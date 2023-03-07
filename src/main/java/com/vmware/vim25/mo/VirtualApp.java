@@ -28,25 +28,12 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.ConcurrentAccess;
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.FileFault;
-import com.vmware.vim25.InsufficientResourcesFault;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidPowerState;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.MigrationFault;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TaskInProgress;
 import com.vmware.vim25.VAppCloneSpec;
-import com.vmware.vim25.VAppConfigFault;
 import com.vmware.vim25.VAppConfigInfo;
 import com.vmware.vim25.VAppConfigSpec;
 import com.vmware.vim25.VirtualAppLinkInfo;
 import com.vmware.vim25.VirtualAppSummary;
-import com.vmware.vim25.VmConfigFault;
 
 import java.rmi.RemoteException;
 

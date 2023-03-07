@@ -52,7 +52,7 @@ public class CachedManagedObject {
         this.xpath = XPathFactory.newInstance().newXPath();
     }
 
-    public String getProperty(String path) throws XPathExpressionException, IOException {
+    public String getProperty(String path) throws XPathExpressionException {
         String propName = null;
         int last = path.lastIndexOf(".");
         if (last != -1) {

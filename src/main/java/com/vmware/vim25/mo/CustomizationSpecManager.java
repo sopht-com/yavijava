@@ -29,13 +29,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
-import com.vmware.vim25.CustomizationFault;
 import com.vmware.vim25.CustomizationSpecInfo;
 import com.vmware.vim25.CustomizationSpecItem;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

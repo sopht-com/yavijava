@@ -32,18 +32,14 @@ package com.vmware.vim25.mo;
 import com.vmware.vim25.AnswerFile;
 import com.vmware.vim25.AnswerFileCreateSpec;
 import com.vmware.vim25.AnswerFileStatusResult;
-import com.vmware.vim25.AnswerFileUpdateFailed;
 import com.vmware.vim25.ApplyProfile;
 import com.vmware.vim25.HostApplyProfile;
-import com.vmware.vim25.HostConfigFailed;
 import com.vmware.vim25.HostConfigSpec;
 import com.vmware.vim25.HostProfileManagerConfigTaskList;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.ProfileDeferredPolicyOptionParameter;
 import com.vmware.vim25.ProfileMetadata;
 import com.vmware.vim25.ProfileProfileStructure;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;

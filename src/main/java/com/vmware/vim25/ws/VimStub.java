@@ -29,21 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.ws;
 
-import com.vmware.vim25.ActiveDirectoryFault;
 import com.vmware.vim25.AlarmSpec;
 import com.vmware.vim25.AlarmState;
-import com.vmware.vim25.AlreadyExists;
-import com.vmware.vim25.AlreadyUpgraded;
 import com.vmware.vim25.AnswerFile;
 import com.vmware.vim25.AnswerFileCreateSpec;
 import com.vmware.vim25.AnswerFileStatusResult;
-import com.vmware.vim25.AnswerFileUpdateFailed;
 import com.vmware.vim25.ApplyProfile;
-import com.vmware.vim25.AuthMinimumAdminPermission;
-import com.vmware.vim25.BackupBlobWriteFailure;
-import com.vmware.vim25.CannotAccessFile;
-import com.vmware.vim25.CannotAccessLocalSource;
-import com.vmware.vim25.CannotCreateFile;
 import com.vmware.vim25.ClusterConfigSpec;
 import com.vmware.vim25.ClusterConfigSpecEx;
 import com.vmware.vim25.ClusterDasAdvancedRuntimeInfo;
@@ -55,11 +46,8 @@ import com.vmware.vim25.ClusterResourceUsageSummary;
 import com.vmware.vim25.ClusterRuleInfo;
 import com.vmware.vim25.ComplianceResult;
 import com.vmware.vim25.ComputeResourceConfigSpec;
-import com.vmware.vim25.ConcurrentAccess;
 import com.vmware.vim25.ConfigTarget;
-import com.vmware.vim25.ConflictingConfiguration;
 import com.vmware.vim25.CustomFieldDef;
-import com.vmware.vim25.CustomizationFault;
 import com.vmware.vim25.CustomizationSpec;
 import com.vmware.vim25.CustomizationSpecItem;
 import com.vmware.vim25.DVPortConfigSpec;
@@ -71,12 +59,10 @@ import com.vmware.vim25.DVSFeatureCapability;
 import com.vmware.vim25.DVSHealthCheckConfig;
 import com.vmware.vim25.DVSManagerDvsConfigTarget;
 import com.vmware.vim25.DVSNetworkResourcePoolConfigSpec;
-import com.vmware.vim25.DasConfigFault;
 import com.vmware.vim25.DatabaseSizeEstimate;
 import com.vmware.vim25.DatabaseSizeParam;
 import com.vmware.vim25.DatacenterConfigSpec;
 import com.vmware.vim25.DatastoreMountPathDatastorePair;
-import com.vmware.vim25.DatastoreNotWritableOnHost;
 import com.vmware.vim25.DiagnosticManagerLogDescriptor;
 import com.vmware.vim25.DiagnosticManagerLogHeader;
 import com.vmware.vim25.DiskChangeInfo;
@@ -88,11 +74,7 @@ import com.vmware.vim25.DistributedVirtualSwitchManagerHostContainer;
 import com.vmware.vim25.DistributedVirtualSwitchManagerHostDvsFilterSpec;
 import com.vmware.vim25.DistributedVirtualSwitchPortCriteria;
 import com.vmware.vim25.DistributedVirtualSwitchProductSpec;
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.DvsFault;
-import com.vmware.vim25.DvsNotAuthorized;
 import com.vmware.vim25.DvsVmVnicResourcePoolConfigSpec;
-import com.vmware.vim25.EVCConfigFault;
 import com.vmware.vim25.EntityBackupConfig;
 import com.vmware.vim25.EntityPrivilege;
 import com.vmware.vim25.EnvironmentBrowserConfigOptionQuerySpec;
@@ -103,42 +85,20 @@ import com.vmware.vim25.Extension;
 import com.vmware.vim25.ExtensionManagerIpAllocationUsage;
 import com.vmware.vim25.FaultToleranceConfigSpec;
 import com.vmware.vim25.FcoeConfigFcoeSpecification;
-import com.vmware.vim25.FcoeFaultPnicHasNoPortSet;
-import com.vmware.vim25.FileAlreadyExists;
-import com.vmware.vim25.FileFault;
-import com.vmware.vim25.FileNotFound;
 import com.vmware.vim25.FileTransferInformation;
-import com.vmware.vim25.FilterInUse;
-import com.vmware.vim25.GatewayConnectFault;
-import com.vmware.vim25.GatewayHostNotReachable;
-import com.vmware.vim25.GatewayNotFound;
-import com.vmware.vim25.GatewayNotReachable;
-import com.vmware.vim25.GatewayOperationRefused;
-import com.vmware.vim25.GatewayToHostAuthFault;
-import com.vmware.vim25.GatewayToHostTrustVerifyFault;
 import com.vmware.vim25.GuestAliases;
 import com.vmware.vim25.GuestAuthAliasInfo;
 import com.vmware.vim25.GuestAuthSubject;
 import com.vmware.vim25.GuestAuthentication;
-import com.vmware.vim25.GuestComponentsOutOfDate;
 import com.vmware.vim25.GuestFileAttributes;
 import com.vmware.vim25.GuestListFileInfo;
 import com.vmware.vim25.GuestMappedAliases;
-import com.vmware.vim25.GuestMultipleMappings;
-import com.vmware.vim25.GuestOperationsFault;
-import com.vmware.vim25.GuestOperationsUnavailable;
-import com.vmware.vim25.GuestPermissionDenied;
 import com.vmware.vim25.GuestProcessInfo;
 import com.vmware.vim25.GuestProgramSpec;
 import com.vmware.vim25.GuestRegKeyNameSpec;
 import com.vmware.vim25.GuestRegKeyRecordSpec;
 import com.vmware.vim25.GuestRegValueNameSpec;
 import com.vmware.vim25.GuestRegValueSpec;
-import com.vmware.vim25.GuestRegistryKeyAlreadyExists;
-import com.vmware.vim25.GuestRegistryKeyHasSubkeys;
-import com.vmware.vim25.GuestRegistryKeyInvalid;
-import com.vmware.vim25.GuestRegistryKeyParentVolatile;
-import com.vmware.vim25.GuestRegistryValueNotFound;
 import com.vmware.vim25.HostAccessControlEntry;
 import com.vmware.vim25.HostAccessMode;
 import com.vmware.vim25.HostAccountSpec;
@@ -147,10 +107,7 @@ import com.vmware.vim25.HostAutoStartManagerConfig;
 import com.vmware.vim25.HostBootDeviceInfo;
 import com.vmware.vim25.HostCacheConfigurationSpec;
 import com.vmware.vim25.HostCapability;
-import com.vmware.vim25.HostConfigFailed;
-import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostConfigSpec;
-import com.vmware.vim25.HostConnectFault;
 import com.vmware.vim25.HostConnectInfo;
 import com.vmware.vim25.HostConnectSpec;
 import com.vmware.vim25.HostDatastoreBrowserSearchSpec;
@@ -172,7 +129,6 @@ import com.vmware.vim25.HostFirewallDefaultPolicy;
 import com.vmware.vim25.HostFirewallRulesetRulesetSpec;
 import com.vmware.vim25.HostFlagInfo;
 import com.vmware.vim25.HostImageProfileSummary;
-import com.vmware.vim25.HostIncompatibleForRecordReplay;
 import com.vmware.vim25.HostInternetScsiHbaAuthenticationProperties;
 import com.vmware.vim25.HostInternetScsiHbaDigestProperties;
 import com.vmware.vim25.HostInternetScsiHbaDiscoveryProperties;
@@ -197,7 +153,6 @@ import com.vmware.vim25.HostPatchManagerPatchManagerOperationSpec;
 import com.vmware.vim25.HostPathSelectionPolicyOption;
 import com.vmware.vim25.HostPciPassthruConfig;
 import com.vmware.vim25.HostPortGroupSpec;
-import com.vmware.vim25.HostPowerOpFailed;
 import com.vmware.vim25.HostProfileConfigSpec;
 import com.vmware.vim25.HostProfileManagerConfigTaskList;
 import com.vmware.vim25.HostScsiDisk;
@@ -227,45 +182,10 @@ import com.vmware.vim25.HostVsanInternalSystemDeleteVsanObjectsResult;
 import com.vmware.vim25.HostVsanInternalSystemVsanObjectOperationResult;
 import com.vmware.vim25.HostVsanInternalSystemVsanPhysicalDiskDiagnosticsResult;
 import com.vmware.vim25.HttpNfcLeaseManifestEntry;
-import com.vmware.vim25.IORMNotSupportedHostOnDatastore;
 import com.vmware.vim25.ImportSpec;
-import com.vmware.vim25.InaccessibleDatastore;
-import com.vmware.vim25.InaccessibleVFlashSource;
-import com.vmware.vim25.InsufficientResourcesFault;
-import com.vmware.vim25.InvalidArgument;
-import com.vmware.vim25.InvalidBundle;
-import com.vmware.vim25.InvalidCollectorVersion;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidDatastorePath;
-import com.vmware.vim25.InvalidDiskFormat;
-import com.vmware.vim25.InvalidEvent;
-import com.vmware.vim25.InvalidFolder;
-import com.vmware.vim25.InvalidGuestLogin;
-import com.vmware.vim25.InvalidHostState;
-import com.vmware.vim25.InvalidIpmiLoginInfo;
-import com.vmware.vim25.InvalidIpmiMacAddress;
-import com.vmware.vim25.InvalidLicense;
-import com.vmware.vim25.InvalidLocale;
-import com.vmware.vim25.InvalidLogin;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidPowerState;
-import com.vmware.vim25.InvalidPrivilege;
-import com.vmware.vim25.InvalidProperty;
-import com.vmware.vim25.InvalidState;
-import com.vmware.vim25.InvalidType;
 import com.vmware.vim25.IoFilterQueryIssueResult;
 import com.vmware.vim25.IpPool;
 import com.vmware.vim25.IpPoolManagerIpAllocation;
-import com.vmware.vim25.IscsiFault;
-import com.vmware.vim25.IscsiFaultInvalidVnic;
-import com.vmware.vim25.IscsiFaultVnicAlreadyBound;
-import com.vmware.vim25.IscsiFaultVnicHasActivePaths;
-import com.vmware.vim25.IscsiFaultVnicHasMultipleUplinks;
-import com.vmware.vim25.IscsiFaultVnicHasNoUplinks;
-import com.vmware.vim25.IscsiFaultVnicHasWrongUplink;
-import com.vmware.vim25.IscsiFaultVnicIsLastPath;
-import com.vmware.vim25.IscsiFaultVnicNotBound;
-import com.vmware.vim25.IscsiFaultVnicNotFound;
 import com.vmware.vim25.IscsiMigrationDependency;
 import com.vmware.vim25.IscsiPortInfo;
 import com.vmware.vim25.IscsiStatus;
@@ -273,33 +193,15 @@ import com.vmware.vim25.KernelModuleInfo;
 import com.vmware.vim25.KeyValue;
 import com.vmware.vim25.LicenseAssignmentManagerLicenseAssignment;
 import com.vmware.vim25.LicenseAvailabilityInfo;
-import com.vmware.vim25.LicenseEntityNotFound;
 import com.vmware.vim25.LicenseFeatureInfo;
 import com.vmware.vim25.LicenseManagerLicenseInfo;
-import com.vmware.vim25.LicenseServerUnavailable;
 import com.vmware.vim25.LicenseSource;
 import com.vmware.vim25.LicenseUsageInfo;
-import com.vmware.vim25.LimitExceeded;
 import com.vmware.vim25.LocalizableMessage;
 import com.vmware.vim25.LocalizedMethodFault;
-import com.vmware.vim25.LogBundlingFailed;
-import com.vmware.vim25.ManagedObjectNotFound;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.MigrationFault;
-import com.vmware.vim25.MismatchedBundle;
-import com.vmware.vim25.NoActiveHostInCluster;
-import com.vmware.vim25.NoClientCertificate;
-import com.vmware.vim25.NoDiskFound;
-import com.vmware.vim25.NoDiskSpace;
-import com.vmware.vim25.NoPermission;
-import com.vmware.vim25.NoSubjectName;
-import com.vmware.vim25.NotFound;
-import com.vmware.vim25.NotSupported;
 import com.vmware.vim25.ObjectContent;
-import com.vmware.vim25.OperationDisabledByGuest;
-import com.vmware.vim25.OperationNotSupportedByGuest;
 import com.vmware.vim25.OptionValue;
-import com.vmware.vim25.OutOfBounds;
 import com.vmware.vim25.OvfCreateDescriptorParams;
 import com.vmware.vim25.OvfCreateDescriptorResult;
 import com.vmware.vim25.OvfCreateImportSpecParams;
@@ -308,10 +210,6 @@ import com.vmware.vim25.OvfParseDescriptorParams;
 import com.vmware.vim25.OvfParseDescriptorResult;
 import com.vmware.vim25.OvfValidateHostParams;
 import com.vmware.vim25.OvfValidateHostResult;
-import com.vmware.vim25.PatchBinariesNotFound;
-import com.vmware.vim25.PatchInstallFailed;
-import com.vmware.vim25.PatchMetadataInvalid;
-import com.vmware.vim25.PatchNotApplicable;
 import com.vmware.vim25.PerfCompositeMetric;
 import com.vmware.vim25.PerfCounterInfo;
 import com.vmware.vim25.PerfEntityMetricBase;
@@ -325,7 +223,6 @@ import com.vmware.vim25.PhysicalNicHintInfo;
 import com.vmware.vim25.PhysicalNicLinkInfo;
 import com.vmware.vim25.PlacementResult;
 import com.vmware.vim25.PlacementSpec;
-import com.vmware.vim25.PlatformConfigFault;
 import com.vmware.vim25.PrivilegePolicyDef;
 import com.vmware.vim25.ProductComponentInfo;
 import com.vmware.vim25.ProfileCreateSpec;
@@ -336,54 +233,34 @@ import com.vmware.vim25.ProfileExpressionMetadata;
 import com.vmware.vim25.ProfileMetadata;
 import com.vmware.vim25.ProfilePolicyMetadata;
 import com.vmware.vim25.ProfileProfileStructure;
-import com.vmware.vim25.ProfileUpdateFailed;
 import com.vmware.vim25.PropertyFilterSpec;
-import com.vmware.vim25.RebootRequired;
-import com.vmware.vim25.RecordReplayDisabled;
-import com.vmware.vim25.RemoveFailed;
-import com.vmware.vim25.RequestCanceled;
 import com.vmware.vim25.ResourceConfigOption;
 import com.vmware.vim25.ResourceConfigSpec;
-import com.vmware.vim25.ResourceInUse;
-import com.vmware.vim25.ResourceNotAvailable;
 import com.vmware.vim25.RetrieveOptions;
 import com.vmware.vim25.RetrieveResult;
-import com.vmware.vim25.RollbackFailure;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.SSPIChallenge;
 import com.vmware.vim25.ScheduledTaskSpec;
-import com.vmware.vim25.SecurityError;
 import com.vmware.vim25.SelectionSet;
 import com.vmware.vim25.ServiceContent;
 import com.vmware.vim25.ServiceManagerServiceInfo;
 import com.vmware.vim25.SessionManagerGenericServiceTicket;
 import com.vmware.vim25.SessionManagerLocalTicket;
 import com.vmware.vim25.SessionManagerServiceRequestSpec;
-import com.vmware.vim25.SnapshotFault;
 import com.vmware.vim25.StorageDrsConfigSpec;
 import com.vmware.vim25.StorageIORMConfigOption;
 import com.vmware.vim25.StorageIORMConfigSpec;
 import com.vmware.vim25.StoragePerformanceSummary;
 import com.vmware.vim25.StoragePlacementResult;
 import com.vmware.vim25.StoragePlacementSpec;
-import com.vmware.vim25.SystemError;
 import com.vmware.vim25.TaskFilterSpec;
-import com.vmware.vim25.TaskInProgress;
 import com.vmware.vim25.TaskInfo;
 import com.vmware.vim25.TaskInfoState;
-import com.vmware.vim25.Timedout;
-import com.vmware.vim25.TooManyHosts;
-import com.vmware.vim25.ToolsUnavailable;
 import com.vmware.vim25.UpdateSet;
-import com.vmware.vim25.UserNotFound;
 import com.vmware.vim25.UserSearchResult;
 import com.vmware.vim25.UserSession;
 import com.vmware.vim25.VAppCloneSpec;
-import com.vmware.vim25.VAppConfigFault;
 import com.vmware.vim25.VAppConfigSpec;
 import com.vmware.vim25.VMwareDvsLacpGroupSpec;
 import com.vmware.vim25.VRPEditSpec;
-import com.vmware.vim25.VimFault;
 import com.vmware.vim25.VirtualAppLinkInfo;
 import com.vmware.vim25.VirtualDisk;
 import com.vmware.vim25.VirtualDiskId;
@@ -405,15 +282,10 @@ import com.vmware.vim25.VirtualMachineTicket;
 import com.vmware.vim25.VirtualNicManagerNetConfig;
 import com.vmware.vim25.VirtualResourcePoolSpec;
 import com.vmware.vim25.VirtualResourcePoolUsage;
-import com.vmware.vim25.VmConfigFault;
-import com.vmware.vim25.VmFaultToleranceIssue;
-import com.vmware.vim25.VmToolsUpgradeFault;
-import com.vmware.vim25.VmfsAmbiguousMount;
 import com.vmware.vim25.VmfsDatastoreCreateSpec;
 import com.vmware.vim25.VmfsDatastoreExpandSpec;
 import com.vmware.vim25.VmfsDatastoreExtendSpec;
 import com.vmware.vim25.VmfsDatastoreOption;
-import com.vmware.vim25.VsanFault;
 import com.vmware.vim25.VsanHostClusterStatus;
 import com.vmware.vim25.VsanHostConfigInfo;
 import com.vmware.vim25.VsanHostDiskMapping;
@@ -448,13 +320,7 @@ public class VimStub {
     public VimStub(String url, boolean ignoreCert) {
         try {
             this.wsc = ClientCreator.getClient(url, ignoreCert);
-        } catch (NoSuchMethodException e) {
-            log.error("Error detected for url: {} ignoreSSL: {}", url, ignoreCert, e);
-        } catch (IllegalAccessException e) {
-            log.error("Error detected for url: {} ignoreSSL: {}", url, ignoreCert, e);
-        } catch (InvocationTargetException e) {
-            log.error("Error detected for url: {} ignoreSSL: {}", url, ignoreCert, e);
-        } catch (InstantiationException e) {
+        } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
             log.error("Error detected for url: {} ignoreSSL: {}", url, ignoreCert, e);
         }
     }
@@ -564,7 +430,7 @@ public class VimStub {
         paras[1] = new Argument("name", "String", name);
         paras[2] = new Argument("privIds", "String[]", privIds);
         Integer ret = (Integer) getWsc().invoke("AddAuthorizationRole", paras, "int");
-        return ret.intValue();
+        return ret;
     }
 
     public void removeAuthorizationRole(ManagedObjectReference _this, int roleId, boolean failIfUsed) throws java.rmi.RemoteException {
@@ -778,7 +644,7 @@ public class VimStub {
         paras[0] = new Argument("_this", "ManagedObjectReference", _this);
         paras[1] = new Argument("name", "String", name);
         Boolean ret = (Boolean) getWsc().invoke("DoesCustomizationSpecExist", paras, "boolean");
-        return ret.booleanValue();
+        return ret;
     }
 
     public CustomizationSpecItem getCustomizationSpec(ManagedObjectReference _this, String name) throws java.rmi.RemoteException {
@@ -1458,7 +1324,7 @@ public class VimStub {
         paras[2] = new Argument("videoRamSize", "int", videoRamSize);
         paras[3] = new Argument("numVcpus", "int", numVcpus);
         Long ret = (Long) getWsc().invoke("QueryMemoryOverhead", paras, "long");
-        return ret.longValue();
+        return ret;
     }
 
     public long queryMemoryOverheadEx(ManagedObjectReference _this, VirtualMachineConfigInfo vmConfigInfo) throws java.rmi.RemoteException {
@@ -1466,7 +1332,7 @@ public class VimStub {
         paras[0] = new Argument("_this", "ManagedObjectReference", _this);
         paras[1] = new Argument("vmConfigInfo", "VirtualMachineConfigInfo", vmConfigInfo);
         Long ret = (Long) getWsc().invoke("QueryMemoryOverheadEx", paras, "long");
-        return ret.longValue();
+        return ret;
     }
 
     public ManagedObjectReference reconfigureHostForDAS_Task(ManagedObjectReference _this) throws java.rmi.RemoteException {
@@ -1511,7 +1377,7 @@ public class VimStub {
         Argument[] paras = new Argument[1];
         paras[0] = new Argument("_this", "ManagedObjectReference", _this);
         Long ret = (Long) getWsc().invoke("RetrieveHardwareUptime", paras, "long");
-        return ret.longValue();
+        return ret;
     }
 
     public HttpNfcLeaseManifestEntry[] httpNfcLeaseGetManifest(ManagedObjectReference _this) throws java.rmi.RemoteException {
@@ -1553,7 +1419,7 @@ public class VimStub {
         paras[1] = new Argument("dc", "ManagedObjectReference", dc);
         paras[2] = new Argument("pool", "IpPool", pool);
         Integer ret = (Integer) getWsc().invoke("CreateIpPool", paras, "int");
-        return ret.intValue();
+        return ret;
     }
 
     public void updateIpPool(ManagedObjectReference _this, ManagedObjectReference dc, IpPool pool) throws java.rmi.RemoteException {
@@ -1667,7 +1533,7 @@ public class VimStub {
         paras[1] = new Argument("host", "ManagedObjectReference", host);
         paras[2] = new Argument("featureKey", "String", featureKey);
         Boolean ret = (Boolean) getWsc().invoke("CheckLicenseFeature", paras, "boolean");
-        return ret.booleanValue();
+        return ret;
     }
 
     public boolean enableFeature(ManagedObjectReference _this, ManagedObjectReference host, String featureKey) throws java.rmi.RemoteException {
@@ -1676,7 +1542,7 @@ public class VimStub {
         paras[1] = new Argument("host", "ManagedObjectReference", host);
         paras[2] = new Argument("featureKey", "String", featureKey);
         Boolean ret = (Boolean) getWsc().invoke("EnableFeature", paras, "boolean");
-        return ret.booleanValue();
+        return ret;
     }
 
     public boolean disableFeature(ManagedObjectReference _this, ManagedObjectReference host, String featureKey) throws java.rmi.RemoteException {
@@ -1685,7 +1551,7 @@ public class VimStub {
         paras[1] = new Argument("host", "ManagedObjectReference", host);
         paras[2] = new Argument("featureKey", "String", featureKey);
         Boolean ret = (Boolean) getWsc().invoke("DisableFeature", paras, "boolean");
-        return ret.booleanValue();
+        return ret;
     }
 
     public void configureLicenseSource(ManagedObjectReference _this, ManagedObjectReference host, LicenseSource licenseSource) throws java.rmi.RemoteException {
@@ -2194,7 +2060,7 @@ public class VimStub {
         paras[1] = new Argument("sessionID", "String", sessionID);
         paras[2] = new Argument("userName", "String", userName);
         Boolean ret = (Boolean) getWsc().invoke("SessionIsActive", paras, "boolean");
-        return ret.booleanValue();
+        return ret;
     }
 
     public String acquireCloneTicket(ManagedObjectReference _this) throws java.rmi.RemoteException {
@@ -2471,7 +2337,7 @@ public class VimStub {
         paras[1] = new Argument("name", "String", name);
         paras[2] = new Argument("datacenter", "ManagedObjectReference", datacenter);
         Integer ret = (Integer) getWsc().invoke("QueryVirtualDiskFragmentation", paras, "int");
-        return ret.intValue();
+        return ret;
     }
 
     public ManagedObjectReference defragmentVirtualDisk_Task(ManagedObjectReference _this, String name, ManagedObjectReference datacenter) throws java.rmi.RemoteException {
@@ -2946,7 +2812,7 @@ public class VimStub {
         paras[0] = new Argument("_this", "ManagedObjectReference", _this);
         paras[1] = new Argument("entity", "ManagedObjectReference", entity);
         Boolean ret = (Boolean) getWsc().invoke("AreAlarmActionsEnabled", paras, "boolean");
-        return ret.booleanValue();
+        return ret;
     }
 
     public void enableAlarmActions(ManagedObjectReference _this, ManagedObjectReference entity, boolean enabled) throws java.rmi.RemoteException {
@@ -3508,7 +3374,7 @@ public class VimStub {
         Argument[] paras = new Argument[1];
         paras[0] = new Argument("_this", "ManagedObjectReference", _this);
         Boolean ret = (Boolean) getWsc().invoke("IsSharedGraphicsActive", paras, "boolean");
-        return ret.booleanValue();
+        return ret;
     }
 
     public void refreshHealthStatusSystem(ManagedObjectReference _this) throws java.rmi.RemoteException {
@@ -5083,7 +4949,7 @@ public class VimStub {
         paras[2] = new Argument("auth", "GuestAuthentication", auth);
         paras[3] = new Argument("spec", "GuestProgramSpec", spec);
         Long ret = (Long) getWsc().invoke("StartProgramInGuest", paras, "long");
-        return ret.longValue();
+        return ret;
     }
 
     public GuestProcessInfo[] listProcessesInGuest(ManagedObjectReference _this, ManagedObjectReference vm, GuestAuthentication auth, long[] pids) throws java.rmi.RemoteException {
@@ -5458,7 +5324,7 @@ public class VimStub {
         params[1] = new Argument("vm", "ManagedObjectReference", vm);
         params[2] = new Argument("host", "ManagedObjectReference", host);
         Long ret = (Long) getWsc().invoke("LookupVmOverheadMemory", params, "long");
-        return ret.longValue();
+        return ret;
     }
 
     public ManagedObjectReference performVsanUpgrade_Task(ManagedObjectReference _this, ManagedObjectReference cluster, Boolean performObjectUpgrade,

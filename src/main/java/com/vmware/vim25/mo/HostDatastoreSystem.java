@@ -29,8 +29,6 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
-import com.vmware.vim25.DatastoreNotWritableOnHost;
 import com.vmware.vim25.DuplicateName;
 import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostDatastoreSystemCapabilities;
@@ -39,14 +37,10 @@ import com.vmware.vim25.HostNasVolumeSpec;
 import com.vmware.vim25.HostScsiDisk;
 import com.vmware.vim25.HostUnresolvedVmfsResignatureSpec;
 import com.vmware.vim25.HostUnresolvedVmfsVolume;
-import com.vmware.vim25.InaccessibleDatastore;
 import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.NotFound;
-import com.vmware.vim25.ResourceInUse;
 import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.VmfsAmbiguousMount;
 import com.vmware.vim25.VmfsDatastoreCreateSpec;
 import com.vmware.vim25.VmfsDatastoreExpandSpec;
 import com.vmware.vim25.VmfsDatastoreExtendSpec;

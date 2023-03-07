@@ -34,13 +34,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
 public class CommandLineParser {
-    private final HashMap<String, String> optsEntered = new HashMap<String, String>();
-    private final HashMap userOpts = new HashMap();
-    private final HashMap builtInOpts = new HashMap();
+    private final Map<String, String> optsEntered = new HashMap<>();
+    private final Map<String, OptionSpec> userOpts = new HashMap<>();
+    private final Map<String, OptionSpec> builtInOpts = new HashMap<>();
 
     public CommandLineParser(OptionSpec[] userOptions, String[] args) {
         builtinOptions();
@@ -57,15 +58,15 @@ public class CommandLineParser {
 
 
     public void addOptions(OptionSpec[] userOptions) {
-        for (int i = 0; i < userOptions.length; i++) {
-            if (userOptions[i].getOptionName() != null && userOptions[i].getOptionName().length() > 0 &&
-                    userOptions[i].getOptionDesc() != null && userOptions[i].getOptionDesc().length() > 0 &&
-                    userOptions[i].getOptionType() != null && userOptions[i].getOptionType().length() > 0 &&
-                    (userOptions[i].getOptionRequired() == 0 || userOptions[i].getOptionName().length() > 1)) {
-                userOpts.put(userOptions[i].getOptionName(), userOptions[i]);
+        for (final OptionSpec userOption : userOptions) {
+            if (userOption.getOptionName() != null && userOption.getOptionName().length() > 0 &&
+                    userOption.getOptionDesc() != null && userOption.getOptionDesc().length() > 0 &&
+                    userOption.getOptionType() != null && userOption.getOptionType().length() > 0 &&
+                    (userOption.getOptionRequired() == 0 || userOption.getOptionName().length() > 1)) {
+                userOpts.put(userOption.getOptionName(), userOption);
             } else {
-                System.out.println("Option " + userOptions[i].getOptionName() + " definition is not valid");
-                throw new IllegalArgumentException("Option " + userOptions[i].getOptionName()
+                System.out.println("Option " + userOption.getOptionName() + " definition is not valid");
+                throw new IllegalArgumentException("Option " + userOption.getOptionName()
                         + " definition is not valid");
             }
         }
@@ -104,9 +105,8 @@ public class CommandLineParser {
             throw new IllegalArgumentException("Exception running : " + e);
         }
 
-        Iterator It = optsEntered.keySet().iterator();
-        while (It.hasNext()) {
-            String keyValue = It.next().toString();
+        for (final String s : optsEntered.keySet()) {
+            String keyValue = s;
             String keyOptions = optsEntered.get(keyValue);
             boolean result = checkInputOptions(builtInOpts, keyValue);
             boolean valid = checkInputOptions(userOpts, keyValue);
@@ -156,14 +156,12 @@ public class CommandLineParser {
         }
     }
 
-    private boolean checkDatatypes(HashMap Opts, String keyValue, String keyOptions) {
-        boolean valid = false;
-        valid = Opts.containsKey(keyValue);
+    private boolean checkDatatypes(Map<String, OptionSpec> Opts, String keyValue, String keyOptions) {
+        boolean valid = Opts.containsKey(keyValue);
         if (valid) {
-            OptionSpec oSpec = (OptionSpec) Opts.get(keyValue);
+            OptionSpec oSpec = Opts.get(keyValue);
             String dataType = oSpec.getOptionType();
-            boolean result = validateDataType(dataType, keyOptions);
-            return result;
+            return validateDataType(dataType, keyOptions);
         } else {
             return false;
         }
@@ -191,7 +189,7 @@ public class CommandLineParser {
         }
     }
 
-    private boolean checkInputOptions(HashMap checkOptions, String value) {
+    private boolean checkInputOptions(Map<String, OptionSpec> checkOptions, String value) {
         boolean valid = false;
         valid = checkOptions.containsKey(value);
         return valid;
@@ -215,25 +213,25 @@ public class CommandLineParser {
             System.exit(1);
         }
         Vector<String> vec = getValue(builtInOpts);
-        for (int i = 0; i < vec.size(); i++) {
-            if (optsEntered.get(vec.get(i)) == null) {
-                String missingArg = vec.get(i);
+        for (String value : vec) {
+            if (optsEntered.get(value) == null) {
+                String missingArg = value;
                 if (missingArg.equalsIgnoreCase("password")) {
                     String password = readPassword("Enter password: ");
                     optsEntered.put("password", password);
                 } else {
-                    System.out.print("----ERROR: " + vec.get(i) + " not specified \n");
+                    System.out.print("----ERROR: " + value + " not specified \n");
                     displayUsage();
-                    throw new IllegalArgumentException("----ERROR: " + vec.get(i) + " not specified \n");
+                    throw new IllegalArgumentException("----ERROR: " + value + " not specified \n");
                 }
             }
         }
         vec = getValue(userOpts);
-        for (int i = 0; i < vec.size(); i++) {
-            if (optsEntered.get(vec.get(i)) == null) {
-                System.out.print("----ERROR: " + vec.get(i) + " not specified \n");
+        for (String s : vec) {
+            if (optsEntered.get(s) == null) {
+                System.out.print("----ERROR: " + s + " not specified \n");
                 displayUsage();
-                throw new IllegalArgumentException("----ERROR: " + vec.get(i) + " not specified \n");
+                throw new IllegalArgumentException("----ERROR: " + s + " not specified \n");
             }
         }
         if ((optsEntered.get("sessionfile") == null) &&
@@ -248,12 +246,12 @@ public class CommandLineParser {
      *taking out value of a particular key in the hashmap
      *i.e checking for required =1 options
      */
-    private Vector getValue(HashMap checkOptions) {
-        Iterator It = checkOptions.keySet().iterator();
-        Vector<String> vec = new Vector<String>();
-        while (It.hasNext()) {
-            String str = It.next().toString();
-            OptionSpec oSpec = (OptionSpec) checkOptions.get(str);
+    private Vector<String> getValue(Map<String, OptionSpec> checkOptions) {
+        final Iterator<String> it = checkOptions.keySet().iterator();
+        Vector<String> vec = new Vector<>();
+        while (it.hasNext()) {
+            String str = it.next();
+            OptionSpec oSpec = checkOptions.get(str);
             if (oSpec.getOptionRequired() == 1) {
                 vec.add(str);
             }
@@ -268,16 +266,16 @@ public class CommandLineParser {
         print_options(userOpts);
     }
 
-    private void print_options(HashMap Opts) {
+    private void print_options(Map<String, OptionSpec> Opts) {
         String type = "";
         String defaultVal = "";
-        Iterator It;
+        Iterator<String> it;
         String help = "";
-        Set generalKeys = Opts.keySet();
-        It = generalKeys.iterator();
-        while (It.hasNext()) {
-            String keyValue = It.next().toString();
-            OptionSpec oSpec = (OptionSpec) Opts.get(keyValue);
+        Set<String> generalKeys = Opts.keySet();
+        it = generalKeys.iterator();
+        while (it.hasNext()) {
+            String keyValue = it.next().toString();
+            OptionSpec oSpec = Opts.get(keyValue);
             if ((oSpec.getOptionType() != null) && (oSpec.getOptionDefault() != null)) {
                 type = oSpec.getOptionType();
                 defaultVal = oSpec.getOptionDefault();
@@ -299,11 +297,11 @@ public class CommandLineParser {
 
     public boolean option_is_set(String option) {
         boolean valid = false;
-        Iterator It = optsEntered.keySet().iterator();
-        while (It.hasNext()) {
-            String keyVal = It.next().toString();
+        for (final String s : optsEntered.keySet()) {
+            String keyVal = s;
             if (option.equals(keyVal)) {
                 valid = true;
+                break;
             }
         }
         return valid;
@@ -313,15 +311,15 @@ public class CommandLineParser {
         if (optsEntered.get(key) != null) {
             return optsEntered.get(key);
         } else if (checkInputOptions(builtInOpts, key)) {
-            if (((OptionSpec) builtInOpts.get(key)).getOptionDefault() != null) {
-                String str = ((OptionSpec) builtInOpts.get(key)).getOptionDefault();
+            if (builtInOpts.get(key).getOptionDefault() != null) {
+                String str = builtInOpts.get(key).getOptionDefault();
                 return str;
             } else {
                 return null;
             }
         } else if (checkInputOptions(userOpts, key)) {
-            if (((OptionSpec) userOpts.get(key)).getOptionDefault() != null) {
-                String str = ((OptionSpec) userOpts.get(key)).getOptionDefault();
+            if (userOpts.get(key).getOptionDefault() != null) {
+                String str = userOpts.get(key).getOptionDefault();
                 return str;
             } else {
                 return null;
@@ -375,7 +373,7 @@ public class CommandLineParser {
         }
     }
 
-    class PasswordMask extends Thread {
+    static class PasswordMask extends Thread {
         private boolean running = true;
 
         public void run() {

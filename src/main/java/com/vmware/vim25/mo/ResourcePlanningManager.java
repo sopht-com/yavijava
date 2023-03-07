@@ -31,7 +31,6 @@ package com.vmware.vim25.mo;
 import com.vmware.vim25.DatabaseSizeEstimate;
 import com.vmware.vim25.DatabaseSizeParam;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

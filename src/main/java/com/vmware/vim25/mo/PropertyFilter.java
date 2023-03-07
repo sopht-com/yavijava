@@ -31,7 +31,6 @@ package com.vmware.vim25.mo;
 
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.PropertyFilterSpec;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -47,7 +46,7 @@ public class PropertyFilter extends ManagedObject {
     }
 
     public boolean getPartialUpdates() {
-        return ((Boolean) getCurrentProperty("partialUpdates")).booleanValue();
+        return (Boolean) getCurrentProperty("partialUpdates");
     }
 
     public PropertyFilterSpec getSpec() {

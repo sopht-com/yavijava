@@ -48,7 +48,7 @@ public class ContainerView extends ManagedObjectView {
     }
 
     public boolean getRecursive() {
-        return ((Boolean) getCurrentProperty("recursive")).booleanValue();
+        return (Boolean) getCurrentProperty("recursive");
     }
 
     public String[] getType() {

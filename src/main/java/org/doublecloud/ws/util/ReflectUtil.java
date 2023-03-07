@@ -46,7 +46,7 @@ public class ReflectUtil {
      * @return Field[]
      */
     public static Field[] getAllFields(Class<?> c) {
-        List<Field> listOfFields = new ArrayList<Field>();
+        List<Field> listOfFields = new ArrayList<>();
         getAllFields(c, listOfFields);
 
         Field[] arrayOffields = new Field[listOfFields.size()];
@@ -148,11 +148,11 @@ public class ReflectUtil {
         // seems to happen when we need to base64 decode
         // see issue 102
         catch (NumberFormatException ignore) {
-            String tempStr = "";
+            StringBuilder tempStr = new StringBuilder();
             for (String s : values) {
-                tempStr += s;
+                tempStr.append(s);
             }
-            return DatatypeConverter.parseBase64Binary(tempStr);
+            return DatatypeConverter.parseBase64Binary(tempStr.toString());
         }
     }
 

@@ -32,7 +32,6 @@ package com.vmware.vim25.mo;
 import com.vmware.vim25.Event;
 import com.vmware.vim25.EventFilterSpec;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

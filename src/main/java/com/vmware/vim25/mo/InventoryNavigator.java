@@ -152,13 +152,13 @@ public class InventoryNavigator {
             return null;
         }
 
-        for (int i = 0; i < ocs.length; i++) {
-            DynamicProperty[] propSet = ocs[i].getPropSet();
+        for (final ObjectContent oc : ocs) {
+            DynamicProperty[] propSet = oc.getPropSet();
 
             if (propSet.length > 0) {
                 String nameInPropSet = (String) propSet[0].getVal();
                 if (name.equalsIgnoreCase(nameInPropSet)) {
-                    ManagedObjectReference mor = ocs[i].getObj();
+                    ManagedObjectReference mor = oc.getObj();
                     return MorUtil.createExactManagedEntity(rootEntity.getServerConnection(), mor);
                 }
             }

@@ -29,11 +29,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.FileFault;
-import com.vmware.vim25.InvalidDatastore;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.UserNotFound;
 
 import java.rmi.RemoteException;
 

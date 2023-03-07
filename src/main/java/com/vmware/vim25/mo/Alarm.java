@@ -31,10 +31,7 @@ package com.vmware.vim25.mo;
 
 import com.vmware.vim25.AlarmInfo;
 import com.vmware.vim25.AlarmSpec;
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.InvalidName;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

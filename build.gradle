@@ -52,3 +52,7 @@ tasks.register('integrationTest', Test) {
     classpath = sourceSets.intTest.runtimeClasspath
     shouldRunAfter test
 }
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ["-parameters", "-Xlint:all"]
+}

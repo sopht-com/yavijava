@@ -31,9 +31,7 @@ package com.vmware.vim25.mo;
 
 import com.vmware.vim25.CustomFieldDef;
 import com.vmware.vim25.CustomFieldValue;
-import com.vmware.vim25.InvalidProperty;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -44,11 +42,11 @@ import java.rmi.RemoteException;
  */
 
 abstract public class ExtensibleManagedObject extends ManagedObject {
-    public CustomFieldDef[] getAvailableField() throws RemoteException {
+    public CustomFieldDef[] getAvailableField() {
         return (CustomFieldDef[]) getCurrentProperty("availableField");
     }
 
-    public CustomFieldValue[] getValues() throws RemoteException {
+    public CustomFieldValue[] getValues() {
         return (CustomFieldValue[]) getCurrentProperty("value");
     }
 

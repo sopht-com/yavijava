@@ -33,10 +33,7 @@ import com.vmware.vim25.Event;
 import com.vmware.vim25.EventArgDesc;
 import com.vmware.vim25.EventDescription;
 import com.vmware.vim25.EventFilterSpec;
-import com.vmware.vim25.InvalidEvent;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.TaskInfo;
 
 import java.rmi.RemoteException;
@@ -62,7 +59,7 @@ public class EventManager extends ManagedObject {
     }
 
     public int getMaxCollector() {
-        return ((Integer) getCurrentProperty("maxCollector")).intValue();
+        return (Integer) getCurrentProperty("maxCollector");
     }
 
     public EventHistoryCollector createCollectorForEvents(EventFilterSpec filter) throws RemoteException {

@@ -29,13 +29,10 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostFirewallDefaultPolicy;
 import com.vmware.vim25.HostFirewallInfo;
 import com.vmware.vim25.HostFirewallRulesetRulesetSpec;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

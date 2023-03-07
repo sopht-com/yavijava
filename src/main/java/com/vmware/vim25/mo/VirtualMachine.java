@@ -29,38 +29,21 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
-import com.vmware.vim25.AlreadyUpgraded;
-import com.vmware.vim25.ConcurrentAccess;
-import com.vmware.vim25.CustomizationFault;
 import com.vmware.vim25.CustomizationSpec;
 import com.vmware.vim25.DiskChangeInfo;
-import com.vmware.vim25.DuplicateName;
 import com.vmware.vim25.FaultToleranceConfigSpec;
 import com.vmware.vim25.FileFault;
 import com.vmware.vim25.GuestInfo;
-import com.vmware.vim25.HostIncompatibleForRecordReplay;
 import com.vmware.vim25.InsufficientResourcesFault;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidPowerState;
-import com.vmware.vim25.InvalidProperty;
 import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.LocalizedMethodFault;
 import com.vmware.vim25.ManagedEntityStatus;
 import com.vmware.vim25.ManagedObjectNotFound;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.MigrationFault;
-import com.vmware.vim25.NoDiskFound;
-import com.vmware.vim25.NotFound;
 import com.vmware.vim25.NotSupported;
-import com.vmware.vim25.RecordReplayDisabled;
 import com.vmware.vim25.ResourceConfigSpec;
 import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.SnapshotFault;
 import com.vmware.vim25.TaskInProgress;
-import com.vmware.vim25.Timedout;
-import com.vmware.vim25.ToolsUnavailable;
 import com.vmware.vim25.VirtualDisk;
 import com.vmware.vim25.VirtualMachineCapability;
 import com.vmware.vim25.VirtualMachineCloneSpec;
@@ -80,7 +63,6 @@ import com.vmware.vim25.VirtualMachineSummary;
 import com.vmware.vim25.VirtualMachineTicket;
 import com.vmware.vim25.VmConfigFault;
 import com.vmware.vim25.VmFaultToleranceIssue;
-import com.vmware.vim25.VmToolsUpgradeFault;
 
 import java.rmi.RemoteException;
 
@@ -103,11 +85,11 @@ public class VirtualMachine extends ManagedEntity {
         return (VirtualMachineConfigInfo) getCurrentProperty("config");
     }
 
-    public Datastore[] getDatastores() throws RemoteException {
+    public Datastore[] getDatastores() {
         return getDatastores("datastore");
     }
 
-    public EnvironmentBrowser getEnvironmentBrowser() throws RemoteException {
+    public EnvironmentBrowser getEnvironmentBrowser() {
         return (EnvironmentBrowser) getManagedObject("environmentBrowser");
     }
 
@@ -137,7 +119,7 @@ public class VirtualMachine extends ManagedEntity {
         return (VirtualMachineStorageInfo) getCurrentProperty("storage");
     }
 
-    public Network[] getNetworks() throws RemoteException {
+    public Network[] getNetworks() {
         return getNetworks("network");
     }
 
@@ -153,7 +135,7 @@ public class VirtualMachine extends ManagedEntity {
         return (ResourceConfigSpec) getCurrentProperty("resourceConfig");
     }
 
-    public ResourcePool getResourcePool() throws RemoteException {
+    public ResourcePool getResourcePool() {
         return (ResourcePool) getManagedObject("resourcePool");
     }
 
@@ -180,7 +162,7 @@ public class VirtualMachine extends ManagedEntity {
         return (VirtualMachineSnapshotInfo) getCurrentProperty("snapshot");
     }
 
-    public VirtualMachineSnapshot getCurrentSnapShot() throws RemoteException {
+    public VirtualMachineSnapshot getCurrentSnapShot() {
         return (VirtualMachineSnapshot) getManagedObject("snapshot.currentSnapshot");
     }
 

@@ -29,9 +29,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.TaskDescription;
 import com.vmware.vim25.TaskFilterSpec;
 import com.vmware.vim25.TaskInfo;
@@ -62,7 +60,7 @@ public class TaskManager extends ManagedObject {
     }
 
     public int getMaxCollector() {
-        return ((Integer) getCurrentProperty("maxCollector")).intValue();
+        return (Integer) getCurrentProperty("maxCollector");
     }
 
     public Task[] getRecentTasks() {

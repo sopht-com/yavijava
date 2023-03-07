@@ -30,13 +30,11 @@ POSSIBILITY OF SUCH DAMAGE.
 package com.vmware.vim25.mo.util;
 
 import com.vmware.vim25.DynamicProperty;
-import com.vmware.vim25.InvalidProperty;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.ObjectContent;
 import com.vmware.vim25.ObjectSpec;
 import com.vmware.vim25.PropertyFilterSpec;
 import com.vmware.vim25.PropertySpec;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.SelectionSpec;
 import com.vmware.vim25.TraversalSpec;
 import com.vmware.vim25.mo.ManagedObject;
@@ -58,6 +56,9 @@ import java.util.List;
  */
 public class PropertyCollectorUtil {
 
+    private PropertyCollectorUtil() {
+    }
+
     static Logger log = LoggerFactory.getLogger(PropertyCollectorUtil.class);
 
     public static final Object NULL = new Object();
@@ -74,14 +75,9 @@ public class PropertyCollectorUtil {
      * one managed object. Note: some of the properties you want to retrieve might not be set, and therefore you don't
      * have an entry in the Hashtable at all. In other words, it's possible for you to get null for a property from the
      * resulted Hashtable.
-     * @throws InvalidProperty
-     * @throws RuntimeFault
-     * @throws RemoteException
      */
 
-    public static Hashtable[] retrieveProperties(ManagedObject[] mos, String moType,
-                                                 String[] propPaths) throws InvalidProperty,
-            RuntimeFault, RemoteException {
+    public static Hashtable[] retrieveProperties(ManagedObject[] mos, String moType, String[] propPaths) throws RemoteException {
         if (mos == null) {
             throw new IllegalArgumentException("Managed object array cannot be null.");
         }
@@ -170,9 +166,9 @@ public class PropertyCollectorUtil {
             try {
                 Method getMethod;
                 try {
-                    getMethod = propClass.getMethod("get" + methodName, (Class[]) null);
+                    getMethod = propClass.getMethod("get" + methodName, (Class<?>[]) null);
                 } catch (NoSuchMethodException ignore) {
-                    getMethod = propClass.getMethod("get_" + methodName.toLowerCase(), (Class[]) null);
+                    getMethod = propClass.getMethod("get_" + methodName.toLowerCase(), (Class<?>[]) null);
                 }
                 propertyValue = getMethod.invoke(dynaPropVal, (Object[]) null);
             } catch (Exception e) {

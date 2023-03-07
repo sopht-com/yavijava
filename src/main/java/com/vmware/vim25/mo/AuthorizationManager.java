@@ -30,19 +30,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
-import com.vmware.vim25.AuthMinimumAdminPermission;
 import com.vmware.vim25.AuthorizationDescription;
 import com.vmware.vim25.AuthorizationPrivilege;
 import com.vmware.vim25.AuthorizationRole;
 import com.vmware.vim25.EntityPrivilege;
-import com.vmware.vim25.InvalidName;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
 import com.vmware.vim25.Permission;
-import com.vmware.vim25.RemoveFailed;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.UserNotFound;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;

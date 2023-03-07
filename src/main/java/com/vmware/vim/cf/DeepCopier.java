@@ -68,8 +68,8 @@ class DeepCopier {
         }
 
         Field[] fields = clazz.getFields();
-        for (int i = 0; i < fields.length; i++) {
-            Object fObj = fields[i].get(src);
+        for (final Field field : fields) {
+            Object fObj = field.get(src);
             if (fObj == null) {
                 continue;
             }
@@ -87,7 +87,7 @@ class DeepCopier {
                     fObj = deepCopy(fObj);
                 }
             }
-            fields[i].set(dst, fObj);
+            field.set(dst, fObj);
         }
 
         return dst;

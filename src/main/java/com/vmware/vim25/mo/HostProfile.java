@@ -28,13 +28,10 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.DuplicateName;
 import com.vmware.vim25.HostProfileConfigSpec;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.ProfileDeferredPolicyOptionParameter;
 import com.vmware.vim25.ProfileExecuteResult;
-import com.vmware.vim25.ProfileUpdateFailed;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

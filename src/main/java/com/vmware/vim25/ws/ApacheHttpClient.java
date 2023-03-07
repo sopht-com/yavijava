@@ -111,21 +111,12 @@ public class ApacheHttpClient extends SoapClient {
     public Object invoke(String methodName, Argument[] paras, String returnType) throws RemoteException {
         log.trace("Invoking method: {}", methodName);
         String soapMsg = marshall(methodName, paras);
-        InputStream is = null;
-        try {
-            is = post(soapMsg);
+        try (InputStream is = post(soapMsg)) {
             log.trace("Converting xml response from server to: {}", returnType);
             return unMarshall(returnType, is);
         } catch (Exception e1) {
             log.error("Exception caught while invoking method.", e1);
             throw new RemoteException("VI SDK invoke exception:" + e1, e1);
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException ignored) {
-                }
-            }
         }
     }
 

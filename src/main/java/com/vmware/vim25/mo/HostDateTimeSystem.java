@@ -29,12 +29,10 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostDateTimeConfig;
 import com.vmware.vim25.HostDateTimeInfo;
 import com.vmware.vim25.HostDateTimeSystemTimeZone;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 import java.util.Calendar;

@@ -30,7 +30,6 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
 import com.vmware.vim25.ConcurrentAccess;
 import com.vmware.vim25.ConflictingConfiguration;
 import com.vmware.vim25.DVPortConfigSpec;
@@ -46,23 +45,16 @@ import com.vmware.vim25.DVSSummary;
 import com.vmware.vim25.DistributedVirtualPort;
 import com.vmware.vim25.DistributedVirtualSwitchPortCriteria;
 import com.vmware.vim25.DistributedVirtualSwitchProductSpec;
-import com.vmware.vim25.DuplicateName;
 import com.vmware.vim25.DvsFault;
 import com.vmware.vim25.DvsNotAuthorized;
 import com.vmware.vim25.DvsVmVnicResourcePoolConfigSpec;
 import com.vmware.vim25.EntityBackupConfig;
-import com.vmware.vim25.InvalidHostState;
 import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidState;
-import com.vmware.vim25.LimitExceeded;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.NotFound;
 import com.vmware.vim25.NotSupported;
 import com.vmware.vim25.ResourceInUse;
-import com.vmware.vim25.ResourceNotAvailable;
-import com.vmware.vim25.RollbackFailure;
 import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TaskInProgress;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;

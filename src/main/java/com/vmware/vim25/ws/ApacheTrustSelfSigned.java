@@ -49,10 +49,7 @@ public class ApacheTrustSelfSigned {
         try {
             sslConnectionSocketFactory = new SSLConnectionSocketFactory(builder.build(), new AllowAllHostnameVerifier());
             log.trace("Added SSLConnectionSocketFactory to builder.");
-        } catch (NoSuchAlgorithmException e) {
-            log.error("Error trying to trust self signed certs.", e);
-            return null;
-        } catch (KeyManagementException e) {
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
             log.error("Error trying to trust self signed certs.", e);
             return null;
         }

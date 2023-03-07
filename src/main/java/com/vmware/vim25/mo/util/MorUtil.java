@@ -87,21 +87,17 @@ public class MorUtil {
         }
 
         String moType = mor.getType();
-        Class moClass = null;
+        Class<?> moClass = null;
         try {
             moClass = Class.forName(moPackageName + "." + moType);
-            Constructor constructor = moClass.getConstructor(
+            Constructor<?> constructor = moClass.getConstructor(
                     ServerConnection.class, ManagedObjectReference.class);
             return (ManagedObject) constructor.newInstance(new Object[]{sc, mor});
         } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException("vijava does not have an associated class for this mor: " + mor.getVal(), e);
         } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException("No constructor found in vijava for class: " + moClass.getName(), e);
-        } catch (InstantiationException e) {
-            throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(), e);
-        } catch (IllegalAccessException e) {
-            throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(), e);
-        } catch (InvocationTargetException e) {
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(), e);
         }
     }

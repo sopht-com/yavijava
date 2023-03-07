@@ -1,8 +1,9 @@
 package com.utility;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class LoadVcenterProps {
@@ -14,12 +15,9 @@ public class LoadVcenterProps {
     public static String sslThumbprint;
 
     static {
-        InputStream input = null;
         Properties prop = new Properties();
 
-        try {
-
-            input = new FileInputStream("src/intTest/java/VcenterInfo.properties");
+        try (InputStream input = Files.newInputStream(Paths.get("src/intTest/java/VcenterInfo.properties"))) {
 
             // load a properties file
             prop.load(input);
@@ -33,14 +31,6 @@ public class LoadVcenterProps {
 
         } catch (IOException ex) {
             ex.printStackTrace();
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

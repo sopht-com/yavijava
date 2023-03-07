@@ -35,7 +35,6 @@ import com.vmware.vim25.ExtensionClientInfo;
 import com.vmware.vim25.ExtensionManagerIpAllocationUsage;
 import com.vmware.vim25.ExtensionServerInfo;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NoClientCertificate;
 import com.vmware.vim25.NotFound;
 import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.mo.util.MorUtil;

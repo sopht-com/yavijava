@@ -1,14 +1,9 @@
 package com.vmware.vim25.mo;
 
 import com.vmware.vim25.ActiveDirectoryFault;
-import com.vmware.vim25.AuthMinimumAdminPermission;
-import com.vmware.vim25.FileNotFound;
 import com.vmware.vim25.HostConfigFault;
-import com.vmware.vim25.InvalidLogin;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 

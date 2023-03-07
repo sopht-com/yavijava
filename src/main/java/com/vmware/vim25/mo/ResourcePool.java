@@ -29,27 +29,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
-import com.vmware.vim25.ConcurrentAccess;
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.FileFault;
 import com.vmware.vim25.ImportSpec;
-import com.vmware.vim25.InsufficientResourcesFault;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidProperty;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
-import com.vmware.vim25.OutOfBounds;
 import com.vmware.vim25.ResourceConfigOption;
 import com.vmware.vim25.ResourceConfigSpec;
 import com.vmware.vim25.ResourcePoolRuntimeInfo;
 import com.vmware.vim25.ResourcePoolSummary;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.VAppConfigSpec;
 import com.vmware.vim25.VirtualMachineConfigSpec;
-import com.vmware.vim25.VmConfigFault;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -73,11 +60,11 @@ public class ResourcePool extends ManagedEntity {
         return (ResourceConfigSpec) this.getCurrentProperty("config");
     }
 
-    public ComputeResource getOwner() throws RemoteException {
+    public ComputeResource getOwner() {
         return (ComputeResource) this.getManagedObject("owner");
     }
 
-    public ResourcePool[] getResourcePools() throws RemoteException {
+    public ResourcePool[] getResourcePools() {
         return getResourcePools("resourcePool");
     }
 
@@ -89,7 +76,7 @@ public class ResourcePool extends ManagedEntity {
         return (ResourcePoolSummary) this.getCurrentProperty("summary");
     }
 
-    public VirtualMachine[] getVMs() throws RemoteException {
+    public VirtualMachine[] getVMs() {
         return getVms("vm");
     }
 

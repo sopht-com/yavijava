@@ -35,7 +35,7 @@ import com.vmware.vim25.ws.Client;
 import javax.net.ssl.TrustManager;
 
 public class VimPortType extends com.vmware.vim25.ws.VimStub {
-    public VimPortType(String url, boolean ignoreCert) throws java.net.MalformedURLException {
+    public VimPortType(String url, boolean ignoreCert) {
         super(url, ignoreCert);
     }
 
@@ -43,7 +43,7 @@ public class VimPortType extends com.vmware.vim25.ws.VimStub {
         super(url, trustManager);
     }
 
-    public VimPortType(Client url) throws java.net.MalformedURLException {
+    public VimPortType(Client url) {
         super(url);
     }
 }

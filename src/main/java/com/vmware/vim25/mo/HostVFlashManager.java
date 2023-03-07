@@ -29,15 +29,10 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostVFlashManagerVFlashCacheConfigSpec;
 import com.vmware.vim25.HostVFlashManagerVFlashConfigInfo;
 import com.vmware.vim25.HostVFlashManagerVFlashResourceConfigSpec;
-import com.vmware.vim25.InaccessibleVFlashSource;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
-import com.vmware.vim25.ResourceInUse;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.VirtualDiskVFlashCacheConfigInfo;
 
 import java.rmi.RemoteException;

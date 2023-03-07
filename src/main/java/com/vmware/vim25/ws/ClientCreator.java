@@ -23,7 +23,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 final public class ClientCreator {
 
-    public static Class<?> clientClass = WSClient.class;
+    public static final Class<?> clientClass = WSClient.class;
 
     public static Client getClient(String url, boolean ignoreCert) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<?> constructor = clientClass.getConstructor(String.class, boolean.class);

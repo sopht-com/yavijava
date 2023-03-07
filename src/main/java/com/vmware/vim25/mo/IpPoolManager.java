@@ -32,7 +32,6 @@ package com.vmware.vim25.mo;
 import com.vmware.vim25.IpPool;
 import com.vmware.vim25.IpPoolManagerIpAllocation;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

@@ -29,13 +29,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.InvalidProperty;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.LocalizableMessage;
 import com.vmware.vim25.LocalizedMethodFault;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.MethodFault;
-import com.vmware.vim25.OutOfBounds;
 import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.TaskInfo;
 import com.vmware.vim25.TaskInfoState;
@@ -56,7 +52,7 @@ public class Task extends ExtensibleManagedObject {
         super(serverConnection, mor);
     }
 
-    public TaskInfo getTaskInfo() throws RemoteException {
+    public TaskInfo getTaskInfo() {
         return (TaskInfo) getCurrentProperty(PROPNAME_INFO);
     }
 
@@ -92,14 +88,9 @@ public class Task extends ExtensibleManagedObject {
      * method is not predictable. This usually happens with VI Client plug-in which shares
      * the session with the VI Client which use waitForUpdate() extensively.
      * The safer way is to poll the related info.state and check its value.
-     *
-     * @return
-     * @throws InvalidProperty
-     * @throws RuntimeFault
-     * @throws RemoteException
-     * @deprecated
      */
-    public String waitForMe() throws InvalidProperty, RuntimeFault, RemoteException {
+    @Deprecated
+    public String waitForMe() throws RemoteException {
 
         Object[] result = waitForValues(
                 new String[]{"info.state", "info.error"},
@@ -113,8 +104,7 @@ public class Task extends ExtensibleManagedObject {
             LocalizedMethodFault fault = tinfo.getError();
             String error = "Error Occured";
             if (fault != null) {
-                MethodFault mf = fault.getFault();
-                throw mf;
+                throw fault.getFault();
             }
             return error;
         }

@@ -22,8 +22,4 @@ public class ReflectUtilImplementsSimpleWith4Fields implements ReflectUtilSimple
     private int anInt3;
     private int anInt4;
 
-    @Override
-    public void helloWorld() {
-    }
-
 }

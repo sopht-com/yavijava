@@ -31,7 +31,6 @@ package com.vmware.vim25.mo;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.ProfileConfigInfo;
 import com.vmware.vim25.ProfileDescription;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;

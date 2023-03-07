@@ -31,8 +31,6 @@ package com.vmware.vim25.mo;
 
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.NetworkSummary;
-import com.vmware.vim25.ResourceInUse;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

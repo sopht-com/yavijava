@@ -29,11 +29,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.ScheduledTaskInfo;
 import com.vmware.vim25.ScheduledTaskSpec;
 

@@ -1,9 +1,7 @@
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.PowerSystemCapability;
 import com.vmware.vim25.PowerSystemInfo;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

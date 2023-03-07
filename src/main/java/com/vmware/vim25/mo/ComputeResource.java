@@ -33,7 +33,6 @@ import com.vmware.vim25.ComputeResourceConfigInfo;
 import com.vmware.vim25.ComputeResourceConfigSpec;
 import com.vmware.vim25.ComputeResourceSummary;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

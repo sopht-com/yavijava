@@ -107,7 +107,7 @@ public class ResultConverter {
                 value = "";
             } else if ("string".equals(type)) {
                 value = value.substring(1, value.length() - 1);
-            } else if (value.indexOf("href=") != -1) {
+            } else if (value.contains("href=")) {
                 int start = value.indexOf(">");
                 int end = value.indexOf("</a>", start);
                 value = value.substring(start + 1, end);
@@ -125,7 +125,7 @@ public class ResultConverter {
     private static int getTableEnd(String html, int from, int to) {
         int tagLevel = 0;
         int pos = from;
-        while (true) {
+        do {
             pos = html.indexOf("<", pos + 1);
             if (html.charAt(pos + 1) == '/') { //closing tag
                 if (html.startsWith(TABLE_END, pos)) {
@@ -136,10 +136,7 @@ public class ResultConverter {
                     tagLevel++;
                 }
             }
-            if (tagLevel == 0) {
-                break;
-            }
-        }
+        } while (tagLevel != 0);
         return pos;
     }
 }

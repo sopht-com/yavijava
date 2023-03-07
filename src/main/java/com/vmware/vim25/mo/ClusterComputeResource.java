@@ -41,18 +41,14 @@ import com.vmware.vim25.ClusterHostRecommendation;
 import com.vmware.vim25.ClusterRecommendation;
 import com.vmware.vim25.ClusterResourceUsageSummary;
 import com.vmware.vim25.ClusterRuleInfo;
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.HostConnectFault;
 import com.vmware.vim25.HostConnectSpec;
 import com.vmware.vim25.InvalidArgument;
-import com.vmware.vim25.InvalidLogin;
 import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.OptionValue;
 import com.vmware.vim25.PlacementResult;
 import com.vmware.vim25.PlacementSpec;
 import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TooManyHosts;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;

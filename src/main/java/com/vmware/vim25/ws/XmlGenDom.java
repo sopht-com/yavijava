@@ -152,7 +152,7 @@ class XmlGenDom extends XmlGen {
     }
 
     protected static Object setDetailMessageInException(Object obj, String detailMessage) {
-        Class current = obj.getClass();
+        Class<?> current = obj.getClass();
         while (current != null) {
             try {
                 Field field = current.getDeclaredField("detailMessage");
@@ -164,10 +164,7 @@ class XmlGenDom extends XmlGen {
                 return obj;
             } catch (NoSuchFieldException e) {
                 current = current.getSuperclass();
-            } catch (IllegalAccessException e) {
-                log.info("The fault string: \"{}\", was unable to be set in exception due to: ", detailMessage, e);
-                return obj;
-            } catch (AccessControlException e) {
+            } catch (IllegalAccessException | AccessControlException e) {
                 log.info("The fault string: \"{}\", was unable to be set in exception due to: ", detailMessage, e);
                 return obj;
             }
@@ -205,7 +202,7 @@ class XmlGenDom extends XmlGen {
                 return mos;
             }
         } else if (TypeUtil.isBasicType(type)) {
-            List<String> vals = new ArrayList<String>();
+            List<String> vals = new ArrayList<>();
             for (Element subNode : subNodes) {
                 vals.add(subNode.getText());
             }
@@ -298,7 +295,7 @@ class XmlGenDom extends XmlGen {
                 if (isFieldArray) {
                     int sizeOfFieldArray = getNumberOfSameTags(subNodes, sizeOfSubNodes, i, tagName);
 
-                    List<String> values = new ArrayList<String>();
+                    List<String> values = new ArrayList<>();
                     for (int j = 0; j < sizeOfFieldArray; j++) {
                         values.add(subNodes.get(j + i).getText());
                     }

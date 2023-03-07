@@ -22,7 +22,7 @@ class TestIOExceptionWithErrorStream extends HttpURLConnection {
     }
 
     @Override
-    public void connect() throws IOException {
+    public void connect() {
     }
 
     @Override

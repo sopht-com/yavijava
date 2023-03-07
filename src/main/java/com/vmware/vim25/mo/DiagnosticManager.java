@@ -29,12 +29,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.CannotAccessFile;
 import com.vmware.vim25.DiagnosticManagerLogDescriptor;
 import com.vmware.vim25.DiagnosticManagerLogHeader;
-import com.vmware.vim25.LogBundlingFailed;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;

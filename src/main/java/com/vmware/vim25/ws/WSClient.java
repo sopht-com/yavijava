@@ -95,9 +95,7 @@ public class WSClient extends SoapClient {
         log.trace("Invoking method: {}", methodName);
         String soapMsg = marshall(methodName, paras);
 
-        InputStream is = null;
-        try {
-            is = post(soapMsg);
+        try (InputStream is = post(soapMsg)) {
             log.trace("Converting xml response from server to: {}", returnType);
             return unMarshall(returnType, is);
         } catch (Exception e1) {
@@ -108,13 +106,6 @@ public class WSClient extends SoapClient {
                 throw (RemoteException) e1;
             } catch (ClassCastException ignore) {
                 throw new RemoteException("Exception caught trying to invoke method " + methodName, e1);
-            }
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException ignored) {
-                }
             }
         }
     }
@@ -215,7 +206,7 @@ public class WSClient extends SoapClient {
         return is;
     }
 
-    protected OutputStreamWriter createOutputStreamWriter(OutputStream os) throws UnsupportedEncodingException {
+    protected OutputStreamWriter createOutputStreamWriter(OutputStream os) {
         return new OutputStreamWriter(os, StandardCharsets.UTF_8);
     }
 

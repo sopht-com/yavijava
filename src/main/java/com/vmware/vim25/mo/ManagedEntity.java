@@ -31,15 +31,11 @@ package com.vmware.vim25.mo;
 
 import com.vmware.vim25.AlarmState;
 import com.vmware.vim25.CustomFieldValue;
-import com.vmware.vim25.DuplicateName;
 import com.vmware.vim25.Event;
-import com.vmware.vim25.InvalidName;
 import com.vmware.vim25.ManagedEntityStatus;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.Permission;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.Tag;
-import com.vmware.vim25.VimFault;
 
 import java.rmi.RemoteException;
 
@@ -61,7 +57,7 @@ public class ManagedEntity extends ExtensibleManagedObject {
      */
     public boolean getAlarmActionEabled() {
         Boolean aae = (Boolean) getCurrentProperty("alarmActionsEnabled");
-        return aae != null && aae.booleanValue();
+        return aae != null && aae;
     }
 
     public Event[] getConfigIssue() {

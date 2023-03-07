@@ -32,7 +32,6 @@ package com.vmware.vim25.mo;
 import com.vmware.vim25.HostCacheConfigurationInfo;
 import com.vmware.vim25.HostCacheConfigurationSpec;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

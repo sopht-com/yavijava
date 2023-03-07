@@ -47,7 +47,7 @@ public class TypeUtil {
 
     private static final Logger log = LoggerFactory.getLogger(TypeUtil.class);
 
-    private final static Set<String> PRIMITIVE_TYPES = new HashSet<String>();
+    private final static Set<String> PRIMITIVE_TYPES = new HashSet<>();
 
     static {
         PRIMITIVE_TYPES.add("int");
@@ -88,7 +88,7 @@ public class TypeUtil {
     }
 
     private static final String PACKAGE_NAME = "com.vmware.vim25";
-    private final static Map<String, Class<?>> VIM_CLASSES = new ConcurrentHashMap<String, Class<?>>();
+    private final static Map<String, Class<?>> VIM_CLASSES = new ConcurrentHashMap<>();
 
     public static Class<?> getVimClass(String type) {
         if (VIM_CLASSES.containsKey(type)) {

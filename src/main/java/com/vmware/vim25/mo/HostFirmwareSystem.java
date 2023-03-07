@@ -29,12 +29,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.FileFault;
-import com.vmware.vim25.InvalidBundle;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.MismatchedBundle;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

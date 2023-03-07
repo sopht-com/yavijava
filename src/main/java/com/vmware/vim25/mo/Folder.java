@@ -29,31 +29,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
 import com.vmware.vim25.ClusterConfigSpec;
 import com.vmware.vim25.ClusterConfigSpecEx;
 import com.vmware.vim25.ComputeResourceConfigSpec;
-import com.vmware.vim25.ConcurrentAccess;
 import com.vmware.vim25.DVSCreateSpec;
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.DvsFault;
-import com.vmware.vim25.DvsNotAuthorized;
-import com.vmware.vim25.FileFault;
-import com.vmware.vim25.HostConnectFault;
 import com.vmware.vim25.HostConnectSpec;
-import com.vmware.vim25.InsufficientResourcesFault;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidFolder;
-import com.vmware.vim25.InvalidLogin;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidProperty;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
-import com.vmware.vim25.OutOfBounds;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.VirtualMachineConfigSpec;
-import com.vmware.vim25.VmConfigFault;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -70,7 +52,7 @@ public class Folder extends ManagedEntity {
     }
 
     // the array could have different real types, therefore cannot use getManagedObjects()
-    public ManagedEntity[] getChildEntity() throws RemoteException {
+    public ManagedEntity[] getChildEntity() {
         ManagedObjectReference[] mors = (ManagedObjectReference[]) getCurrentProperty("childEntity");
 
         if (mors == null) {

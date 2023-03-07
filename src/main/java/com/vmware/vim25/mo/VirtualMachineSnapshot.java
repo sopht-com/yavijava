@@ -30,15 +30,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.FileFault;
-import com.vmware.vim25.InsufficientResourcesFault;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TaskInProgress;
 import com.vmware.vim25.VirtualMachineConfigInfo;
-import com.vmware.vim25.VmConfigFault;
 
 import java.rmi.RemoteException;
 

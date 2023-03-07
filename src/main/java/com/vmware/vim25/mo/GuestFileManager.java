@@ -29,16 +29,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.FileFault;
 import com.vmware.vim25.FileTransferInformation;
 import com.vmware.vim25.GuestAuthentication;
 import com.vmware.vim25.GuestFileAttributes;
 import com.vmware.vim25.GuestListFileInfo;
-import com.vmware.vim25.GuestOperationsFault;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 

@@ -294,7 +294,7 @@ public class ServiceInstanceTest {
         }
     }
 
-    private class TestServiceInstance extends ServiceInstance {
+    private static class TestServiceInstance extends ServiceInstance {
 
         private TestServiceInstance(URL url, String username, String password)
                 throws RemoteException, MalformedURLException {
@@ -397,7 +397,7 @@ public class ServiceInstanceTest {
         }
 
         @Override
-        protected ServiceContent retrieveServiceContent(VimPortType vimService, ManagedObjectReference mor) throws RemoteException {
+        protected ServiceContent retrieveServiceContent(VimPortType vimService, ManagedObjectReference mor) {
             return new ServiceContent();
         }
 

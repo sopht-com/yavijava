@@ -29,10 +29,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim.rest;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.BufferedReader;
@@ -51,12 +49,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Map;
 
 public class RestClient {
-    final private static String NONCE = "vmware-session-nonce";
-    final private static String NONCE_VAL_START = "value=\"";
+    private static final String NONCE = "vmware-session-nonce";
+    private static final String NONCE_VAL_START = "value=\"";
 
     private String baseUrl = null;
 
@@ -65,13 +62,9 @@ public class RestClient {
             trustAllHttpsCertificates();
             HttpsURLConnection.setDefaultHostnameVerifier
                     (
-                            new HostnameVerifier() {
-                                public boolean verify(String urlHostName, SSLSession session) {
-                                    return true;
-                                }
-                            }
+                            (urlHostName, session) -> true
                     );
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -91,7 +84,7 @@ public class RestClient {
     public String get(String urlStr) throws IOException {
         urlStr = preProcessUrl(urlStr);
 
-        StringBuffer sb = getRawPage(urlStr);
+        StringBuilder sb = getRawPage(urlStr);
 
         int start = sb.indexOf("<xml id=\"objData\">");
         int objPos = sb.indexOf("<object>", start);
@@ -116,7 +109,7 @@ public class RestClient {
         return url;
     }
 
-    private StringBuffer getRawPage(String urlStr) throws IOException {
+    private StringBuilder getRawPage(String urlStr) throws IOException {
         HttpURLConnection conn = (HttpURLConnection) new URL(urlStr).openConnection();
         conn.connect();
 
@@ -124,7 +117,7 @@ public class RestClient {
     }
 
     public String post(String urlStr) throws Exception {
-        return post(urlStr, new Hashtable<String, String>());
+        return post(urlStr, new Hashtable<>());
     }
 
     public String post(String urlStr, Map<String, String> para) throws Exception {
@@ -153,18 +146,14 @@ public class RestClient {
             out.write(NONCE + "=" + nonceStr);
         }
 
-        Iterator<String> keys = para.keySet().iterator();
-        while (keys.hasNext()) {
-            String key = keys.next();
+        for (final String key : para.keySet()) {
             String value = para.get(key);
-            key = URLEncoder.encode(key, "UTF-8");
-            value = URLEncoder.encode(value, "UTF-8");
-            out.write(key + "=" + value);
+            out.write(String.format("%s=%s", URLEncoder.encode(key, "UTF-8"), URLEncoder.encode(value, "UTF-8")));
         }
         out.close();
 
         InputStream is = postCon.getInputStream();
-        StringBuffer sb = readStream(is);
+        StringBuilder sb = readStream(is);
         String resultFlag = "Method Invocation Result:";
         int start = sb.indexOf(resultFlag);
 
@@ -177,7 +166,7 @@ public class RestClient {
     }
 
     private String findVMwareSessionNonce(InputStream is) throws IOException {
-        StringBuffer sb = readStream(is);
+        StringBuilder sb = readStream(is);
         int pos = sb.indexOf(NONCE);
         if (pos == -1) {
             return null;
@@ -188,8 +177,8 @@ public class RestClient {
         return sb.substring(start, end);
     }
 
-    private StringBuffer readStream(InputStream is) throws IOException {
-        StringBuffer sb = new StringBuffer();
+    private StringBuilder readStream(InputStream is) throws IOException {
+        StringBuilder sb = new StringBuilder();
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
         String lineStr;
         while ((lineStr = in.readLine()) != null) {
@@ -216,13 +205,11 @@ public class RestClient {
         }
 
         public void checkServerTrusted(X509Certificate[] certs,
-                                       String authType)
-                throws CertificateException {
+                                       String authType) {
         }
 
         public void checkClientTrusted(X509Certificate[] certs,
-                                       String authType)
-                throws CertificateException {
+                                       String authType) {
         }
     }
 

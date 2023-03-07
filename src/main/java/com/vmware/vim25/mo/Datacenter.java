@@ -44,7 +44,6 @@ import com.vmware.vim25.HostConnectInfo;
 import com.vmware.vim25.HostConnectSpec;
 import com.vmware.vim25.InvalidArgument;
 import com.vmware.vim25.InvalidLogin;
-import com.vmware.vim25.InvalidProperty;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.OptionValue;
 import com.vmware.vim25.RuntimeFault;
@@ -65,11 +64,11 @@ public class Datacenter extends ManagedEntity {
         super(sc, mor);
     }
 
-    public Folder getVmFolder() throws RemoteException {
+    public Folder getVmFolder() {
         return (Folder) this.getManagedObject("vmFolder");
     }
 
-    public Folder getHostFolder() throws RemoteException {
+    public Folder getHostFolder() {
         return (Folder) this.getManagedObject("hostFolder");
     }
 
@@ -98,7 +97,7 @@ public class Datacenter extends ManagedEntity {
         return (Folder) getManagedObject("networkFolder");
     }
 
-    public Network[] getNetworks() throws RemoteException {
+    public Network[] getNetworks() {
         return getNetworks("network");
     }
 

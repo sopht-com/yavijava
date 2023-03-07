@@ -29,23 +29,10 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.IscsiFault;
-import com.vmware.vim25.IscsiFaultInvalidVnic;
-import com.vmware.vim25.IscsiFaultVnicAlreadyBound;
-import com.vmware.vim25.IscsiFaultVnicHasActivePaths;
-import com.vmware.vim25.IscsiFaultVnicHasMultipleUplinks;
-import com.vmware.vim25.IscsiFaultVnicHasNoUplinks;
-import com.vmware.vim25.IscsiFaultVnicHasWrongUplink;
-import com.vmware.vim25.IscsiFaultVnicIsLastPath;
-import com.vmware.vim25.IscsiFaultVnicNotBound;
-import com.vmware.vim25.IscsiFaultVnicNotFound;
 import com.vmware.vim25.IscsiMigrationDependency;
 import com.vmware.vim25.IscsiPortInfo;
 import com.vmware.vim25.IscsiStatus;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
-import com.vmware.vim25.PlatformConfigFault;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

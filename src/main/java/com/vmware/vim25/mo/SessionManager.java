@@ -30,14 +30,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.InvalidLocale;
 import com.vmware.vim25.InvalidLogin;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NoClientCertificate;
-import com.vmware.vim25.NoSubjectName;
-import com.vmware.vim25.NotFound;
 import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.SSPIChallenge;
 import com.vmware.vim25.SessionManagerGenericServiceTicket;
 import com.vmware.vim25.SessionManagerLocalTicket;
 import com.vmware.vim25.SessionManagerServiceRequestSpec;

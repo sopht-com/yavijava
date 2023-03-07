@@ -29,24 +29,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mox;
 
-import com.vmware.vim25.ConcurrentAccess;
 import com.vmware.vim25.ConfigTarget;
 import com.vmware.vim25.DeviceNotSupported;
 import com.vmware.vim25.DistributedVirtualPortgroupInfo;
 import com.vmware.vim25.DistributedVirtualPortgroupPortgroupType;
 import com.vmware.vim25.DistributedVirtualSwitchPortConnection;
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.FileFault;
 import com.vmware.vim25.GuestOsDescriptor;
-import com.vmware.vim25.InsufficientResourcesFault;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidName;
 import com.vmware.vim25.InvalidPowerState;
-import com.vmware.vim25.InvalidProperty;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.NetworkSummary;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TaskInProgress;
 import com.vmware.vim25.VirtualCdrom;
 import com.vmware.vim25.VirtualCdromAtapiBackingInfo;
 import com.vmware.vim25.VirtualCdromIsoBackingInfo;
@@ -84,7 +74,6 @@ import com.vmware.vim25.VirtualUSBController;
 import com.vmware.vim25.VirtualVmxnet;
 import com.vmware.vim25.VirtualVmxnet2;
 import com.vmware.vim25.VirtualVmxnet3;
-import com.vmware.vim25.VmConfigFault;
 import com.vmware.vim25.mo.ComputeResource;
 import com.vmware.vim25.mo.EnvironmentBrowser;
 import com.vmware.vim25.mo.HostSystem;
@@ -218,14 +207,6 @@ public class VirtualMachineDeviceManager {
         return "";
     }
 
-    public void addPassthroughDevice() {
-
-    }
-
-    public void removePassthroughDevice() {
-
-    }
-
 
     /*############################################################
     CD/DVC Drive Management
@@ -238,7 +219,7 @@ public class VirtualMachineDeviceManager {
         return addCdDrive(null, hostDevice, startConnected);
     }
 
-    private Task addCdDrive(String isoPath, String hostDevice, boolean startConnected) throws RemoteException, InterruptedException {
+    private Task addCdDrive(String isoPath, String hostDevice, boolean startConnected) throws RemoteException {
         VirtualMachinePowerState powerState = vm.getRuntime().getPowerState();
         if (powerState != VirtualMachinePowerState.poweredOff) {
             throw new RuntimeException("VM is not yet powered off for adding a CD drive.");
@@ -298,7 +279,7 @@ public class VirtualMachineDeviceManager {
     }
 
     private List<String> getValidCdromOnHost() throws RemoteException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         EnvironmentBrowser envBrower = vm.getEnvironmentBrowser();
 
@@ -384,9 +365,9 @@ public class VirtualMachineDeviceManager {
     public VirtualDisk findHardDisk(String diskName) {
         VirtualDevice[] devices = getAllVirtualDevices();
 
-        for (int i = 0; i < devices.length; i++) {
-            if (devices[i] instanceof VirtualDisk) {
-                VirtualDisk vDisk = (VirtualDisk) devices[i];
+        for (final VirtualDevice device : devices) {
+            if (device instanceof VirtualDisk) {
+                VirtualDisk vDisk = (VirtualDisk) device;
                 if (diskName.equalsIgnoreCase(vDisk.getDeviceInfo().getLabel())) {
                     return vDisk;
                 }
@@ -405,7 +386,7 @@ public class VirtualMachineDeviceManager {
         int maxNodes = getMaxNodesPerControllerOfType(controller);
 
         if (controller.device.length < maxNodes) {
-            List<Integer> usedNodeList = new ArrayList<Integer>();
+            List<Integer> usedNodeList = new ArrayList<>();
             VirtualDevice[] devices = getAllVirtualDevices();
 
             // If this is SCSI controller then its controller also occupies one node.
@@ -500,7 +481,7 @@ public class VirtualMachineDeviceManager {
 
         String prodLineId = vm.getServerConnection().getServiceInstance().getAboutInfo().getProductLineId();
         // standalone host cannot do early or late binding
-        if (prodLineId.indexOf("ESX") != -1 &&
+        if (prodLineId.contains("ESX") &&
                 (portgroupType == DistributedVirtualPortgroupPortgroupType.earlyBinding ||
                         portgroupType == DistributedVirtualPortgroupPortgroupType.lateBinding)) {
             throw new RuntimeException("ESX does not support early or late binding!");
@@ -609,7 +590,7 @@ public class VirtualMachineDeviceManager {
         } else {
             if (guestOsInfo.getSupportedEthernetCard() != null) {
                 boolean supported = false;
-                List<String> supportedTypeList = new ArrayList<String>();
+                List<String> supportedTypeList = new ArrayList<>();
 
                 for (String supportedAdapterName : guestOsInfo.getSupportedEthernetCard()) {
                     VirtualNetworkAdapterType supportedAdapterType = GetNetworkAdapterTypeByApiType(supportedAdapterName);
@@ -658,7 +639,7 @@ public class VirtualMachineDeviceManager {
      * If destroyDeviceBacking is true, it deletes backings for example files in datastore. BE CAREFUL!
      */
     public Task removeDevice(VirtualDevice device, boolean destroyDeviceBacking) throws RemoteException {
-        ArrayList<VirtualDevice> deviceList = new ArrayList<VirtualDevice>();
+        ArrayList<VirtualDevice> deviceList = new ArrayList<>();
         deviceList.add(device);
         return removeDevices(deviceList, destroyDeviceBacking);
     }
@@ -670,7 +651,7 @@ public class VirtualMachineDeviceManager {
      * If destroyDeviceBacking is true, it deletes backings for example files in datastore. BE CAREFUL!
      */
     public Task removeDevices(List<VirtualDevice> deviceList, boolean destroyDeviceBacking) throws RemoteException {
-        List<VirtualDeviceConfigSpec> configSpecList = new ArrayList<VirtualDeviceConfigSpec>();
+        List<VirtualDeviceConfigSpec> configSpecList = new ArrayList<>();
 
         boolean allDevicesSupportHotRemoval = allSupportHotRemoval(deviceList);
         VirtualMachinePowerState powerState = vm.getRuntime().getPowerState();
@@ -754,7 +735,7 @@ public class VirtualMachineDeviceManager {
 
     @SuppressWarnings("unchecked")
     public <T extends VirtualDevice> List<T> getVirtualDevicesOfType(Class<T> clazz) {
-        List<T> result = new ArrayList<T>();
+        List<T> result = new ArrayList<>();
 
         VirtualDevice[] devices = getAllVirtualDevices();
 
@@ -803,9 +784,7 @@ public class VirtualMachineDeviceManager {
         VirtualController vc = null;
         try {
             vc = clazz.newInstance();
-        } catch (InstantiationException e) {
-            log.error("Unable to createControllerInstance.", e);
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             log.error("Unable to createControllerInstance.", e);
         }
         return vc;

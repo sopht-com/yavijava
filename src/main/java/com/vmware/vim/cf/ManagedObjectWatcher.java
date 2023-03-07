@@ -58,7 +58,7 @@ class ManagedObjectWatcher extends Observable implements Runnable {
     /**
      * Vector containing PropertyFilters
      */
-    private final Vector<PropertyFilter> filters = new Vector<PropertyFilter>();
+    private final Vector<PropertyFilter> filters = new Vector<>();
     /**
      * Version
      */

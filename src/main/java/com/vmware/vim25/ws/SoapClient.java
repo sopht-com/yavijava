@@ -43,7 +43,7 @@ public abstract class SoapClient implements Client {
     public int readTimeout = 0;
     protected TrustManager trustManager;
 
-    XmlGen xmlGen = new XmlGenDom();
+    final XmlGen xmlGen = new XmlGenDom();
 
     /*===============================================
        * API versions *
@@ -116,9 +116,7 @@ public abstract class SoapClient implements Client {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             return hexify(md.digest(cert.getEncoded()));
-        } catch (NoSuchAlgorithmException ignore1) {
-            return null;
-        } catch (CertificateEncodingException ignore2) {
+        } catch (NoSuchAlgorithmException | CertificateEncodingException ignore1) {
             return null;
         }
     }
@@ -129,7 +127,7 @@ public abstract class SoapClient implements Client {
                 '6', '7', '8', '9', 'A', 'B',
                 'C', 'D', 'E', 'F'
         };
-        StringBuffer buf = new StringBuffer(bytes.length * 3);
+        StringBuilder buf = new StringBuilder(bytes.length * 3);
         for (int i = 0; i < bytes.length; i++) {
             if (i != 0) buf.append(':');
             buf.append(hexDigits[(bytes[i] & 0xf0) >> 4]);

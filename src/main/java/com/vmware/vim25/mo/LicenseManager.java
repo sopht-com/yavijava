@@ -29,20 +29,15 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.CannotAccessLocalSource;
-import com.vmware.vim25.InvalidLicense;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.KeyValue;
 import com.vmware.vim25.LicenseAvailabilityInfo;
 import com.vmware.vim25.LicenseDiagnostics;
 import com.vmware.vim25.LicenseFeatureInfo;
 import com.vmware.vim25.LicenseManagerEvaluationInfo;
 import com.vmware.vim25.LicenseManagerLicenseInfo;
-import com.vmware.vim25.LicenseServerUnavailable;
 import com.vmware.vim25.LicenseSource;
 import com.vmware.vim25.LicenseUsageInfo;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -103,7 +98,7 @@ public class LicenseManager extends ManagedObject {
      * @deprecated in SDK4.0
      */
     public boolean getSourceAvailable() {
-        return ((Boolean) getCurrentProperty("sourceAvailable")).booleanValue();
+        return (Boolean) getCurrentProperty("sourceAvailable");
     }
 
     /**

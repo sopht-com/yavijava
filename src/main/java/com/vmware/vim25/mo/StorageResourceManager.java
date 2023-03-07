@@ -30,11 +30,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.IORMNotSupportedHostOnDatastore;
-import com.vmware.vim25.InaccessibleDatastore;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.StorageDrsConfigSpec;
 import com.vmware.vim25.StorageIORMConfigOption;
 import com.vmware.vim25.StorageIORMConfigSpec;

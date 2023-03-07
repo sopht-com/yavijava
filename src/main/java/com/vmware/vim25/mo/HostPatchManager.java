@@ -31,18 +31,7 @@ package com.vmware.vim25.mo;
 
 import com.vmware.vim25.HostPatchManagerLocator;
 import com.vmware.vim25.HostPatchManagerPatchManagerOperationSpec;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NoDiskSpace;
-import com.vmware.vim25.PatchBinariesNotFound;
-import com.vmware.vim25.PatchInstallFailed;
-import com.vmware.vim25.PatchMetadataInvalid;
-import com.vmware.vim25.PatchNotApplicable;
-import com.vmware.vim25.PlatformConfigFault;
-import com.vmware.vim25.RebootRequired;
-import com.vmware.vim25.RequestCanceled;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 

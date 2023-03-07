@@ -31,7 +31,6 @@ package com.vmware.vim25.mo;
 import com.vmware.vim25.LicenseAssignmentManagerLicenseAssignment;
 import com.vmware.vim25.LicenseManagerLicenseInfo;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

@@ -31,11 +31,8 @@ package com.vmware.vim25.mo;
 import com.vmware.vim25.HttpNfcLeaseInfo;
 import com.vmware.vim25.HttpNfcLeaseManifestEntry;
 import com.vmware.vim25.HttpNfcLeaseState;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.LocalizedMethodFault;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.Timedout;
 
 import java.rmi.RemoteException;
 
@@ -59,7 +56,7 @@ public class HttpNfcLease extends ManagedObject {
     }
 
     public int getInitializeProgress() {
-        return ((Integer) getCurrentProperty("initializeProgress")).intValue();
+        return (Integer) getCurrentProperty("initializeProgress");
     }
 
     public HttpNfcLeaseState getState() {

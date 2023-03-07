@@ -29,10 +29,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
-import com.vmware.vim25.DuplicateName;
 import com.vmware.vim25.FcoeConfigFcoeSpecification;
-import com.vmware.vim25.FcoeFaultPnicHasNoPortSet;
 import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostDiskPartitionBlockRange;
 import com.vmware.vim25.HostDiskPartitionInfo;
@@ -61,11 +58,8 @@ import com.vmware.vim25.HostUnresolvedVmfsVolume;
 import com.vmware.vim25.HostVffsSpec;
 import com.vmware.vim25.HostVmfsSpec;
 import com.vmware.vim25.HostVmfsVolume;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.NotFound;
-import com.vmware.vim25.ResourceInUse;
 import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;

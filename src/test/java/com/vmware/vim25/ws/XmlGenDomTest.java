@@ -10,10 +10,10 @@ import com.vmware.vim25.VirtualMachineConfigInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.reflect.ReflectPermission;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.security.AccessControlException;
 import java.util.Objects;
@@ -23,7 +23,7 @@ public class XmlGenDomTest {
     @Test
     public void testFromXML_UnknownClass() throws Exception {
         // simulate with non-existing class
-        InputStream inputStream = new FileInputStream(new File("src/test/resources/xml/UnknownConfigSpec.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/resources/xml/UnknownConfigSpec.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         Object nullObject = xmlGenDom.fromXML("UnknownConfigSpec", inputStream);
         assert nullObject == null;
@@ -31,21 +31,21 @@ public class XmlGenDomTest {
 
     @Test(expected = InvalidLogin.class)
     public void testFromXML_Throws_Invalid_Login_When_Login_is_Invalid() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/java/com/vmware/vim25/ws/xml/InvalidLoginFault.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/java/com/vmware/vim25/ws/xml/InvalidLoginFault.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         xmlGenDom.fromXML("Login", inputStream);
     }
 
     @Test(expected = RemoteException.class)
     public void parseSoapFault_Throws_RuntimeException() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/java/com/vmware/vim25/ws/xml/CatchRuntimeExceptionTest.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/java/com/vmware/vim25/ws/xml/CatchRuntimeExceptionTest.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         xmlGenDom.fromXML("Login", inputStream);
     }
 
     @Test
     public void set_Detail_Message_Adds_Detail_Message_to_Exception() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/java/com/vmware/vim25/ws/xml/InvalidLoginFault.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/java/com/vmware/vim25/ws/xml/InvalidLoginFault.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         try {
             xmlGenDom.fromXML("Login", inputStream);
@@ -55,7 +55,7 @@ public class XmlGenDomTest {
     }
 
     @Test
-    public void set_Detail_Message_throws_Exception() throws Exception {
+    public void set_Detail_Message_throws_Exception() {
         SecurityManager previous = System.getSecurityManager();
         try {
             SecurityManager securityManager = new SecurityManager() {
@@ -75,8 +75,6 @@ public class XmlGenDomTest {
             Throwable throwable = new Throwable("Illegal Access");
             Throwable noMessage = (Throwable) XmlGenDom.setDetailMessageInException(throwable, "Error occured");
             Assert.assertNotEquals("Error occured", noMessage.getMessage());
-        } catch (Exception e) {
-            throw e;
         } finally {
             System.setSecurityManager(previous);
         }
@@ -84,14 +82,14 @@ public class XmlGenDomTest {
 
     @Test(expected = RemoteException.class)
     public void testFromXML_Throws_DocumentException() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/java/com/vmware/vim25/ws/xml/CatchDocumentExceptionTest.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/java/com/vmware/vim25/ws/xml/CatchDocumentExceptionTest.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         xmlGenDom.fromXML("Login", inputStream);
     }
 
     @Test
     public void testFromXML_ValidUserSessionReturnsValidUserSession() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/resources/xml/UserSessionValidLoginSession.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/resources/xml/UserSessionValidLoginSession.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         UserSession session = (UserSession) xmlGenDom.fromXML("UserSession", inputStream);
         assert Objects.equals(session.getKey(), "5202c417-3a62-54c8-db48-61c00c1909e4");
@@ -99,7 +97,7 @@ public class XmlGenDomTest {
 
     @Test
     public void testFromXML_vmxConfigChecksum_with_Base64_value_parses_correctly_to_byteArray() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/resources/xml/RetrievePropertiesVirtualMachineConfigInfoWithBase64BinaryFields.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/resources/xml/RetrievePropertiesVirtualMachineConfigInfoWithBase64BinaryFields.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         ObjectContent objectContent = (ObjectContent) xmlGenDom.fromXML("ObjectContent", inputStream);
         DynamicProperty[] dps = objectContent.getPropSet();
@@ -110,14 +108,14 @@ public class XmlGenDomTest {
 
     @Test
     public void testFromXML_payload_with_normal_byte_array_parses_into_byte_array() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/resources/xml/RetrievePropertiesHostSystemWithByteArray.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/resources/xml/RetrievePropertiesHostSystemWithByteArray.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         ObjectContent objectContent = (ObjectContent) xmlGenDom.fromXML("ObjectContent", inputStream);
         DynamicProperty[] dps = objectContent.getPropSet();
         HostConfigInfo hostConfigInfo = (HostConfigInfo) dps[0].getVal();
-        String actualCert = "";
+        StringBuilder actualCert = new StringBuilder();
         for (byte b : hostConfigInfo.certificate) {
-            actualCert += (char) b;
+            actualCert.append((char) b);
         }
         String expectedCert = "-----BEGIN CERTIFICATE-----\n" +
                 "MIID8TCCAtmgAwIBAgIGUYXaqhnAMA0GCSqGSIb3DQEBBQUAMBsxGTAXBgNVBAoT\n" +
@@ -143,12 +141,12 @@ public class XmlGenDomTest {
                 "4rfcRl7Ddu29cCqIv81aJwW+ZAdxfY/QsRsvRXp1X/tozj6rE5+vAznvyCAtHR2I\n" +
                 "VOTvbDk=\n" +
                 "-----END CERTIFICATE-----\n";
-        Assert.assertEquals(actualCert, expectedCert);
+        Assert.assertEquals(actualCert.toString(), expectedCert);
     }
 
     @Test
     public void testFromXML_environment_variables_return_as_string_array() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/java/com/vmware/vim25/ws/xml/ReadEnvironmentVariableInGuest.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/java/com/vmware/vim25/ws/xml/ReadEnvironmentVariableInGuest.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         String[] strings = (String[]) xmlGenDom.fromXML("String[]", inputStream);
         assert strings.getClass().isArray();
@@ -156,7 +154,7 @@ public class XmlGenDomTest {
 
     @Test
     public void testFromXML_Folder_GetChildrenTypes() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/java/com/vmware/vim25/ws/xml/Folder_GetChildType_String_Array.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/java/com/vmware/vim25/ws/xml/Folder_GetChildType_String_Array.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         String[] strings = (String[]) xmlGenDom.fromXML("String[]", inputStream);
         assert strings.getClass().isArray();
@@ -164,7 +162,7 @@ public class XmlGenDomTest {
 
     @Test
     public void testFromXML_When_UpdateSet_Contains_Base64_Binary_No_Exception_Is_Thrown() throws Exception {
-        InputStream inputStream = new FileInputStream(new File("src/test/resources/xml/UpdateSetWithBase64Binary.xml"));
+        InputStream inputStream = Files.newInputStream(Paths.get("src/test/resources/xml/UpdateSetWithBase64Binary.xml"));
         XmlGenDom xmlGenDom = new XmlGenDom();
         UpdateSet updateSet = (UpdateSet) xmlGenDom.fromXML("UpdateSet", inputStream);
     }

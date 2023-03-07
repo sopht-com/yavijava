@@ -34,17 +34,9 @@ import com.vmware.vim25.DatastoreHostMount;
 import com.vmware.vim25.DatastoreInfo;
 import com.vmware.vim25.DatastoreMountPathDatastorePair;
 import com.vmware.vim25.DatastoreSummary;
-import com.vmware.vim25.DuplicateName;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.PlatformConfigFault;
-import com.vmware.vim25.ResourceInUse;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.StorageIORMInfo;
 import com.vmware.vim25.StoragePlacementResult;
-import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 

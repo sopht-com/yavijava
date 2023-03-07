@@ -90,10 +90,10 @@ public class RestAppDemo {
         System.out.println(rc.get("?moid=48"));
         long end = System.currentTimeMillis();
         System.out.println("time taken:" + (end - start));
-        Map<String, String> para = new Hashtable<String, String>();
+        Map<String, String> para = new Hashtable<>();
         para.put("newName", "Melody_SuSe");
         System.out.println(rc.post("moid=48&method=rename", para));
-        Map<String, String> para1 = new Hashtable<String, String>();
+        Map<String, String> para1 = new Hashtable<>();
         System.out.println(rc.post("http://10.20.143.205/mob/?moid=48&method=acquireMksTicket", para1));
     }
 }

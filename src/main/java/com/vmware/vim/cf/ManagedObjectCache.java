@@ -57,7 +57,7 @@ class ManagedObjectCache implements Observer {
 
     ManagedObjectCache(ServiceInstance si) {
         this.si = si;
-        items = new ConcurrentHashMap<ManagedObjectReference, Map<String, Object>>();
+        items = new ConcurrentHashMap<>();
     }
 
     public Map<ManagedObjectReference, Map<String, Object>> getCachedItems() {
@@ -73,7 +73,7 @@ class ManagedObjectCache implements Observer {
                 for (int j = 0; ous != null && j < ous.length; j++) {
                     ManagedObjectReference mor = ous[j].getObj();
                     if (!items.containsKey(mor)) {
-                        items.put(mor, new ConcurrentHashMap<String, Object>());
+                        items.put(mor, new ConcurrentHashMap<>());
                     }
                     Map<String, Object> moMap = items.get(mor);
 
@@ -81,10 +81,10 @@ class ManagedObjectCache implements Observer {
                     if (pcs == null) {
                         continue;
                     }
-                    for (int k = 0; k < pcs.length; k++) {
-                        Object value = pcs[k].getVal();
+                    for (final PropertyChange pc : pcs) {
+                        Object value = pc.getVal();
                         value = value == null ? NULL : value; //null is not allowed as value in CHM
-                        String propName = pcs[k].getName();
+                        String propName = pc.getName();
                         if (moMap.containsKey(propName)) {
                             moMap.put(propName, value);
                         } else {

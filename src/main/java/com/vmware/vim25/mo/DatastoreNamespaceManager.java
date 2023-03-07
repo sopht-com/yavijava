@@ -29,14 +29,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.CannotCreateFile;
-import com.vmware.vim25.FileAlreadyExists;
-import com.vmware.vim25.FileFault;
-import com.vmware.vim25.FileNotFound;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidDatastorePath;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

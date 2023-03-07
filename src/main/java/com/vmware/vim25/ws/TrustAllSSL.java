@@ -1,9 +1,7 @@
 package com.vmware.vim25.ws;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.rmi.RemoteException;
@@ -43,11 +41,7 @@ public class TrustAllSSL {
             sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, trustAllCerts, new SecureRandom());
             HttpsURLConnection.setDefaultHostnameVerifier(
-                    new HostnameVerifier() {
-                        public boolean verify(String urlHostName, SSLSession session) {
-                            return true;
-                        }
-                    }
+                    (urlHostName, session) -> true
             );
         } catch (NoSuchAlgorithmException e) {
             throw new RemoteException("Unable to find suitable algorithm while attempting to communicate with remote server.", e);
@@ -82,13 +76,11 @@ public class TrustAllSSL {
         }
 
         public void checkServerTrusted(X509Certificate[] certs,
-                                       String authType)
-                throws CertificateException {
+                                       String authType) {
         }
 
         public void checkClientTrusted(X509Certificate[] certs,
-                                       String authType)
-                throws CertificateException {
+                                       String authType) {
         }
     }
 

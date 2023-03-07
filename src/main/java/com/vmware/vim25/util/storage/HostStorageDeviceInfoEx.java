@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +22,7 @@ public class HostStorageDeviceInfoEx {
     /**
      * Logger to log information.
      */
-    Logger log = LoggerFactory.getLogger(HostStorageDeviceInfoEx.class);
+    final Logger log = LoggerFactory.getLogger(HostStorageDeviceInfoEx.class);
 
     /**
      * Host Storage Device Information.
@@ -41,14 +42,14 @@ public class HostStorageDeviceInfoEx {
     /**
      * All the ScsiLun Keys and their Runtime Names mapped together.
      */
-    public Map<String, String> scsiRuntimeNames = new HashMap<String, String>();
+    public final Map<String, String> scsiRuntimeNames = new HashMap<>();
 
     /**
      * Returns the map of [(ScsiLun Keys) : RuntimeName]
      *
      * @return
      */
-    public Map getScsiRuntimeNames() {
+    public Map<String, String> getScsiRuntimeNames() {
         return this.scsiRuntimeNames;
     }
 
@@ -68,7 +69,7 @@ public class HostStorageDeviceInfoEx {
     private void collectScsiRuntimeNames() {
 
         // To hold all the Scsi Luns that are disks
-        ArrayList<ScsiLun> sortedScsiLuns = new ArrayList<ScsiLun>();
+        ArrayList<ScsiLun> sortedScsiLuns = new ArrayList<>();
 
         // Check to see that this device has luns
         if (storageDeviceInfo.getScsiLun().length == 0) {
@@ -84,7 +85,7 @@ public class HostStorageDeviceInfoEx {
         }
 
         // To collect the Scsi Topology information
-        ArrayList<Map> scsiTopologyInfo = new ArrayList<Map>();
+        List<Map<String, Object>> scsiTopologyInfo = new ArrayList<>();
 
         // Get the HostScsiTopology information
         HostScsiTopology scsiTopology = storageDeviceInfo.scsiTopology;
@@ -117,7 +118,7 @@ public class HostStorageDeviceInfoEx {
                 for (HostScsiTopologyLun lun : target.lun) {
 
                     // Create a Map with The target key and lun information
-                    Map<String, Object> scsiInfo = new HashMap<String, Object>();
+                    Map<String, Object> scsiInfo = new HashMap<>();
 
                     // Add this information to map
                     scsiInfo.put("key", target.key);
@@ -139,7 +140,7 @@ public class HostStorageDeviceInfoEx {
         for (ScsiLun lun : sortedScsiLuns) {
 
             // For each of the ScisiTopology
-            for (Map info : scsiTopologyInfo) {
+            for (Map<String, Object> info : scsiTopologyInfo) {
 
                 // Get the lun information on the target
                 HostScsiTopologyLun scsiTopologyLun = (HostScsiTopologyLun) info.get("lunInfo");

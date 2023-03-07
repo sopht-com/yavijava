@@ -29,8 +29,6 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.AlreadyExists;
-import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostDnsConfig;
 import com.vmware.vim25.HostIpRouteConfig;
 import com.vmware.vim25.HostIpRouteTableConfig;
@@ -42,11 +40,8 @@ import com.vmware.vim25.HostPortGroupSpec;
 import com.vmware.vim25.HostVirtualNicSpec;
 import com.vmware.vim25.HostVirtualSwitchSpec;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotFound;
 import com.vmware.vim25.PhysicalNicHintInfo;
 import com.vmware.vim25.PhysicalNicLinkInfo;
-import com.vmware.vim25.ResourceInUse;
-import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

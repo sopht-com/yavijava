@@ -28,10 +28,6 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.ConcurrentAccess;
-import com.vmware.vim25.FileFault;
-import com.vmware.vim25.InvalidDatastore;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.OvfCreateDescriptorParams;
 import com.vmware.vim25.OvfCreateDescriptorResult;
@@ -42,9 +38,6 @@ import com.vmware.vim25.OvfParseDescriptorParams;
 import com.vmware.vim25.OvfParseDescriptorResult;
 import com.vmware.vim25.OvfValidateHostParams;
 import com.vmware.vim25.OvfValidateHostResult;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.TaskInProgress;
-import com.vmware.vim25.VmConfigFault;
 
 import java.rmi.RemoteException;
 

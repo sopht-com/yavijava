@@ -28,11 +28,8 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostVirtualNicManagerInfo;
-import com.vmware.vim25.InvalidArgument;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.VirtualNicManagerNetConfig;
 
 import java.rmi.RemoteException;

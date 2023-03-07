@@ -30,12 +30,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.DasConfigFault;
 import com.vmware.vim25.HostCapability;
-import com.vmware.vim25.HostConfigFault;
 import com.vmware.vim25.HostConfigInfo;
 import com.vmware.vim25.HostConfigManager;
-import com.vmware.vim25.HostConnectFault;
 import com.vmware.vim25.HostConnectInfo;
 import com.vmware.vim25.HostConnectSpec;
 import com.vmware.vim25.HostFlagInfo;
@@ -44,24 +41,13 @@ import com.vmware.vim25.HostIpmiInfo;
 import com.vmware.vim25.HostLicensableResourceInfo;
 import com.vmware.vim25.HostListSummary;
 import com.vmware.vim25.HostMaintenanceSpec;
-import com.vmware.vim25.HostPowerOpFailed;
 import com.vmware.vim25.HostRuntimeInfo;
 import com.vmware.vim25.HostServiceTicket;
 import com.vmware.vim25.HostSystemReconnectSpec;
 import com.vmware.vim25.HostSystemResourceInfo;
 import com.vmware.vim25.HostSystemSwapConfiguration;
 import com.vmware.vim25.HostTpmAttestationReport;
-import com.vmware.vim25.InvalidIpmiLoginInfo;
-import com.vmware.vim25.InvalidIpmiMacAddress;
-import com.vmware.vim25.InvalidLogin;
-import com.vmware.vim25.InvalidName;
-import com.vmware.vim25.InvalidProperty;
-import com.vmware.vim25.InvalidState;
 import com.vmware.vim25.ManagedObjectReference;
-import com.vmware.vim25.NotSupported;
-import com.vmware.vim25.RequestCanceled;
-import com.vmware.vim25.RuntimeFault;
-import com.vmware.vim25.Timedout;
 import com.vmware.vim25.VirtualMachineConfigInfo;
 import com.vmware.vim25.mo.util.MorUtil;
 
@@ -89,11 +75,11 @@ public class HostSystem extends ManagedEntity {
         return (HostConfigInfo) getCurrentProperty("config");
     }
 
-    public Datastore[] getDatastores() throws RemoteException {
+    public Datastore[] getDatastores() {
         return getDatastores("datastore");
     }
 
-    public HostDatastoreBrowser getDatastoreBrowser() throws RemoteException {
+    public HostDatastoreBrowser getDatastoreBrowser() {
         return (HostDatastoreBrowser) getManagedObject("datastoreBrowser");
     }
 
@@ -108,7 +94,7 @@ public class HostSystem extends ManagedEntity {
         return (HostLicensableResourceInfo) getCurrentProperty("licensableResource");
     }
 
-    public Network[] getNetworks() throws RemoteException {
+    public Network[] getNetworks() {
         return getNetworks("network");
     }
 
@@ -124,7 +110,7 @@ public class HostSystem extends ManagedEntity {
         return (HostSystemResourceInfo) getCurrentProperty("systemResources");
     }
 
-    public VirtualMachine[] getVms() throws RemoteException {
+    public VirtualMachine[] getVms() {
         return getVms("vm");
     }
 
@@ -155,7 +141,7 @@ public class HostSystem extends ManagedEntity {
      * @since SDK5.5
      */
     public Task enterMaintenanceMode(int timeout, boolean evacuatePoweredOffVms, HostMaintenanceSpec maintenanceSpec) throws RemoteException {
-        ManagedObjectReference mor = getVimService().enterMaintenanceMode_Task(getMOR(), timeout, Boolean.valueOf(evacuatePoweredOffVms), maintenanceSpec);
+        ManagedObjectReference mor = getVimService().enterMaintenanceMode_Task(getMOR(), timeout, evacuatePoweredOffVms, maintenanceSpec);
         return new Task(getServerConnection(), mor);
     }
 
@@ -172,7 +158,7 @@ public class HostSystem extends ManagedEntity {
     }
 
     public Task powerDownHostToStandBy(int timeSec, boolean evacuatePoweredOffVms) throws RemoteException {
-        ManagedObjectReference mor = getVimService().powerDownHostToStandBy_Task(getMOR(), timeSec, Boolean.valueOf(evacuatePoweredOffVms));
+        ManagedObjectReference mor = getVimService().powerDownHostToStandBy_Task(getMOR(), timeSec, evacuatePoweredOffVms);
         return new Task(getServerConnection(), mor);
     }
 
@@ -200,7 +186,7 @@ public class HostSystem extends ManagedEntity {
     }
 
     public long queryMemoryOverhead(long memorySize, int videoRamSize, int numVcpus) throws RemoteException {
-        return getVimService().queryMemoryOverhead(getMOR(), memorySize, new Integer(videoRamSize), numVcpus);
+        return getVimService().queryMemoryOverhead(getMOR(), memorySize, videoRamSize, numVcpus);
     }
 
     public long queryMemoryOverheadEx(VirtualMachineConfigInfo vmConfigInfo) throws RemoteException {
@@ -255,7 +241,7 @@ public class HostSystem extends ManagedEntity {
         getVimService().updateIpmi(getMOR(), ipmiInfo);
     }
 
-    private HostConfigManager getConfigManager() throws RemoteException {
+    private HostConfigManager getConfigManager() {
         if (configManager == null) {
             configManager = (HostConfigManager) getCurrentProperty("configManager");
         }

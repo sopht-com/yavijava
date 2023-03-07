@@ -19,5 +19,4 @@ public interface ReflectUtilSimpleInterfaceWith2Fields1Method {
     int int1 = 0;
     String string1 = null;
 
-    void helloWorld();
 }
