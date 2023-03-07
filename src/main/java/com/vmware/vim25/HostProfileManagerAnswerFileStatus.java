@@ -42,7 +42,7 @@ public enum HostProfileManagerAnswerFileStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostProfileManagerAnswerFileStatus(String val) {
+    HostProfileManagerAnswerFileStatus(String val) {
         this.val = val;
     }
 }

@@ -41,7 +41,7 @@ public enum CannotMoveFaultToleranceVmMoveType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private CannotMoveFaultToleranceVmMoveType(String val) {
+    CannotMoveFaultToleranceVmMoveType(String val) {
         this.val = val;
     }
 }

@@ -28,7 +28,13 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.HostProfileConfigSpec;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.ProfileDeferredPolicyOptionParameter;
+import com.vmware.vim25.ProfileExecuteResult;
+import com.vmware.vim25.ProfileUpdateFailed;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -47,16 +53,16 @@ public class HostProfile extends Profile {
         return (HostSystem) getManagedObject("referenceHost");
     }
 
-    public ProfileExecuteResult executeHostProfile(HostSystem host, ProfileDeferredPolicyOptionParameter[] deferredParam) throws RuntimeFault, RemoteException {
+    public ProfileExecuteResult executeHostProfile(HostSystem host, ProfileDeferredPolicyOptionParameter[] deferredParam) throws RemoteException {
         return getVimService().executeHostProfile(getMOR(), host.getMOR(), deferredParam);
     }
 
-    public void updateHostProfile(HostProfileConfigSpec config) throws DuplicateName, ProfileUpdateFailed, RuntimeFault, RemoteException {
+    public void updateHostProfile(HostProfileConfigSpec config) throws RemoteException {
         getVimService().updateHostProfile(getMOR(), config);
     }
 
-    public void updateReferenceHost(HostSystem host) throws RuntimeFault, RemoteException {
+    public void updateReferenceHost(HostSystem host) throws RemoteException {
         getVimService().updateReferenceHost(getMOR(),
-            host == null ? null : host.getMOR());
+                host == null ? null : host.getMOR());
     }
 }

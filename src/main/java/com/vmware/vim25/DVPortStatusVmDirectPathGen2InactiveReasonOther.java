@@ -41,7 +41,7 @@ public enum DVPortStatusVmDirectPathGen2InactiveReasonOther {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DVPortStatusVmDirectPathGen2InactiveReasonOther(String val) {
+    DVPortStatusVmDirectPathGen2InactiveReasonOther(String val) {
         this.val = val;
     }
 }

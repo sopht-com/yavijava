@@ -42,7 +42,7 @@ public enum SimpleCommandEncoding {
     @SuppressWarnings("unused")
     private final String val;
 
-    private SimpleCommandEncoding(String val) {
+    SimpleCommandEncoding(String val) {
         this.val = val;
     }
 }

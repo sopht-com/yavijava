@@ -42,7 +42,7 @@ public enum ArrayUpdateOperation {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ArrayUpdateOperation(String val) {
+    ArrayUpdateOperation(String val) {
         this.val = val;
     }
 }

@@ -43,7 +43,7 @@ public enum VMwareDVSTeamingMatchStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VMwareDVSTeamingMatchStatus(String val) {
+    VMwareDVSTeamingMatchStatus(String val) {
         this.val = val;
     }
 }

@@ -29,7 +29,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package org.doublecloud.ws.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Array;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class TypeUtil {
     final public static Class<?> BYTE_ARRAY_CLASS = byte[].class;
     final public static Class<?> LONG_ARRAY_CLASS = long[].class;
 
-    private static Logger log = Logger.getLogger(TypeUtil.class);
+    private static final Logger log = LoggerFactory.getLogger(TypeUtil.class);
 
     private final static Set<String> PRIMITIVE_TYPES = new HashSet<String>();
 
@@ -62,11 +63,11 @@ public class TypeUtil {
         return PRIMITIVE_TYPES.contains(type);
     }
 
-    private static String[] BASIC_TYPES = new String[] {
-        "String", "int", "short",
-        "long", "float", "Float",
-        "byte", "boolean", "Boolean",
-        "Calendar", "double"
+    private static final String[] BASIC_TYPES = new String[]{
+            "String", "int", "short",
+            "long", "float", "Float",
+            "byte", "boolean", "Boolean",
+            "Calendar", "double"
     };
 
     public static boolean isBasicType(String type) {
@@ -86,20 +87,18 @@ public class TypeUtil {
         return pkg == null || pkg.getName().equals(LANG_PKG) || pkg.getName().equals(UTIL_PKG);
     }
 
-    private static String PACKAGE_NAME = "com.vmware.vim25";
+    private static final String PACKAGE_NAME = "com.vmware.vim25";
     private final static Map<String, Class<?>> VIM_CLASSES = new ConcurrentHashMap<String, Class<?>>();
 
     public static Class<?> getVimClass(String type) {
         if (VIM_CLASSES.containsKey(type)) {
             return VIM_CLASSES.get(type);
-        }
-        else {
+        } else {
             try {
                 Class<?> clazz;
                 if (!type.endsWith("[]")) {
                     clazz = Class.forName(PACKAGE_NAME + "." + type);
-                }
-                else {
+                } else {
                     String arrayType = type.substring(0, type.length() - 2);
                     clazz = Array.newInstance(getVimClass(arrayType), 0).getClass();
                 }
@@ -107,26 +106,25 @@ public class TypeUtil {
                 VIM_CLASSES.put(type, clazz);
 
                 return clazz;
-            }
-            catch (ClassNotFoundException cnfe) {
-                log.error("ClassNotFoundException caught for type: " + type, cnfe);
+            } catch (ClassNotFoundException cnfe) {
+                log.error("ClassNotFoundException caught for type: {}", type, cnfe);
                 return null;
             }
         }
     }
 
 
-    private static Class<?>[] clazzes = new Class[]{
-        java.lang.Integer.class, java.lang.Long.class,
-        java.lang.Boolean.class, java.lang.Short.class,
-        java.lang.Float.class, java.lang.String.class,
-        java.lang.Byte.class, java.lang.Double.class
+    private static final Class<?>[] clazzes = new Class[]{
+            java.lang.Integer.class, java.lang.Long.class,
+            java.lang.Boolean.class, java.lang.Short.class,
+            java.lang.Float.class, java.lang.String.class,
+            java.lang.Byte.class, java.lang.Double.class
     };
-    private static String[] xsdStrs = new String[]{
-        "xsd:int", "xsd:long",
-        "xsd:boolean", "xsd:short",
-        "xsd:float", "xsd:string",
-        "xsd:byte", "xsd:double"
+    private static final String[] xsdStrs = new String[]{
+            "xsd:int", "xsd:long",
+            "xsd:boolean", "xsd:short",
+            "xsd:float", "xsd:string",
+            "xsd:byte", "xsd:double"
     };
 
     //only for the basic data types as shown above

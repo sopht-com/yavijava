@@ -41,7 +41,7 @@ public enum VirtualDiskVFlashCacheConfigInfoCacheMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDiskVFlashCacheConfigInfoCacheMode(String val) {
+    VirtualDiskVFlashCacheConfigInfoCacheMode(String val) {
         this.val = val;
     }
 }

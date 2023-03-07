@@ -43,7 +43,7 @@ public enum LicenseManagerState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private LicenseManagerState(String val) {
+    LicenseManagerState(String val) {
         this.val = val;
     }
 }

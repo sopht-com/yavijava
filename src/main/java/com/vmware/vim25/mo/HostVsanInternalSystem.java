@@ -29,7 +29,17 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.HostVsanInternalSystemCmmdsQuery;
+import com.vmware.vim25.HostVsanInternalSystemDeleteVsanObjectsResult;
+import com.vmware.vim25.HostVsanInternalSystemVsanObjectOperationResult;
+import com.vmware.vim25.HostVsanInternalSystemVsanPhysicalDiskDiagnosticsResult;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.VimFault;
+import com.vmware.vim25.VsanFault;
+import com.vmware.vim25.VsanNewPolicyBatch;
+import com.vmware.vim25.VsanPolicyChangeBatch;
+import com.vmware.vim25.VsanPolicySatisfiability;
 
 import java.rmi.RemoteException;
 
@@ -89,7 +99,7 @@ public class HostVsanInternalSystem extends ManagedObject {
         return getVimService().canProvisionObjects(getMOR(), npbs, ignoreSatisfiability);
     }
 
-    public VsanPolicySatisfiability[] canProvisionObjects(VsanNewPolicyBatch[] npbs) throws VimFault, RuntimeFault, RemoteException {
+    public VsanPolicySatisfiability[] canProvisionObjects(VsanNewPolicyBatch[] npbs) throws RemoteException {
         return canProvisionObjects(npbs, null);
     }
 
@@ -112,7 +122,7 @@ public class HostVsanInternalSystem extends ManagedObject {
         return getVimService().deleteVsanObjects(getMOR(), uuids, force);
     }
 
-    public HostVsanInternalSystemDeleteVsanObjectsResult[] deleteVsanObjects(String[] uuids) throws RuntimeFault, VimFault, RemoteException {
+    public HostVsanInternalSystemDeleteVsanObjectsResult[] deleteVsanObjects(String[] uuids) throws RemoteException {
         return deleteVsanObjects(uuids, null);
     }
 
@@ -144,15 +154,15 @@ public class HostVsanInternalSystem extends ManagedObject {
         return queryCmmds(queries);
     }
 
-    public String queryCmmds(HostVsanInternalSystemCmmdsQuery[] queries) throws RuntimeFault, RemoteException {
+    public String queryCmmds(HostVsanInternalSystemCmmdsQuery[] queries) throws RemoteException {
         return getVimService().queryCmmds(this.getMOR(), queries);
     }
 
-    public String queryObjectsOnPhysicalVsanDisk(String[] disks) throws RuntimeFault, RemoteException {
+    public String queryObjectsOnPhysicalVsanDisk(String[] disks) throws RemoteException {
         return getVimService().queryObjectsOnPhysicalVsanDisk(this.getMOR(), disks);
     }
 
-    public String queryPhysicalVsanDisks(String[] props) throws RuntimeFault, RemoteException {
+    public String queryPhysicalVsanDisks(String[] props) throws RemoteException {
         return getVimService().queryPhysicalVsanDisks(this.getMOR(), props);
     }
 
@@ -231,7 +241,7 @@ public class HostVsanInternalSystem extends ManagedObject {
         return getVimService().reconfigurationSatisfiable(getMOR(), pcbs, ignoreSatisfiability);
     }
 
-    public VsanPolicySatisfiability[] reconfigurationSatisfiable(VsanPolicyChangeBatch[] pcbs) throws RemoteException, RuntimeFault, VimFault {
+    public VsanPolicySatisfiability[] reconfigurationSatisfiable(VsanPolicyChangeBatch[] pcbs) throws RemoteException {
         return reconfigurationSatisfiable(pcbs, null);
     }
 
@@ -283,7 +293,7 @@ public class HostVsanInternalSystem extends ManagedObject {
         return getVimService().upgradeVsanObjects(getMOR(), uuids, newVersion);
     }
 
-    public String queryVsanObjects(String[] uuids) throws RuntimeFault, RemoteException {
+    public String queryVsanObjects(String[] uuids) throws RemoteException {
         return getVimService().queryVsanObjects(this.getMOR(), uuids);
     }
 

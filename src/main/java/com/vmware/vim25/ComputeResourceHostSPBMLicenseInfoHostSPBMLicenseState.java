@@ -42,7 +42,7 @@ public enum ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState(String val) {
+    ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState(String val) {
         this.val = val;
     }
 }

@@ -31,21 +31,27 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.ws;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
-import java.text.MessageFormat;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+import java.text.MessageFormat;
 
 /**
  * The Web Service Engine
@@ -56,10 +62,10 @@ import java.security.cert.X509Certificate;
 
 public class WSClient extends SoapClient {
 
-    private static final Logger log = Logger.getLogger(WSClient.class);
+    private static final Logger log = LoggerFactory.getLogger(WSClient.class);
     private final SSLSocketFactory sslSocketFactory;
 
-    private XmlGen xmlGen = new XmlGenDom();
+    private final XmlGen xmlGen = new XmlGenDom();
 
     public WSClient(String serverUrl) throws MalformedURLException, RemoteException {
         this(serverUrl, true);
@@ -70,15 +76,15 @@ public class WSClient extends SoapClient {
     }
 
     public WSClient(String serverUrl, boolean ignoreCert, TrustManager trustManager) throws MalformedURLException, RemoteException {
-        if(ignoreCert && trustManager != null) {
+        if (ignoreCert && trustManager != null) {
             log.warn("The option to ignore certs has been set along with a provided trust manager. This is not a valid scenario and the trust manager will be ignored.");
         }
 
         if (serverUrl.endsWith("/")) {
             serverUrl = serverUrl.substring(0, serverUrl.length() - 1);
         }
-        log.trace("Creating WSClient to server URL: " + serverUrl);
-        log.trace("Ignore ssl: " + ignoreCert);
+        log.trace("Creating WSClient to server URL: {}", serverUrl);
+        log.trace("Ignore ssl: {}", ignoreCert);
 
         this.trustManager = trustManager;
         this.baseUrl = new URL(serverUrl);
@@ -86,32 +92,28 @@ public class WSClient extends SoapClient {
     }
 
     public Object invoke(String methodName, Argument[] paras, String returnType) throws RemoteException {
-        log.trace("Invoking method: " + methodName);
+        log.trace("Invoking method: {}", methodName);
         String soapMsg = marshall(methodName, paras);
 
         InputStream is = null;
         try {
             is = post(soapMsg);
-            log.trace("Converting xml response from server to: " + returnType);
+            log.trace("Converting xml response from server to: {}", returnType);
             return unMarshall(returnType, is);
-        }
-        catch (Exception e1) {
-            log.error("Exception caught while invoking method: " + methodName, e1);
+        } catch (Exception e1) {
+            log.error("Exception caught while invoking method: {}", methodName, e1);
             // Fixes issue-28 still need to write a test which may require
             // further refacotring but this at least gets the InvalidLogin working.
             try {
                 throw (RemoteException) e1;
-            }
-            catch (ClassCastException ignore) {
+            } catch (ClassCastException ignore) {
                 throw new RemoteException("Exception caught trying to invoke method " + methodName, e1);
             }
-        }
-        finally {
+        } finally {
             if (is != null) {
                 try {
                     is.close();
-                }
-                catch (IOException ignored) {
+                } catch (IOException ignored) {
                 }
             }
         }
@@ -123,8 +125,7 @@ public class WSClient extends SoapClient {
         try {
             InputStream is = post(soapMsg);
             return readStream(is);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RemoteException("VI SDK invoke exception:" + e);
         }
     }
@@ -135,8 +136,8 @@ public class WSClient extends SoapClient {
             ((HttpsURLConnection) postCon).setSSLSocketFactory(sslSocketFactory);
         }
 
-        log.trace("POST: " + soapAction);
-        log.trace("Payload: " + soapMsg);
+        log.trace("POST: {}", soapAction);
+        log.trace("Payload: {}", soapMsg);
         if (connectTimeout > 0) {
             postCon.setConnectTimeout(connectTimeout);
         }
@@ -146,8 +147,7 @@ public class WSClient extends SoapClient {
 
         try {
             postCon.setRequestMethod("POST");
-        }
-        catch (ProtocolException e) {
+        } catch (ProtocolException e) {
             log.debug("ProtocolException caught.", e);
         }
 
@@ -180,14 +180,13 @@ public class WSClient extends SoapClient {
         return is;
     }
 
-    protected InputStream getInputStreamFromConnection(HttpURLConnection postCon) throws RemoteException{
+    protected InputStream getInputStreamFromConnection(HttpURLConnection postCon) throws RemoteException {
         InputStream is;
 
         try {
             is = postCon.getInputStream();
             log.trace("Successfully fetched InputStream.");
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             log.debug("Caught an IOException. Reading ErrorStream for results.", ioe);
             InputStream errorStream = postCon.getErrorStream();
 
@@ -203,14 +202,13 @@ public class WSClient extends SoapClient {
 
         if (thumbprint == null && postCon instanceof HttpsURLConnection) {
             try {
-                Certificate[] certs = ((HttpsURLConnection)postCon).getServerCertificates();
+                Certificate[] certs = ((HttpsURLConnection) postCon).getServerCertificates();
                 for (int i = 0; thumbprint == null && i < certs.length; i++) {
                     if (certs[i] instanceof X509Certificate) {
                         setServerThumbprint(computeX509CertificateThumbprint((X509Certificate) certs[i]));
                     }
                 }
-            }
-            catch (SSLPeerUnverifiedException e) {
+            } catch (SSLPeerUnverifiedException e) {
                 log.debug("SSLPeerUnverifiedException caught.", e);
             }
         }
@@ -218,7 +216,7 @@ public class WSClient extends SoapClient {
     }
 
     protected OutputStreamWriter createOutputStreamWriter(OutputStream os) throws UnsupportedEncodingException {
-        return new OutputStreamWriter(os, "UTF8");
+        return new OutputStreamWriter(os, StandardCharsets.UTF_8);
     }
 
     protected SSLSocketFactory getTrustAllSocketFactory(boolean ignoreCert) throws RemoteException {

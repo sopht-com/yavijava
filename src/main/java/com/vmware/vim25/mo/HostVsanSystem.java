@@ -29,7 +29,19 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.HostMaintenanceSpec;
+import com.vmware.vim25.HostScsiDisk;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RequestCanceled;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.Timedout;
+import com.vmware.vim25.VsanFault;
+import com.vmware.vim25.VsanHostClusterStatus;
+import com.vmware.vim25.VsanHostConfigInfo;
+import com.vmware.vim25.VsanHostDecommissionMode;
+import com.vmware.vim25.VsanHostDiskMapping;
+import com.vmware.vim25.VsanHostDiskResult;
 
 import java.rmi.RemoteException;
 
@@ -49,21 +61,21 @@ public class HostVsanSystem extends ManagedObject {
         return (VsanHostConfigInfo) getCurrentProperty("config");
     }
 
-    public Task addDisks_Task(HostScsiDisk[] disk) throws RuntimeFault, RemoteException {
+    public Task addDisks_Task(HostScsiDisk[] disk) throws RemoteException {
         ManagedObjectReference mor = getVimService().addDisks_Task(this.getMOR(), disk);
         return new Task(getServerConnection(), mor);
     }
 
-    public Task initializeDisks_Task(VsanHostDiskMapping[] mapping) throws RuntimeFault, RemoteException {
+    public Task initializeDisks_Task(VsanHostDiskMapping[] mapping) throws RemoteException {
         ManagedObjectReference mor = getVimService().initializeDisks_Task(this.getMOR(), mapping);
         return new Task(getServerConnection(), mor);
     }
 
-    public VsanHostDiskResult[] queryDisksForVsan(String[] canonicalName) throws RuntimeFault, RemoteException {
+    public VsanHostDiskResult[] queryDisksForVsan(String[] canonicalName) throws RemoteException {
         return getVimService().queryDisksForVsan(this.getMOR(), canonicalName);
     }
 
-    public VsanHostClusterStatus queryHostStatus() throws RuntimeFault, RemoteException {
+    public VsanHostClusterStatus queryHostStatus() throws RemoteException {
         return getVimService().queryHostStatus(this.getMOR());
     }
 
@@ -103,16 +115,16 @@ public class HostVsanSystem extends ManagedObject {
         return new Task(getServerConnection(), mor);
     }
 
-    public Task removeDiskMapping_Task(VsanHostDiskMapping[] mapping) throws RuntimeFault, RemoteException {
+    public Task removeDiskMapping_Task(VsanHostDiskMapping[] mapping) throws RemoteException {
         return removeDiskMapping_Task(mapping, null, 0);
     }
 
-    public Task removeDiskMapping_Task(VsanHostDiskMapping[] mapping, HostMaintenanceSpec maintenanceSpec, int timeout) throws RuntimeFault, RemoteException {
+    public Task removeDiskMapping_Task(VsanHostDiskMapping[] mapping, HostMaintenanceSpec maintenanceSpec, int timeout) throws RemoteException {
         ManagedObjectReference mor = getVimService().removeDiskMapping_Task(this.getMOR(), mapping, maintenanceSpec, timeout);
         return new Task(getServerConnection(), mor);
     }
 
-    public Task updateVsan_Task(VsanHostConfigInfo config) throws RuntimeFault, RemoteException {
+    public Task updateVsan_Task(VsanHostConfigInfo config) throws RemoteException {
         ManagedObjectReference mor = getVimService().updateVsan_Task(this.getMOR(), config);
         return new Task(getServerConnection(), mor);
     }

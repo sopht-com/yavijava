@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.ScheduledTaskDescription;
+import com.vmware.vim25.ScheduledTaskSpec;
 
 import java.rmi.RemoteException;
 
@@ -52,26 +57,26 @@ public class ScheduledTaskManager extends ManagedObject {
         return getScheduledTasks("scheduledTask");
     }
 
-    public ScheduledTask createScheduledTask(ManagedEntity entity, ScheduledTaskSpec spec) throws InvalidName, DuplicateName, RuntimeFault, RemoteException {
+    public ScheduledTask createScheduledTask(ManagedEntity entity, ScheduledTaskSpec spec) throws RemoteException {
         if (entity == null) {
             throw new IllegalArgumentException("entity must not be null.");
         }
         return new ScheduledTask(getServerConnection(),
-            getVimService().createScheduledTask(getMOR(), entity.getMOR(), spec));
+                getVimService().createScheduledTask(getMOR(), entity.getMOR(), spec));
     }
 
     /**
      * @since SDK4.0
      */
-    public ScheduledTask createObjectScheduledTask(ManagedObject obj, ScheduledTaskSpec spec) throws InvalidName, DuplicateName, RuntimeFault, RemoteException {
+    public ScheduledTask createObjectScheduledTask(ManagedObject obj, ScheduledTaskSpec spec) throws RemoteException {
         if (obj == null) {
             throw new IllegalArgumentException("managed object must not be null.");
         }
         return new ScheduledTask(getServerConnection(),
-            getVimService().createObjectScheduledTask(getMOR(), obj.getMOR(), spec));
+                getVimService().createObjectScheduledTask(getMOR(), obj.getMOR(), spec));
     }
 
-    public ScheduledTask[] retrieveEntityScheduledTask(ManagedEntity entity) throws RuntimeFault, RemoteException {
+    public ScheduledTask[] retrieveEntityScheduledTask(ManagedEntity entity) throws RemoteException {
         ManagedObjectReference[] mors = getVimService().retrieveEntityScheduledTask(getMOR(), entity == null ? null : entity.getMOR());
 
         ScheduledTask[] tasks = new ScheduledTask[mors.length];
@@ -84,7 +89,7 @@ public class ScheduledTaskManager extends ManagedObject {
     /**
      * @since SDK4.0
      */
-    public ScheduledTask[] retrieveObjectScheduledTask(ManagedObject obj) throws RuntimeFault, RemoteException {
+    public ScheduledTask[] retrieveObjectScheduledTask(ManagedObject obj) throws RemoteException {
         ManagedObjectReference[] mors = getVimService().retrieveObjectScheduledTask(getMOR(), obj == null ? null : obj.getMOR());
 
         ScheduledTask[] tasks = new ScheduledTask[mors.length];

@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.CustomFieldDef;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.InvalidPrivilege;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.PrivilegePolicyDef;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -50,19 +55,19 @@ public class CustomFieldsManager extends ManagedObject {
     }
 
     public CustomFieldDef addCustomFieldDef(String name, String moType, PrivilegePolicyDef fieldDefPolicy,
-                                            PrivilegePolicyDef fieldPolicy) throws DuplicateName, InvalidPrivilege, RuntimeFault, RemoteException {
+                                            PrivilegePolicyDef fieldPolicy) throws RemoteException {
         return getVimService().addCustomFieldDef(getMOR(), name, moType, fieldDefPolicy, fieldPolicy);
     }
 
-    public void removeCustomFieldDef(int key) throws RuntimeFault, RemoteException {
+    public void removeCustomFieldDef(int key) throws RemoteException {
         getVimService().removeCustomFieldDef(getMOR(), key);
     }
 
-    public void renameCustomFieldDef(int key, String name) throws DuplicateName, RuntimeFault, RemoteException {
+    public void renameCustomFieldDef(int key, String name) throws RemoteException {
         getVimService().renameCustomFieldDef(getMOR(), key, name);
     }
 
-    public void setField(ManagedEntity entity, int key, String value) throws RuntimeFault, RemoteException {
+    public void setField(ManagedEntity entity, int key, String value) throws RemoteException {
         if (entity == null) {
             throw new IllegalArgumentException("entity must not be null.");
         }

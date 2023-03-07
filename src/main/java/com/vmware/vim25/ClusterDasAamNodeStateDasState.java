@@ -47,7 +47,7 @@ public enum ClusterDasAamNodeStateDasState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterDasAamNodeStateDasState(String val) {
+    ClusterDasAamNodeStateDasState(String val) {
         this.val = val;
     }
 }

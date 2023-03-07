@@ -42,7 +42,7 @@ public enum OvfConsumerOstNodeType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private OvfConsumerOstNodeType(String val) {
+    OvfConsumerOstNodeType(String val) {
         this.val = val;
     }
 }

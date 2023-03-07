@@ -41,7 +41,7 @@ public enum VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDire
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther(String val) {
+    VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther(String val) {
         this.val = val;
     }
 }

@@ -85,26 +85,26 @@ public class Profile extends ManagedObject {
         return (String) getCurrentProperty("name");
     }
 
-    public void associateProfile(ManagedEntity[] mes) throws RuntimeFault, RemoteException {
+    public void associateProfile(ManagedEntity[] mes) throws RemoteException {
         ManagedObjectReference[] mors = MorUtil.createMORs(mes);
         getVimService().associateProfile(getMOR(), mors);
     }
 
-    public Task checkProfileCompliance_Task(ManagedEntity[] mes) throws RuntimeFault, RemoteException {
+    public Task checkProfileCompliance_Task(ManagedEntity[] mes) throws RemoteException {
         ManagedObjectReference[] mors = MorUtil.createMORs(mes);
         ManagedObjectReference taskMor = getVimService().checkProfileCompliance_Task(getMOR(), mors);
         return new Task(getServerConnection(), taskMor);
     }
 
-    public void destroyProfile() throws RuntimeFault, RemoteException {
+    public void destroyProfile() throws RemoteException {
         getVimService().destroyProfile(getMOR());
     }
 
-    public String exportProfile() throws RuntimeFault, RemoteException {
-        return (String) getVimService().exportProfile(getMOR());
+    public String exportProfile() throws RemoteException {
+        return getVimService().exportProfile(getMOR());
     }
 
-    public void dissociateProfile(ManagedEntity[] mes) throws RuntimeFault, RemoteException {
+    public void dissociateProfile(ManagedEntity[] mes) throws RemoteException {
         ManagedObjectReference[] mors = MorUtil.createMORs(mes);
         getVimService().dissociateProfile(getMOR(), mors);
     }
@@ -112,7 +112,7 @@ public class Profile extends ManagedObject {
     /**
      * @since SDK5.0
      */
-    public ProfileDescription retrieveDescription() throws RuntimeFault, RemoteException {
+    public ProfileDescription retrieveDescription() throws RemoteException {
         return getVimService().retrieveDescription(getMOR());
     }
 }

@@ -43,7 +43,7 @@ public enum PropertyChangeOp {
     @SuppressWarnings("unused")
     private final String val;
 
-    private PropertyChangeOp(String val) {
+    PropertyChangeOp(String val) {
         this.val = val;
     }
 }

@@ -43,7 +43,7 @@ public enum EventEventSeverity {
     @SuppressWarnings("unused")
     private final String val;
 
-    private EventEventSeverity(String val) {
+    EventEventSeverity(String val) {
         this.val = val;
     }
 }

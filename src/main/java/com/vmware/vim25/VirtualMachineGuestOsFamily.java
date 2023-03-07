@@ -45,7 +45,7 @@ public enum VirtualMachineGuestOsFamily {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineGuestOsFamily(String val) {
+    VirtualMachineGuestOsFamily(String val) {
         this.val = val;
     }
 }

@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.HostSnmpConfigSpec;
+import com.vmware.vim25.HostSnmpSystemAgentLimits;
+import com.vmware.vim25.InsufficientResourcesFault;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -53,11 +58,11 @@ public class HostSnmpSystem extends ManagedObject {
         return (HostSnmpSystemAgentLimits) getCurrentProperty("limits");
     }
 
-    public void reconfigureSnmpAgent(HostSnmpConfigSpec spec) throws InsufficientResourcesFault, NotFound, RuntimeFault, RemoteException {
+    public void reconfigureSnmpAgent(HostSnmpConfigSpec spec) throws RemoteException {
         getVimService().reconfigureSnmpAgent(getMOR(), spec);
     }
 
-    public void sendTestNotification() throws InsufficientResourcesFault, NotFound, RuntimeFault, RemoteException {
+    public void sendTestNotification() throws RemoteException {
         getVimService().sendTestNotification(getMOR());
     }
 

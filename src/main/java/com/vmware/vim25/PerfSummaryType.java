@@ -45,7 +45,7 @@ public enum PerfSummaryType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private PerfSummaryType(String val) {
+    PerfSummaryType(String val) {
         this.val = val;
     }
 }

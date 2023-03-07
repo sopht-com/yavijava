@@ -45,7 +45,7 @@ public enum VirtualDiskMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDiskMode(String val) {
+    VirtualDiskMode(String val) {
         this.val = val;
     }
 }

@@ -1,6 +1,15 @@
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AuthMinimumAdminPermission;
+import com.vmware.vim25.HostAccessControlEntry;
+import com.vmware.vim25.HostAccessMode;
+import com.vmware.vim25.HostLockdownMode;
+import com.vmware.vim25.InvalidArgument;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NoPermission;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.SecurityError;
+import com.vmware.vim25.UserNotFound;
 
 import java.rmi.RemoteException;
 
@@ -162,7 +171,7 @@ public class HostAccessManager extends ManagedObject {
         getVimService().updateLockdownExceptions(getMOR(), users);
     }
 
-    public void updateLockdownExceptions() throws AuthMinimumAdminPermission, RuntimeFault, UserNotFound, RemoteException {
+    public void updateLockdownExceptions() throws RemoteException {
         updateLockdownExceptions(null);
     }
 
@@ -180,7 +189,7 @@ public class HostAccessManager extends ManagedObject {
         getVimService().updateSystemUsers(getMOR(), users);
     }
 
-    public void updateSystemUsers() throws InvalidArgument, RuntimeFault, UserNotFound, RemoteException {
+    public void updateSystemUsers() throws RemoteException {
         updateSystemUsers(null);
     }
 }

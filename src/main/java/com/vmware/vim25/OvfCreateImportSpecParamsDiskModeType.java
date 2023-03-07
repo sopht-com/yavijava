@@ -45,7 +45,7 @@ public enum OvfCreateImportSpecParamsDiskModeType {
 
     private final String val;
 
-    private OvfCreateImportSpecParamsDiskModeType(String val) {
+    OvfCreateImportSpecParamsDiskModeType(String val) {
         this.val = val;
     }
 }

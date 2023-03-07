@@ -10,7 +10,8 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.TrustManager;
 import java.io.IOException;
@@ -44,12 +45,12 @@ public class ApacheHttpClient extends SoapClient {
      * What rolls down stairs alone or in pairs?
      * Its log log log!
      */
-    private static final Logger log = Logger.getLogger(ApacheHttpClient.class);
+    private static final Logger log = LoggerFactory.getLogger(ApacheHttpClient.class);
 
     /**
      * The XML serialization/de-serialization engine
      */
-    private XmlGen xmlGen = new XmlGenDom();
+    private final XmlGen xmlGen = new XmlGenDom();
 
     /**
      * Trust all the ssl stuff no matter what!?!
@@ -75,8 +76,8 @@ public class ApacheHttpClient extends SoapClient {
             serverUrl = serverUrl.substring(0, serverUrl.length() - 1);
         }
 
-        log.trace("Creating ApacheHttpClient to server URL: " + serverUrl);
-        log.trace("Ignore ssl: " + ignoreCert);
+        log.trace("Creating ApacheHttpClient to server URL: {}", serverUrl);
+        log.trace("Ignore ssl: {}", ignoreCert);
         this.trustAllSSL = ignoreCert;
         this.trustManager = trustManager;
         this.baseUrl = new URL(serverUrl);
@@ -108,24 +109,21 @@ public class ApacheHttpClient extends SoapClient {
      */
     @Override
     public Object invoke(String methodName, Argument[] paras, String returnType) throws RemoteException {
-        log.trace("Invoking method: " + methodName);
+        log.trace("Invoking method: {}", methodName);
         String soapMsg = marshall(methodName, paras);
         InputStream is = null;
         try {
             is = post(soapMsg);
-            log.trace("Converting xml response from server to: " + returnType);
+            log.trace("Converting xml response from server to: {}", returnType);
             return unMarshall(returnType, is);
-        }
-        catch (Exception e1) {
+        } catch (Exception e1) {
             log.error("Exception caught while invoking method.", e1);
             throw new RemoteException("VI SDK invoke exception:" + e1, e1);
-        }
-        finally {
+        } finally {
             if (is != null) {
                 try {
                     is.close();
-                }
-                catch (IOException ignored) {
+                } catch (IOException ignored) {
                 }
             }
         }
@@ -148,8 +146,7 @@ public class ApacheHttpClient extends SoapClient {
         try {
             InputStream is = post(soapMsg);
             return readStream(is);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RemoteException("VI SDK invoke exception:" + e);
         }
     }
@@ -157,16 +154,16 @@ public class ApacheHttpClient extends SoapClient {
     private InputStream post(String payload) throws IOException {
         CloseableHttpClient httpclient;
         RequestConfig requestConfig = RequestConfig.custom()
-            .setConnectTimeout(this.connectTimeout)
-            .setSocketTimeout(this.readTimeout)
-            .build();
-        if(trustAllSSL && trustManager != null) {
+                .setConnectTimeout(this.connectTimeout)
+                .setSocketTimeout(this.readTimeout)
+                .build();
+        if (trustAllSSL && trustManager != null) {
             log.warn("The option to ignore certs has been set along with a provided trust manager. This is not a valid scenario and the trust manager will be ignored.");
         }
 
         if (trustAllSSL) {
             httpclient = HttpClients.custom().setSSLSocketFactory(ApacheTrustSelfSigned.trust()).build();
-        } else if(trustManager != null) {
+        } else if (trustManager != null) {
             LayeredConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(CustomSSLTrustContextCreator.getTrustContext(trustManager), new AllowAllHostnameVerifier());
             httpclient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).build();
         } else {
@@ -177,16 +174,14 @@ public class ApacheHttpClient extends SoapClient {
         try {
             stringEntity = new StringEntity(payload);
             log.trace("Converted payload to String entity.");
-        }
-        catch (UnsupportedEncodingException e) {
-            log.error("Failed to convert payload to StringEntity. Unsupported Encoding Exception caught. Payload: " + payload, e);
+        } catch (UnsupportedEncodingException e) {
+            log.error("Failed to convert payload to StringEntity. Unsupported Encoding Exception caught. Payload: {}", payload, e);
             return null;
         }
         try {
             httpPost = new HttpPost(this.baseUrl.toURI());
-        }
-        catch (URISyntaxException e) {
-            log.error("Malformed URI sent: " + this.baseUrl.toString(), e);
+        } catch (URISyntaxException e) {
+            log.error("Malformed URI sent: {}", this.baseUrl.toString(), e);
             return null;
         }
         httpPost.setConfig(requestConfig);

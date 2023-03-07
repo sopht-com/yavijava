@@ -42,7 +42,7 @@ public enum CustomizationNetBIOSMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private CustomizationNetBIOSMode(String val) {
+    CustomizationNetBIOSMode(String val) {
         this.val = val;
     }
 }

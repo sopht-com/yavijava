@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.FileFault;
+import com.vmware.vim25.InvalidBundle;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.MismatchedBundle;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -45,19 +50,19 @@ public class HostFirmwareSystem extends ManagedObject {
         super(serverConnection, mor);
     }
 
-    public String backupFirmwareConfiguration() throws RuntimeFault, RemoteException {
+    public String backupFirmwareConfiguration() throws RemoteException {
         return getVimService().backupFirmwareConfiguration(getMOR());
     }
 
-    public String queryFirmwareConfigUploadURL() throws RuntimeFault, RemoteException {
+    public String queryFirmwareConfigUploadURL() throws RemoteException {
         return getVimService().queryFirmwareConfigUploadURL(getMOR());
     }
 
-    public void resetFirmwareToFactoryDefaults() throws InvalidState, RuntimeFault, RemoteException {
+    public void resetFirmwareToFactoryDefaults() throws RemoteException {
         getVimService().resetFirmwareToFactoryDefaults(getMOR());
     }
 
-    public void restoreFirmwareConfiguration(boolean force) throws InvalidBundle, MismatchedBundle, FileFault, InvalidState, RuntimeFault, RemoteException {
+    public void restoreFirmwareConfiguration(boolean force) throws RemoteException {
         getVimService().restoreFirmwareConfiguration(getMOR(), force);
     }
 

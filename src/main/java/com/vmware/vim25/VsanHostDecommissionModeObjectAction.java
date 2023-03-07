@@ -42,7 +42,7 @@ public enum VsanHostDecommissionModeObjectAction {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VsanHostDecommissionModeObjectAction(String val) {
+    VsanHostDecommissionModeObjectAction(String val) {
         this.val = val;
     }
 }

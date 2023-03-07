@@ -29,7 +29,15 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.Event;
+import com.vmware.vim25.EventArgDesc;
+import com.vmware.vim25.EventDescription;
+import com.vmware.vim25.EventFilterSpec;
+import com.vmware.vim25.InvalidEvent;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInfo;
 
 import java.rmi.RemoteException;
 
@@ -57,27 +65,27 @@ public class EventManager extends ManagedObject {
         return ((Integer) getCurrentProperty("maxCollector")).intValue();
     }
 
-    public EventHistoryCollector createCollectorForEvents(EventFilterSpec filter) throws InvalidState, RuntimeFault, RemoteException {
+    public EventHistoryCollector createCollectorForEvents(EventFilterSpec filter) throws RemoteException {
         return new EventHistoryCollector(getServerConnection(),
-            getVimService().createCollectorForEvents(getMOR(), filter));
+                getVimService().createCollectorForEvents(getMOR(), filter));
     }
 
-    public void logUserEvent(ManagedEntity entity, String msg) throws RuntimeFault, RemoteException {
+    public void logUserEvent(ManagedEntity entity, String msg) throws RemoteException {
         if (entity == null) {
             throw new IllegalArgumentException("entity must not be null.");
         }
         getVimService().logUserEvent(getMOR(), entity.getMOR(), msg);
     }
 
-    public void postEvent(Event eventToPost, TaskInfo taskInfo) throws InvalidEvent, RuntimeFault, RemoteException {
+    public void postEvent(Event eventToPost, TaskInfo taskInfo) throws RemoteException {
         getVimService().postEvent(getMOR(), eventToPost, taskInfo);
     }
 
-    public Event[] queryEvents(EventFilterSpec filter) throws RuntimeFault, RemoteException {
+    public Event[] queryEvents(EventFilterSpec filter) throws RemoteException {
         return getVimService().queryEvents(getMOR(), filter);
     }
 
-    public EventArgDesc[] retrieveArgumentDescription(String eventTypeId) throws RuntimeFault, RemoteException {
+    public EventArgDesc[] retrieveArgumentDescription(String eventTypeId) throws RemoteException {
         return getVimService().retrieveArgumentDescription(getMOR(), eventTypeId);
     }
 }

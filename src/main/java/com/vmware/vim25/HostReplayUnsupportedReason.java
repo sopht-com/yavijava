@@ -45,7 +45,7 @@ public enum HostReplayUnsupportedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostReplayUnsupportedReason(String val) {
+    HostReplayUnsupportedReason(String val) {
         this.val = val;
     }
 }

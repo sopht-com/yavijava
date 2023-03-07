@@ -43,7 +43,7 @@ public enum VmFailedStartingSecondaryEventFailureReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VmFailedStartingSecondaryEventFailureReason(String val) {
+    VmFailedStartingSecondaryEventFailureReason(String val) {
         this.val = val;
     }
 }

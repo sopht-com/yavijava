@@ -46,7 +46,7 @@ public enum GuestOsDescriptorSupportLevel {
     @SuppressWarnings("unused")
     private final String val;
 
-    private GuestOsDescriptorSupportLevel(String val) {
+    GuestOsDescriptorSupportLevel(String val) {
         this.val = val;
     }
 }

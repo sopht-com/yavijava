@@ -42,7 +42,7 @@ public enum InvalidDasConfigArgumentEntryForInvalidArgument {
     @SuppressWarnings("unused")
     private final String val;
 
-    private InvalidDasConfigArgumentEntryForInvalidArgument(String val) {
+    InvalidDasConfigArgumentEntryForInvalidArgument(String val) {
         this.val = val;
     }
 }

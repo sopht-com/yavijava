@@ -42,7 +42,7 @@ public enum VirtualMachineConfigInfoSwapPlacementType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineConfigInfoSwapPlacementType(String val) {
+    VirtualMachineConfigInfoSwapPlacementType(String val) {
         this.val = val;
     }
 }

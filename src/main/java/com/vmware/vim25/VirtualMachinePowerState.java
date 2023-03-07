@@ -42,7 +42,7 @@ public enum VirtualMachinePowerState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachinePowerState(String val) {
+    VirtualMachinePowerState(String val) {
         this.val = val;
     }
 }

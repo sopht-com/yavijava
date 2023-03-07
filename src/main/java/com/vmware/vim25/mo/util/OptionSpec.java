@@ -30,11 +30,11 @@ POSSIBILITY OF SUCH DAMAGE.
 package com.vmware.vim25.mo.util;
 
 public class OptionSpec {
-    private String optionName;
-    private int optionRequired;
-    private String optionDesc;
-    private String optionType;
-    private String optionDefault;
+    private final String optionName;
+    private final int optionRequired;
+    private final String optionDesc;
+    private final String optionType;
+    private final String optionDefault;
 
     public OptionSpec(String optionName, String optionType, int optionRequired, String optionDesc, String optionDefault) {
         this.optionName = optionName;

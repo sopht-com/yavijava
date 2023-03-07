@@ -12,15 +12,15 @@ public class HostKernelModuleSystem extends ManagedObject {
         super(sc, mor);
     }
 
-    public String queryConfiguredModuleOptionString(String name) throws NotFound, RuntimeFault, RemoteException {
+    public String queryConfiguredModuleOptionString(String name) throws RemoteException {
         return getVimService().queryConfiguredModuleOptionString(getMOR(), name);
     }
 
-    public KernelModuleInfo[] queryModules() throws RemoteException, RuntimeFault {
+    public KernelModuleInfo[] queryModules() throws RemoteException {
         return getVimService().queryModules(getMOR());
     }
 
-    public void updateModuleOptionString(String name, String options) throws NotFound, RuntimeFault, RemoteException {
+    public void updateModuleOptionString(String name, String options) throws RemoteException {
         getVimService().updateModuleOptionString(getMOR(), name, options);
     }
 

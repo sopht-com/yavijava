@@ -47,7 +47,7 @@ public enum HostDasErrorEventHostDasErrorReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostDasErrorEventHostDasErrorReason(String val) {
+    HostDasErrorEventHostDasErrorReason(String val) {
         this.val = val;
     }
 }

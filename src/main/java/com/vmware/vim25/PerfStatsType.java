@@ -42,7 +42,7 @@ public enum PerfStatsType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private PerfStatsType(String val) {
+    PerfStatsType(String val) {
         this.val = val;
     }
 }

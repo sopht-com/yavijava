@@ -41,7 +41,7 @@ public enum ClusterDasConfigInfoServiceState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterDasConfigInfoServiceState(String val) {
+    ClusterDasConfigInfoServiceState(String val) {
         this.val = val;
     }
 }

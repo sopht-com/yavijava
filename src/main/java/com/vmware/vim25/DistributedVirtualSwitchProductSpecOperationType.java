@@ -44,7 +44,7 @@ public enum DistributedVirtualSwitchProductSpecOperationType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DistributedVirtualSwitchProductSpecOperationType(String val) {
+    DistributedVirtualSwitchProductSpecOperationType(String val) {
         this.val = val;
     }
 }

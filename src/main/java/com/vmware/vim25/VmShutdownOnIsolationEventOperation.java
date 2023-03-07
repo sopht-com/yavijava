@@ -41,7 +41,7 @@ public enum VmShutdownOnIsolationEventOperation {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VmShutdownOnIsolationEventOperation(String val) {
+    VmShutdownOnIsolationEventOperation(String val) {
         this.val = val;
     }
 }

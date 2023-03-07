@@ -43,7 +43,7 @@ public enum HostDistributedVirtualSwitchManagerNetworkResourcePoolKey {
 
     private final String val;
 
-    private HostDistributedVirtualSwitchManagerNetworkResourcePoolKey(String val) {
+    HostDistributedVirtualSwitchManagerNetworkResourcePoolKey(String val) {
         this.val = val;
     }
 }

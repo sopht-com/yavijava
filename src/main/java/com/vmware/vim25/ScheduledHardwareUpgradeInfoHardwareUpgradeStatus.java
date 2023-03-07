@@ -43,7 +43,7 @@ public enum ScheduledHardwareUpgradeInfoHardwareUpgradeStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ScheduledHardwareUpgradeInfoHardwareUpgradeStatus(String val) {
+    ScheduledHardwareUpgradeInfoHardwareUpgradeStatus(String val) {
         this.val = val;
     }
 }

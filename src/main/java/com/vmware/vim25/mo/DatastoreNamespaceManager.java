@@ -29,7 +29,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.CannotCreateFile;
+import com.vmware.vim25.FileAlreadyExists;
+import com.vmware.vim25.FileFault;
+import com.vmware.vim25.FileNotFound;
+import com.vmware.vim25.InvalidDatastore;
+import com.vmware.vim25.InvalidDatastorePath;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -45,11 +52,11 @@ public class DatastoreNamespaceManager extends ManagedObject {
         super(serverConnection, mor);
     }
 
-    public String createDirectory(Datastore datastore, String displayName, String policy) throws CannotCreateFile, FileAlreadyExists, InvalidDatastore, RuntimeFault, RemoteException {
+    public String createDirectory(Datastore datastore, String displayName, String policy) throws RemoteException {
         return getVimService().createDirectory(this.getMOR(), datastore.getMOR(), displayName, policy);
     }
 
-    public void deleteDirectory(Datacenter datacenter, String datastorePath) throws FileNotFound, InvalidDatastorePath, FileFault, InvalidDatastore, RuntimeFault, RemoteException {
+    public void deleteDirectory(Datacenter datacenter, String datastorePath) throws RemoteException {
         getVimService().deleteDirectory(this.getMOR(), datacenter == null ? null : datacenter.getMOR(), datastorePath);
     }
 }

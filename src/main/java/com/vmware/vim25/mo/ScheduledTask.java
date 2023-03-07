@@ -29,7 +29,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.ScheduledTaskInfo;
+import com.vmware.vim25.ScheduledTaskSpec;
 
 import java.rmi.RemoteException;
 
@@ -57,15 +63,15 @@ public class ScheduledTask extends ExtensibleManagedObject {
         return (ManagedEntity) getCurrentProperty("info.entity");
     }
 
-    public void reconfigureScheduledTask(ScheduledTaskSpec spec) throws InvalidName, DuplicateName, InvalidState, RuntimeFault, RemoteException {
+    public void reconfigureScheduledTask(ScheduledTaskSpec spec) throws RemoteException {
         getVimService().reconfigureScheduledTask(getMOR(), spec);
     }
 
-    public void removeScheduledTask() throws InvalidState, RuntimeFault, RemoteException {
+    public void removeScheduledTask() throws RemoteException {
         getVimService().removeScheduledTask(getMOR());
     }
 
-    public void runScheduledTask() throws InvalidState, RuntimeFault, RemoteException {
+    public void runScheduledTask() throws RemoteException {
         getVimService().runScheduledTask(getMOR());
     }
 

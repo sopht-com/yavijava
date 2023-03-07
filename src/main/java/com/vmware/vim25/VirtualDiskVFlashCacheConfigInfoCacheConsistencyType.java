@@ -41,7 +41,7 @@ public enum VirtualDiskVFlashCacheConfigInfoCacheConsistencyType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDiskVFlashCacheConfigInfoCacheConsistencyType(String val) {
+    VirtualDiskVFlashCacheConfigInfoCacheConsistencyType(String val) {
         this.val = val;
     }
 }

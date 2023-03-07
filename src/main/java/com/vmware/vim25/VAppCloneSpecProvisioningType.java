@@ -42,7 +42,7 @@ public enum VAppCloneSpecProvisioningType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VAppCloneSpecProvisioningType(String val) {
+    VAppCloneSpecProvisioningType(String val) {
         this.val = val;
     }
 }

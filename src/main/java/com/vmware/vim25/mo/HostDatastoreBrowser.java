@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.FileFault;
+import com.vmware.vim25.FileQuery;
+import com.vmware.vim25.HostDatastoreBrowserSearchSpec;
+import com.vmware.vim25.InvalidDatastore;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -64,14 +69,14 @@ public class HostDatastoreBrowser extends ManagedObject {
         getVimService().deleteFile(getMOR(), datastorePath);
     }
 
-    public Task searchDatastore_Task(String datastorePath, HostDatastoreBrowserSearchSpec searchSpec) throws FileFault, InvalidDatastore, RuntimeFault, RemoteException {
+    public Task searchDatastore_Task(String datastorePath, HostDatastoreBrowserSearchSpec searchSpec) throws RemoteException {
         return new Task(getServerConnection(),
-            getVimService().searchDatastore_Task(getMOR(), datastorePath, searchSpec));
+                getVimService().searchDatastore_Task(getMOR(), datastorePath, searchSpec));
     }
 
-    public Task searchDatastoreSubFolders_Task(String datastorePath, HostDatastoreBrowserSearchSpec searchSpec) throws FileFault, InvalidDatastore, RuntimeFault, RemoteException {
+    public Task searchDatastoreSubFolders_Task(String datastorePath, HostDatastoreBrowserSearchSpec searchSpec) throws RemoteException {
         return new Task(getServerConnection(),
-            getVimService().searchDatastoreSubFolders_Task(getMOR(), datastorePath, searchSpec));
+                getVimService().searchDatastoreSubFolders_Task(getMOR(), datastorePath, searchSpec));
     }
 
 

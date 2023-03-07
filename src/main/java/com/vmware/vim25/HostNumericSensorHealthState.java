@@ -43,7 +43,7 @@ public enum HostNumericSensorHealthState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostNumericSensorHealthState(String val) {
+    HostNumericSensorHealthState(String val) {
         this.val = val;
     }
 }

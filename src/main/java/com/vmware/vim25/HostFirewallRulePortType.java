@@ -41,7 +41,7 @@ public enum HostFirewallRulePortType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostFirewallRulePortType(String val) {
+    HostFirewallRulePortType(String val) {
         this.val = val;
     }
 }

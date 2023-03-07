@@ -41,7 +41,7 @@ public enum HostPatchManagerInstallState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostPatchManagerInstallState(String val) {
+    HostPatchManagerInstallState(String val) {
         this.val = val;
     }
 }

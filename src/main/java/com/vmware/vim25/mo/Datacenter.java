@@ -30,7 +30,25 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.DatacenterConfigInfo;
+import com.vmware.vim25.DatacenterConfigSpec;
+import com.vmware.vim25.GatewayConnectFault;
+import com.vmware.vim25.GatewayHostNotReachable;
+import com.vmware.vim25.GatewayNotFound;
+import com.vmware.vim25.GatewayNotReachable;
+import com.vmware.vim25.GatewayOperationRefused;
+import com.vmware.vim25.GatewayToHostAuthFault;
+import com.vmware.vim25.GatewayToHostTrustVerifyFault;
+import com.vmware.vim25.HostConnectFault;
+import com.vmware.vim25.HostConnectInfo;
+import com.vmware.vim25.HostConnectSpec;
+import com.vmware.vim25.InvalidArgument;
+import com.vmware.vim25.InvalidLogin;
+import com.vmware.vim25.InvalidProperty;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.OptionValue;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.VirtualMachineConfigOptionDescriptor;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -47,11 +65,11 @@ public class Datacenter extends ManagedEntity {
         super(sc, mor);
     }
 
-    public Folder getVmFolder() throws InvalidProperty, RuntimeFault, RemoteException {
+    public Folder getVmFolder() throws RemoteException {
         return (Folder) this.getManagedObject("vmFolder");
     }
 
-    public Folder getHostFolder() throws InvalidProperty, RuntimeFault, RemoteException {
+    public Folder getHostFolder() throws RemoteException {
         return (Folder) this.getManagedObject("hostFolder");
     }
 
@@ -80,21 +98,21 @@ public class Datacenter extends ManagedEntity {
         return (Folder) getManagedObject("networkFolder");
     }
 
-    public Network[] getNetworks() throws InvalidProperty, RuntimeFault, RemoteException {
+    public Network[] getNetworks() throws RemoteException {
         return getNetworks("network");
     }
 
     /**
      * old signature for back compatibility with 2.5 and 4.0
      */
-    public Task powerOnMultiVM_Task(VirtualMachine[] vms) throws RuntimeFault, RemoteException {
+    public Task powerOnMultiVM_Task(VirtualMachine[] vms) throws RemoteException {
         return powerOnMultiVM_Task(vms, null);
     }
 
     /**
      * @since SDK4.1
      */
-    public Task powerOnMultiVM_Task(VirtualMachine[] vms, OptionValue[] option) throws RuntimeFault, RemoteException {
+    public Task powerOnMultiVM_Task(VirtualMachine[] vms, OptionValue[] option) throws RemoteException {
         if (vms == null) {
             throw new IllegalArgumentException("vms must not be null.");
         }
@@ -106,20 +124,20 @@ public class Datacenter extends ManagedEntity {
     /**
      * @since SDK5.1
      */
-    public Task reconfigureDatacenter_Task(DatacenterConfigSpec spec, boolean modify) throws RuntimeFault, RemoteException {
+    public Task reconfigureDatacenter_Task(DatacenterConfigSpec spec, boolean modify) throws RemoteException {
         ManagedObjectReference tmor = getVimService().reconfigureDatacenter_Task(getMOR(), spec, modify);
         return new Task(getServerConnection(), tmor);
     }
 
     public HostConnectInfo queryConnectionInfo(String hostname, int port, String username, String password,
-                                               String sslThumbprint) throws InvalidLogin, HostConnectFault, RuntimeFault, RemoteException {
+                                               String sslThumbprint) throws RemoteException {
         return getVimService().queryConnectionInfo(getMOR(), hostname, port, username, password, sslThumbprint);
     }
 
     /**
      * @since SDK5.1
      */
-    public VirtualMachineConfigOptionDescriptor[] queryDatacenterConfigOptionDescriptor() throws RuntimeFault, RemoteException {
+    public VirtualMachineConfigOptionDescriptor[] queryDatacenterConfigOptionDescriptor() throws RemoteException {
         return getVimService().queryDatacenterConfigOptionDescriptor(getMOR());
     }
 

@@ -42,7 +42,7 @@ public enum HostVmciAccessManagerMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostVmciAccessManagerMode(String val) {
+    HostVmciAccessManagerMode(String val) {
         this.val = val;
     }
 }

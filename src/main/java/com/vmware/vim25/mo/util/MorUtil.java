@@ -33,7 +33,8 @@ import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.mo.ManagedEntity;
 import com.vmware.vim25.mo.ManagedObject;
 import com.vmware.vim25.mo.ServerConnection;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -54,7 +55,7 @@ public class MorUtil {
     /**
      * Create a logger
      */
-    private static Logger log = Logger.getLogger(MorUtil.class);
+    private static final Logger log = LoggerFactory.getLogger(MorUtil.class);
 
     /**
      * Takes an array of ManagedObjects and returns the MOR for each MO
@@ -90,19 +91,18 @@ public class MorUtil {
         try {
             moClass = Class.forName(moPackageName + "." + moType);
             Constructor constructor = moClass.getConstructor(
-                    new Class[]{ServerConnection.class, ManagedObjectReference.class});
+                    ServerConnection.class, ManagedObjectReference.class);
             return (ManagedObject) constructor.newInstance(new Object[]{sc, mor});
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException("vijava does not have an associated class for this mor: " + mor.getVal(), e);
         } catch (NoSuchMethodException e) {
-            throw new IllegalArgumentException("No constructor found in vijava for class: " + moClass.getName(),e);
-        } catch (InstantiationException e){
-            throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(),e);
-        } catch (IllegalAccessException e){
-            throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(),e);
+            throw new IllegalArgumentException("No constructor found in vijava for class: " + moClass.getName(), e);
+        } catch (InstantiationException e) {
+            throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(), e);
+        } catch (IllegalAccessException e) {
+            throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(), e);
         } catch (InvocationTargetException e) {
-            throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(),e);
+            throw new IllegalArgumentException("vijava is unable to create a managed object from this mor: " + mor.getVal(), e);
         }
     }
 

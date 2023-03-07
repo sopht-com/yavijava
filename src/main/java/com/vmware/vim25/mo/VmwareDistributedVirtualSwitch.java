@@ -47,7 +47,7 @@ public class VmwareDistributedVirtualSwitch extends DistributedVirtualSwitch {
         super(sc, mor);
     }
 
-    public Task updateDVSLacpGroupConfig_Task(VMwareDvsLacpGroupSpec[] lacpGroupSpec) throws DvsFault, RuntimeFault, RemoteException {
+    public Task updateDVSLacpGroupConfig_Task(VMwareDvsLacpGroupSpec[] lacpGroupSpec) throws RemoteException {
         ManagedObjectReference mor = getVimService().updateDVSLacpGroupConfig_Task(this.getMOR(), lacpGroupSpec);
         return new Task(this.getServerConnection(), mor);
     }

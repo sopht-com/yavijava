@@ -43,7 +43,7 @@ public enum VirtualAppVAppState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualAppVAppState(String val) {
+    VirtualAppVAppState(String val) {
         this.val = val;
     }
 }

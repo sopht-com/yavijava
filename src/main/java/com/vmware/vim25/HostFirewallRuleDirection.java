@@ -41,7 +41,7 @@ public enum HostFirewallRuleDirection {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostFirewallRuleDirection(String val) {
+    HostFirewallRuleDirection(String val) {
         this.val = val;
     }
 }

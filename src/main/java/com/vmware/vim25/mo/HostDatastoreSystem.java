@@ -29,7 +29,28 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AlreadyExists;
+import com.vmware.vim25.DatastoreNotWritableOnHost;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.HostConfigFault;
+import com.vmware.vim25.HostDatastoreSystemCapabilities;
+import com.vmware.vim25.HostDatastoreSystemVvolDatastoreSpec;
+import com.vmware.vim25.HostNasVolumeSpec;
+import com.vmware.vim25.HostScsiDisk;
+import com.vmware.vim25.HostUnresolvedVmfsResignatureSpec;
+import com.vmware.vim25.HostUnresolvedVmfsVolume;
+import com.vmware.vim25.InaccessibleDatastore;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.ResourceInUse;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.VmfsAmbiguousMount;
+import com.vmware.vim25.VmfsDatastoreCreateSpec;
+import com.vmware.vim25.VmfsDatastoreExpandSpec;
+import com.vmware.vim25.VmfsDatastoreExtendSpec;
+import com.vmware.vim25.VmfsDatastoreOption;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -54,21 +75,21 @@ public class HostDatastoreSystem extends ManagedObject {
         return getDatastores("datastore");
     }
 
-    public void configureDatastorePrincipal(String userName, String password) throws HostConfigFault, InvalidState, RuntimeFault, RemoteException {
+    public void configureDatastorePrincipal(String userName, String password) throws RemoteException {
         getVimService().configureDatastorePrincipal(getMOR(), userName, password);
     }
 
-    public Datastore createLocalDatastore(String name, String path) throws HostConfigFault, DuplicateName, RuntimeFault, RemoteException {
+    public Datastore createLocalDatastore(String name, String path) throws RemoteException {
         ManagedObjectReference mor = getVimService().createLocalDatastore(getMOR(), name, path);
         return new Datastore(getServerConnection(), mor);
     }
 
-    public Datastore createNasDatastore(HostNasVolumeSpec spec) throws HostConfigFault, DuplicateName, AlreadyExists, RuntimeFault, RemoteException {
+    public Datastore createNasDatastore(HostNasVolumeSpec spec) throws RemoteException {
         ManagedObjectReference mor = getVimService().createNasDatastore(getMOR(), spec);
         return new Datastore(getServerConnection(), mor);
     }
 
-    public Datastore createVmfsDatastore(VmfsDatastoreCreateSpec spec) throws HostConfigFault, DuplicateName, RuntimeFault, RemoteException {
+    public Datastore createVmfsDatastore(VmfsDatastoreCreateSpec spec) throws RemoteException {
         ManagedObjectReference mor = getVimService().createVmfsDatastore(getMOR(), spec);
         return new Datastore(getServerConnection(), mor);
     }
@@ -76,12 +97,12 @@ public class HostDatastoreSystem extends ManagedObject {
     /**
      * @since 4.0
      */
-    public Datastore expandVmfsDatastore(Datastore datastore, VmfsDatastoreExpandSpec spec) throws NotFound, HostConfigFault, RuntimeFault, RemoteException {
+    public Datastore expandVmfsDatastore(Datastore datastore, VmfsDatastoreExpandSpec spec) throws RemoteException {
         ManagedObjectReference mor = getVimService().expandVmfsDatastore(getMOR(), datastore.getMOR(), spec);
         return new Datastore(getServerConnection(), mor);
     }
 
-    public Datastore extendVmfsDatastore(Datastore datastore, VmfsDatastoreExtendSpec spec) throws HostConfigFault, NotFound, RuntimeFault, RemoteException {
+    public Datastore extendVmfsDatastore(Datastore datastore, VmfsDatastoreExtendSpec spec) throws RemoteException {
         if (datastore == null) {
             throw new IllegalArgumentException("datastore must not be null.");
         }
@@ -89,27 +110,27 @@ public class HostDatastoreSystem extends ManagedObject {
         return new Datastore(getServerConnection(), mor);
     }
 
-    public HostScsiDisk[] queryAvailableDisksForVmfs(Datastore datastore) throws HostConfigFault, NotFound, RuntimeFault, RemoteException {
+    public HostScsiDisk[] queryAvailableDisksForVmfs(Datastore datastore) throws RemoteException {
         return getVimService().queryAvailableDisksForVmfs(getMOR(), datastore == null ? null : datastore.getMOR());
     }
 
     //SDK4.1 signature for back compatibility
-    public VmfsDatastoreOption[] queryVmfsDatastoreCreateOptions(String devicePath) throws HostConfigFault, NotFound, RuntimeFault, RemoteException {
+    public VmfsDatastoreOption[] queryVmfsDatastoreCreateOptions(String devicePath) throws RemoteException {
         return getVimService().queryVmfsDatastoreCreateOptions(getMOR(), devicePath);
     }
 
     //SDK5.0 signature
-    public VmfsDatastoreOption[] queryVmfsDatastoreCreateOptions(String devicePath, int vmfsMajorVersion) throws HostConfigFault, NotFound, RuntimeFault, RemoteException {
+    public VmfsDatastoreOption[] queryVmfsDatastoreCreateOptions(String devicePath, int vmfsMajorVersion) throws RemoteException {
         return getVimService().queryVmfsDatastoreCreateOptions(getMOR(), devicePath, vmfsMajorVersion);
     }
 
     //SDK2.5 signature for back compatibility
-    public VmfsDatastoreOption[] queryVmfsDatastoreExtendOptions(Datastore datastore, String devicePath) throws HostConfigFault, NotFound, RuntimeFault, RemoteException {
+    public VmfsDatastoreOption[] queryVmfsDatastoreExtendOptions(Datastore datastore, String devicePath) throws RemoteException {
         return queryVmfsDatastoreExtendOptions(datastore, devicePath, null);
     }
 
     //SDK4.0 signature
-    public VmfsDatastoreOption[] queryVmfsDatastoreExtendOptions(Datastore datastore, String devicePath, Boolean suppressExpandCandidates) throws HostConfigFault, NotFound, RuntimeFault, RemoteException {
+    public VmfsDatastoreOption[] queryVmfsDatastoreExtendOptions(Datastore datastore, String devicePath, Boolean suppressExpandCandidates) throws RemoteException {
         if (datastore == null) {
             throw new IllegalArgumentException("datastore must not be null.");
         }
@@ -119,18 +140,18 @@ public class HostDatastoreSystem extends ManagedObject {
     /**
      * @since 4.0
      */
-    public VmfsDatastoreOption[] queryVmfsDatastoreExpandOptions(Datastore datastore) throws NotFound, HostConfigFault, RuntimeFault, RemoteException {
+    public VmfsDatastoreOption[] queryVmfsDatastoreExpandOptions(Datastore datastore) throws RemoteException {
         return getVimService().queryVmfsDatastoreExpandOptions(getMOR(), datastore.getMOR());
     }
 
     /**
      * @since 4.0
      */
-    public HostUnresolvedVmfsVolume[] queryUnresolvedVmfsVolumes() throws RuntimeFault, RemoteException {
+    public HostUnresolvedVmfsVolume[] queryUnresolvedVmfsVolumes() throws RemoteException {
         return getVimService().queryUnresolvedVmfsVolumes(getMOR());
     }
 
-    public void removeDatastore(Datastore datastore) throws HostConfigFault, ResourceInUse, NotFound, RuntimeFault, RemoteException {
+    public void removeDatastore(Datastore datastore) throws RemoteException {
         if (datastore == null) {
             throw new IllegalArgumentException("datastore must not be null.");
         }
@@ -140,12 +161,12 @@ public class HostDatastoreSystem extends ManagedObject {
     /**
      * @since 4.0
      */
-    public Task resignatureUnresolvedVmfsVolume_Task(HostUnresolvedVmfsResignatureSpec resolutionSpec) throws VmfsAmbiguousMount, HostConfigFault, RuntimeFault, RemoteException {
+    public Task resignatureUnresolvedVmfsVolume_Task(HostUnresolvedVmfsResignatureSpec resolutionSpec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().resignatureUnresolvedVmfsVolume_Task(getMOR(), resolutionSpec);
         return new Task(getServerConnection(), taskMor);
     }
 
-    public void updateLocalSwapDatastore(Datastore datastore) throws InaccessibleDatastore, DatastoreNotWritableOnHost, RuntimeFault, RemoteException {
+    public void updateLocalSwapDatastore(Datastore datastore) throws RemoteException {
         getVimService().updateLocalSwapDatastore(getMOR(), datastore == null ? null : datastore.getMOR());
     }
 

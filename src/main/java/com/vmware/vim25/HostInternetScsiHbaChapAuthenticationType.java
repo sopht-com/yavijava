@@ -43,7 +43,7 @@ public enum HostInternetScsiHbaChapAuthenticationType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostInternetScsiHbaChapAuthenticationType(String val) {
+    HostInternetScsiHbaChapAuthenticationType(String val) {
         this.val = val;
     }
 }

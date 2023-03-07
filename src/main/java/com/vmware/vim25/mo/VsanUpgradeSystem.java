@@ -1,6 +1,10 @@
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.VsanFault;
+import com.vmware.vim25.VsanUpgradeSystemPreflightCheckResult;
+import com.vmware.vim25.VsanUpgradeSystemUpgradeStatus;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -57,10 +61,10 @@ public class VsanUpgradeSystem extends ManagedObject {
      */
     public Task performVsanUpgrade_Task(ClusterComputeResource cluster, Boolean performObjectUpgrade,
                                         Boolean downgradeFormat, Boolean allowReducedRedundancy, HostSystem[] excludeHosts)
-        throws RuntimeFault, VsanFault, RemoteException {
+            throws RuntimeFault, VsanFault, RemoteException {
         ManagedObjectReference[] mors = excludeHosts == null ? null : MorUtil.createMORs(excludeHosts);
         ManagedObjectReference taskMor = getVimService().performVsanUpgrade_Task(getMOR(), cluster.getMOR(), performObjectUpgrade,
-            downgradeFormat, allowReducedRedundancy, mors);
+                downgradeFormat, allowReducedRedundancy, mors);
         return new Task(getServerConnection(), taskMor);
     }
 
@@ -92,7 +96,7 @@ public class VsanUpgradeSystem extends ManagedObject {
      */
     public Task performVsanUpgrade_Task(ClusterComputeResource cluster, Boolean performObjectUpgrade,
                                         Boolean downgradeFormat, Boolean allowReducedRedundancy)
-        throws RuntimeFault, VsanFault, RemoteException {
+            throws RuntimeFault, VsanFault, RemoteException {
         return performVsanUpgrade_Task(cluster, performObjectUpgrade, downgradeFormat, allowReducedRedundancy, null);
     }
 
@@ -122,7 +126,7 @@ public class VsanUpgradeSystem extends ManagedObject {
      * @see #performVsanUpgradePreflightCheck performVsanUpgradePreflightCheck
      */
     public Task performVsanUpgrade_Task(ClusterComputeResource cluster, Boolean performObjectUpgrade, Boolean downgradeFormat)
-        throws RuntimeFault, VsanFault, RemoteException {
+            throws RuntimeFault, VsanFault, RemoteException {
         return performVsanUpgrade_Task(cluster, performObjectUpgrade, downgradeFormat, null, null);
     }
 

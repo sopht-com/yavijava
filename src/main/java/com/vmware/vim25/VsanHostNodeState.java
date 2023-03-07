@@ -49,7 +49,7 @@ public enum VsanHostNodeState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VsanHostNodeState(String val) {
+    VsanHostNodeState(String val) {
         this.val = val;
     }
 }

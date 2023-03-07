@@ -42,7 +42,7 @@ public enum VirtualDiskAdapterType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDiskAdapterType(String val) {
+    VirtualDiskAdapterType(String val) {
         this.val = val;
     }
 }

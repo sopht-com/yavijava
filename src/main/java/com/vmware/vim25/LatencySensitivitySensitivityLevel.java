@@ -44,7 +44,7 @@ public enum LatencySensitivitySensitivityLevel {
     @SuppressWarnings("unused")
     private final String val;
 
-    private LatencySensitivitySensitivityLevel(String val) {
+    LatencySensitivitySensitivityLevel(String val) {
         this.val = val;
     }
 }

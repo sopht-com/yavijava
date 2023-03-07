@@ -41,7 +41,7 @@ public enum DiagnosticPartitionType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DiagnosticPartitionType(String val) {
+    DiagnosticPartitionType(String val) {
         this.val = val;
     }
 }

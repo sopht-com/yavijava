@@ -42,7 +42,7 @@ public enum TaskFilterSpecTimeOption {
     @SuppressWarnings("unused")
     private final String val;
 
-    private TaskFilterSpecTimeOption(String val) {
+    TaskFilterSpecTimeOption(String val) {
         this.val = val;
     }
 }

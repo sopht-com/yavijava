@@ -46,7 +46,7 @@ public enum HostPatchManagerIntegrityStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostPatchManagerIntegrityStatus(String val) {
+    HostPatchManagerIntegrityStatus(String val) {
         this.val = val;
     }
 }

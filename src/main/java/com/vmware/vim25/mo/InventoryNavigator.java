@@ -1,9 +1,19 @@
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AboutInfo;
+import com.vmware.vim25.DynamicProperty;
+import com.vmware.vim25.InvalidProperty;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.ObjectContent;
+import com.vmware.vim25.ObjectSpec;
+import com.vmware.vim25.PropertyFilterSpec;
+import com.vmware.vim25.PropertySpec;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.SelectionSpec;
 import com.vmware.vim25.mo.util.MorUtil;
 import com.vmware.vim25.mo.util.PropertyCollectorUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.rmi.RemoteException;
 
@@ -11,7 +21,7 @@ public class InventoryNavigator {
     private ManagedEntity rootEntity = null;
     private SelectionSpec[] selectionSpecs = null;
 
-    private static Logger log = Logger.getLogger(InventoryNavigator.class);
+    private static final Logger log = LoggerFactory.getLogger(InventoryNavigator.class);
 
     public InventoryNavigator(ManagedEntity rootEntity) {
         this.rootEntity = rootEntity;
@@ -33,7 +43,7 @@ public class InventoryNavigator {
     /**
      * Get the first ManagedObjectReference from current node for the specified type
      */
-    public ManagedEntity[] searchManagedEntities(String type) throws InvalidProperty, RuntimeFault, RemoteException {
+    public ManagedEntity[] searchManagedEntities(String type) throws RemoteException {
         String[][] typeinfo = new String[][]{new String[]{type, "name",},};
         return searchManagedEntities(typeinfo, true);
     }
@@ -54,7 +64,7 @@ public class InventoryNavigator {
         return createManagedEntities(ocs);
     }
 
-    private ObjectContent[] retrieveObjectContents(String[][] typeinfo, boolean recurse) throws InvalidProperty, RuntimeFault, RemoteException {
+    private ObjectContent[] retrieveObjectContents(String[][] typeinfo, boolean recurse) throws RemoteException {
         if (typeinfo == null || typeinfo.length == 0) {
             return null;
         }
@@ -75,15 +85,13 @@ public class InventoryNavigator {
             int majorVersion;
             try {
                 majorVersion = Integer.parseInt(versionArray[0]);
-            }
-            catch (NumberFormatException ignore) {
+            } catch (NumberFormatException ignore) {
                 majorVersion = 0;
             }
             if (majorVersion >= 4) {
                 log.debug("API version >= 4 detected. Using buildFullTraversalV4.");
                 selectionSpecs = PropertyCollectorUtil.buildFullTraversalV4();
-            }
-            else {
+            } else {
                 log.debug("API version < 4 detected. Using buildFullTraversal");
                 selectionSpecs = PropertyCollectorUtil.buildFullTraversal();
             }

@@ -29,10 +29,20 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo.util;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.DynamicProperty;
+import com.vmware.vim25.InvalidProperty;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.ObjectContent;
+import com.vmware.vim25.ObjectSpec;
+import com.vmware.vim25.PropertyFilterSpec;
+import com.vmware.vim25.PropertySpec;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.SelectionSpec;
+import com.vmware.vim25.TraversalSpec;
 import com.vmware.vim25.mo.ManagedObject;
 import com.vmware.vim25.mo.PropertyCollector;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.rmi.RemoteException;
@@ -48,9 +58,9 @@ import java.util.List;
  */
 public class PropertyCollectorUtil {
 
-    private static Logger log = Logger.getLogger(PropertyCollectorUtil.class);
+    static Logger log = LoggerFactory.getLogger(PropertyCollectorUtil.class);
 
-    final public static Object NULL = new Object();
+    public static final Object NULL = new Object();
 
     /**
      * Retrieves properties from multiple managed objects.
@@ -71,7 +81,7 @@ public class PropertyCollectorUtil {
 
     public static Hashtable[] retrieveProperties(ManagedObject[] mos, String moType,
                                                  String[] propPaths) throws InvalidProperty,
-        RuntimeFault, RemoteException {
+            RuntimeFault, RemoteException {
         if (mos == null) {
             throw new IllegalArgumentException("Managed object array cannot be null.");
         }
@@ -93,7 +103,7 @@ public class PropertyCollectorUtil {
         pfs.setPropSet(new PropertySpec[]{pSpec});
 
         ObjectContent[] objs = pc.retrieveProperties(
-            new PropertyFilterSpec[]{pfs});
+                new PropertyFilterSpec[]{pfs});
 
         Hashtable[] pTables = new Hashtable[mos.length];
 
@@ -103,10 +113,9 @@ public class PropertyCollectorUtil {
 
             int index;
             if (mor.getType().equals(mos[i].getMOR().getType()) &&
-                mor.get_value().equals(mos[i].getMOR().get_value())) {
+                    mor.get_value().equals(mos[i].getMOR().get_value())) {
                 index = i;
-            }
-            else {
+            } else {
                 index = findIndex(mos, mor);
                 if (index == -1) {
                     throw new RuntimeException("Unexpected managed object in result: " + mor.getType() + ":" + mor.get_value());
@@ -131,7 +140,7 @@ public class PropertyCollectorUtil {
     private static int findIndex(ManagedObject[] mos, ManagedObjectReference mor) {
         for (int i = 0; i < mos.length; i++) {
             if (mor.getType().equals(mos[i].getMOR().getType()) &&
-                mor.get_value().equals(mos[i].getMOR().get_value())) {
+                    mor.get_value().equals(mos[i].getMOR().get_value())) {
                 return i;
             }
         }
@@ -162,21 +171,18 @@ public class PropertyCollectorUtil {
                 Method getMethod;
                 try {
                     getMethod = propClass.getMethod("get" + methodName, (Class[]) null);
-                }
-                catch (NoSuchMethodException ignore) {
+                } catch (NoSuchMethodException ignore) {
                     getMethod = propClass.getMethod("get_" + methodName.toLowerCase(), (Class[]) null);
                 }
                 propertyValue = getMethod.invoke(dynaPropVal, (Object[]) null);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 log.error("Exception caught trying to convertProperty", e);
             }
         }
         //Handle the case of an unwrapped array being deserialized.
         else if (dynaPropVal.getClass().isArray()) {
             propertyValue = dynaPropVal;
-        }
-        else {
+        } else {
             propertyValue = dynaPropVal;
         }
 
@@ -257,8 +263,8 @@ public class PropertyCollectorUtil {
 
         // Recurse through the folders
         TraversalSpec visitFolders = createTraversalSpec("visitFolders",
-            "Folder", "childEntity",
-            new String[]{"visitFolders", "dcToHf", "dcToVmf", "crToH", "crToRp", "HToVm", "rpToVm"});
+                "Folder", "childEntity",
+                new String[]{"visitFolders", "dcToHf", "dcToVmf", "crToH", "crToRp", "HToVm", "rpToVm"});
 
         SelectionSpec[] sSpecs = new SelectionSpec[tSpecs.size() + 1];
         sSpecs[0] = visitFolders;
@@ -277,37 +283,37 @@ public class PropertyCollectorUtil {
     private static List<TraversalSpec> buildFullTraversalV2NoFolder() {
         // Recurse through all ResourcePools
         TraversalSpec rpToRp = createTraversalSpec("rpToRp",
-            "ResourcePool", "resourcePool",
-            new String[]{"rpToRp", "rpToVm"});
+                "ResourcePool", "resourcePool",
+                new String[]{"rpToRp", "rpToVm"});
 
         // Recurse through all ResourcePools
         TraversalSpec rpToVm = createTraversalSpec("rpToVm",
-            "ResourcePool", "vm",
-            new SelectionSpec[]{});
+                "ResourcePool", "vm",
+                new SelectionSpec[]{});
 
         // Traversal through ResourcePool branch
         TraversalSpec crToRp = createTraversalSpec("crToRp",
-            "ComputeResource", "resourcePool",
-            new String[]{"rpToRp", "rpToVm"});
+                "ComputeResource", "resourcePool",
+                new String[]{"rpToRp", "rpToVm"});
 
         // Traversal through host branch
         TraversalSpec crToH = createTraversalSpec("crToH",
-            "ComputeResource", "host",
-            new SelectionSpec[]{});
+                "ComputeResource", "host",
+                new SelectionSpec[]{});
 
         // Traversal through hostFolder branch
         TraversalSpec dcToHf = createTraversalSpec("dcToHf",
-            "Datacenter", "hostFolder",
-            new String[]{"visitFolders"});
+                "Datacenter", "hostFolder",
+                new String[]{"visitFolders"});
 
         // Traversal through vmFolder branch
         TraversalSpec dcToVmf = createTraversalSpec("dcToVmf",
-            "Datacenter", "vmFolder",
-            new String[]{"visitFolders"});
+                "Datacenter", "vmFolder",
+                new String[]{"visitFolders"});
 
         TraversalSpec HToVm = createTraversalSpec("HToVm",
-            "HostSystem", "vm",
-            new String[]{"visitFolders"});
+                "HostSystem", "vm",
+                new String[]{"visitFolders"});
 
         return Arrays.asList(dcToVmf, dcToHf, crToH, crToRp, rpToRp, HToVm, rpToVm);
     }
@@ -322,12 +328,12 @@ public class PropertyCollectorUtil {
         List<TraversalSpec> tSpecs = buildFullTraversalV2NoFolder();
 
         TraversalSpec dcToDs = createTraversalSpec("dcToDs",
-            "Datacenter", "datastoreFolder",
-            new String[]{"visitFolders"});
+                "Datacenter", "datastoreFolder",
+                new String[]{"visitFolders"});
 
         TraversalSpec vAppToRp = createTraversalSpec("vAppToRp",
-            "VirtualApp", "resourcePool",
-            new String[]{"rpToRp", "vAppToRp"});
+                "VirtualApp", "resourcePool",
+                new String[]{"rpToRp", "vAppToRp"});
 
         /**
          * Copyright 2009 Altor Networks, contribution by Elsa Bignoli
@@ -335,13 +341,13 @@ public class PropertyCollectorUtil {
          */
         // Traversal through netFolder branch
         TraversalSpec dcToNetf = createTraversalSpec("dcToNetf",
-            "Datacenter", "networkFolder",
-            new String[]{"visitFolders"});
+                "Datacenter", "networkFolder",
+                new String[]{"visitFolders"});
 
         // Recurse through the folders
         TraversalSpec visitFolders = createTraversalSpec("visitFolders",
-            "Folder", "childEntity",
-            new String[]{"visitFolders", "dcToHf", "dcToVmf", "dcToDs", "dcToNetf", "crToH", "crToRp", "HToVm", "rpToVm"});
+                "Folder", "childEntity",
+                new String[]{"visitFolders", "dcToHf", "dcToVmf", "dcToDs", "dcToNetf", "crToH", "crToRp", "HToVm", "rpToVm"});
 
         SelectionSpec[] sSpecs = new SelectionSpec[tSpecs.size() + 4];
         sSpecs[0] = visitFolders;

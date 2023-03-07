@@ -58,7 +58,7 @@ public enum VirtualMachineUsbInfoFamily {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineUsbInfoFamily(String val) {
+    VirtualMachineUsbInfoFamily(String val) {
         this.val = val;
     }
 }

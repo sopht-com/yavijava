@@ -29,7 +29,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.OptionDef;
+import com.vmware.vim25.OptionValue;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -53,11 +57,11 @@ public class OptionManager extends ManagedObject {
         return (OptionDef[]) getCurrentProperty("supportedOption");
     }
 
-    public OptionValue[] queryOptions(String name) throws InvalidName, RuntimeFault, RemoteException {
+    public OptionValue[] queryOptions(String name) throws RemoteException {
         return getVimService().queryOptions(getMOR(), name);
     }
 
-    public void updateOptions(OptionValue[] changedValue) throws InvalidName, RuntimeFault, RemoteException {
+    public void updateOptions(OptionValue[] changedValue) throws RemoteException {
         getVimService().updateOptions(getMOR(), changedValue);
     }
 }

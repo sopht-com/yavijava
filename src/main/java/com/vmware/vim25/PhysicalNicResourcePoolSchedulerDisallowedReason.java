@@ -41,7 +41,7 @@ public enum PhysicalNicResourcePoolSchedulerDisallowedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private PhysicalNicResourcePoolSchedulerDisallowedReason(String val) {
+    PhysicalNicResourcePoolSchedulerDisallowedReason(String val) {
         this.val = val;
     }
 }

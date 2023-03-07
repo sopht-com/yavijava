@@ -42,7 +42,7 @@ public enum ComplianceResultStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ComplianceResultStatus(String val) {
+    ComplianceResultStatus(String val) {
         this.val = val;
     }
 }

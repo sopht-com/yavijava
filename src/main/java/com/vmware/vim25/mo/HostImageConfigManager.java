@@ -50,16 +50,16 @@ public class HostImageConfigManager extends ManagedObject {
         super(serverConnection, mor);
     }
 
-    public String hostImageConfigGetAcceptance() throws HostConfigFault, RuntimeFault, RemoteException {
+    public String hostImageConfigGetAcceptance() throws RemoteException {
         return getVimService().hostImageConfigGetAcceptance(getMOR());
     }
 
 
-    public HostImageProfileSummary hostImageConfigGetProfile() throws RuntimeFault, RemoteException {
+    public HostImageProfileSummary hostImageConfigGetProfile() throws RemoteException {
         return getVimService().hostImageConfigGetProfile(getMOR());
     }
 
-    public void updateHostImageAcceptanceLevel(String newAcceptanceLevel) throws HostConfigFault, RuntimeFault, RemoteException {
+    public void updateHostImageAcceptanceLevel(String newAcceptanceLevel) throws RemoteException {
         getVimService().updateHostImageAcceptanceLevel(getMOR(), newAcceptanceLevel);
     }
 }

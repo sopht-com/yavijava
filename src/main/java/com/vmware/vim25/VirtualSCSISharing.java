@@ -42,7 +42,7 @@ public enum VirtualSCSISharing {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualSCSISharing(String val) {
+    VirtualSCSISharing(String val) {
         this.val = val;
     }
 }

@@ -42,7 +42,7 @@ public enum VirtualMachinePowerOpType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachinePowerOpType(String val) {
+    VirtualMachinePowerOpType(String val) {
         this.val = val;
     }
 }

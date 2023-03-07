@@ -29,7 +29,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.FileFault;
+import com.vmware.vim25.InvalidDatastore;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.UserNotFound;
 
 import java.rmi.RemoteException;
 
@@ -48,34 +52,34 @@ public class FileManager extends ManagedObject {
     /**
      * @since 4.0
      */
-    public void changeOwner(String name, Datacenter datacenter, String owner) throws InvalidDatastore, FileFault, UserNotFound, RuntimeFault, RemoteException {
+    public void changeOwner(String name, Datacenter datacenter, String owner) throws RemoteException {
         getVimService().changeOwner(getMOR(), name,
-            datacenter == null ? null : datacenter.getMOR(), owner);
+                datacenter == null ? null : datacenter.getMOR(), owner);
     }
 
     public Task copyDatastoreFile_Task(String sourceName, Datacenter sourceDatacenter,
-                                       String destinationName, Datacenter destinationDatacenter, boolean force) throws FileFault, InvalidDatastore, RuntimeFault, RemoteException {
+                                       String destinationName, Datacenter destinationDatacenter, boolean force) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().copyDatastoreFile_Task(getMOR(),
-            sourceName, sourceDatacenter == null ? null : sourceDatacenter.getMOR(),
-            destinationName, sourceDatacenter == null ? null : destinationDatacenter.getMOR(), force);
+                sourceName, sourceDatacenter == null ? null : sourceDatacenter.getMOR(),
+                destinationName, sourceDatacenter == null ? null : destinationDatacenter.getMOR(), force);
         return new Task(getServerConnection(), taskMor);
     }
 
-    public Task deleteDatastoreFile_Task(String name, Datacenter datacenter) throws FileFault, InvalidDatastore, RuntimeFault, RemoteException {
+    public Task deleteDatastoreFile_Task(String name, Datacenter datacenter) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().deleteDatastoreFile_Task(getMOR(),
-            name, datacenter == null ? null : datacenter.getMOR());
+                name, datacenter == null ? null : datacenter.getMOR());
         return new Task(getServerConnection(), taskMor);
     }
 
-    public void makeDirectory(String name, Datacenter datacenter, boolean createParentDirectories) throws FileFault, InvalidDatastore, RuntimeFault, RemoteException {
+    public void makeDirectory(String name, Datacenter datacenter, boolean createParentDirectories) throws RemoteException {
         getVimService().makeDirectory(getMOR(), name, datacenter == null ? null : datacenter.getMOR(), createParentDirectories);
     }
 
     public Task moveDatastoreFile_Task(String sourceName, Datacenter sourceDatacenter,
-                                       String destinationName, Datacenter destinationDatacenter, boolean force) throws FileFault, InvalidDatastore, RuntimeFault, RemoteException {
+                                       String destinationName, Datacenter destinationDatacenter, boolean force) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().moveDatastoreFile_Task(getMOR(),
-            sourceName, sourceDatacenter == null ? null : sourceDatacenter.getMOR(),
-            destinationName, destinationDatacenter == null ? null : destinationDatacenter.getMOR(), force);
+                sourceName, sourceDatacenter == null ? null : sourceDatacenter.getMOR(),
+                destinationName, destinationDatacenter == null ? null : destinationDatacenter.getMOR(), force);
         return new Task(getServerConnection(), taskMor);
     }
 

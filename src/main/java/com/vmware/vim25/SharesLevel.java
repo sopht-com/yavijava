@@ -43,7 +43,7 @@ public enum SharesLevel {
     @SuppressWarnings("unused")
     private final String val;
 
-    private SharesLevel(String val) {
+    SharesLevel(String val) {
         this.val = val;
     }
 }

@@ -42,7 +42,7 @@ public enum VirtualEthernetCardMacType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualEthernetCardMacType(String val) {
+    VirtualEthernetCardMacType(String val) {
         this.val = val;
     }
 }

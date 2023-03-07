@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.HostConfigFault;
+import com.vmware.vim25.HostDateTimeConfig;
+import com.vmware.vim25.HostDateTimeInfo;
+import com.vmware.vim25.HostDateTimeSystemTimeZone;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 import java.util.Calendar;
@@ -50,23 +55,23 @@ public class HostDateTimeSystem extends ManagedObject {
         return (HostDateTimeInfo) getCurrentProperty("dateTimeInfo");
     }
 
-    public HostDateTimeSystemTimeZone[] queryAvailableTimeZones() throws RuntimeFault, RemoteException {
+    public HostDateTimeSystemTimeZone[] queryAvailableTimeZones() throws RemoteException {
         return getVimService().queryAvailableTimeZones(getMOR());
     }
 
-    public Calendar queryDateTime() throws RuntimeFault, RemoteException {
+    public Calendar queryDateTime() throws RemoteException {
         return getVimService().queryDateTime(getMOR());
     }
 
-    public void refreshDateTimeSystem() throws RuntimeFault, RemoteException {
+    public void refreshDateTimeSystem() throws RemoteException {
         getVimService().refreshDateTimeSystem(getMOR());
     }
 
-    public void updateDateTime(Calendar dateTime) throws HostConfigFault, RuntimeFault, RemoteException {
+    public void updateDateTime(Calendar dateTime) throws RemoteException {
         getVimService().updateDateTime(getMOR(), dateTime);
     }
 
-    public void updateDateTimeConfig(HostDateTimeConfig config) throws HostConfigFault, RuntimeFault, RemoteException {
+    public void updateDateTimeConfig(HostDateTimeConfig config) throws RemoteException {
         getVimService().updateDateTimeConfig(getMOR(), config);
     }
 

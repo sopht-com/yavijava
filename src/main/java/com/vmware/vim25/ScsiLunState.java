@@ -47,7 +47,7 @@ public enum ScsiLunState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ScsiLunState(String val) {
+    ScsiLunState(String val) {
         this.val = val;
     }
 }

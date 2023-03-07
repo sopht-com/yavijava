@@ -41,7 +41,7 @@ public enum VMwareDvsLacpApiVersion {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VMwareDvsLacpApiVersion(String val) {
+    VMwareDvsLacpApiVersion(String val) {
         this.val = val;
     }
 }

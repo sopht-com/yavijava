@@ -68,8 +68,7 @@ public class ServerConnection {
         if (vimService != null) {
             try {
                 serviceInstance.getSessionManager().logout();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println("Failed to disconnect...");
             }
             vimService = null;

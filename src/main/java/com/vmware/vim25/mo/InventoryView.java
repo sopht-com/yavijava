@@ -47,7 +47,7 @@ public class InventoryView extends ManagedObjectView {
         super(serverConnection, mor);
     }
 
-    public ManagedEntity[] closeInventoryViewFolder(ManagedEntity[] entities) throws RuntimeFault, RemoteException {
+    public ManagedEntity[] closeInventoryViewFolder(ManagedEntity[] entities) throws RemoteException {
         if (entities == null) {
             throw new IllegalArgumentException("entities must not be null.");
         }
@@ -55,7 +55,7 @@ public class InventoryView extends ManagedObjectView {
         return MorUtil.createManagedEntities(getServerConnection(), mors);
     }
 
-    public ManagedEntity[] openInventoryViewFolder(ManagedEntity[] entities) throws RuntimeFault, RemoteException {
+    public ManagedEntity[] openInventoryViewFolder(ManagedEntity[] entities) throws RemoteException {
         if (entities == null) {
             throw new IllegalArgumentException("entities must not be null.");
         }

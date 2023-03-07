@@ -47,11 +47,11 @@ public class HostBootDeviceSystem extends ManagedObject {
         super(serverConnection, mor);
     }
 
-    public HostBootDeviceInfo queryBootDevices() throws RuntimeFault, RemoteException {
+    public HostBootDeviceInfo queryBootDevices() throws RemoteException {
         return getVimService().queryBootDevices(getMOR());
     }
 
-    public void updateBootDevice(String key) throws RuntimeFault, RemoteException {
+    public void updateBootDevice(String key) throws RemoteException {
         getVimService().updateBootDevice(getMOR(), key);
     }
 

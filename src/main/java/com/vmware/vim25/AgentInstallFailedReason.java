@@ -48,7 +48,7 @@ public enum AgentInstallFailedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private AgentInstallFailedReason(String val) {
+    AgentInstallFailedReason(String val) {
         this.val = val;
     }
 }

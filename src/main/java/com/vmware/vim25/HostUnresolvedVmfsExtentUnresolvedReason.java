@@ -41,7 +41,7 @@ public enum HostUnresolvedVmfsExtentUnresolvedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostUnresolvedVmfsExtentUnresolvedReason(String val) {
+    HostUnresolvedVmfsExtentUnresolvedReason(String val) {
         this.val = val;
     }
 }

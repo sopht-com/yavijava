@@ -41,7 +41,7 @@ public enum HostLowLevelProvisioningManagerReloadTarget {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostLowLevelProvisioningManagerReloadTarget(String val) {
+    HostLowLevelProvisioningManagerReloadTarget(String val) {
         this.val = val;
     }
 }

@@ -41,7 +41,7 @@ public enum VMwareUplinkLacpMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VMwareUplinkLacpMode(String val) {
+    VMwareUplinkLacpMode(String val) {
         this.val = val;
     }
 }

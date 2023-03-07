@@ -42,7 +42,7 @@ public enum VirtualEthernetCardLegacyNetworkDeviceName {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualEthernetCardLegacyNetworkDeviceName(String val) {
+    VirtualEthernetCardLegacyNetworkDeviceName(String val) {
         this.val = val;
     }
 }

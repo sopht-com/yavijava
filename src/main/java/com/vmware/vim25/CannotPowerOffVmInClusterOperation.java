@@ -43,7 +43,7 @@ public enum CannotPowerOffVmInClusterOperation {
     @SuppressWarnings("unused")
     private final String val;
 
-    private CannotPowerOffVmInClusterOperation(String val) {
+    CannotPowerOffVmInClusterOperation(String val) {
         this.val = val;
     }
 }

@@ -41,7 +41,7 @@ public enum CustomizationLicenseDataMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private CustomizationLicenseDataMode(String val) {
+    CustomizationLicenseDataMode(String val) {
         this.val = val;
     }
 }

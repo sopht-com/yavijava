@@ -43,7 +43,7 @@ public enum IscsiPortInfoPathStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private IscsiPortInfoPathStatus(String val) {
+    IscsiPortInfoPathStatus(String val) {
         this.val = val;
     }
 }

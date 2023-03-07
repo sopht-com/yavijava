@@ -41,7 +41,7 @@ public enum VirtualDeviceURIBackingOptionDirection {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDeviceURIBackingOptionDirection(String val) {
+    VirtualDeviceURIBackingOptionDirection(String val) {
         this.val = val;
     }
 }

@@ -43,7 +43,7 @@ public enum SlpDiscoveryMethod {
     @SuppressWarnings("unused")
     private final String val;
 
-    private SlpDiscoveryMethod(String val) {
+    SlpDiscoveryMethod(String val) {
         this.val = val;
     }
 }

@@ -49,7 +49,7 @@ public enum ClusterDasFdmAvailabilityState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterDasFdmAvailabilityState(String val) {
+    ClusterDasFdmAvailabilityState(String val) {
         this.val = val;
     }
 }

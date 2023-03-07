@@ -47,7 +47,7 @@ public enum VirtualPointingDeviceHostChoice {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualPointingDeviceHostChoice(String val) {
+    VirtualPointingDeviceHostChoice(String val) {
         this.val = val;
     }
 }

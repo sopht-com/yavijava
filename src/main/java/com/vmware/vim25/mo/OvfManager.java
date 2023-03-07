@@ -28,7 +28,23 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ConcurrentAccess;
+import com.vmware.vim25.FileFault;
+import com.vmware.vim25.InvalidDatastore;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.OvfCreateDescriptorParams;
+import com.vmware.vim25.OvfCreateDescriptorResult;
+import com.vmware.vim25.OvfCreateImportSpecParams;
+import com.vmware.vim25.OvfCreateImportSpecResult;
+import com.vmware.vim25.OvfOptionInfo;
+import com.vmware.vim25.OvfParseDescriptorParams;
+import com.vmware.vim25.OvfParseDescriptorResult;
+import com.vmware.vim25.OvfValidateHostParams;
+import com.vmware.vim25.OvfValidateHostResult;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInProgress;
+import com.vmware.vim25.VmConfigFault;
 
 import java.rmi.RemoteException;
 
@@ -51,19 +67,19 @@ public class OvfManager extends ManagedObject {
         return (OvfOptionInfo[]) getCurrentProperty("ovfImportOption");
     }
 
-    public OvfCreateDescriptorResult createDescriptor(ManagedEntity obj, OvfCreateDescriptorParams cdp) throws TaskInProgress, VmConfigFault, ConcurrentAccess, FileFault, InvalidState, RuntimeFault, RemoteException {
+    public OvfCreateDescriptorResult createDescriptor(ManagedEntity obj, OvfCreateDescriptorParams cdp) throws RemoteException {
         return getVimService().createDescriptor(getMOR(), obj.getMOR(), cdp);
     }
 
-    public OvfCreateImportSpecResult createImportSpec(String ovfDescriptor, ResourcePool resourcePool, Datastore datastore, OvfCreateImportSpecParams cisp) throws TaskInProgress, VmConfigFault, ConcurrentAccess, FileFault, InvalidState, InvalidDatastore, RuntimeFault, RemoteException {
+    public OvfCreateImportSpecResult createImportSpec(String ovfDescriptor, ResourcePool resourcePool, Datastore datastore, OvfCreateImportSpecParams cisp) throws RemoteException {
         return getVimService().createImportSpec(getMOR(), ovfDescriptor, resourcePool.getMOR(), datastore.getMOR(), cisp);
     }
 
-    public OvfParseDescriptorResult parseDescriptor(String ovfDescriptor, OvfParseDescriptorParams pdp) throws TaskInProgress, VmConfigFault, ConcurrentAccess, FileFault, InvalidState, RuntimeFault, RemoteException {
+    public OvfParseDescriptorResult parseDescriptor(String ovfDescriptor, OvfParseDescriptorParams pdp) throws RemoteException {
         return getVimService().parseDescriptor(getMOR(), ovfDescriptor, pdp);
     }
 
-    public OvfValidateHostResult validateHost(String ovfDescriptor, HostSystem host, OvfValidateHostParams vhp) throws TaskInProgress, ConcurrentAccess, FileFault, InvalidState, RuntimeFault, RemoteException {
+    public OvfValidateHostResult validateHost(String ovfDescriptor, HostSystem host, OvfValidateHostParams vhp) throws RemoteException {
         return getVimService().validateHost(getMOR(), ovfDescriptor, host.getMOR(), vhp);
     }
 }

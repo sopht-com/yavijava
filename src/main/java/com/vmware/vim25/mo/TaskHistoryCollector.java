@@ -56,11 +56,11 @@ public class TaskHistoryCollector extends HistoryCollector {
         return (TaskInfo[]) getCurrentProperty("latestPage");
     }
 
-    public TaskInfo[] readNextTasks(int maxCount) throws RuntimeFault, RemoteException {
+    public TaskInfo[] readNextTasks(int maxCount) throws RemoteException {
         return getVimService().readNextTasks(getMOR(), maxCount);
     }
 
-    public TaskInfo[] readPreviousTasks(int maxCount) throws RuntimeFault, RemoteException {
+    public TaskInfo[] readPreviousTasks(int maxCount) throws RemoteException {
         return getVimService().readPreviousTasks(getMOR(), maxCount);
     }
 

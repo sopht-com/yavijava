@@ -46,7 +46,7 @@ public class ProfileComplianceManager extends ManagedObject {
         super(sc, mor);
     }
 
-    public Task checkCompliance_Task(Profile[] profile, ManagedEntity[] entity) throws RuntimeFault, RemoteException {
+    public Task checkCompliance_Task(Profile[] profile, ManagedEntity[] entity) throws RemoteException {
         ManagedObjectReference[] ps = convertMors(profile);
         ManagedObjectReference[] es = convertMors(entity);
 
@@ -54,22 +54,22 @@ public class ProfileComplianceManager extends ManagedObject {
         return new Task(getServerConnection(), taskMor);
     }
 
-    public void clearComplianceStatus(Profile[] profile, ManagedEntity[] entity) throws RuntimeFault, RemoteException {
+    public void clearComplianceStatus(Profile[] profile, ManagedEntity[] entity) throws RemoteException {
         getVimService().clearComplianceStatus(getMOR(),
-            convertMors(profile), convertMors(entity));
+                convertMors(profile), convertMors(entity));
     }
 
-    public ComplianceResult[] queryComplianceStatus(Profile[] profile, ManagedEntity[] entity) throws RuntimeFault, RemoteException {
+    public ComplianceResult[] queryComplianceStatus(Profile[] profile, ManagedEntity[] entity) throws RemoteException {
         return getVimService().queryComplianceStatus(getMOR(), convertMors(profile), convertMors(entity));
     }
 
     //SDK4.1 signature for back compatibility
-    public ProfileExpressionMetadata[] queryExpressionMetadata(String[] expressionName) throws RuntimeFault, RemoteException {
+    public ProfileExpressionMetadata[] queryExpressionMetadata(String[] expressionName) throws RemoteException {
         return queryExpressionMetadata(expressionName, null);
     }
 
     //SDK5.0 signature
-    public ProfileExpressionMetadata[] queryExpressionMetadata(String[] expressionName, Profile profile) throws RuntimeFault, RemoteException {
+    public ProfileExpressionMetadata[] queryExpressionMetadata(String[] expressionName, Profile profile) throws RemoteException {
         return getVimService().queryExpressionMetadata(getMOR(), expressionName, profile == null ? null : profile.getMOR());
     }
 }

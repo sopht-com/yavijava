@@ -41,7 +41,7 @@ public enum NotSupportedDeviceForFTDeviceType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private NotSupportedDeviceForFTDeviceType(String val) {
+    NotSupportedDeviceForFTDeviceType(String val) {
         this.val = val;
     }
 }

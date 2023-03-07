@@ -45,7 +45,7 @@ public enum VirtualMachineGuestState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineGuestState(String val) {
+    VirtualMachineGuestState(String val) {
         this.val = val;
     }
 }

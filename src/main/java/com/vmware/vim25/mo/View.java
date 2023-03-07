@@ -46,7 +46,7 @@ abstract public class View extends ManagedObject {
         super(serverConnection, mor);
     }
 
-    public void destroyView() throws RuntimeFault, RemoteException {
+    public void destroyView() throws RemoteException {
         getVimService().destroyView(getMOR());
     }
 

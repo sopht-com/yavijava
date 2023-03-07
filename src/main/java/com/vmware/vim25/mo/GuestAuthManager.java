@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.GuestAuthentication;
+import com.vmware.vim25.GuestOperationsFault;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 
@@ -53,11 +58,11 @@ public class GuestAuthManager extends ManagedObject {
         return vm;
     }
 
-    public GuestAuthentication acquireCredentialsInGuest(GuestAuthentication requestedAuth, long sessionID) throws GuestOperationsFault, TaskInProgress, InvalidState, RuntimeFault, RemoteException {
+    public GuestAuthentication acquireCredentialsInGuest(GuestAuthentication requestedAuth, long sessionID) throws RemoteException {
         return getVimService().acquireCredentialsInGuest(this.getMOR(), vm.getMOR(), requestedAuth, sessionID);
     }
 
-    public void releaseCredentialsInGuest(GuestAuthentication auth) throws GuestOperationsFault, TaskInProgress, InvalidState, RuntimeFault, RemoteException {
+    public void releaseCredentialsInGuest(GuestAuthentication auth) throws RemoteException {
         getVimService().releaseCredentialsInGuest(getMOR(), vm.getMOR(), auth);
     }
 
@@ -66,7 +71,7 @@ public class GuestAuthManager extends ManagedObject {
      * Watch out GuestPermissionDenied (subtype of GuestOperationsFault)
      * for invalid authentication.
      */
-    public void ValidateCredentialsInGuest(GuestAuthentication auth) throws GuestOperationsFault, InvalidState, TaskInProgress, RuntimeFault, RemoteException {
+    public void ValidateCredentialsInGuest(GuestAuthentication auth) throws RemoteException {
         getVimService().validateCredentialsInGuest(getMOR(), vm.getMOR(), auth);
     }
 }

@@ -42,7 +42,7 @@ public enum HostCpuPackageVendor {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostCpuPackageVendor(String val) {
+    HostCpuPackageVendor(String val) {
         this.val = val;
     }
 }

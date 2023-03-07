@@ -41,7 +41,7 @@ public enum VMotionCompatibilityType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VMotionCompatibilityType(String val) {
+    VMotionCompatibilityType(String val) {
         this.val = val;
     }
 }

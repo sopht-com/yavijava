@@ -46,7 +46,7 @@ public enum DayOfWeek {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DayOfWeek(String val) {
+    DayOfWeek(String val) {
         this.val = val;
     }
 }

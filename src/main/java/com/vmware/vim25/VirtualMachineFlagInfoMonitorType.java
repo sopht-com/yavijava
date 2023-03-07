@@ -42,7 +42,7 @@ public enum VirtualMachineFlagInfoMonitorType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineFlagInfoMonitorType(String val) {
+    VirtualMachineFlagInfoMonitorType(String val) {
         this.val = val;
     }
 }

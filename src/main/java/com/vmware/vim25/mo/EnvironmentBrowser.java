@@ -29,7 +29,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ConfigTarget;
+import com.vmware.vim25.EnvironmentBrowserConfigOptionQuerySpec;
+import com.vmware.vim25.HostCapability;
+import com.vmware.vim25.InvalidArgument;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.VirtualMachineConfigOption;
+import com.vmware.vim25.VirtualMachineConfigOptionDescriptor;
 
 import java.rmi.RemoteException;
 
@@ -49,19 +56,19 @@ public class EnvironmentBrowser extends ManagedObject {
         return (HostDatastoreBrowser) this.getManagedObject("datastoreBrowser");
     }
 
-    public VirtualMachineConfigOption queryConfigOption(String key, HostSystem host) throws RuntimeFault, RemoteException {
+    public VirtualMachineConfigOption queryConfigOption(String key, HostSystem host) throws RemoteException {
         return getVimService().queryConfigOption(getMOR(), key, host == null ? null : host.getMOR());
     }
 
-    public VirtualMachineConfigOptionDescriptor[] queryConfigOptionDescriptor() throws RuntimeFault, RemoteException {
+    public VirtualMachineConfigOptionDescriptor[] queryConfigOptionDescriptor() throws RemoteException {
         return getVimService().queryConfigOptionDescriptor(getMOR());
     }
 
-    public ConfigTarget queryConfigTarget(HostSystem host) throws RuntimeFault, RemoteException {
+    public ConfigTarget queryConfigTarget(HostSystem host) throws RemoteException {
         return getVimService().queryConfigTarget(getMOR(), host == null ? null : host.getMOR());
     }
 
-    public HostCapability queryTargetCapabilities(HostSystem host) throws RuntimeFault, RemoteException {
+    public HostCapability queryTargetCapabilities(HostSystem host) throws RemoteException {
         return getVimService().queryTargetCapabilities(getMOR(), host == null ? null : host.getMOR());
     }
 
@@ -89,7 +96,7 @@ public class EnvironmentBrowser extends ManagedObject {
         return getVimService().queryConfigOptionEx(getMOR(), spec);
     }
 
-    public VirtualMachineConfigOption queryConfigOptionEx() throws InvalidArgument, RuntimeFault, RemoteException {
+    public VirtualMachineConfigOption queryConfigOptionEx() throws RemoteException {
         return queryConfigOptionEx(null);
     }
 }

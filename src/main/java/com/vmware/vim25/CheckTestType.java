@@ -44,7 +44,7 @@ public enum CheckTestType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private CheckTestType(String val) {
+    CheckTestType(String val) {
         this.val = val;
     }
 }

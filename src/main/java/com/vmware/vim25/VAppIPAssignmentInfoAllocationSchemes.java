@@ -41,7 +41,7 @@ public enum VAppIPAssignmentInfoAllocationSchemes {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VAppIPAssignmentInfoAllocationSchemes(String val) {
+    VAppIPAssignmentInfoAllocationSchemes(String val) {
         this.val = val;
     }
 }

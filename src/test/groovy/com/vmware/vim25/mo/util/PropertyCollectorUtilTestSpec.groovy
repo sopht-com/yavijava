@@ -4,7 +4,7 @@ import com.vmware.vim25.ArrayOfManagedObjectReference
 import com.vmware.vim25.ManagedObjectReference
 import com.vmware.vim25.ObjectSpec
 import com.vmware.vim25.SelectionSpec
-import org.apache.log4j.Logger
+import org.slf4j.Logger
 import spock.lang.Specification
 
 
@@ -87,7 +87,7 @@ class PropertyCollectorUtilTestSpec extends Specification {
         Object thing = propertyCollectorUtil.convertProperty(bad)
         then:
         thing == null
-        1 * log.error("Exception caught trying to convertProperty",*_)
+        1 * log.error("Exception caught trying to convertProperty", *_)
     }
 
     def "CreatObjectSpec returns valid objectspec"() {

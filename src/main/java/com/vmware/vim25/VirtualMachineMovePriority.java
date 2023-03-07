@@ -42,7 +42,7 @@ public enum VirtualMachineMovePriority {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineMovePriority(String val) {
+    VirtualMachineMovePriority(String val) {
         this.val = val;
     }
 }

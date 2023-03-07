@@ -41,7 +41,7 @@ public enum VAppIPAssignmentInfoProtocols {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VAppIPAssignmentInfoProtocols(String val) {
+    VAppIPAssignmentInfoProtocols(String val) {
         this.val = val;
     }
 }

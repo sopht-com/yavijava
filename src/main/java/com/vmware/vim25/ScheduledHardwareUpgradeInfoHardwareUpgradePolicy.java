@@ -42,7 +42,7 @@ public enum ScheduledHardwareUpgradeInfoHardwareUpgradePolicy {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ScheduledHardwareUpgradeInfoHardwareUpgradePolicy(String val) {
+    ScheduledHardwareUpgradeInfoHardwareUpgradePolicy(String val) {
         this.val = val;
     }
 }

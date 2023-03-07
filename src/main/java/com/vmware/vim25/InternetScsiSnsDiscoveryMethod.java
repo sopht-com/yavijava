@@ -42,7 +42,7 @@ public enum InternetScsiSnsDiscoveryMethod {
     @SuppressWarnings("unused")
     private final String val;
 
-    private InternetScsiSnsDiscoveryMethod(String val) {
+    InternetScsiSnsDiscoveryMethod(String val) {
         this.val = val;
     }
 }

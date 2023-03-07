@@ -46,7 +46,7 @@ public class ResourcePlanningManager extends Profile {
         super(sc, mor);
     }
 
-    public DatabaseSizeEstimate estimateDatabaseSize(DatabaseSizeParam dbSizeParam) throws RuntimeFault, RemoteException {
+    public DatabaseSizeEstimate estimateDatabaseSize(DatabaseSizeParam dbSizeParam) throws RemoteException {
         return getVimService().estimateDatabaseSize(getMOR(), dbSizeParam);
     }
 }

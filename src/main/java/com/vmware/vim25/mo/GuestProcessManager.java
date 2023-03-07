@@ -29,7 +29,15 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.FileFault;
+import com.vmware.vim25.GuestAuthentication;
+import com.vmware.vim25.GuestOperationsFault;
+import com.vmware.vim25.GuestProcessInfo;
+import com.vmware.vim25.GuestProgramSpec;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 
@@ -53,19 +61,19 @@ public class GuestProcessManager extends ManagedObject {
         return vm;
     }
 
-    public GuestProcessInfo[] listProcessesInGuest(GuestAuthentication auth, long[] pids) throws GuestOperationsFault, InvalidState, TaskInProgress, RuntimeFault, RemoteException {
+    public GuestProcessInfo[] listProcessesInGuest(GuestAuthentication auth, long[] pids) throws RemoteException {
         return getVimService().listProcessesInGuest(getMOR(), vm.getMOR(), auth, pids);
     }
 
-    public String[] readEnvironmentVariableInGuest(GuestAuthentication auth, String[] names) throws GuestOperationsFault, InvalidState, TaskInProgress, RuntimeFault, RemoteException {
+    public String[] readEnvironmentVariableInGuest(GuestAuthentication auth, String[] names) throws RemoteException {
         return getVimService().readEnvironmentVariableInGuest(getMOR(), vm.getMOR(), auth, names);
     }
 
-    public long startProgramInGuest(GuestAuthentication auth, GuestProgramSpec spec) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public long startProgramInGuest(GuestAuthentication auth, GuestProgramSpec spec) throws RemoteException {
         return getVimService().startProgramInGuest(getMOR(), vm.getMOR(), auth, spec);
     }
 
-    public void terminateProcessInGuest(GuestAuthentication auth, long pid) throws GuestOperationsFault, InvalidState, TaskInProgress, RuntimeFault, RemoteException {
+    public void terminateProcessInGuest(GuestAuthentication auth, long pid) throws RemoteException {
         getVimService().terminateProcessInGuest(getMOR(), vm.getMOR(), auth, pid);
     }
 }

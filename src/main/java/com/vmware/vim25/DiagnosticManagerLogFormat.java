@@ -40,7 +40,7 @@ public enum DiagnosticManagerLogFormat {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DiagnosticManagerLogFormat(String val) {
+    DiagnosticManagerLogFormat(String val) {
         this.val = val;
     }
 }

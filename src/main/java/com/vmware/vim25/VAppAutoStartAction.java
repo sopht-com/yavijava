@@ -44,7 +44,7 @@ public enum VAppAutoStartAction {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VAppAutoStartAction(String val) {
+    VAppAutoStartAction(String val) {
         this.val = val;
     }
 }

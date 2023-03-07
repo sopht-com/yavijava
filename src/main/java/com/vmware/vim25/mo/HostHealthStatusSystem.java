@@ -51,11 +51,11 @@ public class HostHealthStatusSystem extends ManagedObject {
         return (HealthSystemRuntime) getCurrentProperty("runtime");
     }
 
-    public void refreshHealthStatusSystem() throws RuntimeFault, RemoteException {
+    public void refreshHealthStatusSystem() throws RemoteException {
         getVimService().refreshHealthStatusSystem(getMOR());
     }
 
-    public void resetSystemHealthInfo() throws RuntimeFault, RemoteException {
+    public void resetSystemHealthInfo() throws RemoteException {
         getVimService().resetSystemHealthInfo(getMOR());
     }
 

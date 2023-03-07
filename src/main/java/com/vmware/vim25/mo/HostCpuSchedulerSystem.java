@@ -51,11 +51,11 @@ public class HostCpuSchedulerSystem extends ManagedObject {
         return (HostHyperThreadScheduleInfo) this.getCurrentProperty("hyperthreadInfo");
     }
 
-    public void disableHyperThreading() throws RuntimeFault, RemoteException {
+    public void disableHyperThreading() throws RemoteException {
         getVimService().disableHyperThreading(getMOR());
     }
 
-    public void enableHyperThreading() throws RuntimeFault, RemoteException {
+    public void enableHyperThreading() throws RemoteException {
         getVimService().enableHyperThreading(getMOR());
     }
 

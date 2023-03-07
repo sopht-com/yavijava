@@ -16,7 +16,7 @@ public class HostPowerSystem extends ManagedObject {
         return (PowerSystemInfo) getCurrentProperty("info");
     }
 
-    public void configurePowerPolicy(int key) throws HostConfigFault, RuntimeFault, RemoteException {
+    public void configurePowerPolicy(int key) throws RemoteException {
         getVimService().configurePowerPolicy(getMOR(), key);
     }
 }

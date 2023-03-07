@@ -46,15 +46,15 @@ public class LicenseAssignmentManager extends ManagedObject {
         super(sc, mor);
     }
 
-    public LicenseAssignmentManagerLicenseAssignment[] queryAssignedLicenses(String entityId) throws RuntimeFault, RemoteException {
+    public LicenseAssignmentManagerLicenseAssignment[] queryAssignedLicenses(String entityId) throws RemoteException {
         return getVimService().queryAssignedLicenses(getMOR(), entityId);
     }
 
-    public void removeAssignedLicense(String entityId) throws RuntimeFault, RemoteException {
+    public void removeAssignedLicense(String entityId) throws RemoteException {
         getVimService().removeAssignedLicense(getMOR(), entityId);
     }
 
-    public LicenseManagerLicenseInfo updateAssignedLicense(String entity, String licenseKey, String entityDisplayName) throws RuntimeFault, RemoteException {
+    public LicenseManagerLicenseInfo updateAssignedLicense(String entity, String licenseKey, String entityDisplayName) throws RemoteException {
         return getVimService().updateAssignedLicense(getMOR(), entity, licenseKey, entityDisplayName);
     }
 }

@@ -45,7 +45,7 @@ public enum ProfileNumericComparator {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ProfileNumericComparator(String val) {
+    ProfileNumericComparator(String val) {
         this.val = val;
     }
 }

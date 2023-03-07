@@ -41,7 +41,7 @@ public enum DatastoreAccessible {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DatastoreAccessible(String val) {
+    DatastoreAccessible(String val) {
         this.val = val;
     }
 }

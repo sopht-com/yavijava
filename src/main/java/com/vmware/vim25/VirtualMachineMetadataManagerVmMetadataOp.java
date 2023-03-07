@@ -41,7 +41,7 @@ public enum VirtualMachineMetadataManagerVmMetadataOp {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineMetadataManagerVmMetadataOp(String val) {
+    VirtualMachineMetadataManagerVmMetadataOp(String val) {
         this.val = val;
     }
 }

@@ -42,7 +42,7 @@ public enum VmwareDistributedVirtualSwitchPvlanPortType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VmwareDistributedVirtualSwitchPvlanPortType(String val) {
+    VmwareDistributedVirtualSwitchPvlanPortType(String val) {
         this.val = val;
     }
 }

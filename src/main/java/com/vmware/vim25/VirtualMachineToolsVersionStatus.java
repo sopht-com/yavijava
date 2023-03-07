@@ -48,7 +48,7 @@ public enum VirtualMachineToolsVersionStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineToolsVersionStatus(String val) {
+    VirtualMachineToolsVersionStatus(String val) {
         this.val = val;
     }
 }

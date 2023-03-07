@@ -41,7 +41,7 @@ public enum UpgradePolicy {
     @SuppressWarnings("unused")
     private final String val;
 
-    private UpgradePolicy(String val) {
+    UpgradePolicy(String val) {
         this.val = val;
     }
 }

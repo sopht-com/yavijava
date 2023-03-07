@@ -42,7 +42,7 @@ public enum TaskFilterSpecRecursionOption {
     @SuppressWarnings("unused")
     private final String val;
 
-    private TaskFilterSpecRecursionOption(String val) {
+    TaskFilterSpecRecursionOption(String val) {
         this.val = val;
     }
 }

@@ -41,7 +41,7 @@ public enum DvsFilterOnFailure {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DvsFilterOnFailure(String val) {
+    DvsFilterOnFailure(String val) {
         this.val = val;
     }
 }

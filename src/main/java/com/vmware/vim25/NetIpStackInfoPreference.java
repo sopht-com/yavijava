@@ -43,7 +43,7 @@ public enum NetIpStackInfoPreference {
     @SuppressWarnings("unused")
     private final String val;
 
-    private NetIpStackInfoPreference(String val) {
+    NetIpStackInfoPreference(String val) {
         this.val = val;
     }
 }

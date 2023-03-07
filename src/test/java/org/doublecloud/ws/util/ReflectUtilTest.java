@@ -1,19 +1,18 @@
 package org.doublecloud.ws.util;
 
-import com.vmware.vim25.AboutInfo;
 import com.vmware.vim25.PropertyChange;
-import org.doublecloud.ws.util.testUtils.*;
-import org.junit.Assert;
+import org.doublecloud.ws.util.testUtils.ReflectUtilExtendsAbs1With2Fields;
+import org.doublecloud.ws.util.testUtils.ReflectUtilExtendsSuper4Fields;
+import org.doublecloud.ws.util.testUtils.ReflectUtilImplementsSimpleWith4Fields;
+import org.doublecloud.ws.util.testUtils.ReflectUtilSingleObjWith2Fields1Method;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ReflectUtilTest {
 
@@ -45,7 +44,7 @@ public class ReflectUtilTest {
     public void testToByteArray() throws Exception {
         List<String> values = new ArrayList<String>();
         char[] chars = "ox991LwhCGLf2gntXqKkSPdqC+A=".toCharArray();
-        for (char c: chars) {
+        for (char c : chars) {
             values.add(Character.toString(c));
         }
         byte[] actual = ReflectUtil.toByteArray(values);

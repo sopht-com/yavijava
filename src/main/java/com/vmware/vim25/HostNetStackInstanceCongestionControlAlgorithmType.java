@@ -41,7 +41,7 @@ public enum HostNetStackInstanceCongestionControlAlgorithmType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostNetStackInstanceCongestionControlAlgorithmType(String val) {
+    HostNetStackInstanceCongestionControlAlgorithmType(String val) {
         this.val = val;
     }
 }

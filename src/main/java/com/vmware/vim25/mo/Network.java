@@ -64,7 +64,7 @@ public class Network extends ManagedEntity {
         return getVms("vm");
     }
 
-    public void destroyNetwork() throws ResourceInUse, RuntimeFault, RemoteException {
+    public void destroyNetwork() throws RemoteException {
         getVimService().destroyNetwork(getMOR());
     }
 

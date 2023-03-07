@@ -41,7 +41,7 @@ public enum InvalidProfileReferenceHostReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private InvalidProfileReferenceHostReason(String val) {
+    InvalidProfileReferenceHostReason(String val) {
         this.val = val;
     }
 }

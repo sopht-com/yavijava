@@ -48,7 +48,7 @@ public enum HostDisconnectedEventReasonCode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostDisconnectedEventReasonCode(String val) {
+    HostDisconnectedEventReasonCode(String val) {
         this.val = val;
     }
 }

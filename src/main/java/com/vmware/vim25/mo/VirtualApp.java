@@ -28,7 +28,25 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ConcurrentAccess;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.FileFault;
+import com.vmware.vim25.InsufficientResourcesFault;
+import com.vmware.vim25.InvalidDatastore;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.InvalidPowerState;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.MigrationFault;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInProgress;
+import com.vmware.vim25.VAppCloneSpec;
+import com.vmware.vim25.VAppConfigFault;
+import com.vmware.vim25.VAppConfigInfo;
+import com.vmware.vim25.VAppConfigSpec;
+import com.vmware.vim25.VirtualAppLinkInfo;
+import com.vmware.vim25.VirtualAppSummary;
+import com.vmware.vim25.VmConfigFault;
 
 import java.rmi.RemoteException;
 
@@ -79,17 +97,17 @@ public class VirtualApp extends ResourcePool {
         return (VAppConfigInfo) getCurrentProperty("vAppConfig");
     }
 
-    public Task cloneVApp_Task(String name, ManagedObjectReference target, VAppCloneSpec spec) throws InvalidState, InvalidDatastore, TaskInProgress, VmConfigFault, FileFault, MigrationFault, InsufficientResourcesFault, RuntimeFault, RemoteException {
+    public Task cloneVApp_Task(String name, ManagedObjectReference target, VAppCloneSpec spec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().cloneVApp_Task(getMOR(), name, target, spec);
         return new Task(getServerConnection(), taskMor);
     }
 
-    public HttpNfcLease exportVApp() throws InvalidPowerState, TaskInProgress, InvalidState, FileFault, RuntimeFault, RemoteException {
+    public HttpNfcLease exportVApp() throws RemoteException {
         ManagedObjectReference mor = getVimService().exportVApp(getMOR());
         return new HttpNfcLease(getServerConnection(), mor);
     }
 
-    public Task powerOffVApp_Task(boolean force) throws TaskInProgress, InvalidState, VAppConfigFault, RuntimeFault, RemoteException {
+    public Task powerOffVApp_Task(boolean force) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().powerOffVApp_Task(getMOR(), force);
         return new Task(getServerConnection(), taskMor);
     }
@@ -97,17 +115,17 @@ public class VirtualApp extends ResourcePool {
     /**
      * @since SDK4.1
      */
-    public Task suspendVApp_Task() throws TaskInProgress, InvalidState, VAppConfigFault, RuntimeFault, RemoteException {
+    public Task suspendVApp_Task() throws RemoteException {
         ManagedObjectReference taskMor = getVimService().suspendVApp_Task(getMOR());
         return new Task(getServerConnection(), taskMor);
     }
 
-    public Task powerOnVApp_Task() throws TaskInProgress, InvalidState, InsufficientResourcesFault, VmConfigFault, VAppConfigFault, FileFault, RuntimeFault, RemoteException {
+    public Task powerOnVApp_Task() throws RemoteException {
         ManagedObjectReference taskMor = getVimService().powerOnVApp_Task(getMOR());
         return new Task(getServerConnection(), taskMor);
     }
 
-    public Task unregisterVApp_Task() throws ConcurrentAccess, InvalidState, RuntimeFault, RemoteException {
+    public Task unregisterVApp_Task() throws RemoteException {
         ManagedObjectReference taskMor = getVimService().unregisterVApp_Task(getMOR());
         return new Task(getServerConnection(), taskMor);
     }
@@ -115,11 +133,11 @@ public class VirtualApp extends ResourcePool {
     /**
      * @since SDK4.1
      */
-    public void updateLinkedChildren(VirtualAppLinkInfo[] addChangeSet, ManagedObjectReference[] removeSet) throws ConcurrentAccess, RuntimeFault, RemoteException {
+    public void updateLinkedChildren(VirtualAppLinkInfo[] addChangeSet, ManagedObjectReference[] removeSet) throws RemoteException {
         getVimService().updateLinkedChildren(getMOR(), addChangeSet, removeSet);
     }
 
-    public void updateVAppConfig(VAppConfigSpec spec) throws TaskInProgress, VmConfigFault, ConcurrentAccess, FileFault, InvalidName, DuplicateName, InvalidState, InsufficientResourcesFault, InvalidDatastore, RuntimeFault, RemoteException {
+    public void updateVAppConfig(VAppConfigSpec spec) throws RemoteException {
         getVimService().updateVAppConfig(getMOR(), spec);
     }
 }

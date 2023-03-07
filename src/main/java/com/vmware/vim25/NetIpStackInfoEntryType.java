@@ -43,7 +43,7 @@ public enum NetIpStackInfoEntryType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private NetIpStackInfoEntryType(String val) {
+    NetIpStackInfoEntryType(String val) {
         this.val = val;
     }
 }

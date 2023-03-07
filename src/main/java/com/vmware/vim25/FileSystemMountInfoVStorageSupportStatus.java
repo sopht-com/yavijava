@@ -42,7 +42,7 @@ public enum FileSystemMountInfoVStorageSupportStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private FileSystemMountInfoVStorageSupportStatus(String val) {
+    FileSystemMountInfoVStorageSupportStatus(String val) {
         this.val = val;
     }
 }

@@ -30,7 +30,21 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.BackupBlobWriteFailure;
+import com.vmware.vim25.DVSFeatureCapability;
+import com.vmware.vim25.DVSManagerDvsConfigTarget;
+import com.vmware.vim25.DistributedVirtualSwitchHostProductSpec;
+import com.vmware.vim25.DistributedVirtualSwitchManagerCompatibilityResult;
+import com.vmware.vim25.DistributedVirtualSwitchManagerDvsProductSpec;
+import com.vmware.vim25.DistributedVirtualSwitchManagerHostContainer;
+import com.vmware.vim25.DistributedVirtualSwitchManagerHostDvsFilterSpec;
+import com.vmware.vim25.DistributedVirtualSwitchProductSpec;
+import com.vmware.vim25.DvsFault;
+import com.vmware.vim25.EntityBackupConfig;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.SelectionSet;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -47,7 +61,7 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
         super(sc, mor);
     }
 
-    public DistributedVirtualSwitchProductSpec[] queryAvailableDvsSpec() throws RuntimeFault, RemoteException {
+    public DistributedVirtualSwitchProductSpec[] queryAvailableDvsSpec() throws RemoteException {
         return queryAvailableDvsSpec(null);
     }
 
@@ -64,7 +78,7 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
         return getVimService().queryAvailableDvsSpec(getMOR(), recommended);
     }
 
-    public HostSystem[] queryCompatibleHostForExistingDvs(ManagedEntity container, boolean recursive, DistributedVirtualSwitch dvs) throws RuntimeFault, RemoteException {
+    public HostSystem[] queryCompatibleHostForExistingDvs(ManagedEntity container, boolean recursive, DistributedVirtualSwitch dvs) throws RemoteException {
         ManagedObjectReference[] mors = getVimService().queryCompatibleHostForExistingDvs(getMOR(), container.getMOR(), recursive, dvs.getMOR());
 
         HostSystem[] hosts = new HostSystem[mors.length];
@@ -74,7 +88,7 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
         return hosts;
     }
 
-    public HostSystem[] queryCompatibleHostForNewDvs(ManagedEntity container, boolean recursive, DistributedVirtualSwitchProductSpec switchProductSpec) throws RuntimeFault, RemoteException {
+    public HostSystem[] queryCompatibleHostForNewDvs(ManagedEntity container, boolean recursive, DistributedVirtualSwitchProductSpec switchProductSpec) throws RemoteException {
         ManagedObjectReference[] mors = getVimService().queryCompatibleHostForNewDvs(getMOR(), container.getMOR(), recursive, switchProductSpec);
 
         HostSystem[] hosts = new HostSystem[mors.length];
@@ -84,7 +98,7 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
         return hosts;
     }
 
-    public DistributedVirtualSwitchHostProductSpec[] queryDvsCompatibleHostSpec(DistributedVirtualSwitchProductSpec switchProductSpec) throws RuntimeFault, RemoteException {
+    public DistributedVirtualSwitchHostProductSpec[] queryDvsCompatibleHostSpec(DistributedVirtualSwitchProductSpec switchProductSpec) throws RemoteException {
         return getVimService().queryDvsCompatibleHostSpec(getMOR(), switchProductSpec);
     }
 
@@ -92,19 +106,19 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
      * @since SDK4.1
      */
     public DistributedVirtualSwitchManagerCompatibilityResult[] queryDvsCheckCompatibility(
-        DistributedVirtualSwitchManagerHostContainer hostContainer, DistributedVirtualSwitchManagerDvsProductSpec dvsProductSpec,
-        DistributedVirtualSwitchManagerHostDvsFilterSpec[] hostFilterSpec) throws RuntimeFault, RemoteException {
+            DistributedVirtualSwitchManagerHostContainer hostContainer, DistributedVirtualSwitchManagerDvsProductSpec dvsProductSpec,
+            DistributedVirtualSwitchManagerHostDvsFilterSpec[] hostFilterSpec) throws RemoteException {
         return getVimService().queryDvsCheckCompatibility(getMOR(), hostContainer, dvsProductSpec, hostFilterSpec);
     }
 
 
-    public DVSManagerDvsConfigTarget queryDvsConfigTarget(HostSystem host, DistributedVirtualSwitch dvs) throws RuntimeFault, RemoteException {
+    public DVSManagerDvsConfigTarget queryDvsConfigTarget(HostSystem host, DistributedVirtualSwitch dvs) throws RemoteException {
         return getVimService().queryDvsConfigTarget(getMOR(),
-            host == null ? null : host.getMOR(),
-            dvs == null ? null : dvs.getMOR());
+                host == null ? null : host.getMOR(),
+                dvs == null ? null : dvs.getMOR());
     }
 
-    public DistributedVirtualSwitch queryDvsByUuid(String uuid) throws NotFound, RuntimeFault, RemoteException {
+    public DistributedVirtualSwitch queryDvsByUuid(String uuid) throws RemoteException {
         ManagedObjectReference mor = getVimService().queryDvsByUuid(getMOR(), uuid);
         return new DistributedVirtualSwitch(getServerConnection(), mor);
     }
@@ -112,14 +126,14 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
     /**
      * @since SDK4.1
      */
-    public DVSFeatureCapability queryDvsFeatureCapability(DistributedVirtualSwitchProductSpec switchProductSpec) throws RuntimeFault, RemoteException {
+    public DVSFeatureCapability queryDvsFeatureCapability(DistributedVirtualSwitchProductSpec switchProductSpec) throws RemoteException {
         return getVimService().queryDvsFeatureCapability(getMOR(), switchProductSpec);
     }
 
     /**
      * @since SDK5.0
      */
-    public Task rectifyDvsOnHost_Task(HostSystem[] hosts) throws DvsFault, RuntimeFault, RemoteException {
+    public Task rectifyDvsOnHost_Task(HostSystem[] hosts) throws RemoteException {
         ManagedObjectReference[] hostMors = MorUtil.createMORs(hosts);
         ManagedObjectReference taskMor = getVimService().rectifyDvsOnHost_Task(getMOR(), hostMors);
         return new Task(getServerConnection(), taskMor);
@@ -128,7 +142,7 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
     /**
      * @since SDK5.1
      */
-    public Task dVSManagerExportEntity_Task(SelectionSet[] selectionSet) throws BackupBlobWriteFailure, NotFound, RuntimeFault, RemoteException {
+    public Task dVSManagerExportEntity_Task(SelectionSet[] selectionSet) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().dVSManagerExportEntity_Task(getMOR(), selectionSet);
         return new Task(getServerConnection(), taskMor);
     }
@@ -136,7 +150,7 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
     /**
      * @since SDK5.1
      */
-    public Task dVSManagerImportEntity_Task(EntityBackupConfig[] entityBackup, String importType) throws DvsFault, NotFound, RuntimeFault, RemoteException {
+    public Task dVSManagerImportEntity_Task(EntityBackupConfig[] entityBackup, String importType) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().dVSManagerImportEntity_Task(getMOR(), entityBackup, importType);
         return new Task(getServerConnection(), taskMor);
     }
@@ -144,7 +158,7 @@ public class DistributedVirtualSwitchManager extends ManagedObject {
     /**
      * @since SDK5.1
      */
-    public DistributedVirtualPortgroup dVSManagerLookupDvPortGroup(String switchUuid, String portgroupKey) throws NotFound, RuntimeFault, RemoteException {
+    public DistributedVirtualPortgroup dVSManagerLookupDvPortGroup(String switchUuid, String portgroupKey) throws RemoteException {
         ManagedObjectReference mor = getVimService().dVSManagerLookupDvPortGroup(getMOR(), switchUuid, portgroupKey);
         return new DistributedVirtualPortgroup(getServerConnection(), mor);
     }

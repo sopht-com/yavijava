@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.CannotAccessFile;
+import com.vmware.vim25.DiagnosticManagerLogDescriptor;
+import com.vmware.vim25.DiagnosticManagerLogHeader;
+import com.vmware.vim25.LogBundlingFailed;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -46,17 +51,17 @@ public class DiagnosticManager extends ManagedObject {
         super(serverConnection, mor);
     }
 
-    public DiagnosticManagerLogHeader browseDiagnosticLog(HostSystem host, String key, int start, int lines) throws CannotAccessFile, RuntimeFault, RemoteException {
+    public DiagnosticManagerLogHeader browseDiagnosticLog(HostSystem host, String key, int start, int lines) throws RemoteException {
         return getVimService().browseDiagnosticLog(getMOR(), host == null ? null : host.getMOR(), key, start, lines);
     }
 
-    public Task generateLogBundles_Task(boolean includeDefault, HostSystem[] hosts) throws LogBundlingFailed, RuntimeFault, RemoteException {
+    public Task generateLogBundles_Task(boolean includeDefault, HostSystem[] hosts) throws RemoteException {
         ManagedObjectReference mor = getVimService().generateLogBundles_Task(getMOR(),
-            includeDefault, hosts == null ? null : MorUtil.createMORs(hosts));
+                includeDefault, hosts == null ? null : MorUtil.createMORs(hosts));
         return new Task(getServerConnection(), mor);
     }
 
-    public DiagnosticManagerLogDescriptor[] queryDescriptions(HostSystem host) throws RuntimeFault, RemoteException {
+    public DiagnosticManagerLogDescriptor[] queryDescriptions(HostSystem host) throws RemoteException {
         return getVimService().queryDescriptions(getMOR(), host == null ? null : host.getMOR());
     }
 

@@ -41,7 +41,7 @@ public enum DiagnosticPartitionStorageType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DiagnosticPartitionStorageType(String val) {
+    DiagnosticPartitionStorageType(String val) {
         this.val = val;
     }
 }

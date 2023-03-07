@@ -38,9 +38,9 @@ import java.util.Set;
 import java.util.Vector;
 
 public class CommandLineParser {
-    private HashMap<String, String> optsEntered = new HashMap<String, String>();
-    private HashMap userOpts = new HashMap();
-    private HashMap builtInOpts = new HashMap();
+    private final HashMap<String, String> optsEntered = new HashMap<String, String>();
+    private final HashMap userOpts = new HashMap();
+    private final HashMap builtInOpts = new HashMap();
 
     public CommandLineParser(OptionSpec[] userOptions, String[] args) {
         builtinOptions();
@@ -49,8 +49,7 @@ public class CommandLineParser {
             addOptions(userOptions);
             parseInput(args);
             validate();
-        }
-        else {
+        } else {
             parseInput(args);
             validate();
         }
@@ -60,15 +59,14 @@ public class CommandLineParser {
     public void addOptions(OptionSpec[] userOptions) {
         for (int i = 0; i < userOptions.length; i++) {
             if (userOptions[i].getOptionName() != null && userOptions[i].getOptionName().length() > 0 &&
-                userOptions[i].getOptionDesc() != null && userOptions[i].getOptionDesc().length() > 0 &&
-                userOptions[i].getOptionType() != null && userOptions[i].getOptionType().length() > 0 &&
-                (userOptions[i].getOptionRequired() == 0 || userOptions[i].getOptionName().length() > 1)) {
+                    userOptions[i].getOptionDesc() != null && userOptions[i].getOptionDesc().length() > 0 &&
+                    userOptions[i].getOptionType() != null && userOptions[i].getOptionType().length() > 0 &&
+                    (userOptions[i].getOptionRequired() == 0 || userOptions[i].getOptionName().length() > 1)) {
                 userOpts.put(userOptions[i].getOptionName(), userOptions[i]);
-            }
-            else {
+            } else {
                 System.out.println("Option " + userOptions[i].getOptionName() + " definition is not valid");
                 throw new IllegalArgumentException("Option " + userOptions[i].getOptionName()
-                    + " definition is not valid");
+                        + " definition is not valid");
             }
         }
     }
@@ -99,11 +97,10 @@ public class CommandLineParser {
         builtInOpts.put("ignorecert", ignorecert);
     }
 
-    public void parseInput(String args[]) {
+    public void parseInput(String[] args) {
         try {
             getCmdArguments(args);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException("Exception running : " + e);
         }
 
@@ -113,14 +110,14 @@ public class CommandLineParser {
             String keyOptions = optsEntered.get(keyValue);
             boolean result = checkInputOptions(builtInOpts, keyValue);
             boolean valid = checkInputOptions(userOpts, keyValue);
-            if (result == false && valid == false) {
+            if (!result && !valid) {
                 System.out.println("Invalid Input Option '" + keyValue + "'");
                 displayUsage();
                 throw new IllegalArgumentException("Invalid Input Option '" + keyValue + "'");
             }
             result = checkDatatypes(builtInOpts, keyValue, keyOptions);
             valid = checkDatatypes(userOpts, keyValue, keyOptions);
-            if (result == false && valid == false) {
+            if (!result && !valid) {
                 System.out.println("Invalid datatype for Input Option '" + keyValue + "'");
                 displayUsage();
                 throw new IllegalArgumentException("Invalid Input Option '" + keyValue + "'");
@@ -128,7 +125,7 @@ public class CommandLineParser {
         }
     }
 
-    private void getCmdArguments(String args[]) {
+    private void getCmdArguments(String[] args) {
         int len = args.length;
         int i = 0;
         if (len == 0) {
@@ -148,12 +145,10 @@ public class CommandLineParser {
                     if (!args[i + 1].startsWith("--")) {
                         val = args[i + 1];
                         optsEntered.put(opt.substring(2), val);
-                    }
-                    else {
+                    } else {
                         optsEntered.put(opt.substring(2), null);
                     }
-                }
-                else {
+                } else {
                     optsEntered.put(opt.substring(2), null);
                 }
             }
@@ -169,8 +164,7 @@ public class CommandLineParser {
             String dataType = oSpec.getOptionType();
             boolean result = validateDataType(dataType, keyOptions);
             return result;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -178,31 +172,21 @@ public class CommandLineParser {
     private boolean validateDataType(String dataType, String keyValue) {
         try {
             if (dataType.equalsIgnoreCase("Boolean")) {
-                if (keyValue.equalsIgnoreCase("true") || keyValue.equalsIgnoreCase("false")) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-            else if (dataType.equalsIgnoreCase("Integer")) {
+                return keyValue.equalsIgnoreCase("true") || keyValue.equalsIgnoreCase("false");
+            } else if (dataType.equalsIgnoreCase("Integer")) {
                 Integer.parseInt(keyValue);
                 return true;
-            }
-            else if (dataType.equalsIgnoreCase("Float")) {
+            } else if (dataType.equalsIgnoreCase("Float")) {
                 Float.parseFloat(keyValue);
                 return true;
-            }
-            else if (dataType.equalsIgnoreCase("Long")) {
+            } else if (dataType.equalsIgnoreCase("Long")) {
                 Long.parseLong(keyValue);
                 return true;
-            }
-            else {
+            } else {
                 // DO NOTHING
             }
             return true;
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
@@ -237,8 +221,7 @@ public class CommandLineParser {
                 if (missingArg.equalsIgnoreCase("password")) {
                     String password = readPassword("Enter password: ");
                     optsEntered.put("password", password);
-                }
-                else {
+                } else {
                     System.out.print("----ERROR: " + vec.get(i) + " not specified \n");
                     displayUsage();
                     throw new IllegalArgumentException("----ERROR: " + vec.get(i) + " not specified \n");
@@ -254,7 +237,7 @@ public class CommandLineParser {
             }
         }
         if ((optsEntered.get("sessionfile") == null) &&
-            ((optsEntered.get("username") == null) && (optsEntered.get("password") == null))) {
+                ((optsEntered.get("username") == null) && (optsEntered.get("password") == null))) {
             System.out.println("Must have one of command options 'sessionfile' or a 'username' and 'password' pair\n");
             displayUsage();
             throw new IllegalArgumentException("Must have one of command options 'sessionfile' or a 'username' and 'password' pair\n");
@@ -262,9 +245,9 @@ public class CommandLineParser {
     }
 
     /*
-    *taking out value of a particular key in the hashmap
-    *i.e checking for required =1 options
-    */
+     *taking out value of a particular key in the hashmap
+     *i.e checking for required =1 options
+     */
     private Vector getValue(HashMap checkOptions) {
         Iterator It = checkOptions.keySet().iterator();
         Vector<String> vec = new Vector<String>();
@@ -303,12 +286,10 @@ public class CommandLineParser {
             if ((oSpec.getOptionDefault() != null) && (oSpec.getOptionType() == null)) {
                 defaultVal = oSpec.getOptionDefault();
                 System.out.println("   --" + keyValue + " < default " + defaultVal + " >");
-            }
-            else if ((oSpec.getOptionType() != null) && (oSpec.getOptionDefault() == null)) {
+            } else if ((oSpec.getOptionType() != null) && (oSpec.getOptionDefault() == null)) {
                 type = oSpec.getOptionType();
                 System.out.println("   --" + keyValue + " < type " + type + " >");
-            }
-            else if ((oSpec.getOptionType() == null) && (oSpec.getOptionDefault() == null)) {
+            } else if ((oSpec.getOptionType() == null) && (oSpec.getOptionDefault() == null)) {
                 System.out.println("   --" + keyValue + " ");
             }
             help = oSpec.getOptionDesc();
@@ -330,27 +311,22 @@ public class CommandLineParser {
 
     public String get_option(String key) {
         if (optsEntered.get(key) != null) {
-            return optsEntered.get(key).toString();
-        }
-        else if (checkInputOptions(builtInOpts, key)) {
+            return optsEntered.get(key);
+        } else if (checkInputOptions(builtInOpts, key)) {
             if (((OptionSpec) builtInOpts.get(key)).getOptionDefault() != null) {
                 String str = ((OptionSpec) builtInOpts.get(key)).getOptionDefault();
                 return str;
-            }
-            else {
+            } else {
                 return null;
             }
-        }
-        else if (checkInputOptions(userOpts, key)) {
+        } else if (checkInputOptions(userOpts, key)) {
             if (((OptionSpec) userOpts.get(key)).getOptionDefault() != null) {
                 String str = ((OptionSpec) userOpts.get(key)).getOptionDefault();
                 return str;
-            }
-            else {
+            } else {
                 return null;
             }
-        }
-        else {
+        } else {
             System.out.println("undefined variable");
         }
         return null;
@@ -362,8 +338,7 @@ public class CommandLineParser {
         String pass = null;
         try {
             pass = stdin.readLine();
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             System.out.println("Error in reading console input.");
         }
         return pass;
@@ -389,14 +364,13 @@ public class CommandLineParser {
             PasswordMask consoleEraser = new PasswordMask();
             System.out.print(prompt);
             BufferedReader stdin = new BufferedReader(new
-                InputStreamReader(System.in));
+                    InputStreamReader(System.in));
             consoleEraser.start();
             String pass = stdin.readLine();
             consoleEraser.halt();
             System.out.print("\b");
             return pass;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

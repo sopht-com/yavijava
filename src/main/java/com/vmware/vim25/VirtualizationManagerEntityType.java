@@ -42,7 +42,7 @@ public enum VirtualizationManagerEntityType {
 
     private final String val;
 
-    private VirtualizationManagerEntityType(String val) {
+    VirtualizationManagerEntityType(String val) {
         this.val = val;
     }
 }

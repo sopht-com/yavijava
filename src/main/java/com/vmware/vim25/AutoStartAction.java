@@ -45,7 +45,7 @@ public enum AutoStartAction {
     @SuppressWarnings("unused")
     private final String val;
 
-    private AutoStartAction(String val) {
+    AutoStartAction(String val) {
         this.val = val;
     }
 }

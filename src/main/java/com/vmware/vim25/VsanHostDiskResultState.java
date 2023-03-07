@@ -42,7 +42,7 @@ public enum VsanHostDiskResultState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VsanHostDiskResultState(String val) {
+    VsanHostDiskResultState(String val) {
         this.val = val;
     }
 }

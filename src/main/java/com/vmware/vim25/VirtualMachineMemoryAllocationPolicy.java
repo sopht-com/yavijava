@@ -42,7 +42,7 @@ public enum VirtualMachineMemoryAllocationPolicy {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineMemoryAllocationPolicy(String val) {
+    VirtualMachineMemoryAllocationPolicy(String val) {
         this.val = val;
     }
 }

@@ -42,7 +42,7 @@ public enum VirtualMachineRecordReplayState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineRecordReplayState(String val) {
+    VirtualMachineRecordReplayState(String val) {
         this.val = val;
     }
 }

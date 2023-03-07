@@ -30,7 +30,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.Extension;
+import com.vmware.vim25.ExtensionClientInfo;
+import com.vmware.vim25.ExtensionManagerIpAllocationUsage;
+import com.vmware.vim25.ExtensionServerInfo;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NoClientCertificate;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -62,26 +69,26 @@ public class ExtensionManager extends ManagedObject {
     /**
      * @since SDK5.1
      */
-    public ExtensionManagerIpAllocationUsage[] queryExtensionIpAllocationUsage(String[] extensionKeys) throws RuntimeFault, RemoteException {
+    public ExtensionManagerIpAllocationUsage[] queryExtensionIpAllocationUsage(String[] extensionKeys) throws RemoteException {
         return getVimService().queryExtensionIpAllocationUsage(getMOR(), extensionKeys);
     }
 
     /**
      * @since SDK4.0
      */
-    public void setExtensionCertificate(String extensionKey, String certificatePem) throws NotFound, NoClientCertificate, RuntimeFault, RemoteException {
+    public void setExtensionCertificate(String extensionKey, String certificatePem) throws RemoteException {
         getVimService().setExtensionCertificate(getMOR(), extensionKey, certificatePem);
     }
 
     /**
      * @since SDK5.0
      */
-    public ManagedEntity[] queryManagedBy(String extensionKey) throws RuntimeFault, RemoteException {
+    public ManagedEntity[] queryManagedBy(String extensionKey) throws RemoteException {
         ManagedObjectReference[] mors = getVimService().queryManagedBy(getMOR(), extensionKey);
         return MorUtil.createManagedEntities(getServerConnection(), mors);
     }
 
-    public void setPublicKey(String extensionKey, String publicKey) throws RuntimeFault, RemoteException {
+    public void setPublicKey(String extensionKey, String publicKey) throws RemoteException {
         getVimService().setPublicKey(getMOR(), extensionKey, publicKey);
     }
 

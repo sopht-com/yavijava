@@ -41,7 +41,7 @@ public enum HostDigestInfoDigestMethodType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostDigestInfoDigestMethodType(String val) {
+    HostDigestInfoDigestMethodType(String val) {
         this.val = val;
     }
 }

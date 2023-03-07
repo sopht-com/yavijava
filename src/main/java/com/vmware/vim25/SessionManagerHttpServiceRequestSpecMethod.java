@@ -47,7 +47,7 @@ public enum SessionManagerHttpServiceRequestSpecMethod {
     @SuppressWarnings("unused")
     private final String val;
 
-    private SessionManagerHttpServiceRequestSpecMethod(String val) {
+    SessionManagerHttpServiceRequestSpecMethod(String val) {
         this.val = val;
     }
 }

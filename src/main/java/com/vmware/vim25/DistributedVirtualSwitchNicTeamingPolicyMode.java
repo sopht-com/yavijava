@@ -44,7 +44,7 @@ public enum DistributedVirtualSwitchNicTeamingPolicyMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DistributedVirtualSwitchNicTeamingPolicyMode(String val) {
+    DistributedVirtualSwitchNicTeamingPolicyMode(String val) {
         this.val = val;
     }
 }

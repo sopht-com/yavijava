@@ -43,7 +43,7 @@ public enum HostInternetScsiHbaDigestType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostInternetScsiHbaDigestType(String val) {
+    HostInternetScsiHbaDigestType(String val) {
         this.val = val;
     }
 }

@@ -44,7 +44,7 @@ public enum WeekOfMonth {
     @SuppressWarnings("unused")
     private final String val;
 
-    private WeekOfMonth(String val) {
+    WeekOfMonth(String val) {
         this.val = val;
     }
 }

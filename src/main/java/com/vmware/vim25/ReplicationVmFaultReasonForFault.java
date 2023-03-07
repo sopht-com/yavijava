@@ -46,7 +46,7 @@ public enum ReplicationVmFaultReasonForFault {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ReplicationVmFaultReasonForFault(String val) {
+    ReplicationVmFaultReasonForFault(String val) {
         this.val = val;
     }
 }

@@ -29,14 +29,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package org.doublecloud.ws.util;
 
+import javax.xml.bind.DatatypeConverter;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-
-import javax.xml.bind.DatatypeConverter;
 
 public class ReflectUtil {
 
@@ -79,57 +78,40 @@ public class ReflectUtil {
     public static void setObjectField(Object object, Field field, String type, String value) throws IllegalArgumentException, IllegalAccessException {
         if ("String".equals(type) || "string".equals(type)) {
             field.set(object, value);
-        }
-        else if ("int".equals(type)) {
+        } else if ("int".equals(type)) {
             field.set(object, Integer.parseInt(value));
-        }
-        else if ("Integer".equals(type)) {
+        } else if ("Integer".equals(type)) {
             field.set(object, new Integer(value));
-        }
-        else if ("short".equals(type)) {
+        } else if ("short".equals(type)) {
             field.set(object, Short.parseShort(value));
-        }
-        else if ("Short".equals(type)) {
+        } else if ("Short".equals(type)) {
             field.set(object, new Short(value));
-        }
-        else if ("byte".equals(type)) {
+        } else if ("byte".equals(type)) {
             field.set(object, Byte.parseByte(value));
-        }
-        else if ("Byte".equals(type)) {
+        } else if ("Byte".equals(type)) {
             field.set(object, new Byte(value));
-        }
-        else if ("long".equals(type)) {
+        } else if ("long".equals(type)) {
             field.set(object, Long.parseLong(value));
-        }
-        else if ("Long".equals(type)) {
+        } else if ("Long".equals(type)) {
             field.set(object, new Long(value));
-        }
-        else if ("float".equals(type)) {
+        } else if ("float".equals(type)) {
             field.set(object, Float.parseFloat(value));
-        }
-        else if ("Float".equals(type)) {
+        } else if ("Float".equals(type)) {
             field.set(object, new Float(value));
-        }
-        else if ("boolean".equals(type)) {
+        } else if ("boolean".equals(type)) {
             field.set(object, Boolean.parseBoolean(value));
-        }
-        else if ("Boolean".equals(type)) {
+        } else if ("Boolean".equals(type)) {
             field.set(object, Boolean.valueOf(value));
-        }
-        else if ("Calendar".equals(type) || "dateTime".equals(type)) {
+        } else if ("Calendar".equals(type) || "dateTime".equals(type)) {
             Calendar cal = DatatypeConverter.parseTime(value);
             field.set(object, cal);
-        }
-        else if ("double".equals(type)) {
+        } else if ("double".equals(type)) {
             field.set(object, Double.parseDouble(value));
-        }
-        else if ("Double".equals(type)) {
+        } else if ("Double".equals(type)) {
             field.set(object, new Double(value));
-        }
-        else if ("base64Binary".equals(type)) {
+        } else if ("base64Binary".equals(type)) {
             field.set(object, DatatypeConverter.parseBase64Binary(value));
-        }
-        else {
+        } else {
             throw new RuntimeException("Unexpected Type at setObjectField: " + field.getType().getCanonicalName() + field.getName());
         }
     }
@@ -138,26 +120,19 @@ public class ReflectUtil {
         if ("String[]".equals(type) || "string[]".equals(type)) {
             String[] vals = new String[values.size()];
             field.set(object, values.toArray(vals));
-        }
-        else if ("int[]".equals(type)) {
+        } else if ("int[]".equals(type)) {
             field.set(object, toIntArray(values));
-        }
-        else if ("short[]".equals(type)) {
+        } else if ("short[]".equals(type)) {
             field.set(object, toShortArray(values));
-        }
-        else if ("byte[]".equals(type)) {
+        } else if ("byte[]".equals(type)) {
             field.set(object, toByteArray(values));
-        }
-        else if ("long[]".equals(type)) {
+        } else if ("long[]".equals(type)) {
             field.set(object, toLongArray(values));
-        }
-        else if ("float[]".equals(type)) {
+        } else if ("float[]".equals(type)) {
             field.set(object, toFloatArray(values));
-        }
-        else if ("boolean[]".equals(type)) {
+        } else if ("boolean[]".equals(type)) {
             field.set(object, toBooleanArray(values));
-        }
-        else {
+        } else {
             throw new RuntimeException("Unexpected Type at setObjectArrayField: " + field.getType().getCanonicalName() + field.getName());
         }
     }
@@ -174,7 +149,7 @@ public class ReflectUtil {
         // see issue 102
         catch (NumberFormatException ignore) {
             String tempStr = "";
-            for (String s: values) {
+            for (String s : values) {
                 tempStr += s;
             }
             return DatatypeConverter.parseBase64Binary(tempStr);
@@ -232,56 +207,39 @@ public class ReflectUtil {
     public static Object parseToObject(String type, List<String> values) {
         if ("String".equals(type) || "string".equals(type)) {
             return values.get(0);
-        }
-        else if ("String[]".equals(type)) {
+        } else if ("String[]".equals(type)) {
             return values.toArray(new String[values.size()]);
-        }
-        else if ("int".equals(type)) {
+        } else if ("int".equals(type)) {
             return new Integer(values.get(0));
-        }
-        else if ("int[]".equals(type)) {
+        } else if ("int[]".equals(type)) {
             return toIntArray(values);
-        }
-        else if ("short".equals(type)) {
+        } else if ("short".equals(type)) {
             return new Short(values.get(0));
-        }
-        else if ("short[]".equals(type)) {
+        } else if ("short[]".equals(type)) {
             return toShortArray(values);
-        }
-        else if ("byte".equals(type)) {
+        } else if ("byte".equals(type)) {
             return new Byte(values.get(0));
-        }
-        else if ("byte[]".equals(type)) {
+        } else if ("byte[]".equals(type)) {
             return toByteArray(values);
-        }
-        else if ("long".equals(type)) {
+        } else if ("long".equals(type)) {
             return new Long(values.get(0));
-        }
-        else if ("long[]".equals(type)) {
+        } else if ("long[]".equals(type)) {
             return toLongArray(values);
-        }
-        else if ("float".equals(type)) {
+        } else if ("float".equals(type)) {
             return new Float(values.get(0));
-        }
-        else if ("float[]".equals(type)) {
+        } else if ("float[]".equals(type)) {
             return toFloatArray(values);
-        }
-        else if ("boolean".equals(type)) {
+        } else if ("boolean".equals(type)) {
             return Boolean.valueOf(values.get(0));
-        }
-        else if ("boolean[]".equals(type)) {
+        } else if ("boolean[]".equals(type)) {
             return toBooleanArray(values);
-        }
-        else if ("Calendar".equals(type) || "dateTime".equals(type)) {
+        } else if ("Calendar".equals(type) || "dateTime".equals(type)) {
             return DatatypeConverter.parseTime(values.get(0));
-        }
-        else if ("double".equals(type)) {
+        } else if ("double".equals(type)) {
             return new Double(values.get(0));
-        }
-        else if ("double[]".equals(type)) {
+        } else if ("double[]".equals(type)) {
             return toDoubleArray(values);
-        }
-        else {
+        } else {
             throw new RuntimeException("Unexpected Type at parseToObject: " + type + values.get(0));
         }
     }

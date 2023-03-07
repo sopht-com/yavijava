@@ -42,7 +42,7 @@ public enum DvsNetworkRuleDirectionType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DvsNetworkRuleDirectionType(String val) {
+    DvsNetworkRuleDirectionType(String val) {
         this.val = val;
     }
 }

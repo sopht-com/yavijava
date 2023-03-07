@@ -42,7 +42,7 @@ public enum HostCapabilityVmDirectPathGen2UnsupportedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostCapabilityVmDirectPathGen2UnsupportedReason(String val) {
+    HostCapabilityVmDirectPathGen2UnsupportedReason(String val) {
         this.val = val;
     }
 }

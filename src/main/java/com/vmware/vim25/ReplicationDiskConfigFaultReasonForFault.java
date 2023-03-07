@@ -46,7 +46,7 @@ public enum ReplicationDiskConfigFaultReasonForFault {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ReplicationDiskConfigFaultReasonForFault(String val) {
+    ReplicationDiskConfigFaultReasonForFault(String val) {
         this.val = val;
     }
 }

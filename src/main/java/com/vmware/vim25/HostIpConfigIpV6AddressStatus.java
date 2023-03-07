@@ -46,7 +46,7 @@ public enum HostIpConfigIpV6AddressStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostIpConfigIpV6AddressStatus(String val) {
+    HostIpConfigIpV6AddressStatus(String val) {
         this.val = val;
     }
 }

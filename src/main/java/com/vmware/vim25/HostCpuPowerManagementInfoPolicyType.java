@@ -42,7 +42,7 @@ public enum HostCpuPowerManagementInfoPolicyType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostCpuPowerManagementInfoPolicyType(String val) {
+    HostCpuPowerManagementInfoPolicyType(String val) {
         this.val = val;
     }
 }

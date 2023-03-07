@@ -41,7 +41,7 @@ public enum WillLoseHAProtectionResolution {
     @SuppressWarnings("unused")
     private final String val;
 
-    private WillLoseHAProtectionResolution(String val) {
+    WillLoseHAProtectionResolution(String val) {
         this.val = val;
     }
 }

@@ -43,7 +43,7 @@ public enum DasVmPriority {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DasVmPriority(String val) {
+    DasVmPriority(String val) {
         this.val = val;
     }
 }

@@ -45,7 +45,7 @@ public enum VirtualMachineFaultToleranceState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineFaultToleranceState(String val) {
+    VirtualMachineFaultToleranceState(String val) {
         this.val = val;
     }
 }

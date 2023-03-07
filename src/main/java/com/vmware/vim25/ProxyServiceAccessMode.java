@@ -41,7 +41,7 @@ public enum ProxyServiceAccessMode {
 
     private final String val;
 
-    private ProxyServiceAccessMode(String val) {
+    ProxyServiceAccessMode(String val) {
         this.val = val;
     }
 }

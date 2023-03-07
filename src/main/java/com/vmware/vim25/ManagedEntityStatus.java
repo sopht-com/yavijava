@@ -43,7 +43,7 @@ public enum ManagedEntityStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ManagedEntityStatus(String val) {
+    ManagedEntityStatus(String val) {
         this.val = val;
     }
 }

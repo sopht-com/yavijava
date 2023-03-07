@@ -53,7 +53,7 @@ public class HostCacheConfigurationManager extends ManagedObject {
         return (HostCacheConfigurationInfo[]) getCurrentProperty("cacheConfigurationInfo");
     }
 
-    public Task configureHostCache_Task(HostCacheConfigurationSpec spec) throws RuntimeFault, RemoteException {
+    public Task configureHostCache_Task(HostCacheConfigurationSpec spec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().configureHostCache_Task(getMOR(), spec);
         return new Task(getServerConnection(), taskMor);
     }

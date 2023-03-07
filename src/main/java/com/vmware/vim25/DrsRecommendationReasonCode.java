@@ -44,7 +44,7 @@ public enum DrsRecommendationReasonCode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DrsRecommendationReasonCode(String val) {
+    DrsRecommendationReasonCode(String val) {
         this.val = val;
     }
 }

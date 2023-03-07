@@ -45,7 +45,7 @@ public enum VirtualizationManagerHealthValue {
 
     private final String val;
 
-    private VirtualizationManagerHealthValue(String val) {
+    VirtualizationManagerHealthValue(String val) {
         this.val = val;
     }
 }

@@ -42,7 +42,7 @@ public enum ScsiLunVStorageSupportStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ScsiLunVStorageSupportStatus(String val) {
+    ScsiLunVStorageSupportStatus(String val) {
         this.val = val;
     }
 }

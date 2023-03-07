@@ -44,7 +44,7 @@ public enum VirtualMachineRelocateDiskMoveOptions {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineRelocateDiskMoveOptions(String val) {
+    VirtualMachineRelocateDiskMoveOptions(String val) {
         this.val = val;
     }
 }

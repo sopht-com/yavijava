@@ -42,7 +42,7 @@ public enum VirtualMachineVideoCardUse3dRenderer {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineVideoCardUse3dRenderer(String val) {
+    VirtualMachineVideoCardUse3dRenderer(String val) {
         this.val = val;
     }
 }

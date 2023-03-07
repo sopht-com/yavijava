@@ -51,7 +51,7 @@ public enum VirtualMachineScsiPassthroughType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineScsiPassthroughType(String val) {
+    VirtualMachineScsiPassthroughType(String val) {
         this.val = val;
     }
 }

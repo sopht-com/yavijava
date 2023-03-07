@@ -39,7 +39,7 @@ public interface Client {
      * @return Object
      * @throws RemoteException
      */
-    public Object invoke(String methodName, Argument[] paras, String returnType) throws RemoteException;
+    Object invoke(String methodName, Argument[] paras, String returnType) throws RemoteException;
 
     /**
      * Invoke a given method with supplied {@link com.vmware.vim25.ws.Argument} on the remote vi server.
@@ -51,21 +51,21 @@ public interface Client {
      * @return StringBuffer with the
      * @throws RemoteException
      */
-    public StringBuffer invokeAsString(String methodName, Argument[] paras) throws RemoteException;
+    StringBuffer invokeAsString(String methodName, Argument[] paras) throws RemoteException;
 
     /**
      * Returns the {@link java.net.URL} that will be used in the connection.
      *
      * @return <code>URL</code> of the vi server used by this Client
      */
-    public URL getBaseUrl();
+    URL getBaseUrl();
 
     /**
      * Set the baseUrl for use in this Client
      *
      * @param baseUrl <code>URL</code> to be used by this Client
      */
-    public void setBaseUrl(URL baseUrl);
+    void setBaseUrl(URL baseUrl);
 
     /**
      * Returns the <code>String</code> of the Cookie from the Set-Cookie header
@@ -73,35 +73,35 @@ public interface Client {
      *
      * @return String from the Set-Cookie header
      */
-    public String getCookie();
+    String getCookie();
 
     /**
      * Primarily used to set the cookie from the Set-Cookie header
      *
      * @param cookie String from the Set-Cookie header
      */
-    public void setCookie(String cookie);
+    void setCookie(String cookie);
 
     /**
      * Get the vim namespace used in SOAP payloads
      *
      * @return vim namespace used in SOAP Payloads
      */
-    public String getVimNameSpace();
+    String getVimNameSpace();
 
     /**
      * Sets the vim name space for the SOAP payload.
      *
      * @param vimNameSpace String
      */
-    public void setVimNameSpace(String vimNameSpace);
+    void setVimNameSpace(String vimNameSpace);
 
     /**
      * Basic getter
      *
      * @return Time in milliseconds as an <code>int</code>
      */
-    public int getConnectTimeout();
+    int getConnectTimeout();
 
     /**
      * Sets a specified timeout value, in milliseconds, to be used
@@ -118,7 +118,7 @@ public interface Client {
      *
      * @param timeoutMilliSec an <code>int</code> that specifies the connect timeout value in milliseconds
      */
-    public void setConnectTimeout(int timeoutMilliSec);
+    void setConnectTimeout(int timeoutMilliSec);
 
     /**
      * Returns the time in milliseconds that is set for the read timeout
@@ -129,7 +129,7 @@ public interface Client {
      *
      * @return Time in milliseconds
      */
-    public int getReadTimeout();
+    int getReadTimeout();
 
     /**
      * Set the read timeout.
@@ -147,16 +147,16 @@ public interface Client {
      *
      * @param timeoutMilliSec Integer time in milliseconds
      */
-    public void setReadTimeout(int timeoutMilliSec);
+    void setReadTimeout(int timeoutMilliSec);
 
-    public TrustManager getTrustManager();
+    TrustManager getTrustManager();
 
     /**
      * Sets the api version. The oldest supported will be v4.0
      *
      * @param apiVersion String with the api version.
      */
-    public void setSoapActionOnApiVersion(String apiVersion);
+    void setSoapActionOnApiVersion(String apiVersion);
 
     /**
      * Marshal the JAVA Object into a XML payload to send to the
@@ -166,7 +166,7 @@ public interface Client {
      * @param paras      Array of Arguments aka params for the method
      * @return
      */
-    public String marshall(String methodName, Argument[] paras);
+    String marshall(String methodName, Argument[] paras);
 
     /**
      * Convert from an InputStream filled with an XML response
@@ -176,7 +176,7 @@ public interface Client {
      * @param is
      * @return
      */
-    public Object unMarshall(String returnType, InputStream is) throws Exception;
+    Object unMarshall(String returnType, InputStream is) throws Exception;
 
     /**
      * Read an InputStream filled with an XML response
@@ -186,5 +186,5 @@ public interface Client {
      * @return
      * @throws IOException
      */
-    public StringBuffer readStream(InputStream stream) throws IOException;
+    StringBuffer readStream(InputStream stream) throws IOException;
 }

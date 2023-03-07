@@ -42,7 +42,7 @@ public enum HostSnmpAgentCapability {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostSnmpAgentCapability(String val) {
+    HostSnmpAgentCapability(String val) {
         this.val = val;
     }
 }

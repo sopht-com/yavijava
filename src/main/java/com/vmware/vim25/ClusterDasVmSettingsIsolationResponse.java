@@ -43,7 +43,7 @@ public enum ClusterDasVmSettingsIsolationResponse {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterDasVmSettingsIsolationResponse(String val) {
+    ClusterDasVmSettingsIsolationResponse(String val) {
         this.val = val;
     }
 }

@@ -40,9 +40,9 @@ public class ServiceInstanceIntTest {
             ServiceInstance si = new ServiceInstance(new URL(LoadVcenterProps.url),
                     LoadVcenterProps.userName, LoadVcenterProps.password, true);
             Assert.assertNotNull("Expected non-null service instance", si.currentTime());
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.fail("An error occurred creating and reading from service instance. " + e.getMessage());
         }
     }
@@ -53,9 +53,9 @@ public class ServiceInstanceIntTest {
             ServiceInstance si = new ServiceInstance(new URL(LoadVcenterProps.url),
                     LoadVcenterProps.userName, LoadVcenterProps.password, true, 5000, 5000);
             Assert.assertNotNull("Expected non-null service instance", si.currentTime());
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.fail("An error occurred creating and reading from service instance. " + e.getMessage());
         }
     }
@@ -66,9 +66,9 @@ public class ServiceInstanceIntTest {
             ServiceInstance si = new ServiceInstance(new URL(LoadVcenterProps.url),
                     LoadVcenterProps.userName, LoadVcenterProps.password, true, ServiceInstance.VIM25_NAMESPACE);
             Assert.assertNotNull("Expected non-null service instance", si.currentTime());
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.fail("An error occurred creating and reading from service instance. " + e.getMessage());
         }
     }
@@ -79,9 +79,9 @@ public class ServiceInstanceIntTest {
             ServiceInstance si = new ServiceInstance(new URL(LoadVcenterProps.url),
                     LoadVcenterProps.userName, LoadVcenterProps.password, true, ServiceInstance.VIM25_NAMESPACE, 5000, 5000);
             Assert.assertNotNull("Expected non-null service instance", si.currentTime());
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.fail("An error occurred creating and reading from service instance. " + e.getMessage());
         }
     }
@@ -95,9 +95,9 @@ public class ServiceInstanceIntTest {
 
             ServiceInstance siFromSessionString = new ServiceInstance(new URL(LoadVcenterProps.url), si.getServerConnection().getSessionStr(), true);
             Assert.assertNotNull("Expected non-null service instance when creating with session string", siFromSessionString.currentTime());
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.fail("An error occurred creating and reading from service instance. " + e.getMessage());
         }
     }
@@ -110,10 +110,10 @@ public class ServiceInstanceIntTest {
         try {
             ServiceInstance si = new ServiceInstance(new URL(LoadVcenterProps.url),
                     LoadVcenterProps.userName, LoadVcenterProps.password, new TrustAllManager(), ServiceInstance.VIM25_NAMESPACE, 1000, 1000);
-             Assert.assertNotNull("Expected a non-null time from service instance", si.currentTime());
-        } catch(MalformedURLException e) {
+            Assert.assertNotNull("Expected a non-null time from service instance", si.currentTime());
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.fail("An error occurred creating and reading from service instance. " + e.getMessage());
         }
     }
@@ -129,9 +129,9 @@ public class ServiceInstanceIntTest {
             new ServiceInstance(new URL(LoadVcenterProps.url),
                     LoadVcenterProps.userName, LoadVcenterProps.password, null, ServiceInstance.VIM25_NAMESPACE, 1000, 1000);
             Assert.fail("Expected an SSLHandshakeException to have been thrown when no trust manager is provided and certs are not ignored.");
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.assertTrue("Expected an SSLHandshakeException to have been thrown when no trust manager is provided and certs are not ignored.", e.getCause() instanceof SSLHandshakeException);
         }
     }
@@ -147,9 +147,9 @@ public class ServiceInstanceIntTest {
             new ServiceInstance(new URL(LoadVcenterProps.url),
                     LoadVcenterProps.userName, LoadVcenterProps.password, testUntrustedServerTrustManager, ServiceInstance.VIM25_NAMESPACE, 1000, 1000);
             Assert.fail("Expected an SSLHandshakeException to have been thrown when the trust manager provided simulates an untrusted server.");
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             e.printStackTrace();
             Assert.assertTrue("Expected an SSLHandshakeException to have been thrown when the trust manager provided simulates an untrusted server.", e.getCause() instanceof SSLHandshakeException);
         }
@@ -169,9 +169,9 @@ public class ServiceInstanceIntTest {
 
             ServiceInstance siFromSessionString = new ServiceInstance(new URL(LoadVcenterProps.url), si.getServerConnection().getSessionStr(), trustAllManager);
             Assert.assertNotNull("Expected non-null service instance when creating with session string", siFromSessionString.currentTime());
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.fail("An error occurred creating and reading from service instance. " + e.getMessage());
         }
     }
@@ -190,9 +190,9 @@ public class ServiceInstanceIntTest {
             X509TrustManager nullTrustManager = null;
             new ServiceInstance(new URL(LoadVcenterProps.url), si.getServerConnection().getSessionStr(), nullTrustManager);
             Assert.fail("Expected an SSLHandshakeException to have been thrown when no trust manager is provided.");
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.assertTrue("Expected an SSLHandshakeException to have been thrown when no trust manager is provided.", e.getCause() instanceof SSLHandshakeException);
         }
     }
@@ -201,14 +201,14 @@ public class ServiceInstanceIntTest {
     public void testServiceInstanceUsingSession() {
         try {
             ServiceInstance si = new ServiceInstance(new URL(LoadVcenterProps.url),
-                LoadVcenterProps.userName, LoadVcenterProps.password, true, 5000, 5000);
+                    LoadVcenterProps.userName, LoadVcenterProps.password, true, 5000, 5000);
             Assert.assertNotNull("Expected non-null service instance", si.currentTime());
             ServiceInstance si2 = new ServiceInstance(new URL(LoadVcenterProps.url),
-                si.getServerConnection().getSessionStr(), true);
+                    si.getServerConnection().getSessionStr(), true);
             Assert.assertNotNull("Expected non-null service instance", si2.currentTime());
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
             Assert.fail("An error occurred creating a service instance due its url being malformed. " + e.getMessage());
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Assert.fail("An error occurred creating and reading from service instance. " + e.getMessage());
         }
     }

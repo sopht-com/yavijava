@@ -41,7 +41,7 @@ public enum StorageIORMThresholdMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private StorageIORMThresholdMode(String val) {
+    StorageIORMThresholdMode(String val) {
         this.val = val;
     }
 }

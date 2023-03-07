@@ -41,7 +41,7 @@ public enum VirtualSerialPortEndPoint {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualSerialPortEndPoint(String val) {
+    VirtualSerialPortEndPoint(String val) {
         this.val = val;
     }
 }

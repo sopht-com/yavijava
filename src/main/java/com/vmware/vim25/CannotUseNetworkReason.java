@@ -43,7 +43,7 @@ public enum CannotUseNetworkReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private CannotUseNetworkReason(String val) {
+    CannotUseNetworkReason(String val) {
         this.val = val;
     }
 }

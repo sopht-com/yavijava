@@ -45,7 +45,7 @@ public enum DistributedVirtualSwitchHostMemberHostComponentState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DistributedVirtualSwitchHostMemberHostComponentState(String val) {
+    DistributedVirtualSwitchHostMemberHostComponentState(String val) {
         this.val = val;
     }
 }

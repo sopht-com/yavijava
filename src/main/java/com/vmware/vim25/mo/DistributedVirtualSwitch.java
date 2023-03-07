@@ -30,7 +30,39 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AlreadyExists;
+import com.vmware.vim25.ConcurrentAccess;
+import com.vmware.vim25.ConflictingConfiguration;
+import com.vmware.vim25.DVPortConfigSpec;
+import com.vmware.vim25.DVPortgroupConfigSpec;
+import com.vmware.vim25.DVSCapability;
+import com.vmware.vim25.DVSConfigInfo;
+import com.vmware.vim25.DVSConfigSpec;
+import com.vmware.vim25.DVSHealthCheckConfig;
+import com.vmware.vim25.DVSNetworkResourcePool;
+import com.vmware.vim25.DVSNetworkResourcePoolConfigSpec;
+import com.vmware.vim25.DVSRuntimeInfo;
+import com.vmware.vim25.DVSSummary;
+import com.vmware.vim25.DistributedVirtualPort;
+import com.vmware.vim25.DistributedVirtualSwitchPortCriteria;
+import com.vmware.vim25.DistributedVirtualSwitchProductSpec;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.DvsFault;
+import com.vmware.vim25.DvsNotAuthorized;
+import com.vmware.vim25.DvsVmVnicResourcePoolConfigSpec;
+import com.vmware.vim25.EntityBackupConfig;
+import com.vmware.vim25.InvalidHostState;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.LimitExceeded;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.NotSupported;
+import com.vmware.vim25.ResourceInUse;
+import com.vmware.vim25.ResourceNotAvailable;
+import com.vmware.vim25.RollbackFailure;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInProgress;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -91,7 +123,7 @@ public class DistributedVirtualSwitch extends ManagedEntity {
         return (DVSRuntimeInfo) getCurrentProperty("runtime");
     }
 
-    public Task addDVPortgroup_Task(DVPortgroupConfigSpec[] spec) throws DvsFault, DuplicateName, InvalidName, RuntimeFault, RemoteException {
+    public Task addDVPortgroup_Task(DVPortgroupConfigSpec[] spec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().addDVPortgroup_Task(getMOR(), spec);
         return new Task(getServerConnection(), taskMor);
     }
@@ -99,7 +131,7 @@ public class DistributedVirtualSwitch extends ManagedEntity {
     /**
      * @since SDK5.1
      */
-    public Task createDVPortgroup_Task(DVPortgroupConfigSpec spec) throws DvsFault, DuplicateName, InvalidName, RuntimeFault, RemoteException {
+    public Task createDVPortgroup_Task(DVPortgroupConfigSpec spec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().createDVPortgroup_Task(getMOR(), spec);
         return new Task(getServerConnection(), taskMor);
     }
@@ -107,7 +139,7 @@ public class DistributedVirtualSwitch extends ManagedEntity {
     /**
      * @since SDK5.1
      */
-    public Task dVSRollback_Task(EntityBackupConfig spec) throws RollbackFailure, DvsFault, RuntimeFault, RemoteException {
+    public Task dVSRollback_Task(EntityBackupConfig spec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().dVSRollback_Task(getMOR(), spec);
         return new Task(getServerConnection(), taskMor);
     }
@@ -115,7 +147,7 @@ public class DistributedVirtualSwitch extends ManagedEntity {
     /**
      * @since SDK5.1
      */
-    public DistributedVirtualPortgroup lookupDvPortGroup(String portgroupKey) throws NotFound, RuntimeFault, RemoteException {
+    public DistributedVirtualPortgroup lookupDvPortGroup(String portgroupKey) throws RemoteException {
         ManagedObjectReference mor = getVimService().lookupDvPortGroup(getMOR(), portgroupKey);
         return new DistributedVirtualPortgroup(getServerConnection(), mor);
     }
@@ -123,7 +155,7 @@ public class DistributedVirtualSwitch extends ManagedEntity {
     /**
      * @since SDK5.1
      */
-    public Task updateDVSHealthCheckConfig_Task(DVSHealthCheckConfig[] healthCheckConfig) throws DvsFault, RuntimeFault, RemoteException {
+    public Task updateDVSHealthCheckConfig_Task(DVSHealthCheckConfig[] healthCheckConfig) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().updateDVSHealthCheckConfig_Task(getMOR(), healthCheckConfig);
         return new Task(getServerConnection(), taskMor);
     }
@@ -132,78 +164,78 @@ public class DistributedVirtualSwitch extends ManagedEntity {
      * @since SDK5.0
      * @deprecated Use {@link #dvsReconfigureVmVnicNetworkResourcePool_Task dvsReconfigureVmVnicNetworkResourcePool_Task}
      */
-    public void addNetworkResourcePool(DVSNetworkResourcePoolConfigSpec[] configSpec) throws DvsFault, InvalidName, RuntimeFault, RemoteException {
+    public void addNetworkResourcePool(DVSNetworkResourcePoolConfigSpec[] configSpec) throws RemoteException {
         getVimService().addNetworkResourcePool(getMOR(), configSpec);
     }
 
     /**
      * @since SDK4.1
      */
-    public void enableNetworkResourceManagement(boolean enable) throws DvsFault, RuntimeFault, RemoteException {
+    public void enableNetworkResourceManagement(boolean enable) throws RemoteException {
         getVimService().enableNetworkResourceManagement(getMOR(), enable);
     }
 
-    public String[] fetchDVPortKeys(DistributedVirtualSwitchPortCriteria criteria) throws RuntimeFault, RemoteException {
+    public String[] fetchDVPortKeys(DistributedVirtualSwitchPortCriteria criteria) throws RemoteException {
         return getVimService().fetchDVPortKeys(getMOR(), criteria);
     }
 
-    public DistributedVirtualPort[] fetchDVPorts(DistributedVirtualSwitchPortCriteria criteria) throws RuntimeFault, RemoteException {
+    public DistributedVirtualPort[] fetchDVPorts(DistributedVirtualSwitchPortCriteria criteria) throws RemoteException {
         return getVimService().fetchDVPorts(getMOR(), criteria);
     }
 
-    public Task mergeDvs_Task(DistributedVirtualSwitch dvs) throws InvalidHostState, DvsFault, NotFound, ResourceInUse, RuntimeFault, RemoteException {
+    public Task mergeDvs_Task(DistributedVirtualSwitch dvs) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().mergeDvs_Task(getMOR(), dvs.getMOR());
         return new Task(getServerConnection(), taskMor);
     }
 
-    public Task moveDVPort_Task(String[] portKey, String destinationPortgroupKey) throws DvsFault, NotFound, ConcurrentAccess, RuntimeFault, RemoteException {
+    public Task moveDVPort_Task(String[] portKey, String destinationPortgroupKey) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().moveDVPort_Task(getMOR(), portKey, destinationPortgroupKey);
         return new Task(getServerConnection(), taskMor);
     }
 
-    public Task performDvsProductSpecOperation_Task(String operation, DistributedVirtualSwitchProductSpec productSpec) throws TaskInProgress, InvalidState, DvsFault, RuntimeFault, RemoteException {
+    public Task performDvsProductSpecOperation_Task(String operation, DistributedVirtualSwitchProductSpec productSpec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().performDvsProductSpecOperation_Task(getMOR(), operation, productSpec);
         return new Task(getServerConnection(), taskMor);
     }
 
-    public int[] queryUsedVlanIdInDvs() throws RuntimeFault, RemoteException {
+    public int[] queryUsedVlanIdInDvs() throws RemoteException {
         return getVimService().queryUsedVlanIdInDvs(getMOR());
     }
 
-    public Task reconfigureDvs_Task(DVSConfigSpec spec) throws DvsNotAuthorized, DvsFault, ConcurrentAccess, DuplicateName, InvalidState, InvalidName, NotFound, AlreadyExists, LimitExceeded, ResourceInUse, ResourceNotAvailable, RuntimeFault, RemoteException {
+    public Task reconfigureDvs_Task(DVSConfigSpec spec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().reconfigureDvs_Task(getMOR(), spec);
         return new Task(getServerConnection(), taskMor);
     }
 
-    public Task rectifyDvsHost_Task(HostSystem[] hosts) throws DvsFault, NotFound, RuntimeFault, RemoteException {
+    public Task rectifyDvsHost_Task(HostSystem[] hosts) throws RemoteException {
         ManagedObjectReference[] mors = MorUtil.createMORs(hosts);
         ManagedObjectReference mor = getVimService().rectifyDvsHost_Task(getMOR(), mors);
         return new Task(getServerConnection(), mor);
     }
 
-    public void refreshDVPortState(String[] portKeys) throws DvsFault, NotFound, RuntimeFault, RemoteException {
+    public void refreshDVPortState(String[] portKeys) throws RemoteException {
         getVimService().refreshDVPortState(getMOR(), portKeys);
     }
 
     /**
      * @since SDK5.0
      */
-    public void removeNetworkResourcePool(String[] key) throws DvsFault, NotFound, InvalidName, ResourceInUse, RuntimeFault, RemoteException {
+    public void removeNetworkResourcePool(String[] key) throws RemoteException {
         getVimService().removeNetworkResourcePool(getMOR(), key);
     }
 
-    public void updateDvsCapability(DVSCapability capability) throws RuntimeFault, RemoteException {
+    public void updateDvsCapability(DVSCapability capability) throws RemoteException {
         getVimService().updateDvsCapability(getMOR(), capability);
     }
 
     /**
      * @since SDK4.1
      */
-    public void updateNetworkResourcePool(DVSNetworkResourcePoolConfigSpec[] configSpec) throws DvsFault, NotFound, InvalidName, RuntimeFault, RemoteException {
+    public void updateNetworkResourcePool(DVSNetworkResourcePoolConfigSpec[] configSpec) throws RemoteException {
         getVimService().updateNetworkResourcePool(getMOR(), configSpec);
     }
 
-    public Task reconfigureDVPort_Task(DVPortConfigSpec[] port) throws DvsFault, NotFound, ResourceInUse, ConcurrentAccess, RuntimeFault, RemoteException {
+    public Task reconfigureDVPort_Task(DVPortConfigSpec[] port) throws RemoteException {
         ManagedObjectReference mor = getVimService().reconfigureDVPort_Task(getMOR(), port);
         return new Task(getServerConnection(), mor);
     }

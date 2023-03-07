@@ -41,7 +41,7 @@ public enum GuestOsDescriptorFirmwareType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private GuestOsDescriptorFirmwareType(String val) {
+    GuestOsDescriptorFirmwareType(String val) {
         this.val = val;
     }
 }

@@ -44,7 +44,7 @@ public enum ClusterDasVmSettingsRestartPriority {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterDasVmSettingsRestartPriority(String val) {
+    ClusterDasVmSettingsRestartPriority(String val) {
         this.val = val;
     }
 }

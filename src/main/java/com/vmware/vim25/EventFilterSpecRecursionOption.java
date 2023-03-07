@@ -42,7 +42,7 @@ public enum EventFilterSpecRecursionOption {
     @SuppressWarnings("unused")
     private final String val;
 
-    private EventFilterSpecRecursionOption(String val) {
+    EventFilterSpecRecursionOption(String val) {
         this.val = val;
     }
 }

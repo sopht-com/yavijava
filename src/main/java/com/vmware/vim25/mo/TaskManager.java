@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskDescription;
+import com.vmware.vim25.TaskFilterSpec;
+import com.vmware.vim25.TaskInfo;
 
 import java.rmi.RemoteException;
 
@@ -64,18 +69,18 @@ public class TaskManager extends ManagedObject {
         return getTasks("recentTask");
     }
 
-    public TaskHistoryCollector createCollectorForTasks(TaskFilterSpec filter) throws InvalidState, RuntimeFault, RemoteException {
+    public TaskHistoryCollector createCollectorForTasks(TaskFilterSpec filter) throws RemoteException {
         return new TaskHistoryCollector(getServerConnection(),
-            getVimService().createCollectorForTasks(getMOR(), filter));
+                getVimService().createCollectorForTasks(getMOR(), filter));
     }
 
     //SDK2.5 signature for back compatibility
-    public TaskInfo createTask(ManagedObject obj, String taskTypeId, String initiatedBy, boolean cancelable) throws RuntimeFault, RemoteException {
+    public TaskInfo createTask(ManagedObject obj, String taskTypeId, String initiatedBy, boolean cancelable) throws RemoteException {
         return createTask(obj, taskTypeId, initiatedBy, cancelable, null);
     }
 
     //SDK4.0 signature
-    public TaskInfo createTask(ManagedObject obj, String taskTypeId, String initiatedBy, boolean cancelable, String parentTaskKey) throws RuntimeFault, RemoteException {
+    public TaskInfo createTask(ManagedObject obj, String taskTypeId, String initiatedBy, boolean cancelable, String parentTaskKey) throws RemoteException {
         if (obj == null) {
             throw new IllegalArgumentException("obj must not be null.");
         }
@@ -83,7 +88,7 @@ public class TaskManager extends ManagedObject {
     }
 
     // SDK 6.0
-    public TaskInfo createTask(ManagedObject obj, String taskTypeId, String initiatedBy, boolean cancelable, String parentTaskKey, String activationId) throws RuntimeFault, RemoteException {
+    public TaskInfo createTask(ManagedObject obj, String taskTypeId, String initiatedBy, boolean cancelable, String parentTaskKey, String activationId) throws RemoteException {
         if (obj == null) {
             throw new IllegalArgumentException("obj must not be null.");
         }

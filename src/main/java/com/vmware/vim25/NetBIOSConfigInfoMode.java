@@ -43,7 +43,7 @@ public enum NetBIOSConfigInfoMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private NetBIOSConfigInfoMode(String val) {
+    NetBIOSConfigInfoMode(String val) {
         this.val = val;
     }
 }

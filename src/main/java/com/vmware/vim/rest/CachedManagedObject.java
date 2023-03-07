@@ -29,46 +29,42 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim.rest;
 
-import java.io.IOException;
-import java.io.StringReader;
+import org.xml.sax.InputSource;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import org.xml.sax.InputSource;
+import java.io.IOException;
+import java.io.StringReader;
 
-/** The cached managed object on the client side.
-* @author Steve JIN (sjin@vmware.com)
-*/
+/**
+ * The cached managed object on the client side.
+ *
+ * @author Steve JIN (sjin@vmware.com)
+ */
 
-public class CachedManagedObject
-{
-  private String propXML = null;
-  private XPath xpath = null;
-  
-  public CachedManagedObject(String propXML)
-  {
-    this.propXML = propXML;
-    this.xpath = XPathFactory.newInstance().newXPath();
-  }
-  
-  public String getProperty(String path) throws XPathExpressionException, IOException
-  {
-    String propName = null;
-    int last = path.lastIndexOf(".");
-    if(last!=-1)
-    {
-      propName = path.substring(last+1);
+public class CachedManagedObject {
+    private String propXML = null;
+    private XPath xpath = null;
+
+    public CachedManagedObject(String propXML) {
+        this.propXML = propXML;
+        this.xpath = XPathFactory.newInstance().newXPath();
     }
-    else
-    {
-      propName = path;
+
+    public String getProperty(String path) throws XPathExpressionException, IOException {
+        String propName = null;
+        int last = path.lastIndexOf(".");
+        if (last != -1) {
+            propName = path.substring(last + 1);
+        } else {
+            propName = path;
+        }
+        xpath.reset();
+        return xpath.evaluate("//" + propName + "/text()", new InputSource(new StringReader(propXML)));
     }
-    xpath.reset();
-    return xpath.evaluate("//" + propName + "/text()", new InputSource(new StringReader(propXML)));
-  }
-  
-  public String getPropXML()
-  {
-    return propXML;
-  }
+
+    public String getPropXML() {
+        return propXML;
+    }
 }

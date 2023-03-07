@@ -41,7 +41,7 @@ public enum HostIncompatibleForFaultToleranceReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostIncompatibleForFaultToleranceReason(String val) {
+    HostIncompatibleForFaultToleranceReason(String val) {
         this.val = val;
     }
 }

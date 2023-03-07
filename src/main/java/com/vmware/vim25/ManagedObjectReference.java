@@ -67,17 +67,17 @@ public class ManagedObjectReference {
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj)
+        if (this == obj)
             return true;
-        if((obj == null) || (obj.getClass() != this.getClass()))
+        if ((obj == null) || (obj.getClass() != this.getClass()))
             return false;
 
-        ManagedObjectReference mor = (ManagedObjectReference)obj;
-        return  mor.getType().equals(getType()) && mor.getVal().equals(getVal());
+        ManagedObjectReference mor = (ManagedObjectReference) obj;
+        return mor.getType().equals(getType()) && mor.getVal().equals(getVal());
     }
 
     @Override
-    public int hashCode()  {
+    public int hashCode() {
         return val.hashCode() + type.hashCode();
     }
 

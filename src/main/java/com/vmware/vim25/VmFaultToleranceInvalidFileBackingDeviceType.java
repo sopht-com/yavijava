@@ -44,7 +44,7 @@ public enum VmFaultToleranceInvalidFileBackingDeviceType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VmFaultToleranceInvalidFileBackingDeviceType(String val) {
+    VmFaultToleranceInvalidFileBackingDeviceType(String val) {
         this.val = val;
     }
 }

@@ -1,6 +1,24 @@
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.GuestAliases;
+import com.vmware.vim25.GuestAuthAliasInfo;
+import com.vmware.vim25.GuestAuthSubject;
+import com.vmware.vim25.GuestAuthentication;
+import com.vmware.vim25.GuestComponentsOutOfDate;
+import com.vmware.vim25.GuestMappedAliases;
+import com.vmware.vim25.GuestMultipleMappings;
+import com.vmware.vim25.GuestOperationsFault;
+import com.vmware.vim25.GuestOperationsUnavailable;
+import com.vmware.vim25.GuestPermissionDenied;
+import com.vmware.vim25.InvalidArgument;
+import com.vmware.vim25.InvalidGuestLogin;
+import com.vmware.vim25.InvalidPowerState;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.OperationDisabledByGuest;
+import com.vmware.vim25.OperationNotSupportedByGuest;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 
@@ -62,9 +80,9 @@ public class GuestAliasManager extends ManagedObject {
      */
     public void addGuestAlias(VirtualMachine virtualMachine, GuestAuthentication guestAuthentication,
                               String userName, boolean mapCert, String base64Cert, GuestAuthAliasInfo guestAuthAliasInfo)
-        throws GuestComponentsOutOfDate, GuestMultipleMappings, GuestOperationsFault, GuestOperationsUnavailable,
-        GuestPermissionDenied, InvalidArgument, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest,
-        OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+            throws GuestComponentsOutOfDate, GuestMultipleMappings, GuestOperationsFault, GuestOperationsUnavailable,
+            GuestPermissionDenied, InvalidArgument, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest,
+            OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
         getVimService().addGuestAlias(getMOR(), virtualMachine.getMOR(), guestAuthentication, userName, mapCert, base64Cert, guestAuthAliasInfo);
     }
 
@@ -89,7 +107,7 @@ public class GuestAliasManager extends ManagedObject {
      * @throws RemoteException
      */
     public GuestAliases[] listGuestAliases(VirtualMachine vm, GuestAuthentication auth, String userName) throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable, GuestPermissionDenied,
-        InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+            InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
         return getVimService().listGuestAliases(getMOR(), vm.getMOR(), auth, userName);
     }
 
@@ -113,8 +131,8 @@ public class GuestAliasManager extends ManagedObject {
      * @throws RemoteException
      */
     public GuestMappedAliases[] listGuestMappedAliases(VirtualMachine vm, GuestAuthentication auth) throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable,
-        GuestPermissionDenied, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault,
-        TaskInProgress, RemoteException {
+            GuestPermissionDenied, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault,
+            TaskInProgress, RemoteException {
         return getVimService().listGuestMappedAliases(getMOR(), vm.getMOR(), auth);
     }
 
@@ -142,8 +160,8 @@ public class GuestAliasManager extends ManagedObject {
      * @throws RemoteException
      */
     public void removeGuestAlias(VirtualMachine vm, GuestAuthentication auth, String userName, String base64Cert, GuestAuthSubject subject) throws GuestComponentsOutOfDate, GuestOperationsFault,
-        GuestOperationsUnavailable, GuestPermissionDenied, InvalidArgument, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest,
-        RuntimeFault, TaskInProgress, RemoteException {
+            GuestOperationsUnavailable, GuestPermissionDenied, InvalidArgument, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest,
+            RuntimeFault, TaskInProgress, RemoteException {
         getVimService().removeGuestAlias(getMOR(), vm.getMOR(), auth, userName, base64Cert, subject);
     }
 
@@ -170,8 +188,8 @@ public class GuestAliasManager extends ManagedObject {
      * @throws RemoteException
      */
     public void removeGuestAliasByCert(VirtualMachine vm, GuestAuthentication auth, String userName, String base64Cert) throws GuestComponentsOutOfDate, GuestOperationsFault,
-        GuestOperationsUnavailable, GuestPermissionDenied, InvalidArgument, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest,
-        RuntimeFault, TaskInProgress, RemoteException {
+            GuestOperationsUnavailable, GuestPermissionDenied, InvalidArgument, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest,
+            RuntimeFault, TaskInProgress, RemoteException {
         getVimService().removeGuestAliasByCert(getMOR(), vm.getMOR(), auth, userName, base64Cert);
     }
 }

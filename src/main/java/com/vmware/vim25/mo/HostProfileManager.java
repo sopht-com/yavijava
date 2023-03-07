@@ -29,7 +29,21 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AnswerFile;
+import com.vmware.vim25.AnswerFileCreateSpec;
+import com.vmware.vim25.AnswerFileStatusResult;
+import com.vmware.vim25.AnswerFileUpdateFailed;
+import com.vmware.vim25.ApplyProfile;
+import com.vmware.vim25.HostApplyProfile;
+import com.vmware.vim25.HostConfigFailed;
+import com.vmware.vim25.HostConfigSpec;
+import com.vmware.vim25.HostProfileManagerConfigTaskList;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.ProfileDeferredPolicyOptionParameter;
+import com.vmware.vim25.ProfileMetadata;
+import com.vmware.vim25.ProfileProfileStructure;
+import com.vmware.vim25.RuntimeFault;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -46,12 +60,12 @@ public class HostProfileManager extends ProfileManager {
     }
 
     //SDK4.1 signature for back compatibility
-    public Task applyHostConfig_Task(HostSystem host, HostConfigSpec configSpec) throws HostConfigFailed, InvalidState, RuntimeFault, RemoteException {
+    public Task applyHostConfig_Task(HostSystem host, HostConfigSpec configSpec) throws RemoteException {
         return applyHostConfig_Task(host, configSpec, null);
     }
 
     //SDK5.0 signature
-    public Task applyHostConfig_Task(HostSystem host, HostConfigSpec configSpec, ProfileDeferredPolicyOptionParameter[] userInputs) throws HostConfigFailed, InvalidState, RuntimeFault, RemoteException {
+    public Task applyHostConfig_Task(HostSystem host, HostConfigSpec configSpec, ProfileDeferredPolicyOptionParameter[] userInputs) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().applyHostConfig_Task(getMOR(), host.getMOR(), configSpec, userInputs);
         return new Task(getServerConnection(), taskMor);
     }
@@ -59,27 +73,27 @@ public class HostProfileManager extends ProfileManager {
     /**
      * @since SDK5.0
      */
-    public Task checkAnswerFileStatus_Task(HostSystem[] hosts) throws RuntimeFault, RemoteException {
+    public Task checkAnswerFileStatus_Task(HostSystem[] hosts) throws RemoteException {
         ManagedObjectReference[] hostMors = MorUtil.createMORs(hosts);
         ManagedObjectReference taskMor = getVimService().checkAnswerFileStatus_Task(getMOR(), hostMors);
         return new Task(getServerConnection(), taskMor);
     }
 
     //SDK4.1 signature for back compatibility
-    public ApplyProfile createDefaultProfile(String profileType) throws RuntimeFault, RemoteException {
+    public ApplyProfile createDefaultProfile(String profileType) throws RemoteException {
         return createDefaultProfile(profileType, null, null);
     }
 
     //SDK5.0 signature
-    public ApplyProfile createDefaultProfile(String profileType, String profileTypeName, Profile profile) throws RuntimeFault, RemoteException {
+    public ApplyProfile createDefaultProfile(String profileType, String profileTypeName, Profile profile) throws RemoteException {
         return getVimService().createDefaultProfile(getMOR(), profileType, profileTypeName,
-            profile == null ? null : profile.getMOR());
+                profile == null ? null : profile.getMOR());
     }
 
     /**
      * @since SDK5.0
      */
-    public Task exportAnswerFile_Task(HostSystem host) throws RuntimeFault, RemoteException {
+    public Task exportAnswerFile_Task(HostSystem host) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().exportAnswerFile_Task(getMOR(), host.getMOR());
         return new Task(getServerConnection(), taskMor);
     }
@@ -87,14 +101,14 @@ public class HostProfileManager extends ProfileManager {
     /**
      * @deprecated as of SDK5.5, use generateHostProfileTaskList_Task() instead
      */
-    public HostProfileManagerConfigTaskList generateConfigTaskList(HostConfigSpec configSpec, HostSystem host) throws RuntimeFault, RemoteException {
+    public HostProfileManagerConfigTaskList generateConfigTaskList(HostConfigSpec configSpec, HostSystem host) throws RemoteException {
         return getVimService().generateConfigTaskList(getMOR(), configSpec, host.getMOR());
     }
 
     /**
      * @since SDK5.5
      */
-    public Task generateHostProfileTaskList_Task(HostConfigSpec configSpec, HostSystem host) throws RuntimeFault, RemoteException {
+    public Task generateHostProfileTaskList_Task(HostConfigSpec configSpec, HostSystem host) throws RemoteException {
         ManagedObjectReference mor = getVimService().generateHostProfileTaskList_Task(getMOR(), configSpec, host.getMOR());
         return new Task(getServerConnection(), mor);
     }
@@ -102,33 +116,33 @@ public class HostProfileManager extends ProfileManager {
     /**
      * @since SDK5.0
      */
-    public AnswerFileStatusResult[] queryAnswerFileStatus(HostSystem[] hosts) throws RuntimeFault, RemoteException {
+    public AnswerFileStatusResult[] queryAnswerFileStatus(HostSystem[] hosts) throws RemoteException {
         ManagedObjectReference[] hostMors = MorUtil.createMORs(hosts);
         return getVimService().queryAnswerFileStatus(getMOR(), hostMors);
     }
 
     //SDK4.1 signature for back compatibility
-    public ProfileMetadata[] queryHostProfileMetadata(String[] profileName) throws RuntimeFault, RemoteException {
+    public ProfileMetadata[] queryHostProfileMetadata(String[] profileName) throws RemoteException {
         return getVimService().queryHostProfileMetadata(getMOR(), profileName, null);
     }
 
     //SDK5.0 signature
-    public ProfileMetadata[] queryHostProfileMetadata(String[] profileNames, Profile profile) throws RuntimeFault, RemoteException {
+    public ProfileMetadata[] queryHostProfileMetadata(String[] profileNames, Profile profile) throws RemoteException {
         return getVimService().queryHostProfileMetadata(getMOR(), profileNames,
-            profile == null ? null : profile.getMOR());
+                profile == null ? null : profile.getMOR());
     }
 
     /**
      * @since SDK5.0
      */
-    public ProfileProfileStructure queryProfileStructure(Profile profile) throws RuntimeFault, RemoteException {
+    public ProfileProfileStructure queryProfileStructure(Profile profile) throws RemoteException {
         return getVimService().queryProfileStructure(getMOR(), profile.getMOR());
     }
 
     /**
      * @since SDK5.0
      */
-    public AnswerFile retrieveAnswerFile(HostSystem host) throws RuntimeFault, RemoteException {
+    public AnswerFile retrieveAnswerFile(HostSystem host) throws RemoteException {
         return getVimService().retrieveAnswerFile(getMOR(), host.getMOR());
     }
 
@@ -136,14 +150,14 @@ public class HostProfileManager extends ProfileManager {
     /**
      * @since SDK5.1
      */
-    public AnswerFile retrieveAnswerFileForProfile(HostSystem host, HostApplyProfile applyProfile) throws RuntimeFault, RemoteException {
+    public AnswerFile retrieveAnswerFileForProfile(HostSystem host, HostApplyProfile applyProfile) throws RemoteException {
         return getVimService().retrieveAnswerFileForProfile(getMOR(), host == null ? null : host.getMOR(), applyProfile);
     }
 
     /**
      * @since SDK5.0
      */
-    public Task updateAnswerFile_Task(HostSystem host, AnswerFileCreateSpec configSpec) throws AnswerFileUpdateFailed, RuntimeFault, RemoteException {
+    public Task updateAnswerFile_Task(HostSystem host, AnswerFileCreateSpec configSpec) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().updateAnswerFile_Task(getMOR(), host.getMOR(), configSpec);
         return new Task(getServerConnection(), taskMor);
     }

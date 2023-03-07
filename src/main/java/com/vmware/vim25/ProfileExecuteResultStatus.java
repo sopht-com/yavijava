@@ -42,7 +42,7 @@ public enum ProfileExecuteResultStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ProfileExecuteResultStatus(String val) {
+    ProfileExecuteResultStatus(String val) {
         this.val = val;
     }
 }

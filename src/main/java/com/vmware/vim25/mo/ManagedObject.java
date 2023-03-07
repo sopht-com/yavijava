@@ -29,10 +29,24 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.DynamicProperty;
+import com.vmware.vim25.InvalidProperty;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.ObjectContent;
+import com.vmware.vim25.ObjectSpec;
+import com.vmware.vim25.ObjectUpdate;
+import com.vmware.vim25.PropertyChange;
+import com.vmware.vim25.PropertyChangeOp;
+import com.vmware.vim25.PropertyFilterSpec;
+import com.vmware.vim25.PropertyFilterUpdate;
+import com.vmware.vim25.PropertySpec;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.UpdateSet;
+import com.vmware.vim25.VimPortType;
 import com.vmware.vim25.mo.util.MorUtil;
 import com.vmware.vim25.mo.util.PropertyCollectorUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
@@ -55,7 +69,7 @@ abstract public class ManagedObject {
     /**
      * Create Logger
      */
-    private static Logger log = Logger.getLogger(ManagedObject.class);
+    private static final Logger log = LoggerFactory.getLogger(ManagedObject.class);
 
     static {
         MO_PACKAGE_NAME = ManagedObject.class.getPackage().getName();
@@ -128,12 +142,12 @@ abstract public class ManagedObject {
 
     protected ObjectContent retrieveObjectProperties(String[] properties) {
         ObjectSpec oSpec = PropertyCollectorUtil.creatObjectSpec(
-            getMOR(), Boolean.FALSE, null);
+                getMOR(), Boolean.FALSE, null);
 
         PropertySpec pSpec = PropertyCollectorUtil.createPropertySpec(
-            getMOR().getType(),
-            properties == null || properties.length == 0, //if true, all props of this obj are to be read regardless of propName
-            properties);
+                getMOR().getType(),
+                properties == null || properties.length == 0, //if true, all props of this obj are to be read regardless of propName
+                properties);
 
         PropertyFilterSpec pfSpec = new PropertyFilterSpec();
         pfSpec.setObjectSet(new ObjectSpec[]{oSpec});
@@ -144,15 +158,13 @@ abstract public class ManagedObject {
         ObjectContent[] objs;
         try {
             objs = pc.retrieveProperties(new PropertyFilterSpec[]{pfSpec});
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         if (objs == null || objs[0] == null) {
             return null;
-        }
-        else {
+        } else {
             return objs[0];
         }
     }
@@ -192,13 +204,12 @@ abstract public class ManagedObject {
      * @throws RemoteException
      */
     public Hashtable getPropertiesByPaths(String[] propPaths)
-        throws InvalidProperty, RuntimeFault, RemoteException {
+            throws InvalidProperty, RuntimeFault, RemoteException {
         Hashtable[] pht = PropertyCollectorUtil.retrieveProperties(
-            new ManagedObject[]{this}, getMOR().getType(), propPaths);
+                new ManagedObject[]{this}, getMOR().getType(), propPaths);
         if (pht.length != 0) {
             return pht[0];
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -229,13 +240,12 @@ abstract public class ManagedObject {
                     moClass = Class.forName(MO_PACKAGE_NAME + "." + mors[i].getType());
                 }
                 Constructor<?> constructor = moClass.getConstructor(
-                    new Class[]{ServerConnection.class, ManagedObjectReference.class});
+                        ServerConnection.class, ManagedObjectReference.class);
 
                 Array.set(mos, i,
-                    constructor.newInstance(new Object[]{getServerConnection(), mors[i]}));
+                        constructor.newInstance(getServerConnection(), mors[i]));
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Exception caught trying to getManagedObjects.", e);
         }
 
@@ -349,12 +359,12 @@ abstract public class ManagedObject {
         Object[] filterVals = new Object[filterProps.length];
 
         ObjectSpec oSpec = PropertyCollectorUtil.creatObjectSpec(
-            getMOR(), Boolean.FALSE, null);
+                getMOR(), Boolean.FALSE, null);
 
         PropertySpec pSpec = PropertyCollectorUtil.createPropertySpec(
-            getMOR().getType(),
-            filterProps == null || filterProps.length == 0, //if true, all props of this obj are to be read regardless of propName
-            filterProps);
+                getMOR().getType(),
+                filterProps == null || filterProps.length == 0, //if true, all props of this obj are to be read regardless of propName
+                filterProps);
 
         PropertyFilterSpec spec = new PropertyFilterSpec();
         spec.setObjectSet(new ObjectSpec[]{oSpec});
@@ -417,8 +427,7 @@ abstract public class ManagedObject {
             if (propchg.getName().lastIndexOf(props[i]) >= 0) {
                 if (propchg.getOp() == PropertyChangeOp.remove) {
                     vals[i] = "";
-                }
-                else {
+                } else {
                     vals[i] = propchg.getVal();
                 }
             }
@@ -427,7 +436,7 @@ abstract public class ManagedObject {
 
     public String toString() {
         return mor.getType() + ":" + mor.get_value()
-            + " @ " + getServerConnection().getUrl();
+                + " @ " + getServerConnection().getUrl();
     }
 
     protected ManagedObjectReference[] convertMors(ManagedObject[] mos) {

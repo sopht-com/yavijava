@@ -41,7 +41,7 @@ public enum LinkDiscoveryProtocolConfigProtocolType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private LinkDiscoveryProtocolConfigProtocolType(String val) {
+    LinkDiscoveryProtocolConfigProtocolType(String val) {
         this.val = val;
     }
 }

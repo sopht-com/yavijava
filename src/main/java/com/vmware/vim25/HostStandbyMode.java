@@ -43,7 +43,7 @@ public enum HostStandbyMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostStandbyMode(String val) {
+    HostStandbyMode(String val) {
         this.val = val;
     }
 }

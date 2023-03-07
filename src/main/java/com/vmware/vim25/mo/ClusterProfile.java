@@ -46,7 +46,7 @@ public class ClusterProfile extends Profile {
         super(sc, mor);
     }
 
-    public void updateClusterProfile(ClusterProfileConfigSpec config) throws DuplicateName, RuntimeFault, RemoteException {
+    public void updateClusterProfile(ClusterProfileConfigSpec config) throws RemoteException {
         getVimService().updateClusterProfile(getMOR(), config);
     }
 }

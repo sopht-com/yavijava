@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AlarmInfo;
+import com.vmware.vim25.AlarmSpec;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -52,11 +57,11 @@ public class Alarm extends ExtensibleManagedObject {
         return (ManagedEntity) getManagedObject("info.entity");
     }
 
-    public void reconfigureAlarm(AlarmSpec alarmSpec) throws InvalidName, DuplicateName, RuntimeFault, RemoteException {
+    public void reconfigureAlarm(AlarmSpec alarmSpec) throws RemoteException {
         getVimService().reconfigureAlarm(getMOR(), alarmSpec);
     }
 
-    public void removeAlarm() throws RuntimeFault, RemoteException {
+    public void removeAlarm() throws RemoteException {
         getVimService().removeAlarm(getMOR());
     }
 }

@@ -40,7 +40,7 @@ public enum HostFeatureVersionKey {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostFeatureVersionKey(String val) {
+    HostFeatureVersionKey(String val) {
         this.val = val;
     }
 }

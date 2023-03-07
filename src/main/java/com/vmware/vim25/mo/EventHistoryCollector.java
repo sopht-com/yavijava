@@ -56,11 +56,11 @@ public class EventHistoryCollector extends HistoryCollector {
         return (Event[]) this.getCurrentProperty("latestPage");
     }
 
-    public Event[] readNextEvents(int maxCount) throws RuntimeFault, RemoteException {
+    public Event[] readNextEvents(int maxCount) throws RemoteException {
         return getVimService().readNextEvents(getMOR(), maxCount);
     }
 
-    public Event[] readPreviousEvents(int maxCount) throws RuntimeFault, RemoteException {
+    public Event[] readPreviousEvents(int maxCount) throws RemoteException {
         return getVimService().readPreviousEvents(getMOR(), maxCount);
     }
 

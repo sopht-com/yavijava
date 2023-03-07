@@ -51,11 +51,11 @@ public class HostGraphicsManager extends ExtensibleManagedObject {
         return (HostGraphicsInfo[]) getCurrentProperty("graphicsInfo");
     }
 
-    public boolean isSharedGraphicsActive() throws RuntimeFault, RemoteException {
+    public boolean isSharedGraphicsActive() throws RemoteException {
         return getVimService().isSharedGraphicsActive(this.getMOR());
     }
 
-    public void refreshGraphicsManager() throws RuntimeFault, RemoteException {
+    public void refreshGraphicsManager() throws RemoteException {
         getVimService().queryFirmwareConfigUploadURL(this.getMOR());
     }
 

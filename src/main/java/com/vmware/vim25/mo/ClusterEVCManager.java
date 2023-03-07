@@ -1,6 +1,13 @@
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ClusterEVCManagerEVCState;
+import com.vmware.vim25.EVCConfigFault;
+import com.vmware.vim25.GatewayConnectFault;
+import com.vmware.vim25.HostConnectFault;
+import com.vmware.vim25.HostConnectSpec;
+import com.vmware.vim25.InvalidLogin;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 

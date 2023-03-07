@@ -43,7 +43,7 @@ public enum VAppIPAssignmentInfoIpAllocationPolicy {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VAppIPAssignmentInfoIpAllocationPolicy(String val) {
+    VAppIPAssignmentInfoIpAllocationPolicy(String val) {
         this.val = val;
     }
 }

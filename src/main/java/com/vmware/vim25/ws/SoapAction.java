@@ -38,6 +38,6 @@ public enum SoapAction {
     }
 
     public boolean equalsName(String otherName) {
-        return (otherName != null) && value.equals(otherName);
+        return value.equals(otherName);
     }
 }

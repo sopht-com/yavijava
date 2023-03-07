@@ -52,7 +52,7 @@ public enum VirtualDiskType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDiskType(String val) {
+    VirtualDiskType(String val) {
         this.val = val;
     }
 }

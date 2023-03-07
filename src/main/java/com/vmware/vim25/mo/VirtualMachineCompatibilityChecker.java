@@ -46,10 +46,10 @@ public class VirtualMachineCompatibilityChecker extends ManagedObject {
         super(sc, mor);
     }
 
-    public Task checkCompatibility_Task(VirtualMachine vm, HostSystem host, ResourcePool pool, String[] testType) throws NoActiveHostInCluster, InvalidState, RuntimeFault, RemoteException {
+    public Task checkCompatibility_Task(VirtualMachine vm, HostSystem host, ResourcePool pool, String[] testType) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().checkCompatibility_Task(getMOR(),
-            vm == null ? null : vm.getMOR(), host == null ? null : host.getMOR(),
-            pool == null ? null : pool.getMOR(), testType);
+                vm == null ? null : vm.getMOR(), host == null ? null : host.getMOR(),
+                pool == null ? null : pool.getMOR(), testType);
         return new Task(getServerConnection(), taskMor);
     }
 }

@@ -42,7 +42,7 @@ public enum HostMountInfoInaccessibleReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostMountInfoInaccessibleReason(String val) {
+    HostMountInfoInaccessibleReason(String val) {
         this.val = val;
     }
 }

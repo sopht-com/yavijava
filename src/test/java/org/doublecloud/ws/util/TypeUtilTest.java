@@ -23,7 +23,10 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TypeUtilTest {
 
@@ -181,7 +184,7 @@ public class TypeUtilTest {
     @Test
     public void testGetVimClass_VirtualMachine_wrong_package_is_null() throws Exception {
         Class<?> vm = TypeUtil.getVimClass("VirtualMachine");
-        assertEquals(null, vm);
+        assertNull(vm);
     }
 
     @Test
@@ -204,7 +207,7 @@ public class TypeUtilTest {
 
     @Test
     public void testGetXSIType_long_gives_xsd_long() throws Exception {
-        String actual = TypeUtil.getXSIType(10l);
+        String actual = TypeUtil.getXSIType(10L);
         assertEquals("xsd:long", actual);
     }
 
@@ -242,7 +245,8 @@ public class TypeUtilTest {
 
     @Test(expected = RuntimeException.class)
     public void testGetXSIType_Custom_Object_gives_RuntimeException() throws Exception {
-        class foo {}
+        class foo {
+        }
         String actual = TypeUtil.getXSIType(foo.class);
     }
 

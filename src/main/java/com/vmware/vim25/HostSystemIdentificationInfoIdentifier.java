@@ -42,7 +42,7 @@ public enum HostSystemIdentificationInfoIdentifier {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostSystemIdentificationInfoIdentifier(String val) {
+    HostSystemIdentificationInfoIdentifier(String val) {
         this.val = val;
     }
 }

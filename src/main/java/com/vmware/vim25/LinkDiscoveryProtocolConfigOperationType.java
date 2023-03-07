@@ -43,7 +43,7 @@ public enum LinkDiscoveryProtocolConfigOperationType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private LinkDiscoveryProtocolConfigOperationType(String val) {
+    LinkDiscoveryProtocolConfigOperationType(String val) {
         this.val = val;
     }
 }

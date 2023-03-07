@@ -42,7 +42,7 @@ public enum VsanDiskIssueType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VsanDiskIssueType(String val) {
+    VsanDiskIssueType(String val) {
         this.val = val;
     }
 }

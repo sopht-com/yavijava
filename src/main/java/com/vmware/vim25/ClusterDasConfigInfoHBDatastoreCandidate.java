@@ -42,7 +42,7 @@ public enum ClusterDasConfigInfoHBDatastoreCandidate {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterDasConfigInfoHBDatastoreCandidate(String val) {
+    ClusterDasConfigInfoHBDatastoreCandidate(String val) {
         this.val = val;
     }
 }

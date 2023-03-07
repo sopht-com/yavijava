@@ -44,7 +44,7 @@ public enum VFlashModuleNotSupportedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VFlashModuleNotSupportedReason(String val) {
+    VFlashModuleNotSupportedReason(String val) {
         this.val = val;
     }
 }

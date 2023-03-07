@@ -42,7 +42,7 @@ public enum HostGraphicsInfoGraphicsType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostGraphicsInfoGraphicsType(String val) {
+    HostGraphicsInfoGraphicsType(String val) {
         this.val = val;
     }
 }

@@ -44,7 +44,7 @@ public enum HostNumericSensorType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostNumericSensorType(String val) {
+    HostNumericSensorType(String val) {
         this.val = val;
     }
 }

@@ -43,7 +43,7 @@ public enum ValidateMigrationTestType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ValidateMigrationTestType(String val) {
+    ValidateMigrationTestType(String val) {
         this.val = val;
     }
 }

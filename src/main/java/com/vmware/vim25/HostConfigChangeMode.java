@@ -41,7 +41,7 @@ public enum HostConfigChangeMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostConfigChangeMode(String val) {
+    HostConfigChangeMode(String val) {
         this.val = val;
     }
 }

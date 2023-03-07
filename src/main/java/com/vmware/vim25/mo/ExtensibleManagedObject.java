@@ -29,7 +29,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.CustomFieldDef;
+import com.vmware.vim25.CustomFieldValue;
+import com.vmware.vim25.InvalidProperty;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -40,11 +44,11 @@ import java.rmi.RemoteException;
  */
 
 abstract public class ExtensibleManagedObject extends ManagedObject {
-    public CustomFieldDef[] getAvailableField() throws InvalidProperty, RuntimeFault, RemoteException {
+    public CustomFieldDef[] getAvailableField() throws RemoteException {
         return (CustomFieldDef[]) getCurrentProperty("availableField");
     }
 
-    public CustomFieldValue[] getValues() throws InvalidProperty, RuntimeFault, RemoteException {
+    public CustomFieldValue[] getValues() throws RemoteException {
         return (CustomFieldValue[]) getCurrentProperty("value");
     }
 
@@ -52,7 +56,7 @@ abstract public class ExtensibleManagedObject extends ManagedObject {
         super(serverConnection, mor);
     }
 
-    public void setCustomValue(String key, String value) throws RuntimeFault, RemoteException {
+    public void setCustomValue(String key, String value) throws RemoteException {
         getVimService().setCustomValue(getMOR(), key, value);
     }
 }

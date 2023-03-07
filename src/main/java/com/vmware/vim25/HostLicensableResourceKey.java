@@ -45,7 +45,7 @@ public enum HostLicensableResourceKey {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostLicensableResourceKey(String val) {
+    HostLicensableResourceKey(String val) {
         this.val = val;
     }
 }

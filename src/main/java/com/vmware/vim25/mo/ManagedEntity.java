@@ -29,7 +29,17 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AlarmState;
+import com.vmware.vim25.CustomFieldValue;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.Event;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.ManagedEntityStatus;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.Permission;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.Tag;
+import com.vmware.vim25.VimFault;
 
 import java.rmi.RemoteException;
 
@@ -44,14 +54,14 @@ public class ManagedEntity extends ExtensibleManagedObject {
         super(sc, mor);
     }
 
-	/* =========================Accessors=================================*/
+    /* =========================Accessors=================================*/
 
     /**
      * @since SDK4.0
      */
     public boolean getAlarmActionEabled() {
         Boolean aae = (Boolean) getCurrentProperty("alarmActionsEnabled");
-        return aae == null ? false : aae.booleanValue();
+        return aae != null && aae.booleanValue();
     }
 
     public Event[] getConfigIssue() {
@@ -109,18 +119,18 @@ public class ManagedEntity extends ExtensibleManagedObject {
         return (AlarmState[]) getCurrentProperty("triggeredAlarmState");
     }
 
-	/* =========================Methods=================================*/
+    /* =========================Methods=================================*/
 
-    public Task destroy_Task() throws VimFault, RuntimeFault, RemoteException {
+    public Task destroy_Task() throws RemoteException {
         ManagedObjectReference taskMor = getVimService().destroy_Task(getMOR());
         return new Task(getServerConnection(), taskMor);
     }
 
-    public void reload() throws RuntimeFault, RemoteException {
+    public void reload() throws RemoteException {
         getVimService().reload(getMOR());
     }
 
-    public Task rename_Task(String name) throws InvalidName, DuplicateName, RuntimeFault, RemoteException {
+    public Task rename_Task(String name) throws RemoteException {
         ManagedObjectReference taskMor = getVimService().rename_Task(getMOR(), name);
         return new Task(getServerConnection(), taskMor);
     }

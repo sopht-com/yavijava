@@ -28,7 +28,12 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.HostConfigFault;
+import com.vmware.vim25.HostVirtualNicManagerInfo;
+import com.vmware.vim25.InvalidArgument;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.VirtualNicManagerNetConfig;
 
 import java.rmi.RemoteException;
 
@@ -47,15 +52,15 @@ public class HostVirtualNicManager extends ExtensibleManagedObject {
         return (HostVirtualNicManagerInfo) getCurrentProperty("info");
     }
 
-    public VirtualNicManagerNetConfig queryNetConfig(String nicType) throws HostConfigFault, InvalidArgument, RuntimeFault, RemoteException {
+    public VirtualNicManagerNetConfig queryNetConfig(String nicType) throws RemoteException {
         return getVimService().queryNetConfig(getMOR(), nicType);
     }
 
-    public void deselectVnicForNicType(String nicType, String device) throws HostConfigFault, InvalidArgument, RuntimeFault, RemoteException {
+    public void deselectVnicForNicType(String nicType, String device) throws RemoteException {
         getVimService().deselectVnicForNicType(getMOR(), nicType, device);
     }
 
-    public void selectVnicForNicType(String nicType, String device) throws HostConfigFault, InvalidArgument, RuntimeFault, RemoteException {
+    public void selectVnicForNicType(String nicType, String device) throws RemoteException {
         getVimService().selectVnicForNicType(getMOR(), nicType, device);
     }
 }

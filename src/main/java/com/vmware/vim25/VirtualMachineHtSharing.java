@@ -42,7 +42,7 @@ public enum VirtualMachineHtSharing {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineHtSharing(String val) {
+    VirtualMachineHtSharing(String val) {
         this.val = val;
     }
 }

@@ -29,7 +29,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AlreadyExists;
+import com.vmware.vim25.HostAccountSpec;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.UserNotFound;
 
 import java.rmi.RemoteException;
 
@@ -45,31 +49,31 @@ public class HostLocalAccountManager extends ManagedObject {
         super(serverConnection, mor);
     }
 
-    public void assignUserToGroup(String user, String group) throws AlreadyExists, UserNotFound, RuntimeFault, RemoteException {
+    public void assignUserToGroup(String user, String group) throws RemoteException {
         getVimService().assignUserToGroup(getMOR(), user, group);
     }
 
-    public void createGroup(HostAccountSpec group) throws AlreadyExists, RuntimeFault, RemoteException {
+    public void createGroup(HostAccountSpec group) throws RemoteException {
         getVimService().createGroup(getMOR(), group);
     }
 
-    public void createUser(HostAccountSpec user) throws AlreadyExists, RuntimeFault, RemoteException {
+    public void createUser(HostAccountSpec user) throws RemoteException {
         getVimService().createUser(getMOR(), user);
     }
 
-    public void removeGroup(String groupName) throws UserNotFound, RuntimeFault, RemoteException {
+    public void removeGroup(String groupName) throws RemoteException {
         getVimService().removeGroup(getMOR(), groupName);
     }
 
-    public void removeUser(String userName) throws UserNotFound, RuntimeFault, RemoteException {
+    public void removeUser(String userName) throws RemoteException {
         getVimService().removeUser(getMOR(), userName);
     }
 
-    public void unassignUserFromGroup(String user, String group) throws UserNotFound, RuntimeFault, RemoteException {
+    public void unassignUserFromGroup(String user, String group) throws RemoteException {
         getVimService().unassignUserFromGroup(getMOR(), user, group);
     }
 
-    public void updateUser(HostAccountSpec user) throws AlreadyExists, UserNotFound, RuntimeFault, RemoteException {
+    public void updateUser(HostAccountSpec user) throws RemoteException {
         getVimService().updateUser(getMOR(), user);
     }
 

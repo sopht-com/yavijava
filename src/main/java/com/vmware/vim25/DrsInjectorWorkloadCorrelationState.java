@@ -41,7 +41,7 @@ public enum DrsInjectorWorkloadCorrelationState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DrsInjectorWorkloadCorrelationState(String val) {
+    DrsInjectorWorkloadCorrelationState(String val) {
         this.val = val;
     }
 }

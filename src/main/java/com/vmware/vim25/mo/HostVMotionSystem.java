@@ -29,7 +29,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.HostConfigFault;
+import com.vmware.vim25.HostIpConfig;
+import com.vmware.vim25.HostVMotionNetConfig;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -54,15 +59,15 @@ public class HostVMotionSystem extends ExtensibleManagedObject {
         return (HostVMotionNetConfig) getCurrentProperty("netConfig");
     }
 
-    public void deselectVnic() throws HostConfigFault, RuntimeFault, RemoteException {
+    public void deselectVnic() throws RemoteException {
         getVimService().deselectVnic(getMOR());
     }
 
-    public void selectVnic(String device) throws HostConfigFault, RuntimeFault, RemoteException {
+    public void selectVnic(String device) throws RemoteException {
         getVimService().selectVnic(getMOR(), device);
     }
 
-    public void updateIpConfig(HostIpConfig ipConfig) throws HostConfigFault, NotFound, RuntimeFault, RemoteException {
+    public void updateIpConfig(HostIpConfig ipConfig) throws RemoteException {
         getVimService().updateIpConfig(getMOR(), ipConfig);
     }
 

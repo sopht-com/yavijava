@@ -95,27 +95,27 @@ public class SearchIndex extends ManagedObject {
     /**
      * @since SDK4.0
      */
-    public ManagedEntity[] findAllByDnsName(Datacenter datacenter, String dnsName, boolean vmSearch) throws RuntimeFault, RemoteException {
+    public ManagedEntity[] findAllByDnsName(Datacenter datacenter, String dnsName, boolean vmSearch) throws RemoteException {
         ManagedObjectReference[] mors = getVimService().findAllByDnsName(getMOR(),
-            datacenter == null ? null : datacenter.getMOR(), dnsName, vmSearch);
+                datacenter == null ? null : datacenter.getMOR(), dnsName, vmSearch);
         return MorUtil.createManagedEntities(getServerConnection(), mors);
     }
 
     /**
      * @since SDK4.0
      */
-    public ManagedEntity[] findAllByIp(Datacenter datacenter, String ip, boolean vmSearch) throws RuntimeFault, RemoteException {
+    public ManagedEntity[] findAllByIp(Datacenter datacenter, String ip, boolean vmSearch) throws RemoteException {
         ManagedObjectReference[] mors = getVimService().findAllByIp(getMOR(),
-            datacenter == null ? null : datacenter.getMOR(), ip, vmSearch);
+                datacenter == null ? null : datacenter.getMOR(), ip, vmSearch);
         return MorUtil.createManagedEntities(getServerConnection(), mors);
     }
 
     /**
      * @since SDK4.0
      */
-    public ManagedEntity[] findAllByUuid(Datacenter datacenter, String uuid, boolean vmSearch, boolean instanceUuid) throws RuntimeFault, RemoteException {
+    public ManagedEntity[] findAllByUuid(Datacenter datacenter, String uuid, boolean vmSearch, boolean instanceUuid) throws RemoteException {
         ManagedObjectReference[] mors = getVimService().findAllByUuid(getMOR(),
-            datacenter == null ? null : datacenter.getMOR(), uuid, vmSearch, instanceUuid);
+                datacenter == null ? null : datacenter.getMOR(), uuid, vmSearch, instanceUuid);
         return MorUtil.createManagedEntities(getServerConnection(), mors);
     }
 
@@ -155,7 +155,7 @@ public class SearchIndex extends ManagedObject {
     }
 
     //SDK4.0 signature
-    public ManagedEntity findByUuid(Datacenter datacenter, String uuid, boolean vmOnly, Boolean instanceUuid) throws RuntimeFault, RemoteException {
+    public ManagedEntity findByUuid(Datacenter datacenter, String uuid, boolean vmOnly, Boolean instanceUuid) throws RemoteException {
         ManagedObjectReference mor = getVimService().findByUuid(getMOR(), datacenter == null ? null : datacenter.getMOR(), uuid, vmOnly, instanceUuid);
         return MorUtil.createExactManagedEntity(getServerConnection(), mor);
     }

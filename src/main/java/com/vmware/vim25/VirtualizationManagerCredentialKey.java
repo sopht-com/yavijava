@@ -39,7 +39,7 @@ public enum VirtualizationManagerCredentialKey {
 
     private final String val;
 
-    private VirtualizationManagerCredentialKey(String val) {
+    VirtualizationManagerCredentialKey(String val) {
         this.val = val;
     }
 }

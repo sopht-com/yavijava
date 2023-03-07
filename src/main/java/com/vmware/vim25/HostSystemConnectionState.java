@@ -42,7 +42,7 @@ public enum HostSystemConnectionState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostSystemConnectionState(String val) {
+    HostSystemConnectionState(String val) {
         this.val = val;
     }
 }

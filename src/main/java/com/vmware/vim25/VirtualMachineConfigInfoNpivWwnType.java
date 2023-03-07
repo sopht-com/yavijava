@@ -42,7 +42,7 @@ public enum VirtualMachineConfigInfoNpivWwnType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineConfigInfoNpivWwnType(String val) {
+    VirtualMachineConfigInfoNpivWwnType(String val) {
         this.val = val;
     }
 }

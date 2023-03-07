@@ -32,13 +32,14 @@ package com.vmware.vim25.ws;
 
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.mo.util.MorUtil;
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.doublecloud.ws.util.ReflectUtil;
 import org.doublecloud.ws.util.TypeUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,15 +59,14 @@ import java.util.List;
  */
 
 class XmlGenDom extends XmlGen {
-    private static Logger log = Logger.getLogger(XmlGenDom.class);
+    private static final Logger log = LoggerFactory.getLogger(XmlGenDom.class);
 
     protected static int getNumberOfSameTags(List<Element> subNodes, int sizeOfSubNodes, int from, String tagName) {
         int numOfTags = 1;
         for (int j = from + 1; j < sizeOfSubNodes; j++) {
             if (subNodes.get(j).getName().equals(tagName)) {
                 numOfTags++;
-            }
-            else {
+            } else {
                 break;
             }
         }
@@ -74,60 +74,52 @@ class XmlGenDom extends XmlGen {
     }
 
     public Object fromXML(String returnType, InputStream is) throws RemoteException {
-        log.debug("Parsing XML payload from server. " + returnType);
+        log.debug("Parsing XML payload from server. {}", returnType);
         Element root = null;
         try {
             SAXReader reader = new SAXReader();
             Document doc = reader.read(is);
-            if(log.isTraceEnabled()) {
-                log.trace("XML Document: " + doc.asXML());
+            if (log.isTraceEnabled()) {
+                log.trace("XML Document: {}", doc.asXML());
             }
             root = doc.getRootElement();
-        }
-        catch (DocumentException e){
+        } catch (DocumentException e) {
             Throwable throwThis = e.getNestedException() != null ? e.getNestedException() : e;
             throw new RemoteException("An error occurred parsing XML with return type: " + returnType, throwThis);
         } catch (Exception e1) {
             throw new RemoteException("VI SDK invoke exception:" + e1, e1);
-        }
-        finally {
+        } finally {
             if (is != null) {
                 try {
                     is.close();
-                }
-                catch (IOException ignore) {
+                } catch (IOException ignore) {
                 }
             }
         }
 
-        Element body = (Element) root.elements().get(0);
-        Element resp = (Element) body.elements().get(0);
+        Element body = root.elements().get(0);
+        Element resp = body.elements().get(0);
 
         if (resp.getName().contains("Fault")) {
             SoapFaultException sfe;
             try {
                 sfe = parseSoapFault(resp);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 throw new RemoteException("Exception in SoapClient.invoke:", e);
             }
             if (sfe != null && sfe.detail != null) {
                 throw (RemoteException) sfe.detail;
-            }
-            else {
+            } else {
                 throw sfe;
             }
-        }
-        else {
+        } else {
             if (returnType != null) {
                 try {
                     return fromXML(returnType, resp);
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     throw new RemoteException("Exception in SoapClient.invoke:", e);
                 }
-            }
-            else {
+            } else {
                 return null;
             }
         }
@@ -154,16 +146,15 @@ class XmlGenDom extends XmlGen {
             }
             sfe.detail = (Throwable) setDetailMessageInException(sfe.detail, root.elementText("faultstring"));
             return sfe;
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             throw new RuntimeException("Could not map the soap fault from:\n" + getContent(root), e);
         }
     }
 
     protected static Object setDetailMessageInException(Object obj, String detailMessage) {
         Class current = obj.getClass();
-        while(current != null) {
-            try{
+        while (current != null) {
+            try {
                 Field field = current.getDeclaredField("detailMessage");
                 if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers()) ||
                         Modifier.isFinal(field.getModifiers())) && !field.isAccessible()) {
@@ -174,10 +165,10 @@ class XmlGenDom extends XmlGen {
             } catch (NoSuchFieldException e) {
                 current = current.getSuperclass();
             } catch (IllegalAccessException e) {
-                log.info("The fault string: \"" + detailMessage + "\", was unable to be set in exception due to: ", e);
+                log.info("The fault string: \"{}\", was unable to be set in exception due to: ", detailMessage, e);
                 return obj;
             } catch (AccessControlException e) {
-                log.info("The fault string: \"" + detailMessage + "\", was unable to be set in exception due to: ", e);
+                log.info("The fault string: \"{}\", was unable to be set in exception due to: ", detailMessage, e);
                 return obj;
             }
         }
@@ -205,8 +196,7 @@ class XmlGenDom extends XmlGen {
             if (!type.endsWith("[]")) {
                 Element e = subNodes.get(0);
                 return MorUtil.createMOR(e.attributeValue("type"), e.getText());
-            }
-            else {
+            } else {
                 ManagedObjectReference[] mos = new ManagedObjectReference[subNodes.size()];
                 for (int i = 0; i < subNodes.size(); i++) {
                     Element elem = subNodes.get(i);
@@ -214,15 +204,13 @@ class XmlGenDom extends XmlGen {
                 }
                 return mos;
             }
-        }
-        else if (TypeUtil.isBasicType(type)) {
+        } else if (TypeUtil.isBasicType(type)) {
             List<String> vals = new ArrayList<String>();
             for (Element subNode : subNodes) {
                 vals.add(subNode.getText());
             }
             return ReflectUtil.parseToObject(type, vals);
-        }
-        else if (type.endsWith("[]")) { // array type
+        } else if (type.endsWith("[]")) { // array type
             String arrayItemTypeName = type.substring(0, type.length() - 2);
             Class<?> clazz = TypeUtil.getVimClass(arrayItemTypeName);
             Object ao = Array.newInstance(clazz, subNodes.size());
@@ -236,10 +224,10 @@ class XmlGenDom extends XmlGen {
             return ao;
         } else {
             Class<?> vimClass = TypeUtil.getVimClass(type);
-            if(vimClass != null) {
+            if (vimClass != null) {
                 return fromXml(vimClass, subNodes.get(0));
             } else {
-                log.error("Vim class not found for type: " + type + ", XML Document: " + subNodes.get(0).asXML());
+                log.error("Vim class not found for type: {}, XML Document: {}", type, subNodes.get(0).asXML());
                 return null;
             }
         }
@@ -262,8 +250,7 @@ class XmlGenDom extends XmlGen {
             Field field = null;
             if (TypeUtil.isPrimitiveType(tagName)) {
                 field = clazz.getField("_" + tagName);
-            }
-            else {
+            } else {
                 field = clazz.getField(tagName);
             }
 
@@ -290,28 +277,24 @@ class XmlGenDom extends XmlGen {
                     }
                     field.set(obj, mos);
                     i = i + sizeOfFieldArray - 1;
-                }
-                else {
+                } else {
                     field.set(obj, MorUtil.createMOR(e.attributeValue("type"), e.getText()));
                 }
-            }
-            else if (fRealType.isEnum()) { // Enum type
+            } else if (fRealType.isEnum()) { // Enum type
                 if (!isFieldArray) {
                     Object fo = Enum.valueOf(fRealType, e.getText());
                     field.set(obj, fo);
-                }
-                else {
+                } else {
                     int sizeOfFieldArray = getNumberOfSameTags(subNodes, sizeOfSubNodes, i, tagName);
                     Object ao = Array.newInstance(fRealType, sizeOfFieldArray);
                     for (int j = 0; j < sizeOfFieldArray; j++) {
-                        String enumStr = ((Element) subNodes.get(j + i)).getText();
+                        String enumStr = subNodes.get(j + i).getText();
                         Array.set(ao, j, Enum.valueOf(fRealType, enumStr));
                     }
                     field.set(obj, ao);
                     i = i + sizeOfFieldArray - 1;
                 }
-            }
-            else if (TypeUtil.isBasicType(fRealType)) { // basic data types
+            } else if (TypeUtil.isBasicType(fRealType)) { // basic data types
                 if (isFieldArray) {
                     int sizeOfFieldArray = getNumberOfSameTags(subNodes, sizeOfSubNodes, i, tagName);
 
@@ -323,8 +306,7 @@ class XmlGenDom extends XmlGen {
                     String fTrueType;
                     if (xsiType != null) {
                         fTrueType = xsiType.substring("xsd:".length()) + "[]";
-                    }
-                    else {
+                    } else {
                         fTrueType = fRealType.getSimpleName();
                         if (!fTrueType.endsWith("[]")) {
                             fTrueType = fTrueType + "[]";
@@ -332,18 +314,15 @@ class XmlGenDom extends XmlGen {
                     }
                     ReflectUtil.setObjectArrayField(obj, field, fTrueType, values);
                     i = i + sizeOfFieldArray - 1;
-                }
-                else {
+                } else {
                     if (xsiType != null) {
                         xsiType = xsiType.substring("xsd:".length());
                         ReflectUtil.setObjectField(obj, field, xsiType, e.getText());
-                    }
-                    else {
+                    } else {
                         ReflectUtil.setObjectField(obj, field, fRealType.getSimpleName(), e.getText());
                     }
                 }
-            }
-            else { //VIM type
+            } else { //VIM type
                 if (isFieldArray) {
                     int sizeOfFieldArray = getNumberOfSameTags(subNodes, sizeOfSubNodes, i, tagName);
                     // arrayTypeName = arrayTypeName.substring(0, arrayTypeName.length()-2);
@@ -358,8 +337,7 @@ class XmlGenDom extends XmlGen {
                     }
                     field.set(obj, ao);
                     i = i + sizeOfFieldArray - 1;
-                }
-                else { // single VIM
+                } else { // single VIM
                     Object o = fromXml(fRealType, e);
                     field.set(obj, o);
                 }

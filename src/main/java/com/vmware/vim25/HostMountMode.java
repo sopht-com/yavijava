@@ -41,7 +41,7 @@ public enum HostMountMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostMountMode(String val) {
+    HostMountMode(String val) {
         this.val = val;
     }
 }

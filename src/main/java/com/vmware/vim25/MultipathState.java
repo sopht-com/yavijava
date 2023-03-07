@@ -44,7 +44,7 @@ public enum MultipathState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private MultipathState(String val) {
+    MultipathState(String val) {
         this.val = val;
     }
 }

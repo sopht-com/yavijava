@@ -30,7 +30,16 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ConcurrentAccess;
+import com.vmware.vim25.DVPortgroupConfigInfo;
+import com.vmware.vim25.DVPortgroupConfigSpec;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.DvsFault;
+import com.vmware.vim25.EntityBackupConfig;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RollbackFailure;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -59,7 +68,7 @@ public class DistributedVirtualPortgroup extends Network {
         return (String[]) getCurrentProperty("portKeys");
     }
 
-    public Task reconfigureDVPortgroup_Task(DVPortgroupConfigSpec spec) throws DvsFault, ConcurrentAccess, DuplicateName, InvalidName, RuntimeFault, RemoteException {
+    public Task reconfigureDVPortgroup_Task(DVPortgroupConfigSpec spec) throws RemoteException {
         ManagedObjectReference mor = getVimService().reconfigureDVPortgroup_Task(getMOR(), spec);
         return new Task(getServerConnection(), mor);
     }
@@ -67,7 +76,7 @@ public class DistributedVirtualPortgroup extends Network {
     /**
      * @since SDK5.1
      */
-    public Task dVPortgroupRollback_Task(EntityBackupConfig entityBackup) throws RollbackFailure, DvsFault, RuntimeFault, RemoteException {
+    public Task dVPortgroupRollback_Task(EntityBackupConfig entityBackup) throws RemoteException {
         ManagedObjectReference mor = getVimService().dVPortgroupRollback_Task(getMOR(), entityBackup);
         return new Task(getServerConnection(), mor);
     }

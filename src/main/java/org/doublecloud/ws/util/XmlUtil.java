@@ -30,8 +30,8 @@ POSSIBILITY OF SUCH DAMAGE.
 package org.doublecloud.ws.util;
 
 public class XmlUtil {
-    private static char[] toBeEscaped = new char[]{'&', '<', '>', '"', '\''};
-    private static String[] escaped = new String[]{"&amp;", "&lt;", "&gt;", "&quot;", "&apos;"};
+    private static final char[] toBeEscaped = new char[]{'&', '<', '>', '"', '\''};
+    private static final String[] escaped = new String[]{"&amp;", "&lt;", "&gt;", "&quot;", "&apos;"};
 
     //escape 5 special chars http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
     public static String escapeForXML(String str) {

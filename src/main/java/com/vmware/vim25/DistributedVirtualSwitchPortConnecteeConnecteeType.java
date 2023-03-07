@@ -43,7 +43,7 @@ public enum DistributedVirtualSwitchPortConnecteeConnecteeType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DistributedVirtualSwitchPortConnecteeConnecteeType(String val) {
+    DistributedVirtualSwitchPortConnecteeConnecteeType(String val) {
         this.val = val;
     }
 }

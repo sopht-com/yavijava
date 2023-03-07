@@ -47,7 +47,7 @@ public enum HostDiskPartitionInfoType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostDiskPartitionInfoType(String val) {
+    HostDiskPartitionInfoType(String val) {
         this.val = val;
     }
 }

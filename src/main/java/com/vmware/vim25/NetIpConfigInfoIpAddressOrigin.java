@@ -44,7 +44,7 @@ public enum NetIpConfigInfoIpAddressOrigin {
     @SuppressWarnings("unused")
     private final String val;
 
-    private NetIpConfigInfoIpAddressOrigin(String val) {
+    NetIpConfigInfoIpAddressOrigin(String val) {
         this.val = val;
     }
 }

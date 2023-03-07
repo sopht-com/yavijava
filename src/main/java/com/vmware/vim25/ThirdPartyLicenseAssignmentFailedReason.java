@@ -41,7 +41,7 @@ public enum ThirdPartyLicenseAssignmentFailedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ThirdPartyLicenseAssignmentFailedReason(String val) {
+    ThirdPartyLicenseAssignmentFailedReason(String val) {
         this.val = val;
     }
 }

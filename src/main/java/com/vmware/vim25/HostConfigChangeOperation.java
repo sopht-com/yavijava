@@ -42,7 +42,7 @@ public enum HostConfigChangeOperation {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostConfigChangeOperation(String val) {
+    HostConfigChangeOperation(String val) {
         this.val = val;
     }
 }

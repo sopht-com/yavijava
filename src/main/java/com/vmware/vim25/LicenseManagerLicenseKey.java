@@ -56,7 +56,7 @@ public enum LicenseManagerLicenseKey {
     @SuppressWarnings("unused")
     private final String val;
 
-    private LicenseManagerLicenseKey(String val) {
+    LicenseManagerLicenseKey(String val) {
         this.val = val;
     }
 }

@@ -1,6 +1,14 @@
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.InsufficientResourcesFault;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.ResourceConfigSpec;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.VRPEditSpec;
+import com.vmware.vim25.VirtualResourcePoolSpec;
+import com.vmware.vim25.VirtualResourcePoolUsage;
 
 import java.rmi.RemoteException;
 

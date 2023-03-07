@@ -43,7 +43,7 @@ public enum StoragePlacementSpecPlacementType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private StoragePlacementSpecPlacementType(String val) {
+    StoragePlacementSpecPlacementType(String val) {
         this.val = val;
     }
 }

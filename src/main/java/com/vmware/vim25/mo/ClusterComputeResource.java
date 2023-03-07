@@ -29,7 +29,30 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ClusterActionHistory;
+import com.vmware.vim25.ClusterConfigInfo;
+import com.vmware.vim25.ClusterConfigSpec;
+import com.vmware.vim25.ClusterDasAdvancedRuntimeInfo;
+import com.vmware.vim25.ClusterDrsFaults;
+import com.vmware.vim25.ClusterDrsMigration;
+import com.vmware.vim25.ClusterDrsRecommendation;
+import com.vmware.vim25.ClusterEnterMaintenanceResult;
+import com.vmware.vim25.ClusterHostRecommendation;
+import com.vmware.vim25.ClusterRecommendation;
+import com.vmware.vim25.ClusterResourceUsageSummary;
+import com.vmware.vim25.ClusterRuleInfo;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.HostConnectFault;
+import com.vmware.vim25.HostConnectSpec;
+import com.vmware.vim25.InvalidArgument;
+import com.vmware.vim25.InvalidLogin;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.OptionValue;
+import com.vmware.vim25.PlacementResult;
+import com.vmware.vim25.PlacementSpec;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TooManyHosts;
 import com.vmware.vim25.mo.util.MorUtil;
 
 import java.rmi.RemoteException;
@@ -77,36 +100,36 @@ public class ClusterComputeResource extends ComputeResource {
     }
 
     // SDK 2.5 signature for back compatibility
-    public Task addHost_Task(HostConnectSpec spec, boolean asConnected, ResourcePool resourcePool) throws InvalidLogin, HostConnectFault, RuntimeFault, RemoteException {
+    public Task addHost_Task(HostConnectSpec spec, boolean asConnected, ResourcePool resourcePool) throws RemoteException {
         return addHost_Task(spec, asConnected, resourcePool, null);
     }
 
     // new SDK 4.0 signature
-    public Task addHost_Task(HostConnectSpec spec, boolean asConnected, ResourcePool resourcePool, String license) throws InvalidLogin, HostConnectFault, RuntimeFault, RemoteException {
+    public Task addHost_Task(HostConnectSpec spec, boolean asConnected, ResourcePool resourcePool, String license) throws RemoteException {
         ManagedObjectReference taskMOR = getVimService().addHost_Task(getMOR(), spec, asConnected, resourcePool == null ? null : resourcePool.getMOR(), license);
         return new Task(getServerConnection(), taskMOR);
     }
 
-    public void applyRecommendation(String key) throws RuntimeFault, RemoteException {
+    public void applyRecommendation(String key) throws RemoteException {
         getVimService().applyRecommendation(getMOR(), key);
     }
 
     /**
      * @since SDK4.1
      */
-    public void cancelRecommendation(String key) throws RuntimeFault, RemoteException {
+    public void cancelRecommendation(String key) throws RemoteException {
         getVimService().cancelRecommendation(getMOR(), key);
     }
 
     /**
      * @since SDK5.0
      */
-    public ClusterEnterMaintenanceResult clusterEnterMaintenanceMode(HostSystem[] hosts, OptionValue[] option) throws RuntimeFault, RemoteException {
+    public ClusterEnterMaintenanceResult clusterEnterMaintenanceMode(HostSystem[] hosts, OptionValue[] option) throws RemoteException {
         ManagedObjectReference[] hostMors = MorUtil.createMORs(hosts);
         return getVimService().clusterEnterMaintenanceMode(getMOR(), hostMors, option);
     }
 
-    public Task moveHostInto_Task(HostSystem host, ResourcePool resourcePool) throws TooManyHosts, InvalidState, RuntimeFault, RemoteException {
+    public Task moveHostInto_Task(HostSystem host, ResourcePool resourcePool) throws RemoteException {
         if (host == null) {
             throw new IllegalArgumentException("host must not be null.");
         }
@@ -114,7 +137,7 @@ public class ClusterComputeResource extends ComputeResource {
         return new Task(getServerConnection(), taskMOR);
     }
 
-    public Task moveInto_Task(HostSystem[] hosts) throws TooManyHosts, DuplicateName, InvalidState, RuntimeFault, RemoteException {
+    public Task moveInto_Task(HostSystem[] hosts) throws RemoteException {
         if (hosts == null) {
             throw new IllegalArgumentException("hosts must not be null.");
         }
@@ -122,26 +145,26 @@ public class ClusterComputeResource extends ComputeResource {
         return new Task(getServerConnection(), taskMOR);
     }
 
-    public ClusterHostRecommendation[] recommendHostsForVm(VirtualMachine vm, ResourcePool pool) throws RuntimeFault, RemoteException {
+    public ClusterHostRecommendation[] recommendHostsForVm(VirtualMachine vm, ResourcePool pool) throws RemoteException {
         if (vm == null) {
             throw new IllegalArgumentException("vm must not be null.");
         }
         return getVimService().recommendHostsForVm(getMOR(), vm.getMOR(), pool == null ? null : pool.getMOR());
     }
 
-    public Task reconfigureCluster_Task(ClusterConfigSpec spec, boolean modify) throws RuntimeFault, RemoteException {
+    public Task reconfigureCluster_Task(ClusterConfigSpec spec, boolean modify) throws RemoteException {
         ManagedObjectReference taskMOR = getVimService().reconfigureCluster_Task(getMOR(), spec, modify);
         return new Task(getServerConnection(), taskMOR);
     }
 
-    public void refreshRecommendation() throws RuntimeFault, RemoteException {
+    public void refreshRecommendation() throws RemoteException {
         getVimService().refreshRecommendation(getMOR());
     }
 
     /**
      * @since 4.0
      */
-    public ClusterDasAdvancedRuntimeInfo retrieveDasAdvancedRuntimeInfo() throws RuntimeFault, RemoteException {
+    public ClusterDasAdvancedRuntimeInfo retrieveDasAdvancedRuntimeInfo() throws RemoteException {
         return getVimService().retrieveDasAdvancedRuntimeInfo(getMOR());
     }
 

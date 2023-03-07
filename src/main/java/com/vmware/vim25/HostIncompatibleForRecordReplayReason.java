@@ -41,7 +41,7 @@ public enum HostIncompatibleForRecordReplayReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostIncompatibleForRecordReplayReason(String val) {
+    HostIncompatibleForRecordReplayReason(String val) {
         this.val = val;
     }
 }

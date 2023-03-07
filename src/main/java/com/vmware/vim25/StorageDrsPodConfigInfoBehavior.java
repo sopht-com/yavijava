@@ -41,7 +41,7 @@ public enum StorageDrsPodConfigInfoBehavior {
     @SuppressWarnings("unused")
     private final String val;
 
-    private StorageDrsPodConfigInfoBehavior(String val) {
+    StorageDrsPodConfigInfoBehavior(String val) {
         this.val = val;
     }
 }

@@ -29,7 +29,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ComputeResourceConfigInfo;
+import com.vmware.vim25.ComputeResourceConfigSpec;
+import com.vmware.vim25.ComputeResourceSummary;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -72,7 +76,7 @@ public class ComputeResource extends ManagedEntity {
         return (ComputeResourceSummary) this.getCurrentProperty("summary");
     }
 
-    public Task reconfigureComputeResource_Task(ComputeResourceConfigSpec spec, boolean modify) throws RuntimeFault, RemoteException {
+    public Task reconfigureComputeResource_Task(ComputeResourceConfigSpec spec, boolean modify) throws RemoteException {
         ManagedObjectReference taskMOR = getVimService().reconfigureComputeResource_Task(getMOR(), spec, modify);
         return new Task(getServerConnection(), taskMOR);
     }

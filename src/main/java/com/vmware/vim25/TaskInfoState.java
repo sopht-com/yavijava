@@ -43,7 +43,7 @@ public enum TaskInfoState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private TaskInfoState(String val) {
+    TaskInfoState(String val) {
         this.val = val;
     }
 }

@@ -29,7 +29,16 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.InvalidProperty;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.LocalizableMessage;
+import com.vmware.vim25.LocalizedMethodFault;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.MethodFault;
+import com.vmware.vim25.OutOfBounds;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInfo;
+import com.vmware.vim25.TaskInfoState;
 
 import java.rmi.RemoteException;
 
@@ -47,7 +56,7 @@ public class Task extends ExtensibleManagedObject {
         super(serverConnection, mor);
     }
 
-    public TaskInfo getTaskInfo() throws InvalidProperty, RuntimeFault, RemoteException {
+    public TaskInfo getTaskInfo() throws RemoteException {
         return (TaskInfo) getCurrentProperty(PROPNAME_INFO);
     }
 
@@ -59,22 +68,22 @@ public class Task extends ExtensibleManagedObject {
         return (ManagedEntity[]) getManagedObjects("info.locked");
     }
 
-    public void cancelTask() throws RuntimeFault, RemoteException {
+    public void cancelTask() throws RemoteException {
         getVimService().cancelTask(getMOR());
     }
 
-    public void setTaskState(TaskInfoState tis, Object result, LocalizedMethodFault fault) throws InvalidState, RuntimeFault, RemoteException {
+    public void setTaskState(TaskInfoState tis, Object result, LocalizedMethodFault fault) throws RemoteException {
         getVimService().setTaskState(getMOR(), tis, result, fault);
     }
 
-    public void updateProgress(int percentDone) throws InvalidState, OutOfBounds, RuntimeFault, RemoteException {
+    public void updateProgress(int percentDone) throws RemoteException {
         getVimService().updateProgress(getMOR(), percentDone);
     }
 
     /**
      * @since SDK4.0
      */
-    public void setTaskDescription(LocalizableMessage description) throws RuntimeFault, RemoteException {
+    public void setTaskDescription(LocalizableMessage description) throws RemoteException {
         getVimService().setTaskDescription(getMOR(), description);
     }
 
@@ -93,14 +102,13 @@ public class Task extends ExtensibleManagedObject {
     public String waitForMe() throws InvalidProperty, RuntimeFault, RemoteException {
 
         Object[] result = waitForValues(
-            new String[]{"info.state", "info.error"},
-            new String[]{"state"},
-            new Object[][]{new Object[]{TaskInfoState.success, TaskInfoState.error}});
+                new String[]{"info.state", "info.error"},
+                new String[]{"state"},
+                new Object[][]{new Object[]{TaskInfoState.success, TaskInfoState.error}});
 
         if (result[0].equals(TaskInfoState.success)) {
             return SUCCESS;
-        }
-        else {
+        } else {
             TaskInfo tinfo = (TaskInfo) getCurrentProperty(PROPNAME_INFO);
             LocalizedMethodFault fault = tinfo.getError();
             String error = "Error Occured";
@@ -171,22 +179,18 @@ public class Task extends ExtensibleManagedObject {
                 if (tries > maxTries) {
                     if (getInfoException == null) {
                         throw new NullPointerException();
-                    }
-                    else if (getInfoException instanceof RuntimeFault) {
+                    } else if (getInfoException instanceof RuntimeFault) {
                         throw (RuntimeFault) getInfoException;
-                    }
-                    else if (getInfoException instanceof RemoteException) {
+                    } else if (getInfoException instanceof RemoteException) {
                         throw (RemoteException) getInfoException;
-                    }
-                    else {
+                    } else {
                         throw new RuntimeException(getInfoException);
                     }
                 }
 
                 try {
                     tState = getTaskInfo().getState();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     //silently catch 3 exceptions
                     getInfoException = e;
                 }
@@ -195,8 +199,7 @@ public class Task extends ExtensibleManagedObject {
             // sleep for a specified time based on task state.
             if (tState.equals(TaskInfoState.running)) {
                 Thread.sleep(runningDelayInMillSecond);
-            }
-            else {
+            } else {
                 Thread.sleep(queuedDelayInMillSecond);
             }
         }

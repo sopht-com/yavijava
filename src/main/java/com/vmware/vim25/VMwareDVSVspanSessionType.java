@@ -44,7 +44,7 @@ public enum VMwareDVSVspanSessionType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VMwareDVSVspanSessionType(String val) {
+    VMwareDVSVspanSessionType(String val) {
         this.val = val;
     }
 }

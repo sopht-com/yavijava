@@ -43,7 +43,7 @@ public enum LicenseAssignmentFailedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private LicenseAssignmentFailedReason(String val) {
+    LicenseAssignmentFailedReason(String val) {
         this.val = val;
     }
 }

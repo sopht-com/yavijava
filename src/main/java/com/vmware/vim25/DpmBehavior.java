@@ -41,7 +41,7 @@ public enum DpmBehavior {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DpmBehavior(String val) {
+    DpmBehavior(String val) {
         this.val = val;
     }
 }

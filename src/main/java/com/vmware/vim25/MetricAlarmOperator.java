@@ -41,7 +41,7 @@ public enum MetricAlarmOperator {
     @SuppressWarnings("unused")
     private final String val;
 
-    private MetricAlarmOperator(String val) {
+    MetricAlarmOperator(String val) {
         this.val = val;
     }
 }

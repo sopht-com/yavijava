@@ -41,7 +41,7 @@ public enum NumVirtualCpusIncompatibleReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private NumVirtualCpusIncompatibleReason(String val) {
+    NumVirtualCpusIncompatibleReason(String val) {
         this.val = val;
     }
 }

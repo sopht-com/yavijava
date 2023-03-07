@@ -1,6 +1,27 @@
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.GuestAuthentication;
+import com.vmware.vim25.GuestComponentsOutOfDate;
+import com.vmware.vim25.GuestOperationsFault;
+import com.vmware.vim25.GuestOperationsUnavailable;
+import com.vmware.vim25.GuestPermissionDenied;
+import com.vmware.vim25.GuestRegKeyNameSpec;
+import com.vmware.vim25.GuestRegKeyRecordSpec;
+import com.vmware.vim25.GuestRegValueNameSpec;
+import com.vmware.vim25.GuestRegValueSpec;
+import com.vmware.vim25.GuestRegistryKeyAlreadyExists;
+import com.vmware.vim25.GuestRegistryKeyHasSubkeys;
+import com.vmware.vim25.GuestRegistryKeyInvalid;
+import com.vmware.vim25.GuestRegistryKeyParentVolatile;
+import com.vmware.vim25.GuestRegistryValueNotFound;
+import com.vmware.vim25.InvalidGuestLogin;
+import com.vmware.vim25.InvalidPowerState;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.OperationDisabledByGuest;
+import com.vmware.vim25.OperationNotSupportedByGuest;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 
@@ -58,12 +79,12 @@ public class GuestWindowsRegistryManager extends ManagedObject {
      * @throws RemoteException
      */
     public void createRegistryKeyInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean isVolatile, String classType) throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable,
-        GuestPermissionDenied, GuestRegistryKeyAlreadyExists, GuestRegistryKeyInvalid, GuestRegistryKeyParentVolatile, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+            GuestPermissionDenied, GuestRegistryKeyAlreadyExists, GuestRegistryKeyInvalid, GuestRegistryKeyParentVolatile, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
         getVimService().createRegistryKeyInGuest(getMOR(), vm.getMOR(), auth, keyName, isVolatile, classType);
     }
 
-    public void createRegistryKeyInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean isVolatile) throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable,
-        GuestPermissionDenied, GuestRegistryKeyAlreadyExists, GuestRegistryKeyInvalid, GuestRegistryKeyParentVolatile, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+    public void createRegistryKeyInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean isVolatile) throws
+            RemoteException {
         createRegistryKeyInGuest(vm, auth, keyName, isVolatile, null);
     }
 
@@ -90,8 +111,8 @@ public class GuestWindowsRegistryManager extends ManagedObject {
      * @throws RemoteException
      */
     public void deleteRegistryKeyInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean recursive) throws GuestComponentsOutOfDate, GuestOperationsFault,
-        GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyHasSubkeys, GuestRegistryKeyInvalid, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest,
-        OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+            GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyHasSubkeys, GuestRegistryKeyInvalid, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest,
+            OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
         getVimService().deleteRegistryKeyInGuest(getMOR(), vm.getMOR(), auth, keyName, recursive);
     }
 
@@ -117,8 +138,8 @@ public class GuestWindowsRegistryManager extends ManagedObject {
      * @throws RemoteException
      */
     public void deleteRegistryValueInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegValueNameSpec valueName) throws GuestComponentsOutOfDate, GuestOperationsFault,
-        GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyInvalid, GuestRegistryValueNotFound, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest,
-        RuntimeFault, TaskInProgress, RemoteException {
+            GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyInvalid, GuestRegistryValueNotFound, InvalidGuestLogin, InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest,
+            RuntimeFault, TaskInProgress, RemoteException {
         getVimService().deleteRegistryValueInGuest(getMOR(), vm.getMOR(), auth, valueName);
     }
 
@@ -146,14 +167,14 @@ public class GuestWindowsRegistryManager extends ManagedObject {
      * @throws RemoteException
      */
     public GuestRegKeyRecordSpec[] listRegistryKeysInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean recursive, String matchPattern)
-        throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyInvalid, InvalidGuestLogin, InvalidPowerState,
-        InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+            throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyInvalid, InvalidGuestLogin, InvalidPowerState,
+            InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
         return getVimService().listRegistryKeysInGuest(getMOR(), vm.getMOR(), auth, keyName, recursive, matchPattern);
     }
 
     public GuestRegKeyRecordSpec[] listRegistryKeysInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean recursive)
-        throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyInvalid, InvalidGuestLogin, InvalidPowerState,
-        InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+            throws
+            RemoteException {
         return listRegistryKeysInGuest(vm, auth, keyName, recursive, null);
     }
 
@@ -181,12 +202,12 @@ public class GuestWindowsRegistryManager extends ManagedObject {
      * @throws RemoteException
      */
     public GuestRegValueSpec[] listRegistryValuesInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean expandStrings, String matchPattern) throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyInvalid, InvalidGuestLogin, InvalidPowerState,
-        InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+            InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
         return getVimService().listRegistryValuesInGuest(getMOR(), vm.getMOR(), auth, keyName, expandStrings, matchPattern);
     }
 
-    public GuestRegValueSpec[] listRegistryValuesInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean expandStrings) throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyInvalid, InvalidGuestLogin, InvalidPowerState,
-        InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+    public GuestRegValueSpec[] listRegistryValuesInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, boolean expandStrings) throws
+            RemoteException {
         return listRegistryValuesInGuest(vm, auth, keyName, expandStrings, null);
     }
 
@@ -211,7 +232,7 @@ public class GuestWindowsRegistryManager extends ManagedObject {
      * @throws RemoteException
      */
     public void setRegistryValueInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegValueSpec value) throws GuestComponentsOutOfDate, GuestOperationsFault, GuestOperationsUnavailable, GuestPermissionDenied, GuestRegistryKeyInvalid, InvalidGuestLogin,
-        InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
+            InvalidPowerState, InvalidState, OperationDisabledByGuest, OperationNotSupportedByGuest, RuntimeFault, TaskInProgress, RemoteException {
         getVimService().setRegistryValueInGuest(getMOR(), vm.getMOR(), auth, value);
     }
 }

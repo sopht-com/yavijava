@@ -29,7 +29,7 @@ class WSClientSpec extends Specification {
         setup:
         InputStream inputStream = new FileInputStream(new File("src/test/java/com/vmware/vim25/ws/xml/InvalidLoginFault.xml"))
 
-        WSClient wsClient = Spy(WSClient,constructorArgs:["https://foo.com/sdk", true]) {post(*_) >> inputStream}
+        WSClient wsClient = Spy(WSClient, constructorArgs: ["https://foo.com/sdk", true]) { post(*_) >> inputStream }
         ManagedObjectReference managedObjectReference = new ManagedObjectReference()
         managedObjectReference.setType("UserSession")
         managedObjectReference.val = "user-123"
@@ -50,13 +50,13 @@ class WSClientSpec extends Specification {
 
     def 'test IOException Handling during getInputStream'() {
         setup:
-        TestIOExceptionNullErrorStream connect = new TestIOExceptionNullErrorStream();
-        TestIOExceptionWithErrorStream connect2 = new TestIOExceptionWithErrorStream();
+        TestIOExceptionNullErrorStream connect = new TestIOExceptionNullErrorStream()
+        TestIOExceptionWithErrorStream connect2 = new TestIOExceptionWithErrorStream()
         WSClient wsClient = new WSClient("https://foo.com/sdk", true)
 
         when:
-        String message = shouldFail RemoteException, {wsClient.getInputStreamFromConnection(connect)}
-        String message2 = new InputStreamReader(wsClient.getInputStreamFromConnection(connect2)).readLine();
+        String message = shouldFail RemoteException, { wsClient.getInputStreamFromConnection(connect) }
+        String message2 = new InputStreamReader(wsClient.getInputStreamFromConnection(connect2)).readLine()
 
         then:
         message.contains("An error occurred getting a response from the connection at url https://foo.com/sdk; nested exception is: ")

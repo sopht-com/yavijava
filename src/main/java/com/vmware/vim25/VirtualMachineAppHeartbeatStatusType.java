@@ -42,7 +42,7 @@ public enum VirtualMachineAppHeartbeatStatusType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineAppHeartbeatStatusType(String val) {
+    VirtualMachineAppHeartbeatStatusType(String val) {
         this.val = val;
     }
 }

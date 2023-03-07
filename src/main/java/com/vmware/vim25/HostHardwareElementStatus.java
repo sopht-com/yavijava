@@ -43,7 +43,7 @@ public enum HostHardwareElementStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostHardwareElementStatus(String val) {
+    HostHardwareElementStatus(String val) {
         this.val = val;
     }
 }

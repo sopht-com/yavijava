@@ -40,7 +40,7 @@ public enum RecommendationType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private RecommendationType(String val) {
+    RecommendationType(String val) {
         this.val = val;
     }
 }

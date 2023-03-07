@@ -43,7 +43,7 @@ public enum HostImageAcceptanceLevel {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostImageAcceptanceLevel(String val) {
+    HostImageAcceptanceLevel(String val) {
         this.val = val;
     }
 }

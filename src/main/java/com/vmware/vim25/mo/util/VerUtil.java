@@ -29,7 +29,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo.util;
 
-import javax.net.ssl.*;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -85,17 +89,16 @@ public class VerUtil {
 
         try {
             trustAllHttpsCertificates();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         HttpsURLConnection.setDefaultHostnameVerifier(
-            new HostnameVerifier() {
-                public boolean verify(String urlHostName, SSLSession session) {
-                    return true;
-                }
-            });
+                new HostnameVerifier() {
+                    public boolean verify(String urlHostName, SSLSession session) {
+                        return true;
+                    }
+                });
 
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -139,11 +142,9 @@ public class VerUtil {
         }
 
         public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException {
-            return;
         }
 
         public void checkClientTrusted(X509Certificate[] certs, String authType) throws CertificateException {
-            return;
         }
     }
 }

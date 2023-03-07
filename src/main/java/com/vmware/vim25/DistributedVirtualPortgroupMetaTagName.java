@@ -42,7 +42,7 @@ public enum DistributedVirtualPortgroupMetaTagName {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DistributedVirtualPortgroupMetaTagName(String val) {
+    DistributedVirtualPortgroupMetaTagName(String val) {
         this.val = val;
     }
 }

@@ -51,25 +51,25 @@ public class ViewManager extends ManagedObject {
         return getViews("viewList");
     }
 
-    public ContainerView createContainerView(ManagedEntity container, String[] type, boolean recursive) throws RuntimeFault, RemoteException {
+    public ContainerView createContainerView(ManagedEntity container, String[] type, boolean recursive) throws RemoteException {
         if (container == null) {
             throw new IllegalArgumentException("container must not be null.");
         }
         return new ContainerView(getServerConnection(),
-            getVimService().createContainerView(getMOR(), container.getMOR(), type, recursive));
+                getVimService().createContainerView(getMOR(), container.getMOR(), type, recursive));
     }
 
-    public InventoryView createInventoryView() throws RuntimeFault, RemoteException {
+    public InventoryView createInventoryView() throws RemoteException {
         return new InventoryView(getServerConnection(),
-            getVimService().createInventoryView(getMOR()));
+                getVimService().createInventoryView(getMOR()));
     }
 
-    public ListView createListView(ManagedObject[] mos) throws RuntimeFault, RemoteException {
+    public ListView createListView(ManagedObject[] mos) throws RemoteException {
         return new ListView(getServerConnection(),
-            getVimService().createListView(getMOR(), mos == null ? null : MorUtil.createMORs(mos)));
+                getVimService().createListView(getMOR(), mos == null ? null : MorUtil.createMORs(mos)));
     }
 
-    public ListView createListViewFromView(View view) throws RuntimeFault, RemoteException {
+    public ListView createListViewFromView(View view) throws RemoteException {
         if (view == null) {
             throw new IllegalArgumentException("view must not be null.");
         }

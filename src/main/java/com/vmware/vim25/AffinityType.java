@@ -41,7 +41,7 @@ public enum AffinityType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private AffinityType(String val) {
+    AffinityType(String val) {
         this.val = val;
     }
 }

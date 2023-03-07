@@ -52,7 +52,7 @@ public enum ScsiLunType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ScsiLunType(String val) {
+    ScsiLunType(String val) {
         this.val = val;
     }
 }

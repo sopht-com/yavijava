@@ -28,6 +28,7 @@ POSSIBILITY OF SUCH DAMAGE.
 ================================================================================*/
 
 package com.vmware.vim.cf;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -37,68 +38,58 @@ import java.util.Calendar;
  * @author Steve JIN (sjin@vmware.com)
  */
 
-class DeepCopier 
-{
+class DeepCopier {
     private final static Package JAVA_LANG_PKG = String.class.getPackage();
 
     /**
      * This is used to clone an data object in VI SDK. The algorithm used here
      * is NOT generic enough to be used in other cases.
+     *
      * @param src the source object to be deep copied.
      * @return the cloned copy.
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
-    
-	public static Object deepCopy(Object src) throws InstantiationException, IllegalAccessException
-	{
-		Class<?> clazz = src.getClass();
 
-		// Just check if the object is mutable.
-		// We assume the object that is final is likely immutable. 
-		// It's true for String, Integer and other data types.
-		if(Modifier.isFinal(clazz.getModifiers()))
-		{
-          return src; 
-		}
+    public static Object deepCopy(Object src) throws InstantiationException, IllegalAccessException {
+        Class<?> clazz = src.getClass();
 
-		Object dst = clazz.newInstance();
-		if(src instanceof Calendar)
-		{
-			((Calendar)dst).setTimeInMillis(((Calendar)src).getTimeInMillis());
-			return dst;
-		}
-		
-		Field[] fields = clazz.getFields();
-		for(int i=0; i<fields.length; i++)
-		{
-			Object fObj = fields[i].get(src);
-			if(fObj == null)
-			{
-				continue;
-			}
-			Class<?> fRealType = fObj.getClass();
-			if((!fRealType.isPrimitive()) 
-			  || (!fRealType.isEnum())
-			  || fRealType.getPackage() != JAVA_LANG_PKG)
-			{
-				if(fRealType.isArray())
-				{
-					Object[] items = (Object[]) fObj;
-					fObj = Array.newInstance(fRealType.getComponentType(), items.length);
-					for(int j=0; j<items.length; j++)
-					{
-						Array.set(fObj, j, deepCopy(items[j]));
-					}
-				}
-				else
-				{
-					fObj = deepCopy(fObj);
-				}
-			}
-			fields[i].set(dst, fObj);
-		}
-		
-		return dst;
-	}
+        // Just check if the object is mutable.
+        // We assume the object that is final is likely immutable.
+        // It's true for String, Integer and other data types.
+        if (Modifier.isFinal(clazz.getModifiers())) {
+            return src;
+        }
+
+        Object dst = clazz.newInstance();
+        if (src instanceof Calendar) {
+            ((Calendar) dst).setTimeInMillis(((Calendar) src).getTimeInMillis());
+            return dst;
+        }
+
+        Field[] fields = clazz.getFields();
+        for (int i = 0; i < fields.length; i++) {
+            Object fObj = fields[i].get(src);
+            if (fObj == null) {
+                continue;
+            }
+            Class<?> fRealType = fObj.getClass();
+            if ((!fRealType.isPrimitive())
+                    || (!fRealType.isEnum())
+                    || fRealType.getPackage() != JAVA_LANG_PKG) {
+                if (fRealType.isArray()) {
+                    Object[] items = (Object[]) fObj;
+                    fObj = Array.newInstance(fRealType.getComponentType(), items.length);
+                    for (int j = 0; j < items.length; j++) {
+                        Array.set(fObj, j, deepCopy(items[j]));
+                    }
+                } else {
+                    fObj = deepCopy(fObj);
+                }
+            }
+            fields[i].set(dst, fObj);
+        }
+
+        return dst;
+    }
 }

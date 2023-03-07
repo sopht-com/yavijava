@@ -1,19 +1,5 @@
 package com.vmware.vim25.ws;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.rmi.RemoteException;
-import java.security.cert.X509Certificate;
-import java.util.Calendar;
-
-import javax.net.ssl.*;
-
-import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.utility.LoadVcenterProps;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.ObjectContent;
@@ -23,10 +9,26 @@ import com.vmware.vim25.PropertySpec;
 import com.vmware.vim25.SelectionSpec;
 import com.vmware.vim25.mo.ServiceInstance;
 import com.vmware.vim25.mo.util.PropertyCollectorUtil;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.security.cert.X509Certificate;
+import java.util.Calendar;
 
 public class WSClientIntTest {
 
-    private static final Logger log = Logger.getLogger(WSClientIntTest.class);
+    private static final Logger log = LoggerFactory.getLogger(WSClientIntTest.class);
 
     /**
      * Counter for created factory in {@link CustomWSClient}.
@@ -68,7 +70,7 @@ public class WSClientIntTest {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        if(si != null) {
+        if (si != null) {
             wsClient = new WSClient(LoadVcenterProps.url, true);
 
             wsClient.setVimNameSpace(ServiceInstance.VIM25_NAMESPACE);
@@ -117,8 +119,7 @@ public class WSClientIntTest {
         Throwable t = null;
         try {
             ServiceInstance si = new ServiceInstance(new URL(LoadVcenterProps.url), LoadVcenterProps.userName, LoadVcenterProps.password, false);
-        }
-        catch (RemoteException re) {
+        } catch (RemoteException re) {
             t = re;
         }
         assert t.getCause() instanceof SSLHandshakeException;
@@ -172,14 +173,14 @@ public class WSClientIntTest {
             client.invoke("RetrieveProperties", buildGetHostsArgs(), "ObjectContent[]");
         } catch (RemoteException e) {
         }
-        
+
         Assert.assertEquals(1, createdSSLFactory);
 
         try {
             client.invoke("RetrieveProperties", buildGetHostsArgs(), "ObjectContent[]");
         } catch (RemoteException e) {
         }
-        
+
         Assert.assertEquals(1, createdSSLFactory);
     }
 
@@ -206,9 +207,9 @@ public class WSClientIntTest {
         Assert.assertEquals(1, createdSSLFactory);
     }
 
-   /**
+    /**
      * This method will build the request payload.
-     * 
+     *
      * @return Argument[]
      */
     private Argument[] buildGetHostsArgs() {
@@ -231,24 +232,25 @@ public class WSClientIntTest {
         os.setSkip(Boolean.FALSE);
         os.setSelectSet(selectionSpecs);
 
-        String[][] typeinfo = new String[][] { new String[] { "HostSystem",
-                "name", }, };
+        String[][] typeinfo = new String[][]{new String[]{"HostSystem",
+                "name",},};
         PropertySpec[] propspecary = PropertyCollectorUtil
                 .buildPropertySpecArray(typeinfo);
 
         PropertyFilterSpec spec = new PropertyFilterSpec();
-        spec.setObjectSet(new ObjectSpec[] { os });
+        spec.setObjectSet(new ObjectSpec[]{os});
         spec.setPropSet(propspecary);
 
         paras[0] = new Argument("_this", "ManagedObjectReference", mor);
         paras[1] = new Argument("specSet", "PropertyFilterSpec[]",
-                new PropertyFilterSpec[] { spec });
+                new PropertyFilterSpec[]{spec});
 
         return paras;
     }
 
     /**
      * This test verifies that the computed thumbprint is correct and that it is computed only once.
+     *
      * @author Hubert Verstraete
      */
     @Test
@@ -259,7 +261,7 @@ public class WSClientIntTest {
             client.invoke("RetrieveProperties", buildGetHostsArgs(), "ObjectContent[]");
         } catch (RemoteException e) {
         }
- 
+
         Assert.assertEquals(1, computedThumbprint);
 
         try {
@@ -273,15 +275,13 @@ public class WSClientIntTest {
     }
 
 
-    
     /**
      * This extension of the WSClient will create count the number of time the {@link SSLSocketFactory} was created.
-     * 
+     *
      * @author Francis Beaulé
-     * 
+     * <p>
      * This extension also counts the number of time the Server {@link thumbprint} is computed.
      * @author Hubert Verstraete
-     *
      */
     private class CustomWSClient extends WSClient {
         public CustomWSClient(String serverUrl, boolean ignoreCert) throws MalformedURLException, RemoteException {

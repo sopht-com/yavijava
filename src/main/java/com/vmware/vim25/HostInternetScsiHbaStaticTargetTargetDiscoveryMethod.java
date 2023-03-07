@@ -44,7 +44,7 @@ public enum HostInternetScsiHbaStaticTargetTargetDiscoveryMethod {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostInternetScsiHbaStaticTargetTargetDiscoveryMethod(String val) {
+    HostInternetScsiHbaStaticTargetTargetDiscoveryMethod(String val) {
         this.val = val;
     }
 }

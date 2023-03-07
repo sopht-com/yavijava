@@ -42,7 +42,7 @@ public enum FtIssuesOnHostHostSelectionType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private FtIssuesOnHostHostSelectionType(String val) {
+    FtIssuesOnHostHostSelectionType(String val) {
         this.val = val;
     }
 }

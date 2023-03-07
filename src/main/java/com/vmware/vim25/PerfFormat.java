@@ -41,7 +41,7 @@ public enum PerfFormat {
     @SuppressWarnings("unused")
     private final String val;
 
-    private PerfFormat(String val) {
+    PerfFormat(String val) {
         this.val = val;
     }
 }

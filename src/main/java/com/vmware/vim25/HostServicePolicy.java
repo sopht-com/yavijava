@@ -42,7 +42,7 @@ public enum HostServicePolicy {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostServicePolicy(String val) {
+    HostServicePolicy(String val) {
         this.val = val;
     }
 }

@@ -43,7 +43,7 @@ public enum ScsiLunDescriptorQuality {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ScsiLunDescriptorQuality(String val) {
+    ScsiLunDescriptorQuality(String val) {
         this.val = val;
     }
 }

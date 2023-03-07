@@ -41,7 +41,7 @@ public enum StateAlarmOperator {
     @SuppressWarnings("unused")
     private final String val;
 
-    private StateAlarmOperator(String val) {
+    StateAlarmOperator(String val) {
         this.val = val;
     }
 }

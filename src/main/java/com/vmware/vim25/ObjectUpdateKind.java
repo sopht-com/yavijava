@@ -42,7 +42,7 @@ public enum ObjectUpdateKind {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ObjectUpdateKind(String val) {
+    ObjectUpdateKind(String val) {
         this.val = val;
     }
 }

@@ -44,7 +44,7 @@ public enum VirtualMachineConnectionState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineConnectionState(String val) {
+    VirtualMachineConnectionState(String val) {
         this.val = val;
     }
 }

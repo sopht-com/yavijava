@@ -53,7 +53,7 @@ public class HostEsxAgentHostManager extends ManagedObject {
         return (HostEsxAgentHostManagerConfigInfo) getCurrentProperty("configInfo");
     }
 
-    public void esxAgentHostManagerUpdateConfig(HostEsxAgentHostManagerConfigInfo configInfo) throws RuntimeFault, RemoteException {
+    public void esxAgentHostManagerUpdateConfig(HostEsxAgentHostManagerConfigInfo configInfo) throws RemoteException {
         getVimService().esxAgentHostManagerUpdateConfig(getMOR(), configInfo);
     }
 }

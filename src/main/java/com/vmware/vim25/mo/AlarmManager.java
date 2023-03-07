@@ -29,7 +29,15 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.AlarmDescription;
+import com.vmware.vim25.AlarmExpression;
+import com.vmware.vim25.AlarmSpec;
+import com.vmware.vim25.AlarmState;
+import com.vmware.vim25.DuplicateName;
+import com.vmware.vim25.InvalidName;
+import com.vmware.vim25.ManagedEntityStatus;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
 
 import java.rmi.RemoteException;
 
@@ -63,12 +71,9 @@ public class AlarmManager extends ManagedObject {
     /**
      * Acknowledge the alarm for a managed entity.
      *
-     * @param alarm
-     *            The {@link Alarm} to acknowledge.
-     * @param entity
-     *            The {@link ManagedEntity} which the alarm applies to.
-     * @throws RuntimeFault
-     *             if any unhandled runtime fault occurs
+     * @param alarm  The {@link Alarm} to acknowledge.
+     * @param entity The {@link ManagedEntity} which the alarm applies to.
+     * @throws RuntimeFault    if any unhandled runtime fault occurs
      * @throws RemoteException
      * @since 4.0
      */
@@ -80,15 +85,11 @@ public class AlarmManager extends ManagedObject {
      * Set the status of an alarm for the given managed entity. Not a public
      * VMware API.
      *
-     * @param alarm
-     *            The {@link Alarm} to set the status of.
-     * @param entity
-     *            The {@link ManagedEntity} the alarm applies to.
-     * @param status
-     *            The string status corresponding to a
-     *            {@link ManagedEntityStatus} to set.
-     * @throws RuntimeFault
-     *             if any unhandled runtime fault occurs
+     * @param alarm  The {@link Alarm} to set the status of.
+     * @param entity The {@link ManagedEntity} the alarm applies to.
+     * @param status The string status corresponding to a
+     *               {@link ManagedEntityStatus} to set.
+     * @throws RuntimeFault    if any unhandled runtime fault occurs
      * @throws RemoteException
      * @since 4.x added to yavija for 5.5b.07
      */
@@ -99,11 +100,9 @@ public class AlarmManager extends ManagedObject {
     /**
      * Whether or not alarm actions are available on the given ManagedEntity
      *
-     * @param entity
-     *            The {@link ManagedEntity} to query.
+     * @param entity The {@link ManagedEntity} to query.
      * @return true if alarm actions are available
-     * @throws RuntimeFault
-     *             if any unhandled runtime fault occurs
+     * @throws RuntimeFault    if any unhandled runtime fault occurs
      * @throws RemoteException
      * @since 4.0
      */
@@ -114,12 +113,9 @@ public class AlarmManager extends ManagedObject {
     /**
      * Toggles alarms on the given managed entity.
      *
-     * @param entity
-     *            The {@link ManagedEntity} to toggle alarms on.
-     * @param enabled
-     *            Whether to enable or disable alarms.
-     * @throws RuntimeFault
-     *             if any unhandled runtime fault occurs
+     * @param entity  The {@link ManagedEntity} to toggle alarms on.
+     * @param enabled Whether to enable or disable alarms.
+     * @throws RuntimeFault    if any unhandled runtime fault occurs
      * @throws RemoteException
      * @since 4.0
      */
@@ -131,17 +127,12 @@ public class AlarmManager extends ManagedObject {
      * Create an alarm against the given managed entity using the alarm
      * specification
      *
-     * @param me
-     *            The {@link ManagedEntity} to alarm against.
-     * @param as
-     *            The {@link AlarmSpec} used to generate the alarm.
+     * @param me The {@link ManagedEntity} to alarm against.
+     * @param as The {@link AlarmSpec} used to generate the alarm.
      * @return The new {@link Alarm} created
-     * @throws InvalidName
-     *             if the alarm name exceeds the max length or is empty.
-     * @throws DuplicateName
-     *             if an alarm with the same name already exists.
-     * @throws RuntimeFault
-     *             if any unhandled runtime fault occurs
+     * @throws InvalidName     if the alarm name exceeds the max length or is empty.
+     * @throws DuplicateName   if an alarm with the same name already exists.
+     * @throws RuntimeFault    if any unhandled runtime fault occurs
      * @throws RemoteException
      */
     public Alarm createAlarm(ManagedEntity me, AlarmSpec as) throws InvalidName, DuplicateName, RuntimeFault, RemoteException {

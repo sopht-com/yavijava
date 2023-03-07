@@ -40,7 +40,7 @@ public enum VirtualMachineMetadataManagerVmMetadataOwnerOwner {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineMetadataManagerVmMetadataOwnerOwner(String val) {
+    VirtualMachineMetadataManagerVmMetadataOwnerOwner(String val) {
         this.val = val;
     }
 }

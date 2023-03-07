@@ -40,7 +40,7 @@ public enum DisallowedChangeByServiceDisallowedChange {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DisallowedChangeByServiceDisallowedChange(String val) {
+    DisallowedChangeByServiceDisallowedChange(String val) {
         this.val = val;
     }
 }

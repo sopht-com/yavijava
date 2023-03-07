@@ -5,9 +5,9 @@ import com.vmware.vim25.ManagedObjectReference
 /**
  * Created by willkandrade on 7/29/15.
  */
-class TestInvocationTargetException extends ManagedEntity{
-    public TestInvocationTargetException(ServerConnection sc, ManagedObjectReference mor) {
-        super (sc, mor)
+class TestInvocationTargetException extends ManagedEntity {
+    TestInvocationTargetException(ServerConnection sc, ManagedObjectReference mor) {
+        super(sc, mor)
         throw new RuntimeException()
     }
 }

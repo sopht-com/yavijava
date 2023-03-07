@@ -29,7 +29,16 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.FileFault;
+import com.vmware.vim25.FileTransferInformation;
+import com.vmware.vim25.GuestAuthentication;
+import com.vmware.vim25.GuestFileAttributes;
+import com.vmware.vim25.GuestListFileInfo;
+import com.vmware.vim25.GuestOperationsFault;
+import com.vmware.vim25.InvalidState;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.TaskInProgress;
 
 import java.rmi.RemoteException;
 
@@ -53,47 +62,47 @@ public class GuestFileManager extends ManagedObject {
         return vm;
     }
 
-    public void changeFileAttributesInGuest(GuestAuthentication auth, String guestFilePath, GuestFileAttributes fileAttributes) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public void changeFileAttributesInGuest(GuestAuthentication auth, String guestFilePath, GuestFileAttributes fileAttributes) throws RemoteException {
         getVimService().changeFileAttributesInGuest(getMOR(), vm.getMOR(), auth, guestFilePath, fileAttributes);
     }
 
-    public String createTemporaryDirectoryInGuest(GuestAuthentication auth, String prefix, String suffix, String directoryPath) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public String createTemporaryDirectoryInGuest(GuestAuthentication auth, String prefix, String suffix, String directoryPath) throws RemoteException {
         return getVimService().createTemporaryDirectoryInGuest(getMOR(), vm.getMOR(), auth, prefix, suffix, directoryPath);
     }
 
-    public String createTemporaryFileInGuest(GuestAuthentication auth, String prefix, String suffix, String directoryPath) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public String createTemporaryFileInGuest(GuestAuthentication auth, String prefix, String suffix, String directoryPath) throws RemoteException {
         return getVimService().createTemporaryFileInGuest(getMOR(), vm.getMOR(), auth, prefix, suffix, directoryPath);
     }
 
-    public void deleteDirectoryInGuest(GuestAuthentication auth, String directoryPath, boolean recursive) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public void deleteDirectoryInGuest(GuestAuthentication auth, String directoryPath, boolean recursive) throws RemoteException {
         getVimService().deleteDirectoryInGuest(getMOR(), vm.getMOR(), auth, directoryPath, recursive);
     }
 
-    public void deleteFileInGuest(GuestAuthentication auth, String filePath) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public void deleteFileInGuest(GuestAuthentication auth, String filePath) throws RemoteException {
         getVimService().deleteFileInGuest(getMOR(), vm.getMOR(), auth, filePath);
     }
 
-    public FileTransferInformation initiateFileTransferFromGuest(GuestAuthentication auth, String guestFilePath) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public FileTransferInformation initiateFileTransferFromGuest(GuestAuthentication auth, String guestFilePath) throws RemoteException {
         return getVimService().initiateFileTransferFromGuest(getMOR(), vm.getMOR(), auth, guestFilePath);
     }
 
-    public String initiateFileTransferToGuest(GuestAuthentication auth, String guestFilePath, GuestFileAttributes fileAttributes, long fileSize, boolean overwrite) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public String initiateFileTransferToGuest(GuestAuthentication auth, String guestFilePath, GuestFileAttributes fileAttributes, long fileSize, boolean overwrite) throws RemoteException {
         return getVimService().initiateFileTransferToGuest(getMOR(), vm.getMOR(), auth, guestFilePath, fileAttributes, fileSize, overwrite);
     }
 
-    public GuestListFileInfo listFilesInGuest(GuestAuthentication auth, String filePath, int index, int maxResults, String matchPattern) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public GuestListFileInfo listFilesInGuest(GuestAuthentication auth, String filePath, int index, int maxResults, String matchPattern) throws RemoteException {
         return getVimService().listFilesInGuest(getMOR(), vm.getMOR(), auth, filePath, index, maxResults, matchPattern);
     }
 
-    public void makeDirectoryInGuest(GuestAuthentication auth, String directoryPath, boolean createParentDirectories) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public void makeDirectoryInGuest(GuestAuthentication auth, String directoryPath, boolean createParentDirectories) throws RemoteException {
         getVimService().makeDirectoryInGuest(getMOR(), vm.getMOR(), auth, directoryPath, createParentDirectories);
     }
 
-    public void moveDirectoryInGuest(GuestAuthentication auth, String srcDirectoryPath, String dstDirectoryPath) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public void moveDirectoryInGuest(GuestAuthentication auth, String srcDirectoryPath, String dstDirectoryPath) throws RemoteException {
         getVimService().moveDirectoryInGuest(getMOR(), vm.getMOR(), auth, srcDirectoryPath, dstDirectoryPath);
     }
 
-    public void moveFileInGuest(GuestAuthentication auth, String srcFilePath, String dstFilePath, boolean overwrite) throws GuestOperationsFault, InvalidState, TaskInProgress, FileFault, RuntimeFault, RemoteException {
+    public void moveFileInGuest(GuestAuthentication auth, String srcFilePath, String dstFilePath, boolean overwrite) throws RemoteException {
         getVimService().moveFileInGuest(getMOR(), vm.getMOR(), auth, srcFilePath, dstFilePath, overwrite);
     }
 }

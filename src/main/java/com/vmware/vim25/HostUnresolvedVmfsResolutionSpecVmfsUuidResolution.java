@@ -41,7 +41,7 @@ public enum HostUnresolvedVmfsResolutionSpecVmfsUuidResolution {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostUnresolvedVmfsResolutionSpecVmfsUuidResolution(String val) {
+    HostUnresolvedVmfsResolutionSpecVmfsUuidResolution(String val) {
         this.val = val;
     }
 }

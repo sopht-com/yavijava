@@ -1,13 +1,5 @@
 package com.vmware.vim25.ws;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.rmi.RemoteException;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.utility.LoadVcenterProps;
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.ObjectContent;
@@ -17,6 +9,13 @@ import com.vmware.vim25.PropertySpec;
 import com.vmware.vim25.SelectionSpec;
 import com.vmware.vim25.mo.ServiceInstance;
 import com.vmware.vim25.mo.util.PropertyCollectorUtil;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.rmi.RemoteException;
 
 public class ApacheHttpClientTest {
     SoapClient apacheHttpClient = null;
@@ -74,7 +73,7 @@ public class ApacheHttpClientTest {
 
     /**
      * This method will build the request payload.
-     * 
+     *
      * @return Argument[]
      */
     private Argument[] buildGetHostsArgs() {
@@ -97,18 +96,18 @@ public class ApacheHttpClientTest {
         os.setSkip(Boolean.FALSE);
         os.setSelectSet(selectionSpecs);
 
-        String[][] typeinfo = new String[][] { new String[] { "HostSystem",
-                "name", }, };
+        String[][] typeinfo = new String[][]{new String[]{"HostSystem",
+                "name",},};
         PropertySpec[] propspecary = PropertyCollectorUtil
                 .buildPropertySpecArray(typeinfo);
 
         PropertyFilterSpec spec = new PropertyFilterSpec();
-        spec.setObjectSet(new ObjectSpec[] { os });
+        spec.setObjectSet(new ObjectSpec[]{os});
         spec.setPropSet(propspecary);
 
         paras[0] = new Argument("_this", "ManagedObjectReference", mor);
         paras[1] = new Argument("specSet", "PropertyFilterSpec[]",
-                new PropertyFilterSpec[] { spec });
+                new PropertyFilterSpec[]{spec});
 
         return paras;
     }

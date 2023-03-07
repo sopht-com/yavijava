@@ -42,7 +42,7 @@ public enum VirtualMachineFlagInfoVirtualExecUsage {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineFlagInfoVirtualExecUsage(String val) {
+    VirtualMachineFlagInfoVirtualExecUsage(String val) {
         this.val = val;
     }
 }

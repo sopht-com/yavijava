@@ -44,7 +44,7 @@ public enum VirtualMachineUsbInfoSpeed {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineUsbInfoSpeed(String val) {
+    VirtualMachineUsbInfoSpeed(String val) {
         this.val = val;
     }
 }

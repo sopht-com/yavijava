@@ -41,7 +41,7 @@ public enum HostPowerOperationType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostPowerOperationType(String val) {
+    HostPowerOperationType(String val) {
         this.val = val;
     }
 }

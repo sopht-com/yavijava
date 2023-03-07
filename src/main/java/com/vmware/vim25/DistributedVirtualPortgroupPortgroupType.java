@@ -42,7 +42,7 @@ public enum DistributedVirtualPortgroupPortgroupType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DistributedVirtualPortgroupPortgroupType(String val) {
+    DistributedVirtualPortgroupPortgroupType(String val) {
         this.val = val;
     }
 }

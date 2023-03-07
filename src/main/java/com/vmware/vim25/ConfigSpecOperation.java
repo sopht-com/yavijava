@@ -42,7 +42,7 @@ public enum ConfigSpecOperation {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ConfigSpecOperation(String val) {
+    ConfigSpecOperation(String val) {
         this.val = val;
     }
 }

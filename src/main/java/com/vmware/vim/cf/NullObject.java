@@ -1,13 +1,14 @@
 package com.vmware.vim.cf;
 
-final public class NullObject extends Object
-{
-	final public static NullObject NULL = new NullObject();
-	private NullObject() {}
+final public class NullObject {
+    final public static NullObject NULL = new NullObject();
 
-	@Override
-	public String toString()
-	{
-		return "null";
-	};
+    private NullObject() {
+    }
+
+    @Override
+    public String toString() {
+        return "null";
+    }
+
 }

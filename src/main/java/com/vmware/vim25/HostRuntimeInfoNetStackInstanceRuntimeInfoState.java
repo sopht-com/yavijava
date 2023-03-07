@@ -43,7 +43,7 @@ public enum HostRuntimeInfoNetStackInstanceRuntimeInfoState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostRuntimeInfoNetStackInstanceRuntimeInfoState(String val) {
+    HostRuntimeInfoNetStackInstanceRuntimeInfoState(String val) {
         this.val = val;
     }
 }

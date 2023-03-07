@@ -29,7 +29,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.ServiceConsoleReservationInfo;
+import com.vmware.vim25.VirtualMachineMemoryReservationInfo;
+import com.vmware.vim25.VirtualMachineMemoryReservationSpec;
 
 import java.rmi.RemoteException;
 
@@ -53,11 +57,11 @@ public class HostMemorySystem extends ExtensibleManagedObject {
         return (VirtualMachineMemoryReservationInfo) getCurrentProperty("virtualMachineReservationInfo");
     }
 
-    public void reconfigureServiceConsoleReservation(long cfgBytes) throws RuntimeFault, RemoteException {
+    public void reconfigureServiceConsoleReservation(long cfgBytes) throws RemoteException {
         getVimService().reconfigureServiceConsoleReservation(getMOR(), cfgBytes);
     }
 
-    public void reconfigureVirtualMachineReservation(VirtualMachineMemoryReservationSpec spec) throws RuntimeFault, RemoteException {
+    public void reconfigureVirtualMachineReservation(VirtualMachineMemoryReservationSpec spec) throws RemoteException {
         getVimService().reconfigureVirtualMachineReservation(getMOR(), spec);
     }
 

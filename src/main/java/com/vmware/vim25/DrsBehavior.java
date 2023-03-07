@@ -42,7 +42,7 @@ public enum DrsBehavior {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DrsBehavior(String val) {
+    DrsBehavior(String val) {
         this.val = val;
     }
 }

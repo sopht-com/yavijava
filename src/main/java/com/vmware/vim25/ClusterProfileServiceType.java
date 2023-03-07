@@ -43,7 +43,7 @@ public enum ClusterProfileServiceType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterProfileServiceType(String val) {
+    ClusterProfileServiceType(String val) {
         this.val = val;
     }
 }

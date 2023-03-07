@@ -44,7 +44,7 @@ public enum LicenseFeatureInfoUnit {
     @SuppressWarnings("unused")
     private final String val;
 
-    private LicenseFeatureInfoUnit(String val) {
+    LicenseFeatureInfoUnit(String val) {
         this.val = val;
     }
 }

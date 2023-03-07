@@ -4,7 +4,8 @@ import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContextBuilder;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -29,7 +30,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class ApacheTrustSelfSigned {
 
-    private static Logger log = Logger.getLogger(ApacheTrustSelfSigned.class);
+    private static final Logger log = LoggerFactory.getLogger(ApacheTrustSelfSigned.class);
 
     public static SSLConnectionSocketFactory trust() {
         SSLContextBuilder builder = new SSLContextBuilder();
@@ -37,12 +38,10 @@ public class ApacheTrustSelfSigned {
         try {
             builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
             log.trace("Added Self Signed Strategy to builder.");
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             log.error("NoSuchAlgorithm caught trying to add SelfSignedStrategy.", e);
             return null;
-        }
-        catch (KeyStoreException e) {
+        } catch (KeyStoreException e) {
             log.error("KeyStoreException caught trying to add TrustSelfSignedStrategy.", e);
             return null;
         }
@@ -50,12 +49,10 @@ public class ApacheTrustSelfSigned {
         try {
             sslConnectionSocketFactory = new SSLConnectionSocketFactory(builder.build(), new AllowAllHostnameVerifier());
             log.trace("Added SSLConnectionSocketFactory to builder.");
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             log.error("Error trying to trust self signed certs.", e);
             return null;
-        }
-        catch (KeyManagementException e) {
+        } catch (KeyManagementException e) {
             log.error("Error trying to trust self signed certs.", e);
             return null;
         }

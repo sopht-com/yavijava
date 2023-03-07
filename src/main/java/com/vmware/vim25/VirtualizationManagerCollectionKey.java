@@ -40,7 +40,7 @@ public enum VirtualizationManagerCollectionKey {
 
     private final String val;
 
-    private VirtualizationManagerCollectionKey(String val) {
+    VirtualizationManagerCollectionKey(String val) {
         this.val = val;
     }
 }

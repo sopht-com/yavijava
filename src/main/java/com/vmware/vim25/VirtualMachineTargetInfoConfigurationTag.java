@@ -41,7 +41,7 @@ public enum VirtualMachineTargetInfoConfigurationTag {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineTargetInfoConfigurationTag(String val) {
+    VirtualMachineTargetInfoConfigurationTag(String val) {
         this.val = val;
     }
 }

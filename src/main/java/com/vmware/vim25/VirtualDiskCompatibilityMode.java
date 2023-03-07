@@ -41,7 +41,7 @@ public enum VirtualDiskCompatibilityMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDiskCompatibilityMode(String val) {
+    VirtualDiskCompatibilityMode(String val) {
         this.val = val;
     }
 }

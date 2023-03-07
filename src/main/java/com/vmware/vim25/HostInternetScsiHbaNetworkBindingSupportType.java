@@ -42,7 +42,7 @@ public enum HostInternetScsiHbaNetworkBindingSupportType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostInternetScsiHbaNetworkBindingSupportType(String val) {
+    HostInternetScsiHbaNetworkBindingSupportType(String val) {
         this.val = val;
     }
 }

@@ -43,7 +43,7 @@ public enum VirtualDeviceConnectInfoStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDeviceConnectInfoStatus(String val) {
+    VirtualDeviceConnectInfoStatus(String val) {
         this.val = val;
     }
 }

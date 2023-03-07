@@ -43,7 +43,7 @@ public enum HttpNfcLeaseState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HttpNfcLeaseState(String val) {
+    HttpNfcLeaseState(String val) {
         this.val = val;
     }
 }

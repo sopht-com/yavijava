@@ -43,7 +43,7 @@ public enum HostSystemPowerState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostSystemPowerState(String val) {
+    HostSystemPowerState(String val) {
         this.val = val;
     }
 }

@@ -1,6 +1,7 @@
 package com.vmware.vim25.ws;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.TrustManager;
 import java.io.BufferedReader;
@@ -10,8 +11,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
 import java.security.cert.CertificateEncodingException;
+import java.security.cert.X509Certificate;
 
 /**
  * Created by Michael Rice on 8/10/14.
@@ -32,7 +33,7 @@ import java.security.cert.CertificateEncodingException;
  */
 public abstract class SoapClient implements Client {
 
-    private static Logger log = Logger.getLogger(SoapClient.class);
+    private static final Logger log = LoggerFactory.getLogger(SoapClient.class);
     public String soapAction;
     public URL baseUrl = null;
     public String cookie = null;
@@ -56,29 +57,23 @@ public abstract class SoapClient implements Client {
       ===============================================
     */
     public void setSoapActionOnApiVersion(String apiVersion) {
-        log.trace("API Version detected: " + apiVersion);
+        log.trace("API Version detected: {}", apiVersion);
         if ("4.0".equals(apiVersion)) {
             soapAction = SoapAction.SOAP_ACTION_V40.toString();
-        }
-        else if ("4.1".equals(apiVersion)) {
+        } else if ("4.1".equals(apiVersion)) {
             soapAction = SoapAction.SOAP_ACTION_V41.toString();
-        }
-        else if ("5.0".equals(apiVersion)) {
+        } else if ("5.0".equals(apiVersion)) {
             soapAction = SoapAction.SOAP_ACTION_V50.toString();
-        }
-        else if ("5.1".equals(apiVersion)) {
+        } else if ("5.1".equals(apiVersion)) {
             soapAction = SoapAction.SOAP_ACTION_V51.toString();
-        }
-        else if ("5.5".equals(apiVersion)) {
+        } else if ("5.5".equals(apiVersion)) {
             soapAction = SoapAction.SOAP_ACTION_V55.toString();
-        }
-        else if ("6.0".equals(apiVersion)) {
+        } else if ("6.0".equals(apiVersion)) {
+            soapAction = SoapAction.SOAP_ACTION_V60.toString();
+        } else { //always defaults to latest version
             soapAction = SoapAction.SOAP_ACTION_V60.toString();
         }
-        else { //always defaults to latest version
-            soapAction = SoapAction.SOAP_ACTION_V60.toString();
-        }
-        log.trace("Set soapAction to: " + soapAction);
+        log.trace("Set soapAction to: {}", soapAction);
     }
 
     /**
@@ -121,20 +116,18 @@ public abstract class SoapClient implements Client {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             return hexify(md.digest(cert.getEncoded()));
-        }
-        catch (NoSuchAlgorithmException ignore1) {
+        } catch (NoSuchAlgorithmException ignore1) {
             return null;
-        }
-        catch (CertificateEncodingException ignore2) {
+        } catch (CertificateEncodingException ignore2) {
             return null;
         }
     }
 
-    public static String hexify (byte bytes[]) {
+    public static String hexify(byte[] bytes) {
         char[] hexDigits = {
-            '0', '1', '2', '3', '4', '5',
-            '6', '7', '8', '9', 'A', 'B',
-            'C', 'D', 'E', 'F'
+                '0', '1', '2', '3', '4', '5',
+                '6', '7', '8', '9', 'A', 'B',
+                'C', 'D', 'E', 'F'
         };
         StringBuffer buf = new StringBuffer(bytes.length * 3);
         for (int i = 0; i < bytes.length; i++) {
@@ -238,7 +231,7 @@ public abstract class SoapClient implements Client {
     public String marshall(String methodName, Argument[] paras) {
         String soapMsg = XmlGen.toXML(methodName, paras, vimNameSpace);
         if (log.isTraceEnabled()) {
-            log.trace("Marshalled Payload String xml: " + soapMsg);
+            log.trace("Marshalled Payload String xml: {}", soapMsg);
         }
         return soapMsg;
     }

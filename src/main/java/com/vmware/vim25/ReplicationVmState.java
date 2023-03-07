@@ -45,7 +45,7 @@ public enum ReplicationVmState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ReplicationVmState(String val) {
+    ReplicationVmState(String val) {
         this.val = val;
     }
 }

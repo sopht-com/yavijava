@@ -41,7 +41,7 @@ public enum ClusterPowerOnVmOption {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterPowerOnVmOption(String val) {
+    ClusterPowerOnVmOption(String val) {
         this.val = val;
     }
 }

@@ -45,7 +45,7 @@ public enum EventAlarmExpressionComparisonOperator {
     @SuppressWarnings("unused")
     private final String val;
 
-    private EventAlarmExpressionComparisonOperator(String val) {
+    EventAlarmExpressionComparisonOperator(String val) {
         this.val = val;
     }
 }

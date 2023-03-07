@@ -42,7 +42,7 @@ public enum DatastoreSummaryMaintenanceModeState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DatastoreSummaryMaintenanceModeState(String val) {
+    DatastoreSummaryMaintenanceModeState(String val) {
         this.val = val;
     }
 }

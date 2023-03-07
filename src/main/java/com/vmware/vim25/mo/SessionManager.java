@@ -30,7 +30,19 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.InvalidLocale;
+import com.vmware.vim25.InvalidLogin;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NoClientCertificate;
+import com.vmware.vim25.NoSubjectName;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.SSPIChallenge;
+import com.vmware.vim25.SessionManagerGenericServiceTicket;
+import com.vmware.vim25.SessionManagerLocalTicket;
+import com.vmware.vim25.SessionManagerServiceRequestSpec;
+import com.vmware.vim25.UserSession;
+import com.vmware.vim25.VimPortType;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
@@ -71,14 +83,14 @@ public class SessionManager extends ManagedObject {
         return (String[]) getCurrentProperty("supportedLocaleList");
     }
 
-    public SessionManagerLocalTicket acquireLocalTicket(String userName) throws InvalidLogin, RuntimeFault, RemoteException {
+    public SessionManagerLocalTicket acquireLocalTicket(String userName) throws RemoteException {
         return getVimService().acquireLocalTicket(getMOR(), userName);
     }
 
     /**
      * @since SDK5.0
      */
-    public SessionManagerGenericServiceTicket acquireGenericServiceTicket(SessionManagerServiceRequestSpec spec) throws RuntimeFault, RemoteException {
+    public SessionManagerGenericServiceTicket acquireGenericServiceTicket(SessionManagerServiceRequestSpec spec) throws RemoteException {
         return getVimService().acquireGenericServiceTicket(getMOR(), spec);
     }
 
@@ -86,7 +98,7 @@ public class SessionManager extends ManagedObject {
      * @since SDK4.0
      * You don't need to use this method. Instead, look at the other cloneSession method.
      */
-    public UserSession cloneSession(String cloneTicket) throws InvalidLogin, RuntimeFault, RemoteException {
+    public UserSession cloneSession(String cloneTicket) throws RemoteException {
         return getVimService().cloneSession(getMOR(), cloneTicket);
     }
 
@@ -127,60 +139,60 @@ public class SessionManager extends ManagedObject {
      * This method is called in the cloneSession method. If you happen to use this method,
      * please double check if it's really needed.
      */
-    public String acquireCloneTicket() throws RuntimeFault, RemoteException {
+    public String acquireCloneTicket() throws RemoteException {
         return getVimService().acquireCloneTicket(getMOR());
     }
 
     /**
      * @since SDK4.0
      */
-    public UserSession loginExtensionBySubjectName(String extensionKey, String locale) throws InvalidLogin, InvalidLocale, NotFound, NoClientCertificate, NoSubjectName, RuntimeFault, RemoteException {
+    public UserSession loginExtensionBySubjectName(String extensionKey, String locale) throws RemoteException {
         return getVimService().loginExtensionBySubjectName(getMOR(), extensionKey, locale);
     }
 
     /**
      * @since SDK4.0
      */
-    public UserSession loginExtensionByCertificate(String extensionKey, String locale) throws InvalidLogin, InvalidLocale, NoClientCertificate, RuntimeFault, RemoteException {
+    public UserSession loginExtensionByCertificate(String extensionKey, String locale) throws RemoteException {
         return getVimService().loginExtensionByCertificate(getMOR(), extensionKey, locale);
     }
 
-    public UserSession impersonateUser(String userName, String locale) throws InvalidLogin, InvalidLocale, RuntimeFault, RemoteException {
+    public UserSession impersonateUser(String userName, String locale) throws RemoteException {
         return getVimService().impersonateUser(getMOR(), userName, locale);
     }
 
-    public UserSession login(String userName, String password, String locale) throws InvalidLogin, InvalidLocale, RuntimeFault, RemoteException {
+    public UserSession login(String userName, String password, String locale) throws RemoteException {
         return getVimService().login(getMOR(), userName, password, locale);
     }
 
-    public UserSession loginBySSPI(String base64Token, String locale) throws InvalidLogin, InvalidLocale, SSPIChallenge, RuntimeFault, RemoteException {
+    public UserSession loginBySSPI(String base64Token, String locale) throws RemoteException {
         return getVimService().loginBySSPI(getMOR(), base64Token, locale);
     }
 
     /**
      * @since SDK5.1
      */
-    public UserSession loginByToken(String locale) throws InvalidLogin, InvalidLocale, RuntimeFault, RemoteException {
+    public UserSession loginByToken(String locale) throws RemoteException {
         return getVimService().loginByToken(getMOR(), locale);
     }
 
-    public void logout() throws RuntimeFault, RemoteException {
+    public void logout() throws RemoteException {
         getVimService().logout(getMOR());
     }
 
-    public boolean sessionIsActive(String sessionID, String userName) throws RuntimeFault, RemoteException {
+    public boolean sessionIsActive(String sessionID, String userName) throws RemoteException {
         return getVimService().sessionIsActive(getMOR(), sessionID, userName);
     }
 
-    public void setLocale(String locale) throws InvalidLocale, RuntimeFault, RemoteException {
+    public void setLocale(String locale) throws RemoteException {
         getVimService().setLocale(getMOR(), locale);
     }
 
-    public void terminateSession(String[] sessionIDs) throws NotFound, RuntimeFault, RemoteException {
+    public void terminateSession(String[] sessionIDs) throws RemoteException {
         getVimService().terminateSession(getMOR(), sessionIDs);
     }
 
-    public void updateServiceMessage(String message) throws RuntimeFault, RemoteException {
+    public void updateServiceMessage(String message) throws RemoteException {
         getVimService().updateServiceMessage(getMOR(), message);
     }
 

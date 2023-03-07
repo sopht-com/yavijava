@@ -20,5 +20,6 @@ public class ReflectUtilSingleObjWith2Fields1Method {
     public int foo;
     private String bar;
 
-    private void ignore() {}
+    private void ignore() {
+    }
 }

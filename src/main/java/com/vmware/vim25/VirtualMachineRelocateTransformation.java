@@ -41,7 +41,7 @@ public enum VirtualMachineRelocateTransformation {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineRelocateTransformation(String val) {
+    VirtualMachineRelocateTransformation(String val) {
         this.val = val;
     }
 }

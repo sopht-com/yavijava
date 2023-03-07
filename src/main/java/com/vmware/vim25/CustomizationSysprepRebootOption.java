@@ -42,7 +42,7 @@ public enum CustomizationSysprepRebootOption {
     @SuppressWarnings("unused")
     private final String val;
 
-    private CustomizationSysprepRebootOption(String val) {
+    CustomizationSysprepRebootOption(String val) {
         this.val = val;
     }
 }

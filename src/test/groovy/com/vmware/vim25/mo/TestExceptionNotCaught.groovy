@@ -6,7 +6,7 @@ import com.vmware.vim25.ManagedObjectReference
  * Created by willkandrade on 7/30/15.
  */
 class TestExceptionNotCaught {
-        public TestExceptionNotCaught(ServerConnection sc, ManagedObjectReference mor) {
+    TestExceptionNotCaught(ServerConnection sc, ManagedObjectReference mor) {
 
-        }
+    }
 }

@@ -46,7 +46,7 @@ public enum HostActiveDirectoryInfoDomainMembershipStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostActiveDirectoryInfoDomainMembershipStatus(String val) {
+    HostActiveDirectoryInfoDomainMembershipStatus(String val) {
         this.val = val;
     }
 }

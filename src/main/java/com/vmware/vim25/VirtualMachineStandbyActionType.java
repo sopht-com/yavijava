@@ -41,7 +41,7 @@ public enum VirtualMachineStandbyActionType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineStandbyActionType(String val) {
+    VirtualMachineStandbyActionType(String val) {
         this.val = val;
     }
 }

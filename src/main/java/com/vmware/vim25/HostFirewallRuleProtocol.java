@@ -41,7 +41,7 @@ public enum HostFirewallRuleProtocol {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostFirewallRuleProtocol(String val) {
+    HostFirewallRuleProtocol(String val) {
         this.val = val;
     }
 }

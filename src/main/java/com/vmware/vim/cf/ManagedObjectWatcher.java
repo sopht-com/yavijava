@@ -29,10 +29,6 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim.cf;
 
-import java.rmi.RemoteException;
-import java.util.Observable;
-import java.util.Vector;
-
 import com.vmware.vim25.NotAuthenticated;
 import com.vmware.vim25.ObjectSpec;
 import com.vmware.vim25.PropertyFilterSpec;
@@ -42,7 +38,12 @@ import com.vmware.vim25.UpdateSet;
 import com.vmware.vim25.mo.ManagedObject;
 import com.vmware.vim25.mo.PropertyCollector;
 import com.vmware.vim25.mo.PropertyFilter;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.rmi.RemoteException;
+import java.util.Observable;
+import java.util.Vector;
 
 /**
  * @author Steve JIN (sjin@vmware.com)
@@ -53,11 +54,11 @@ class ManagedObjectWatcher extends Observable implements Runnable {
     /**
      * PropertyCollector
      */
-    private PropertyCollector pc;
+    private final PropertyCollector pc;
     /**
      * Vector containing PropertyFilters
      */
-    private Vector<PropertyFilter> filters = new Vector<PropertyFilter>();
+    private final Vector<PropertyFilter> filters = new Vector<PropertyFilter>();
     /**
      * Version
      */
@@ -65,14 +66,13 @@ class ManagedObjectWatcher extends Observable implements Runnable {
     /**
      * Logger
      */
-    private static Logger log = Logger.getLogger(ManagedObjectWatcher.class);
+    private static final Logger log = LoggerFactory.getLogger(ManagedObjectWatcher.class);
 
     public ManagedObjectWatcher(PropertyCollector pc) {
         this.pc = pc;
     }
 
     /**
-     *
      * @param mos
      * @param propNames
      */
@@ -95,15 +95,13 @@ class ManagedObjectWatcher extends Observable implements Runnable {
     }
 
     /**
-     *
      * @param pfs
      */
     public void watch(PropertyFilterSpec pfs) {
         try {
             PropertyFilter pf = pc.createFilter(pfs, true); //report only nesting properties, not enclosing ones.
             filters.add(pf);
-        }
-        catch (RemoteException re) {
+        } catch (RemoteException re) {
             log.error("RemoteException caught trying to watch on a PropertyFilterSpec", re);
             throw new RuntimeException(re);
         }
@@ -120,12 +118,10 @@ class ManagedObjectWatcher extends Observable implements Runnable {
                 this.setChanged();
                 this.notifyObservers(pfu);
                 version = update.getVersion();
-            }
-            catch (NotAuthenticated na) {
+            } catch (NotAuthenticated na) {
                 log.error("NotAuthenticated Exception caught.", na);
                 break;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 log.error("Generic Exception caught in run block of ManagedObjectWatcher.", e);
             }
         }
@@ -138,8 +134,7 @@ class ManagedObjectWatcher extends Observable implements Runnable {
         for (PropertyFilter filter : filters) {
             try {
                 filter.destroyPropertyFilter();
-            }
-            catch (RemoteException e) {
+            } catch (RemoteException e) {
                 log.error("RemoteException caught in cleanUp", e);
             }
         }

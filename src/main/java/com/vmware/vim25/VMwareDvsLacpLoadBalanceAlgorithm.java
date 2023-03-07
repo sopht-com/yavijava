@@ -59,7 +59,7 @@ public enum VMwareDvsLacpLoadBalanceAlgorithm {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VMwareDvsLacpLoadBalanceAlgorithm(String val) {
+    VMwareDvsLacpLoadBalanceAlgorithm(String val) {
         this.val = val;
     }
 }

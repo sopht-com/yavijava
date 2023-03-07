@@ -48,7 +48,7 @@ public enum ActionParameter {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ActionParameter(String val) {
+    ActionParameter(String val) {
         this.val = val;
     }
 }

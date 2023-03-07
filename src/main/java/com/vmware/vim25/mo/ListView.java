@@ -48,24 +48,24 @@ public class ListView extends ManagedObjectView {
     }
 
     public ManagedEntity[] modifyListView(ManagedEntity[] add, ManagedEntity[] remove)
-        throws RuntimeFault, RemoteException {
+            throws RemoteException {
         ManagedObjectReference[] mors =
-            getVimService().modifyListView(getMOR(),
-                add == null ? null : MorUtil.createMORs(add),
-                remove == null ? null : MorUtil.createMORs(remove));
+                getVimService().modifyListView(getMOR(),
+                        add == null ? null : MorUtil.createMORs(add),
+                        remove == null ? null : MorUtil.createMORs(remove));
         return MorUtil.createManagedEntities(getServerConnection(), mors);
     }
 
     public ManagedEntity[] resetListView(ManagedEntity[] obj)
-        throws RuntimeFault, RemoteException {
+            throws RemoteException {
         ManagedObjectReference[] mors =
-            getVimService().resetListView(getMOR(),
-                obj == null ? null : MorUtil.createMORs(obj));
+                getVimService().resetListView(getMOR(),
+                        obj == null ? null : MorUtil.createMORs(obj));
         return MorUtil.createManagedEntities(getServerConnection(), mors);
     }
 
     public void resetListViewFromView(View view)
-        throws RuntimeFault, RemoteException {
+            throws RemoteException {
         if (view == null) {
             throw new IllegalArgumentException("view must not be null.");
         }

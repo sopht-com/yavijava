@@ -46,7 +46,7 @@ public enum DiagnosticManagerLogCreator {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DiagnosticManagerLogCreator(String val) {
+    DiagnosticManagerLogCreator(String val) {
         this.val = val;
     }
 }

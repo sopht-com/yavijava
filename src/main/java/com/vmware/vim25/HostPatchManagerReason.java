@@ -45,7 +45,7 @@ public enum HostPatchManagerReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostPatchManagerReason(String val) {
+    HostPatchManagerReason(String val) {
         this.val = val;
     }
 }

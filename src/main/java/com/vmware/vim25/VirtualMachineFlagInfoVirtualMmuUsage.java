@@ -42,7 +42,7 @@ public enum VirtualMachineFlagInfoVirtualMmuUsage {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineFlagInfoVirtualMmuUsage(String val) {
+    VirtualMachineFlagInfoVirtualMmuUsage(String val) {
         this.val = val;
     }
 }

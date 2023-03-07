@@ -46,7 +46,7 @@ public enum NetIpConfigInfoIpAddressStatus {
     @SuppressWarnings("unused")
     private final String val;
 
-    private NetIpConfigInfoIpAddressStatus(String val) {
+    NetIpConfigInfoIpAddressStatus(String val) {
         this.val = val;
     }
 }

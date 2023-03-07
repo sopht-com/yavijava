@@ -43,7 +43,7 @@ public enum PortGroupConnecteeType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private PortGroupConnecteeType(String val) {
+    PortGroupConnecteeType(String val) {
         this.val = val;
     }
 }

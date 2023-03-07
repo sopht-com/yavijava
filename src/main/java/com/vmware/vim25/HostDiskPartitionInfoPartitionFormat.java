@@ -42,7 +42,7 @@ public enum HostDiskPartitionInfoPartitionFormat {
     @SuppressWarnings("unused")
     private final String val;
 
-    private HostDiskPartitionInfoPartitionFormat(String val) {
+    HostDiskPartitionInfoPartitionFormat(String val) {
         this.val = val;
     }
 }

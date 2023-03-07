@@ -26,7 +26,7 @@ public class ManagedObjectReferenceTest {
     }
 
     @Test
-    public void testManagedObjectNotFoundToString(){
+    public void testManagedObjectNotFoundToString() {
         ManagedObjectReference mor1 = new ManagedObjectReference();
         mor1.setType("HostSystem");
         mor1.setVal("host-234");

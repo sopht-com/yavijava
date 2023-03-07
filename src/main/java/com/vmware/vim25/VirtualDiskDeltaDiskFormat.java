@@ -42,7 +42,7 @@ public enum VirtualDiskDeltaDiskFormat {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDiskDeltaDiskFormat(String val) {
+    VirtualDiskDeltaDiskFormat(String val) {
         this.val = val;
     }
 }

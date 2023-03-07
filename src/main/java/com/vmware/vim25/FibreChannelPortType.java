@@ -43,7 +43,7 @@ public enum FibreChannelPortType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private FibreChannelPortType(String val) {
+    FibreChannelPortType(String val) {
         this.val = val;
     }
 }

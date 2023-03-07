@@ -42,7 +42,7 @@ public enum ClusterDasConfigInfoVmMonitoringState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private ClusterDasConfigInfoVmMonitoringState(String val) {
+    ClusterDasConfigInfoVmMonitoringState(String val) {
         this.val = val;
     }
 }

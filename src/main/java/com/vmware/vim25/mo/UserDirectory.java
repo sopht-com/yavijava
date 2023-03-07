@@ -52,9 +52,9 @@ public class UserDirectory extends ManagedObject {
     }
 
     public UserSearchResult[] retrieveUserGroups(String domain, String searchStr, String belongsToGroup,
-                                                 String belongsToUser, boolean exactMatch, boolean findUsers, boolean findGroups) throws NotFound, RuntimeFault, RemoteException {
+                                                 String belongsToUser, boolean exactMatch, boolean findUsers, boolean findGroups) throws RemoteException {
         return getVimService().retrieveUserGroups(getMOR(), domain, searchStr, belongsToGroup,
-            belongsToUser, exactMatch, findUsers, findGroups);
+                belongsToUser, exactMatch, findUsers, findGroups);
     }
 
 }

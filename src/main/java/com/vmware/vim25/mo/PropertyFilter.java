@@ -54,7 +54,7 @@ public class PropertyFilter extends ManagedObject {
         return (PropertyFilterSpec) this.getCurrentProperty("spec");
     }
 
-    public void destroyPropertyFilter() throws RuntimeFault, RemoteException {
+    public void destroyPropertyFilter() throws RemoteException {
         getVimService().destroyPropertyFilter(getMOR());
     }
 }

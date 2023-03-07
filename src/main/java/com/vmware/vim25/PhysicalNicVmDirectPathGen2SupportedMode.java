@@ -40,7 +40,7 @@ public enum PhysicalNicVmDirectPathGen2SupportedMode {
     @SuppressWarnings("unused")
     private final String val;
 
-    private PhysicalNicVmDirectPathGen2SupportedMode(String val) {
+    PhysicalNicVmDirectPathGen2SupportedMode(String val) {
         this.val = val;
     }
 }

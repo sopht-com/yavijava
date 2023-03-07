@@ -5,6 +5,7 @@ import com.vmware.vim25.mo.ManagedObject
 import com.vmware.vim25.mo.ServerConnection
 import com.vmware.vim25.mo.VirtualMachine
 import spock.lang.Specification
+
 import static groovy.test.GroovyAssert.shouldFail
 
 /**
@@ -77,7 +78,7 @@ class MorUtilTestSpec extends Specification {
         ServerConnection sc = Mock(ServerConnection)
 
         when:
-        String message = shouldFail IllegalArgumentException, {MorUtil.createExactManagedObject(sc, mor1)}
+        String message = shouldFail IllegalArgumentException, { MorUtil.createExactManagedObject(sc, mor1) }
 
         then:
         message.contains("vijava does not have an associated class for this mor: vm-12345")
@@ -92,7 +93,7 @@ class MorUtilTestSpec extends Specification {
         MorUtil mu = Mock(MorUtil)
 
         when:
-        String message = shouldFail IllegalArgumentException, {MorUtil.createExactManagedObject(sc, mor1)}
+        String message = shouldFail IllegalArgumentException, { MorUtil.createExactManagedObject(sc, mor1) }
 
         then:
         message.contains("No constructor found in vijava for class: com.vmware.vim25.mo.ServiceInstance")
@@ -107,7 +108,7 @@ class MorUtilTestSpec extends Specification {
 
 
         when:
-        String message = shouldFail IllegalArgumentException, {MorUtil.createExactManagedObject(sc, mor1)}
+        String message = shouldFail IllegalArgumentException, { MorUtil.createExactManagedObject(sc, mor1) }
 
         then:
         message.contains("vijava is unable to create a managed object from this mor: vm-12345")
@@ -122,7 +123,7 @@ class MorUtilTestSpec extends Specification {
 
 
         when:
-        String message = shouldFail IllegalArgumentException, {MorUtil.createExactManagedObject(sc, mor1)}
+        String message = shouldFail IllegalArgumentException, { MorUtil.createExactManagedObject(sc, mor1) }
 
         then:
         message.contains("vijava is unable to create a managed object from this mor: vm-12345")
@@ -137,7 +138,7 @@ class MorUtilTestSpec extends Specification {
 
 
         when:
-        String message = shouldFail ClassCastException, {MorUtil.createExactManagedObject(sc, mor1)}
+        String message = shouldFail ClassCastException, { MorUtil.createExactManagedObject(sc, mor1) }
 
         then:
         message.contains("com.vmware.vim25.mo.TestExceptionNotCaught cannot be cast to com.vmware.vim25.mo.ManagedObject")

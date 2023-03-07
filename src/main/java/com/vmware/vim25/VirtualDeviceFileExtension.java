@@ -44,7 +44,7 @@ public enum VirtualDeviceFileExtension {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDeviceFileExtension(String val) {
+    VirtualDeviceFileExtension(String val) {
         this.val = val;
     }
 }

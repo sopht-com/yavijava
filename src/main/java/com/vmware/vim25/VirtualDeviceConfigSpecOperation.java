@@ -42,7 +42,7 @@ public enum VirtualDeviceConfigSpecOperation {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualDeviceConfigSpecOperation(String val) {
+    VirtualDeviceConfigSpecOperation(String val) {
         this.val = val;
     }
 }

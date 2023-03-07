@@ -42,7 +42,7 @@ public enum AutoStartWaitHeartbeatSetting {
     @SuppressWarnings("unused")
     private final String val;
 
-    private AutoStartWaitHeartbeatSetting(String val) {
+    AutoStartWaitHeartbeatSetting(String val) {
         this.val = val;
     }
 }

@@ -29,77 +29,71 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim.rest.sample;
 
+import com.vmware.vim.rest.CachedManagedObject;
+import com.vmware.vim.rest.RestClient;
+import com.vmware.vim.rest.RestManagedObject;
+import org.xml.sax.InputSource;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 import java.util.Hashtable;
 import java.util.Map;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
+public class RestAppDemo {
+    public static void main(String[] args) throws Exception {
+        RestClient rc = new RestClient("https://8.8.8.8", "root", "pass");
+        runRestLevel(rc);
+        runMOLevel(rc);
+    }
 
-import org.xml.sax.InputSource;
+    public static void runMOLevel(RestClient rc) throws Exception {
 
-import com.vmware.vim.rest.CachedManagedObject;
-import com.vmware.vim.rest.RestClient;
-import com.vmware.vim.rest.RestManagedObject;
+        RestManagedObject si = new RestManagedObject(rc, "ServiceInstance");
 
-public class RestAppDemo
-{
-  public static void main(String[] args) throws Exception
-  {
-    RestClient rc = new RestClient("https://8.8.8.8", "root", "pass");
-    runRestLevel(rc);
-    runMOLevel(rc);
-  }
+        System.out.println("name:" + si.getPropertyAsString("content.about.fullName"));
+        System.out.println(si.invoke("currentTime"));
+        System.out.println(si.invoke("retrieveContent"));
 
-  public static void runMOLevel(RestClient rc) throws Exception
-  {
-    
-    RestManagedObject si = new RestManagedObject(rc, "ServiceInstance");
+        String allXml = si.getAllProperties();
+        System.out.println(allXml);
+        CachedManagedObject csi = new CachedManagedObject(allXml);
+        System.out.println("name:" + csi.getProperty("content.about.fullName"));
+        System.out.println("root:" + csi.getProperty("content.rootFolder"));
+        System.out.println("cap:" + si.getPropertyAsString("capability.multiHostSupported"));
 
-    System.out.println("name:" + si.getPropertyAsString("content.about.fullName"));
-    System.out.println(si.invoke("currentTime"));
-    System.out.println(si.invoke("retrieveContent"));
+        String em_id = si.getPropertyAsString("content.eventManager");
+        RestManagedObject eventMgr = new RestManagedObject(rc, em_id);
+        System.out.println("latest evt:" + eventMgr.getPropertyAsString("latest.fullFormattedMessage"));
 
-    String allXml = si.getAllProperties();
-    System.out.println(allXml);
-    CachedManagedObject csi = new CachedManagedObject(allXml);
-    System.out.println("name:" + csi.getProperty("content.about.fullName"));
-    System.out.println("root:" + csi.getProperty("content.rootFolder"));
-    System.out.println("cap:" + si.getPropertyAsString("capability.multiHostSupported"));
-    
-    String em_id = si.getPropertyAsString("content.eventManager");
-    RestManagedObject eventMgr = new RestManagedObject(rc, em_id); 
-    System.out.println("latest evt:" + eventMgr.getPropertyAsString("latest.fullFormattedMessage"));
-    
-    RestManagedObject vm = new RestManagedObject(rc, "48");
-    System.out.println("reload:" + vm.invoke("reload"));
-    CachedManagedObject cvm = new CachedManagedObject(vm.getAllProperties());
-    System.out.println("Roles:" + cvm.getProperty("effectiveRole"));
-  }
-  
-  public static void runRestLevel(RestClient rc) throws Exception
-  {
-    String contentXml = rc.get("moid=ServiceInstance&doPath=content");
-    System.out.println(contentXml);
-    
-    XPath xpath = XPathFactory.newInstance().newXPath();
-    String emMOR = xpath.evaluate("//eventManager/text()", new InputSource(new StringReader(contentXml)));
-    System.out.println("view:" + emMOR);
-    String lastEventXml = rc.get("moid=" + emMOR + "&doPath=latestEvent");
-    xpath.reset();
-    String eMessage = xpath.evaluate("//fullFormattedMessage/text()", new InputSource(new StringReader(lastEventXml)));
-    System.out.println("Latest Event: " + eMessage);
+        RestManagedObject vm = new RestManagedObject(rc, "48");
+        System.out.println("reload:" + vm.invoke("reload"));
+        CachedManagedObject cvm = new CachedManagedObject(vm.getAllProperties());
+        System.out.println("Roles:" + cvm.getProperty("effectiveRole"));
+    }
 
-    System.out.println(rc.get(null));
-    System.out.println(rc.get("?moid=ServiceInstance&doPath=content%2eabout"));
-    long start = System.currentTimeMillis();
-    System.out.println(rc.get("?moid=48"));
-    long end = System.currentTimeMillis();
-    System.out.println("time taken:" + (end-start));
-    Map<String, String> para = new Hashtable<String, String>();
-    para.put("newName", "Melody_SuSe");
-    System.out.println(rc.post("moid=48&method=rename", para));
-    Map<String, String> para1 = new Hashtable<String, String>();
-    System.out.println(rc.post("http://10.20.143.205/mob/?moid=48&method=acquireMksTicket", para1));
-  }
+    public static void runRestLevel(RestClient rc) throws Exception {
+        String contentXml = rc.get("moid=ServiceInstance&doPath=content");
+        System.out.println(contentXml);
+
+        XPath xpath = XPathFactory.newInstance().newXPath();
+        String emMOR = xpath.evaluate("//eventManager/text()", new InputSource(new StringReader(contentXml)));
+        System.out.println("view:" + emMOR);
+        String lastEventXml = rc.get("moid=" + emMOR + "&doPath=latestEvent");
+        xpath.reset();
+        String eMessage = xpath.evaluate("//fullFormattedMessage/text()", new InputSource(new StringReader(lastEventXml)));
+        System.out.println("Latest Event: " + eMessage);
+
+        System.out.println(rc.get(null));
+        System.out.println(rc.get("?moid=ServiceInstance&doPath=content%2eabout"));
+        long start = System.currentTimeMillis();
+        System.out.println(rc.get("?moid=48"));
+        long end = System.currentTimeMillis();
+        System.out.println("time taken:" + (end - start));
+        Map<String, String> para = new Hashtable<String, String>();
+        para.put("newName", "Melody_SuSe");
+        System.out.println(rc.post("moid=48&method=rename", para));
+        Map<String, String> para1 = new Hashtable<String, String>();
+        System.out.println(rc.post("http://10.20.143.205/mob/?moid=48&method=acquireMksTicket", para1));
+    }
 }

@@ -43,7 +43,7 @@ public enum EventCategory {
     @SuppressWarnings("unused")
     private final String val;
 
-    private EventCategory(String val) {
+    EventCategory(String val) {
         this.val = val;
     }
 }

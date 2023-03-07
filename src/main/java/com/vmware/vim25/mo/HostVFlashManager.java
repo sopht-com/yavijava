@@ -29,7 +29,16 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package com.vmware.vim25.mo;
 
-import com.vmware.vim25.*;
+import com.vmware.vim25.HostConfigFault;
+import com.vmware.vim25.HostVFlashManagerVFlashCacheConfigSpec;
+import com.vmware.vim25.HostVFlashManagerVFlashConfigInfo;
+import com.vmware.vim25.HostVFlashManagerVFlashResourceConfigSpec;
+import com.vmware.vim25.InaccessibleVFlashSource;
+import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.NotFound;
+import com.vmware.vim25.ResourceInUse;
+import com.vmware.vim25.RuntimeFault;
+import com.vmware.vim25.VirtualDiskVFlashCacheConfigInfo;
 
 import java.rmi.RemoteException;
 
@@ -49,24 +58,24 @@ public class HostVFlashManager extends ManagedObject {
         return (HostVFlashManagerVFlashConfigInfo) getCurrentProperty("vFlashConfigInfo");
     }
 
-    public Task configureVFlashResourceEx_Task(String[] devicePath) throws HostConfigFault, RuntimeFault, RemoteException {
+    public Task configureVFlashResourceEx_Task(String[] devicePath) throws RemoteException {
         ManagedObjectReference mor = getVimService().configureVFlashResourceEx_Task(this.getMOR(), devicePath);
         return new Task(getServerConnection(), mor);
     }
 
-    public void hostConfigureVFlashResource(HostVFlashManagerVFlashResourceConfigSpec spec) throws HostConfigFault, ResourceInUse, RuntimeFault, RemoteException {
+    public void hostConfigureVFlashResource(HostVFlashManagerVFlashResourceConfigSpec spec) throws RemoteException {
         getVimService().hostConfigureVFlashResource(this.getMOR(), spec);
     }
 
-    public void hostConfigVFlashCache(HostVFlashManagerVFlashCacheConfigSpec spec) throws HostConfigFault, InaccessibleVFlashSource, ResourceInUse, RuntimeFault, RemoteException {
+    public void hostConfigVFlashCache(HostVFlashManagerVFlashCacheConfigSpec spec) throws RemoteException {
         getVimService().hostConfigVFlashCache(this.getMOR(), spec);
     }
 
-    public VirtualDiskVFlashCacheConfigInfo hostGetVFlashModuleDefaultConfig(String vFlashModule) throws NotFound, HostConfigFault, RuntimeFault, RemoteException {
+    public VirtualDiskVFlashCacheConfigInfo hostGetVFlashModuleDefaultConfig(String vFlashModule) throws RemoteException {
         return getVimService().hostGetVFlashModuleDefaultConfig(this.getMOR(), vFlashModule);
     }
 
-    public void hostRemoveVFlashResource() throws NotFound, HostConfigFault, ResourceInUse, RuntimeFault, RemoteException {
+    public void hostRemoveVFlashResource() throws RemoteException {
         getVimService().hostRemoveVFlashResource(this.getMOR());
     }
 }

@@ -41,7 +41,7 @@ public enum EntityType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private EntityType(String val) {
+    EntityType(String val) {
         this.val = val;
     }
 }

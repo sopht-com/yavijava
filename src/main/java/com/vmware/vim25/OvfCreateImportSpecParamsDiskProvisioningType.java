@@ -49,7 +49,7 @@ public enum OvfCreateImportSpecParamsDiskProvisioningType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private OvfCreateImportSpecParamsDiskProvisioningType(String val) {
+    OvfCreateImportSpecParamsDiskProvisioningType(String val) {
         this.val = val;
     }
 }

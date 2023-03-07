@@ -42,7 +42,7 @@ public enum GuestFileType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private GuestFileType(String val) {
+    GuestFileType(String val) {
         this.val = val;
     }
 }

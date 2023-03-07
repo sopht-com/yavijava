@@ -51,15 +51,15 @@ public class HostAutoStartManager extends ManagedObject {
         return (HostAutoStartManagerConfig) getCurrentProperty("config");
     }
 
-    public void autoStartPowerOff() throws RuntimeFault, RemoteException {
+    public void autoStartPowerOff() throws RemoteException {
         getVimService().autoStartPowerOff(getMOR());
     }
 
-    public void autoStartPowerOn() throws RuntimeFault, RemoteException {
+    public void autoStartPowerOn() throws RemoteException {
         getVimService().autoStartPowerOn(getMOR());
     }
 
-    public void reconfigureAutostart(HostAutoStartManagerConfig spec) throws RuntimeFault, RemoteException {
+    public void reconfigureAutostart(HostAutoStartManagerConfig spec) throws RemoteException {
         getVimService().reconfigureAutostart(getMOR(), spec);
     }
 

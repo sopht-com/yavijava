@@ -42,7 +42,7 @@ public enum EntityImportType {
     @SuppressWarnings("unused")
     private final String val;
 
-    private EntityImportType(String val) {
+    EntityImportType(String val) {
         this.val = val;
     }
 }

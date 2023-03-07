@@ -41,7 +41,7 @@ public enum DeviceNotSupportedReason {
     @SuppressWarnings("unused")
     private final String val;
 
-    private DeviceNotSupportedReason(String val) {
+    DeviceNotSupportedReason(String val) {
         this.val = val;
     }
 }

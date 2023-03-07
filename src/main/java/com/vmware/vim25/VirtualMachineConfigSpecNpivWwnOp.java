@@ -43,7 +43,7 @@ public enum VirtualMachineConfigSpecNpivWwnOp {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VirtualMachineConfigSpecNpivWwnOp(String val) {
+    VirtualMachineConfigSpecNpivWwnOp(String val) {
         this.val = val;
     }
 }

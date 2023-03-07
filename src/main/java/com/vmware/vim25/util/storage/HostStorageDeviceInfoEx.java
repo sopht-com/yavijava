@@ -1,7 +1,13 @@
 package com.vmware.vim25.util.storage;
 
-import com.vmware.vim25.*;
-import org.apache.log4j.Logger;
+import com.vmware.vim25.HostScsiTopology;
+import com.vmware.vim25.HostScsiTopologyInterface;
+import com.vmware.vim25.HostScsiTopologyLun;
+import com.vmware.vim25.HostScsiTopologyTarget;
+import com.vmware.vim25.HostStorageDeviceInfo;
+import com.vmware.vim25.ScsiLun;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,12 +21,12 @@ public class HostStorageDeviceInfoEx {
     /**
      * Logger to log information.
      */
-    Logger log = Logger.getLogger(HostStorageDeviceInfoEx.class);
+    Logger log = LoggerFactory.getLogger(HostStorageDeviceInfoEx.class);
 
     /**
      * Host Storage Device Information.
      */
-    private HostStorageDeviceInfo storageDeviceInfo;
+    private final HostStorageDeviceInfo storageDeviceInfo;
 
     /**
      * Default constructor.
@@ -94,7 +100,7 @@ public class HostStorageDeviceInfoEx {
 
             // Check to see that these adapters have targets
             if (null == adapter.target || adapter.target.length == 0) {
-                log.trace("This adapter has no targets. Adapter:" + adapter.adapter);
+                log.trace("This adapter has no targets. Adapter:{}", adapter.adapter);
                 continue;
             }
 
@@ -103,7 +109,7 @@ public class HostStorageDeviceInfoEx {
 
                 // Check to see that the target has LUNs
                 if (null == target.lun || target.lun.length == 0) {
-                    log.trace("This target has no LUNs on it. Target:" + target.key);
+                    log.trace("This target has no LUNs on it. Target:{}", target.key);
                     continue;
                 }
 

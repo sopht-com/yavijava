@@ -42,7 +42,7 @@ public enum VsanHostHealthState {
     @SuppressWarnings("unused")
     private final String val;
 
-    private VsanHostHealthState(String val) {
+    VsanHostHealthState(String val) {
         this.val = val;
     }
 }

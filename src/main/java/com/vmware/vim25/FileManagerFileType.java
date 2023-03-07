@@ -39,7 +39,7 @@ public enum FileManagerFileType {
 
     private final String val;
 
-    private FileManagerFileType(String val) {
+    FileManagerFileType(String val) {
         this.val = val;
     }
 }
